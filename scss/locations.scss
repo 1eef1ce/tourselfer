@@ -1,0 +1,134 @@
+@import "variables.scss";
+@import "media.scss";
+
+.locations {
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -12px;
+
+    @include max-767 {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    width: calc(33.33% - 24px);
+    height: 465px;
+    padding: 24px;
+    margin: 12px;
+    border-radius: 16px;
+    color: #fff;
+    overflow: hidden;
+
+    @include max-1023 {
+      width: calc(50% - 24px);
+    }
+
+    @include max-767 {
+      width: 282px;
+      flex-shrink: 0;
+    }
+
+    &--big {
+      width: calc(58.333% - 24px);
+
+      @include max-1023 {
+        width: calc(50% - 24px);
+      }
+
+      @include max-767 {
+        width: 282px;
+      }
+    }
+
+    &--medium {
+      width: calc(41.667% - 24px);
+
+      @include max-1023 {
+        width: calc(50% - 24px);
+      }
+
+      @include max-767 {
+        width: 282px;
+      }
+    }
+
+    &:hover {
+
+      .locations__picture {
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__picture {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: 0.2s;
+    }
+
+    &::before {
+      height: 43.441%;
+      background: $gradient-black-33;
+    }
+
+    &::after {
+      height: 100%;
+      background: $color-black-30;
+      opacity: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    position: relative;
+    margin-top: auto;
+  }
+
+  &__title {
+
+  }
+
+  &__text {
+    margin-top: 12px;
+
+    @include max-767 {
+      margin-top: 4px;
+    }
+  }
+
+  &__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 64px;
+
+    @include max-767 {
+      display: none;
+    }
+  }
+}

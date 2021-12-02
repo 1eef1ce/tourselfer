@@ -1,0 +1,28 @@
+@import "variables.scss";
+@import "media.scss";
+
+.section {
+  margin-top: 64px;
+
+  @include max-767 {
+    margin-top: 40px;
+  }
+
+  &__head {
+    margin-bottom: 32px;
+
+    @include max-767 {
+      margin-bottom: 24px;
+    }
+
+    .link {
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 1.33;
+
+      @include max-767 {
+        margin-top: 8px;
+      }
+    }
+  }
+}

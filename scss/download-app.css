@@ -1,0 +1,15 @@
+.download-app__title {
+  margin-bottom: 20px;
+  font-size: 18px;
+  line-height: 1.56;
+}
+.download-app__items {
+  display: flex;
+  margin: 0 -6px;
+}
+.download-app__item {
+  height: 45px;
+  margin: 0 6px;
+}
+
+/*# sourceMappingURL=download-app.css.map */
