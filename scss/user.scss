@@ -14,7 +14,7 @@
     }
   }
 
-  &--small {
+  &--medium {
 
     .user {
 
@@ -32,6 +32,52 @@
         line-height: 1.5;
       }
     }
+  }
+
+  &--small {
+
+    .user {
+
+      &__img {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+      }
+
+      &__icon {
+        top: auto;
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+      }
+
+      &__name {
+        font-size: 18px;
+        line-height: 1.11;
+
+        @include max-767 {
+          font-size: 16px;
+          line-height: 1.5;
+        }
+      }
+
+      &__status {
+        margin: 4px 0 0;
+        font-family: $font-primary;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.43;
+        text-transform: none;
+        letter-spacing: normal;
+
+        @include max-767 {
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 1.33;
+        }
+      }
+    }
+
   }
 
   &__img {

@@ -17,6 +17,7 @@
     border: 1px solid $color-gray;
     border-radius: 16px;
     flex-shrink: 0;
+    transition: 0.2s;
 
     @include max-1023 {
       width: calc(50% - 24px);
@@ -24,6 +25,14 @@
 
     @include max-767 {
       width: 282px;
+    }
+
+    &:hover {
+      background: $color-green-20;
+
+      .advantages__number {
+        color: #fff;
+      }
     }
   }
 
@@ -37,6 +46,7 @@
     line-height: 0.9;
     color: $color-gray;
     letter-spacing: -0.01em;
+    transition: 0.2s;
   }
 
   &__img {

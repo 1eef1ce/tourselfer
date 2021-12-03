@@ -20,6 +20,15 @@
     padding: 20px 30px;
   }
 
+  &--alt {
+    width: 100%;
+    padding: 17px;
+    border-radius: 8px;
+    border: 1px solid $color-gray;
+    font-weight: 500;
+    color: $color-primary;
+  }
+
   &--fill {
     color: #fff;
     background: $gradient-green;

@@ -36,7 +36,7 @@
   span {
     display: block;
     height: 2px;
-    background: #fff;
+    background: $color-primary;
     transition: 0.2s;
 
     &:not(:last-of-type) {

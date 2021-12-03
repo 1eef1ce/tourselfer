@@ -112,4 +112,8 @@
   @include max-1023 {
     display: block;
   }
+
+  svg * {
+    fill: $color-primary;
+  }
 }

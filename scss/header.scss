@@ -4,10 +4,49 @@
 .header {
   position: relative;
   z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid $color-gray;
+  color: $color-primary;
 
   &--transparent {
+    border-bottom: 0;
     background: transparent;
     color: #fff;
+
+    .header {
+
+      &__lang {
+        color: #fff;
+
+        svg * {
+          fill: #fff;
+        }
+      }
+
+      &-nav {
+
+        &__icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+    }
+
+    .burger-btn {
+
+      span {
+        background: #fff;
+      }
+    }
+
+    .search-btn {
+
+      svg * {
+        fill: #fff;
+      }
+    }
   }
 
   &__container {
@@ -39,6 +78,7 @@
 
   &__lang {
     margin-right: 32px;
+    color: $color-secondary;
 
     @include max-1200 {
       margin-right: 24px;
@@ -46,6 +86,10 @@
 
     @include max-1023 {
       display: none;
+    }
+
+    svg * {
+      fill: $color-secondary;
     }
   }
 
@@ -104,5 +148,9 @@
     width: 24px;
     height: 24px;
     margin-right: 8px;
+
+    svg * {
+      fill: $color-primary;
+    }
   }
 }

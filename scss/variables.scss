@@ -11,10 +11,13 @@ $color-white-60: rgba(255, 255, 255, 0.6);
 $color-white-80: rgba(255, 255, 255, 0.8);
 $color-white-90: rgba(255, 255, 255, 0.9);
 
+$color-black-7: rgba(0, 0, 0, 0.07);
 $color-black-30: rgba(0, 0, 0, 0.3);
+$color-black-60: rgba(0, 0, 0, 0.6);
 
 $color-black: #222222;
 $color-black-v1: #242424;
+$color-black-v2: #353545;
 $color-gray: #D9D9D9;
 $color-gray-v1: #737373;
 $color-gray-v2: #969696;
@@ -25,6 +28,8 @@ $color-gray-bg-v1: #F8F8FA;
 $color-green: #4FB4A2;
 $color-green-v1: #8DB401;
 $color-green-hover: #AEDEA6;
+
+$color-green-20: rgba(79, 180, 162, 0.2);
 
 $gradient-green: linear-gradient(314.63deg, #0B97A0 0%, #AEDEA6 100%);
 $gradient-green-hover: linear-gradient(314deg, #0B97A0 -51.72%, #AEDEA6 100%);

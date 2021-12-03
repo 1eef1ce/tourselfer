@@ -1,0 +1,47 @@
+@import "variables.scss";
+@import "media.scss";
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: $color-gray-bg;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $color-primary;
+  white-space: nowrap;
+  transition: 0.2s;
+
+  &:not(:last-of-type) {
+    margin-right: 8px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    background: $gradient-green;
+    color: #fff;
+  }
+
+  &.active {
+    background: $gradient-green;
+    color: #fff;
+
+    span {
+
+      &::before {
+        content: "";
+        width: 18px;
+        height: 24px;
+        background: url("../icons/icon-check.svg") no-repeat center;
+        background-size: contain;
+        margin-right: 4px;
+      }
+    }
+  }
+}
