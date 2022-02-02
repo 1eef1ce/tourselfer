@@ -48,5 +48,5 @@ export default function Logo() {
                 </linearGradient>
             </defs>
         </svg>
-    )
+    );
 }

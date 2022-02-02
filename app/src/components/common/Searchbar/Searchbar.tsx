@@ -1,5 +1,5 @@
-import {FC, memo} from 'react'
-import {SearchIcon} from '@components/icons'
+import {FC, memo} from 'react';
+import {SearchIcon} from '@components/icons';
 
 interface Props {
     id?: string
@@ -17,7 +17,7 @@ const Searchbar: FC<Props> = ({id = 'search'}) => {
                 <button className="btn btn--fill search__btn" type="submit">Find</button>
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default memo(Searchbar)
+export default memo(Searchbar);

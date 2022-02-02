@@ -12,7 +12,7 @@ const SearchIcon = ({ ...props }) => {
                 fill="white"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default SearchIcon
+export default SearchIcon;

@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Link from 'next/link'
-import {Avatar} from '@components/common'
-import {Rating} from '@components/ui'
-import {ArrowRight, Quotes} from "@components/icons";
-import {useState} from 'react'
+import Link from 'next/link';
+import {Avatar} from '@components/common';
+import {Rating} from '@components/ui';
+import {ArrowRight, Quotes} from '@components/icons';
+import {useState} from 'react';
 
 const ReviewSlider = () => {
-    const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
-    const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
+    const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+    const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
     return (
         <div className="reviews__container">
             <div className="swiper-navigation swiper-navigation--outside reviews__nav">
@@ -162,7 +162,7 @@ const ReviewSlider = () => {
                 </SwiperSlide>
             </Swiper>
         </div>
-    )
-}
+    );
+};
 
-export default ReviewSlider
+export default ReviewSlider;

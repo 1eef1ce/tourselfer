@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import {Crown, Man, MapPin, MapPinGray} from '@components/icons'
-import {Button} from '@components/ui'
-import {Avatar} from '@components/common'
+import Image from 'next/image';
+import Link from 'next/link';
+import {Crown, Man, MapPin, MapPinGray} from '@components/icons';
+import {Button} from '@components/ui';
+import {Avatar} from '@components/common';
 
 export default function Routes() {
     return (
@@ -106,5 +106,5 @@ export default function Routes() {
                 <Button className="btn btn--alt">See more</Button>
             </div>
         </div>
-    )
+    );
 }

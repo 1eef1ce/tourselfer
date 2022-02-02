@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image'
+import Image from 'next/image';
 
 const AppSlider = () => {
     return (
@@ -51,7 +51,7 @@ const AppSlider = () => {
                 </div>
             </SwiperSlide>
         </Swiper>
-    )
-}
+    );
+};
 
-export default AppSlider
+export default AppSlider;

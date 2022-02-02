@@ -23,7 +23,7 @@ const MapPin = ({...props}) => {
                 </linearGradient>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default MapPin
+export default MapPin;

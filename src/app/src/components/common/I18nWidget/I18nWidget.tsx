@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { FC } from 'react'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { FC } from 'react';
+import { useRouter } from 'next/router';
 
 interface LOCALE_DATA {
     name: string,
@@ -20,7 +20,7 @@ const LOCALES_MAP: Record<string, LOCALE_DATA> = {
         name: 'Chinese (CN)',
         shortName: 'CN',
     },
-}
+};
 
 const I18nWidget: FC = () => {
     const {
@@ -28,10 +28,10 @@ const I18nWidget: FC = () => {
         locales,
         defaultLocale = 'en-US',
         asPath: currentPath,
-    } = useRouter()
+    } = useRouter();
 
-    const options = locales?.filter((val) => val !== locale)
-    const currentLocale = locale || defaultLocale
+    const options = locales?.filter((val) => val !== locale);
+    const currentLocale = locale || defaultLocale;
 
     return (
         <>
@@ -45,7 +45,7 @@ const I18nWidget: FC = () => {
                 </div>
             ))}
         </>
-    )
-}
+    );
+};
 
-export default I18nWidget
+export default I18nWidget;

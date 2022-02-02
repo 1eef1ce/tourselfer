@@ -1,5 +1,5 @@
-import cn from 'classnames'
-import React, { InputHTMLAttributes } from 'react'
+import cn from 'classnames';
+import React, { InputHTMLAttributes } from 'react';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
@@ -7,16 +7,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { className, children, onChange, ...rest } = props
-
-  const rootClassName = cn({}, className)
-
+  const { className, onChange, ...rest } = props;
+  const rootClassName = cn({}, className);
   const handleOnChange = (e: any) => {
     if (onChange) {
-      onChange(e.target.value)
+      onChange(e.target.value);
     }
-    return null
-  }
+    return null;
+  };
 
   return (
     <input
@@ -28,7 +26,7 @@ const Input: React.FC<InputProps> = (props) => {
       spellCheck="false"
       {...rest}
     />
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

@@ -17,7 +17,7 @@ const Car = ({...props}) => {
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default Car
+export default Car;

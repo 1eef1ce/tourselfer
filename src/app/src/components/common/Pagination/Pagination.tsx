@@ -1,5 +1,5 @@
-import {ChevronRight} from '@components/icons'
-import {Button} from '@components/ui'
+import {ChevronRight} from '@components/icons';
+import {Button} from '@components/ui';
 
 export default function Pagination() {
     return (
@@ -29,5 +29,5 @@ export default function Pagination() {
                 </Button>
             </div>
         </div>
-    )
+    );
 }

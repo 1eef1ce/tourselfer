@@ -5,7 +5,7 @@ const Loader: React.FC = () => {
       <span className="loader__dot" key={`dot_2`} />
       <span className="loader__dot" key={`dot_3`} />
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

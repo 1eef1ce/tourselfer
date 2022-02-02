@@ -60,7 +60,7 @@
     font-weight: 700;
     font-size: 64px;
     line-height: 1.25;
-    white-space: pre;
+    white-space: pre-wrap;
 
     @include max-767 {
       font-size: 40px;

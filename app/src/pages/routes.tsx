@@ -1,7 +1,7 @@
-import {Breadcrumbs, Layout, Pagination} from '@components/common'
-import Head from 'next/head'
-import Filter from '@components/filter'
-import Routes from '@components/routes'
+import {Breadcrumbs, Layout, Pagination} from '@components/common';
+import Head from 'next/head';
+import Filter from '@components/filter';
+import Routes from '@components/routes';
 
 export default function RoutesPage() {
     return (
@@ -18,5 +18,5 @@ export default function RoutesPage() {
                 <Pagination />
             </div>
         </Layout>
-    )
+    );
 }

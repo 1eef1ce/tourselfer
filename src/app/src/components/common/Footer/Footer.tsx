@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import {Button, Logo} from '@components/ui'
-import {Appstore, ChevronDown, ChevronRight, Facebook, Googleplay, Instagram, World} from '@components/icons'
-import {I18nWidget} from '@components/common'
-import {FC} from "react";
+import Link from 'next/link';
+import {Button, Logo} from '@components/ui';
+import {Appstore, ChevronDown, ChevronRight, Facebook, Googleplay, Instagram, World} from '@components/icons';
+import {I18nWidget} from '@components/common';
+import {FC} from 'react';
 
 const Footer: FC = () => {
     return (
@@ -129,7 +129,7 @@ const Footer: FC = () => {
                 </div>
             </div>
         </footer>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

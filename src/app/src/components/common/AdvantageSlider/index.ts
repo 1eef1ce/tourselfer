@@ -1,1 +1,1 @@
-export { default } from './AdvantageSlider'
+export { default } from './AdvantageSlider';

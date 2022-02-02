@@ -1,1 +1,1 @@
-export { default } from './AppSlider'
+export { default } from './AppSlider';
