@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image'
-import {useState} from 'react'
+import Image from 'next/image';
+import {useState} from 'react';
 
 const AdvantageSlider = () => {
-    const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
-    const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
+    const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+    const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
     return (
         <div className="advantages__container">
             <div className="swiper-navigation swiper-navigation--outside advantages__nav">
@@ -112,7 +112,7 @@ const AdvantageSlider = () => {
                 </SwiperSlide>
             </Swiper>
         </div>
-    )
-}
+    );
+};
 
-export default AdvantageSlider
+export default AdvantageSlider;

@@ -1,4 +1,4 @@
-import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons'
+import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons';
 
 export default function Filter() {
     return (
@@ -90,5 +90,5 @@ export default function Filter() {
                 </a>
             </div>
         </div>
-    )
+    );
 }

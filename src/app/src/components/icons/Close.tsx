@@ -13,7 +13,7 @@ const Close = ({...props}) => {
             </g>
         </svg>
 
-    )
-}
+    );
+};
 
-export default Close
+export default Close;

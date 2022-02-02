@@ -14,6 +14,6 @@ const Locale = () => {
             break;
         default: t = en;
     }
-}
+};
 
-export default Locale
+export default Locale;

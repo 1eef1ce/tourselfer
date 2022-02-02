@@ -1,35 +1,33 @@
-import Link from 'next/link'
-import {Button, Input, Logo} from '@components/ui'
-import {ChevronDown, Heart, SearchIcon, User} from '@components/icons'
-import {I18nWidget} from '@components/common'
-
-import { Modal } from '@components/ui/Modal'
+import Link from 'next/link';
+import {Button, Input, Logo} from '@components/ui';
+import {ChevronDown, Heart, SearchIcon, User} from '@components/icons';
+import {I18nWidget} from '@components/common';
+import { Modal } from '@components/ui/Modal';
 import { useModal } from '@lib/hooks/useModal';
-import {useEffect, useState} from "react";
-import throttle from 'lodash.throttle'
-import cn from 'classnames'
+import {useEffect, useState} from 'react';
+import throttle from 'lodash.throttle';
+import cn from 'classnames';
 
 const Header = () => {
     const { isShown, toggle } = useModal();
-
-    const [hasScrolled, setHasScrolled] = useState(false)
+    const [hasScrolled, setHasScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = throttle(() => {
-            const offset = 0
-            const { scrollTop } = document.documentElement
-            const scrolled = scrollTop > offset
+            const offset = 0;
+            const { scrollTop } = document.documentElement;
+            const scrolled = scrollTop > offset;
 
             if (hasScrolled !== scrolled) {
-                setHasScrolled(scrolled)
+                setHasScrolled(scrolled);
             }
-        }, 200)
+        }, 200);
 
-        document.addEventListener('scroll', handleScroll)
+        document.addEventListener('scroll', handleScroll);
         return () => {
-            document.removeEventListener('scroll', handleScroll)
-        }
-    }, [hasScrolled])
+            document.removeEventListener('scroll', handleScroll);
+        };
+    }, [hasScrolled]);
 
     return (
         <header className={cn("header", {'header--transparent': !hasScrolled})}>
@@ -112,7 +110,7 @@ const Header = () => {
                 }
             />
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

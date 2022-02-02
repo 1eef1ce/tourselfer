@@ -1,1 +1,1 @@
-export { default } from './ReviewSlider'
+export { default } from './ReviewSlider';

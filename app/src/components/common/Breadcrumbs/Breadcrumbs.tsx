@@ -1,7 +1,7 @@
-import {ChevronRight} from '@components/icons'
-import Link from 'next/link'
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import {ChevronRight} from '@components/icons';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 const getPathFromUrl = (url: string): string => {
     return url.split(/[?#]/)[0];
@@ -10,7 +10,7 @@ const getPathFromUrl = (url: string): string => {
 const convertBreadcrumb = (
     title: string,
 ): React.ReactNode => {
-    let transformedTitle = getPathFromUrl(title);
+    const transformedTitle = getPathFromUrl(title);
     return decodeURI(transformedTitle);
 };
 
@@ -103,25 +103,9 @@ const Breadcrumbs = ({
                     </li>
                 );
             })}
-{/*            <li className="breadcrumbs__item">
-                <Link href="/">
-                    <a className="breadcrumbs__link">
-                        <span className="breadcrumbs__icon breadcrumbs__icon--prev icon">
-                            <ChevronRight />
-                        </span>
-                        <span>Main</span>
-                        <span className="breadcrumbs__icon breadcrumbs__icon--next icon">
-                            <ChevronRight />
-                        </span>
-                    </a>
-                </Link>
-            </li>
-            <li className="breadcrumbs__item active">
-                Routes
-            </li>*/}
         </ul>
-    )
-}
+    );
+};
 
 Breadcrumbs.defaultProps = defaultProps;
 

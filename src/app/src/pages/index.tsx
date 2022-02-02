@@ -1,16 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import {Layout} from '@components/common'
-import {Button} from '@components/ui'
-import {AdvantageSlider, AppSlider, Review, ReviewSlider, Searchbar} from "@components/common";
-
-import {Appstore, ArrowRight, Googleplay} from '@components/icons'
-
-import {useRouter} from 'next/router'
-import { en } from '../locales/en'
-import { ru } from '../locales/ru'
-import { zh } from '../locales/zh'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import {Layout} from '@components/common';
+import {Button} from '@components/ui';
+import {AdvantageSlider, AppSlider, Review, ReviewSlider, Searchbar} from '@components/common';
+import {Appstore, ArrowRight, Googleplay} from '@components/icons';
+import {useRouter} from 'next/router';
+import { en } from '../locales/en';
+import { ru } from '../locales/ru';
+import { zh } from '../locales/zh';
 
 export default function Home() {
 
@@ -245,5 +243,5 @@ export default function Home() {
                 </div>
             </div>{/*download*/}
         </Layout>
-    )
+    );
 }

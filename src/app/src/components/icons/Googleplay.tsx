@@ -95,7 +95,7 @@ const Googleplay = ({...props}) => {
                 </linearGradient>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default Googleplay
+export default Googleplay;

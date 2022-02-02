@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import {Avatar} from '@components/common'
+import Link from 'next/link';
+import Image from 'next/image';
+import {Avatar} from '@components/common';
 
 export default function Review() {
   return (
@@ -53,5 +53,5 @@ export default function Review() {
               </div>
           </div>
       </div>
-  )
+  );
 }

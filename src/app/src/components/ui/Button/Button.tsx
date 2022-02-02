@@ -1,12 +1,12 @@
-import cn from 'classnames'
+import cn from 'classnames';
 import React, {
   forwardRef,
   ButtonHTMLAttributes,
   JSXElementConstructor,
   useRef,
-} from 'react'
-import mergeRefs from 'react-merge-refs'
-import {Loader} from '@components/ui'
+} from 'react';
+import mergeRefs from 'react-merge-refs';
+import {Loader} from '@components/ui';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string
@@ -31,12 +31,12 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     style = {},
     Component = 'button',
     ...rest
-  } = props
-  const ref = useRef<typeof Component>(null)
+  } = props;
+  const ref = useRef<typeof Component>(null);
 
   const rootClassName = cn(
     className
-  )
+  );
 
   return (
     <Component
@@ -55,7 +55,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
         <Loader />
       )}
     </Component>
-  )
-})
+  );
+});
 
-export default Button
+export default Button;

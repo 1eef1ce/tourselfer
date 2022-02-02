@@ -1,5 +1,5 @@
-import {Breadcrumbs, Layout} from '@components/common'
-import Head from 'next/head'
+import {Breadcrumbs, Layout} from '@components/common';
+import Head from 'next/head';
 
 export default function About() {
     return (
@@ -13,5 +13,5 @@ export default function About() {
                 <h1 className="title-1">About us</h1>
             </div>
         </Layout>
-    )
+    );
 }
