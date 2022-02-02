@@ -1,0 +1,134 @@
+@import "variables.scss";
+@import "media.scss";
+
+.user {
+  display: flex;
+  align-items: center;
+  color: $color-primary;
+
+  &--white {
+    color: #fff;
+
+    .user__status {
+      color: #fff;
+    }
+  }
+
+  &--medium {
+
+    .user {
+
+      &__img {
+
+        @include max-767 {
+          width: 52px;
+          height: 52px;
+          margin-right: 12px;
+        }
+      }
+
+      &__name {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  &--small {
+
+    .user {
+
+      &__img {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+      }
+
+      &__icon {
+        top: auto;
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+      }
+
+      &__name {
+        font-size: 18px;
+        line-height: 1.11;
+
+        @include max-767 {
+          font-size: 16px;
+          line-height: 1.5;
+        }
+      }
+
+      &__status {
+        margin: 4px 0 0;
+        font-family: $font-primary;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.43;
+        text-transform: none;
+        letter-spacing: normal;
+
+        @include max-767 {
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 1.33;
+        }
+      }
+    }
+
+  }
+
+  &__img {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+    border-radius: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    background: $gradient-green;
+    z-index: 1;
+  }
+
+  &__status {
+    margin-bottom: 4px;
+    font-family: $font-secondary;
+    font-size: 12px;
+    line-height: 1.67;
+    color: $color-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    @include max-767 {
+      font-size: 10px;
+      line-height: 1.8;
+    }
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.4;
+
+    @include max-767 {
+      font-size: 18px;
+      line-height: 1.56;
+    }
+  }
+}

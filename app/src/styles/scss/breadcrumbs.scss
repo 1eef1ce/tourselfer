@@ -1,0 +1,73 @@
+@import "variables.scss";
+@import "media.scss";
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 40px 0 20px;
+  list-style: none;
+
+  @include max-1023 {
+    overflow-x: scroll;
+  }
+
+  @include max-767 {
+    margin: 16px 0;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    text-transform: capitalize;
+
+    &.active {
+
+      @include max-767 {
+        display: none;
+      }
+
+      .breadcrumbs__link {
+        font-size: 14px;
+        color: $color-tertiary;
+        pointer-events: none;
+      }
+    }
+
+    &:first-of-type {
+
+      .breadcrumbs__icon {
+        display: none;
+
+        @include max-767 {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 24px;
+    color: $color-secondary;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+
+    @include max-767 {
+      transform: rotate(180deg);
+      margin: 0 4px -0.25em 0;
+    }
+
+    svg * {
+      fill: $color-secondary;
+    }
+  }
+}
