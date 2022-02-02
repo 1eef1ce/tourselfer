@@ -1,0 +1,128 @@
+import {ChevronRight} from '@components/icons'
+import Link from 'next/link'
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+
+const getPathFromUrl = (url: string): string => {
+    return url.split(/[?#]/)[0];
+};
+
+const convertBreadcrumb = (
+    title: string,
+): React.ReactNode => {
+    let transformedTitle = getPathFromUrl(title);
+    return decodeURI(transformedTitle);
+};
+
+export interface Breadcrumb {
+    breadcrumb: string;
+    href: string;
+}
+
+export interface BreadcrumbsProps {
+    rootLabel?: string | null;
+}
+
+const defaultProps: BreadcrumbsProps = {
+    rootLabel: 'Main',
+};
+
+const Breadcrumbs = ({
+     rootLabel,
+ }: BreadcrumbsProps) => {
+    const router = useRouter();
+    const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb> | null>(
+        null
+    );
+
+    useEffect(() => {
+        if (router) {
+            const linkPath = router.asPath.split('/');
+            linkPath.shift();
+
+            const pathArray = linkPath.map((path, i) => {
+                return {
+                    breadcrumb: path,
+                    href: '/' + linkPath.slice(0, i + 1).join('/'),
+                };
+            });
+
+            setBreadcrumbs(pathArray);
+        }
+    }, [router]);
+
+    if (!breadcrumbs) {
+        return null;
+    }
+
+    return (
+        <ul className="breadcrumbs">
+            <li className="breadcrumbs__item">
+                <Link href="/">
+                    <a className="breadcrumbs__link">
+                        <span className="breadcrumbs__icon icon">
+                            <ChevronRight />
+                        </span>
+                        <span>
+                            {convertBreadcrumb(
+                                rootLabel || 'Main',
+                            )}
+                        </span>
+                    </a>
+                </Link>
+            </li>
+            {breadcrumbs.length >= 1 &&
+            breadcrumbs.map((breadcrumb, i) => {
+                if (
+                    !breadcrumb ||
+                    breadcrumb.breadcrumb.length === 0
+                ) {
+                    return;
+                }
+                return (
+                    <li
+                        key={breadcrumb.href}
+                        className={
+                            i === breadcrumbs.length - 1
+                                ? "breadcrumbs__item active"
+                                : "breadcrumbs__item"
+                        }
+                    >
+                        <Link href={breadcrumb.href}>
+                            <a className="breadcrumbs__link">
+                                <span className="breadcrumbs__icon icon">
+                                    <ChevronRight />
+                                </span>
+                                <span>
+                                {convertBreadcrumb(
+                                    breadcrumb.breadcrumb,
+                                )}
+                                </span>
+                            </a>
+                        </Link>
+                    </li>
+                );
+            })}
+{/*            <li className="breadcrumbs__item">
+                <Link href="/">
+                    <a className="breadcrumbs__link">
+                        <span className="breadcrumbs__icon breadcrumbs__icon--prev icon">
+                            <ChevronRight />
+                        </span>
+                        <span>Main</span>
+                        <span className="breadcrumbs__icon breadcrumbs__icon--next icon">
+                            <ChevronRight />
+                        </span>
+                    </a>
+                </Link>
+            </li>
+            <li className="breadcrumbs__item active">
+                Routes
+            </li>*/}
+        </ul>
+    )
+}
+
+Breadcrumbs.defaultProps = defaultProps;
+
+export default Breadcrumbs;

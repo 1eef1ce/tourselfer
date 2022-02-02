@@ -1,0 +1,73 @@
+@import "variables.scss";
+@import "media.scss";
+
+.advantages {
+
+  &__items {
+    display: flex;
+    margin: 0 -12px;
+    overflow-x: scroll;
+  }
+
+  &__item {
+    position: relative;
+    width: calc(33.33% - 24px);
+    margin: 0 12px;
+    padding: 28px 24px 40px;
+    border: 1px solid $color-gray;
+    border-radius: 16px;
+    flex-shrink: 0;
+    transition: 0.2s;
+
+    @include max-1023 {
+      width: calc(50% - 24px);
+    }
+
+    @include max-767 {
+      width: 282px;
+    }
+
+    &:hover {
+      background: $color-green-20;
+
+      .advantages__number {
+        color: #fff;
+      }
+    }
+  }
+
+  &__number {
+    position: absolute;
+    top: 28px;
+    right: 24px;
+    transform: rotate(90deg);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 0.9;
+    color: $color-gray;
+    letter-spacing: -0.01em;
+    transition: 0.2s;
+  }
+
+  &__img {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 32px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+
+  }
+
+  &__text {
+    margin-top: 16px;
+    color: $color-secondary;
+  }
+}
