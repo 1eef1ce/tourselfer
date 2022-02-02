@@ -1,0 +1,59 @@
+@import "variables.scss";
+@import "media.scss";
+
+.link {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+
+  &--underline {
+    text-decoration: underline;
+  }
+
+  &--gray {
+    color: $color-tertiary;
+
+    .icon {
+
+      svg * {
+        fill: $color-tertiary;
+      }
+    }
+  }
+
+  &--color {
+    color: $color-green;
+    background: $webkit-color-green;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    .icon {
+
+      svg * {
+        fill: $color-green;
+      }
+    }
+
+    &:hover {
+      color: $color-green-hover;
+      background: $webkit-gradient-green-hover;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      svg * {
+        fill: $color-green-hover;
+      }
+    }
+  }
+
+  &--arrow {
+    display: inline-flex;
+    align-items: center;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin-left: 4px;
+    }
+  }
+}

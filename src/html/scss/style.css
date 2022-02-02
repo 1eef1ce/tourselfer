@@ -361,6 +361,12 @@ html {
   position: relative;
   padding: 5px 0;
 }
+.dropdown:hover .dropdown__icon {
+  transform: scale(1, -1);
+}
+.dropdown:hover .dropdown__icon--left {
+  transform: none;
+}
 .dropdown:hover .dropdown__content {
   display: block;
 }
@@ -369,11 +375,14 @@ html {
   align-items: center;
   font-size: 16px;
   line-height: 1.5;
+  text-transform: uppercase;
+  transition: 0.2s;
 }
 .dropdown__icon {
   width: 16px;
   height: 16px;
   margin: 0 0 0 4px;
+  transition: 0.2s;
 }
 .dropdown__icon--left {
   margin: 0 8px 0 0;
@@ -399,6 +408,7 @@ html {
   font-size: 16px;
   line-height: 1.5;
   color: #5C6670;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 .dropdown__link.active {
@@ -721,6 +731,7 @@ html {
   transition: 0.2s;
 }
 .advantages__img {
+  position: relative;
   width: 120px;
   height: 120px;
   margin-bottom: 32px;
@@ -891,6 +902,7 @@ html {
   color: #737373;
 }
 .download__code {
+  position: relative;
   width: 210px;
   height: 210px;
 }
@@ -960,6 +972,9 @@ html {
   max-width: 253px;
   height: 48px;
 }
+.footer__logo svg * {
+  fill: #fff;
+}
 .footer__description {
   margin-top: 16px;
   font-size: 16px;
@@ -1022,6 +1037,7 @@ html {
 }
 @media (max-width: 767px) {
   .footer-nav {
+    width: 100%;
     column-count: 1;
     padding-top: 24px;
   }
@@ -1062,16 +1078,21 @@ html {
 }
 
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
   background: #fff;
   border-bottom: 1px solid #D9D9D9;
   color: #0D0D0D;
+  transition: 0.2s;
 }
 .header--transparent {
   border-bottom: 0;
   background: transparent;
   color: #fff;
+}
+.header--transparent .header__logo svg * {
+  fill: #fff;
 }
 .header--transparent .header__lang {
   color: #fff;
@@ -1115,6 +1136,9 @@ html {
     height: 36px;
     margin: 0 auto;
   }
+}
+.header__logo svg * {
+  transition: 0.2s;
 }
 .header__lang {
   margin-right: 32px;
@@ -1178,6 +1202,7 @@ html {
 }
 .header-nav__icon svg * {
   fill: #0D0D0D;
+  transition: 0.2s;
 }
 
 .locations__items {
@@ -1899,10 +1924,10 @@ html {
   }
 }
 .showcase__heading {
+  margin: 0;
   font-weight: 700;
   font-size: 64px;
   line-height: 1.25;
-  margin: 0;
 }
 @media (max-width: 767px) {
   .showcase__heading {
@@ -1976,6 +2001,7 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   transition: 0.2s;
 }
 .showcase__img::before {
@@ -1995,6 +2021,7 @@ html {
 .showcase__content {
   position: relative;
   margin-top: auto;
+  z-index: 2;
 }
 .showcase__text {
   color: rgba(255, 255, 255, 0.9);
@@ -2162,6 +2189,7 @@ html {
   height: 24px;
   border-radius: 100%;
   background: linear-gradient(314.63deg, #0B97A0 0%, #AEDEA6 100%);
+  z-index: 1;
 }
 .user__status {
   margin-bottom: 4px;
