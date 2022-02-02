@@ -1,0 +1,59 @@
+@import "variables.scss";
+@import "media.scss";
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border: 1px solid transparent;
+  border-radius: 32px;
+  background: transparent;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: inherit;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    color: #fff;
+    background: $gradient-green-hover;
+  }
+
+  &:focus {
+    border-color: $color-gray-20;
+  }
+
+  &--large {
+    padding: 20px 30px;
+  }
+
+  &--alt {
+    width: 100%;
+    padding: 17px;
+    border-radius: 8px;
+    border-color: $color-gray;
+    font-weight: 500;
+    color: $color-primary;
+
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
+  &--fill {
+    color: #fff;
+    background: $gradient-green;
+  }
+
+  &--more {
+    padding: 15px 29px;
+    border-color: $color-green;
+    color: $color-tertiary;
+
+    &:hover {
+      border-color: transparent;
+    }
+  }
+}

@@ -2,11 +2,13 @@
 @import "media.scss";
 
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
   background: #fff;
   border-bottom: 1px solid $color-gray;
   color: $color-primary;
+  transition: 0.2s;
 
   &--transparent {
     border-bottom: 0;
@@ -14,6 +16,13 @@
     color: #fff;
 
     .header {
+
+      &__logo {
+
+        svg * {
+          fill: #fff;
+        }
+      }
 
       &__lang {
         color: #fff;
@@ -73,6 +82,10 @@
       max-width: 190px;
       height: 36px;
       margin: 0 auto;
+    }
+
+    svg * {
+      transition: 0.2s;
     }
   }
 
@@ -151,6 +164,7 @@
 
     svg * {
       fill: $color-primary;
+      transition: 0.2s;
     }
   }
 }

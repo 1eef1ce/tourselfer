@@ -45,6 +45,10 @@
   &__logo {
     max-width: 253px;
     height: 48px;
+
+    svg * {
+      fill: #fff;
+    }
   }
 
   &__description {
@@ -112,6 +116,7 @@
   padding-top: 28px;
 
   @include max-767 {
+    width: 100%;
     column-count: 1;
     padding-top: 24px;
   }

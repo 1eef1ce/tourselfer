@@ -103,6 +103,7 @@
     height: 24px;
     border-radius: 100%;
     background: $gradient-green;
+    z-index: 1;
   }
 
   &__status {
