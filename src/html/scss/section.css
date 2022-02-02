@@ -1,0 +1,26 @@
+.section {
+  margin-top: 64px;
+}
+@media (max-width: 767px) {
+  .section {
+    margin-top: 40px;
+  }
+}
+.section__head {
+  margin-bottom: 32px;
+}
+@media (max-width: 767px) {
+  .section__head {
+    margin-bottom: 24px;
+  }
+}
+.section__head .link {
+  margin-top: 16px;
+}
+@media (max-width: 767px) {
+  .section__head .link {
+    margin-top: 8px;
+  }
+}
+
+/*# sourceMappingURL=section.css.map */

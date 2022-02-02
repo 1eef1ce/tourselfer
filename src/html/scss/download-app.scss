@@ -1,0 +1,19 @@
+@import "variables.scss";
+@import "media.scss";
+
+.download-app {
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__items {
+    display: flex;
+    margin: 0 -6px;
+  }
+
+  &__item {
+    height: 45px;
+    margin: 0 6px;
+  }
+}

@@ -1,0 +1,12 @@
+@import "variables.scss";
+@import "media.scss";
+
+.form {
+
+  &__field {
+    padding: 0;
+    border: 0;
+    background: #fff;
+    outline: none;
+  }
+}
