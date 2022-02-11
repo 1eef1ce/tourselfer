@@ -19,7 +19,6 @@
   &__item {
     display: inline-flex;
     align-items: center;
-    text-transform: capitalize;
 
     &.active {
 
@@ -53,6 +52,13 @@
     line-height: 24px;
     color: $color-secondary;
     white-space: nowrap;
+
+    span {
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
   }
 
   &__icon {

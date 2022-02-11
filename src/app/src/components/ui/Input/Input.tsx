@@ -1,32 +1,48 @@
+import React from 'react';
 import cn from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string
-  onChange?: (...args: any[]) => any
-}
-
-const Input: React.FC<InputProps> = (props) => {
-  const { className, onChange, ...rest } = props;
-  const rootClassName = cn({}, className);
-  const handleOnChange = (e: any) => {
-    if (onChange) {
-      onChange(e.target.value);
+class Input extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            focus: false,
+            inputValue: ''
+        };
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.getClass = this.getClass.bind(this);
     }
-    return null;
-  };
+    onFocus() {
+        this.setState({focus: true});
+    }
+    onBlur() {
+        this.setState({focus: false});
+    }
+    onChange() {
+        this.setState({inputValue: event.target.value});
+    }
+    getClass() {
+        if(this.state.focus === true)
+            return "focus";
+        else
+            return "";
+    }
 
-  return (
-    <input
-      className={rootClassName}
-      onChange={handleOnChange}
-      autoComplete="off"
-      autoCorrect="off"
-      autoCapitalize="off"
-      spellCheck="false"
-      {...rest}
-    />
-  );
-};
+    render() {
+        const inputClass = this.getClass();
+        return (
+            <>
+                <label className="form__label">Адрес *</label>
+                <div className={cn("gradient-border", inputClass)}>
+                    <input className="form__field" type="text" value={this.state.inputValue}
+                           onBlur={this.onBlur} onFocus={this.onFocus} onChange={this.onChange}
+                    />
+                    <div className="form__error">Helper Text</div>
+                </div>
+            </>
+        );
+    }
+}
 
 export default Input;

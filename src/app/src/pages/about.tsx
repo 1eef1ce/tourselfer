@@ -5,7 +5,7 @@ export default function About() {
     return (
         <Layout>
             <Head>
-                <title>Routes</title>
+                <title>About us</title>
             </Head>
 
             <div className="container">

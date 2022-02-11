@@ -25,10 +25,8 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     className,
     children,
     active,
-    width,
     loading = false,
     disabled = false,
-    style = {},
     Component = 'button',
     ...rest
   } = props;
@@ -44,10 +42,6 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       ref={mergeRefs([ref, buttonRef])}
       className={rootClassName}
       disabled={disabled}
-      style={{
-        width,
-        ...style,
-      }}
       {...rest}
     >
       {children}

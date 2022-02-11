@@ -42,7 +42,7 @@ const Breadcrumbs = ({
 
             const pathArray = linkPath.map((path, i) => {
                 return {
-                    breadcrumb: path,
+                    breadcrumb: path.replace(/-/g, ' '),
                     href: '/' + linkPath.slice(0, i + 1).join('/'),
                 };
             });

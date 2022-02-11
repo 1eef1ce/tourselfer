@@ -11,36 +11,46 @@ $color-white-60: rgba(255, 255, 255, 0.6);
 $color-white-80: rgba(255, 255, 255, 0.8);
 $color-white-90: rgba(255, 255, 255, 0.9);
 
+$color-black: #222222;
+$color-black-v1: #242424;
+$color-black-v2: #353545;
 $color-black-7: rgba(0, 0, 0, 0.07);
 $color-black-30: rgba(0, 0, 0, 0.3);
 $color-black-60: rgba(0, 0, 0, 0.6);
 
-$color-gray-20: rgba(15, 36, 32, 0.2);
-
-$color-black: #222222;
-$color-black-v1: #242424;
-$color-black-v2: #353545;
 $color-gray: #D9D9D9;
 $color-gray-v1: #737373;
 $color-gray-v2: #969696;
 $color-gray-v3: #9FA5AA;
 $color-gray-bg: #F5F5F7;
 $color-gray-bg-v1: #F8F8FA;
+$color-gray-7: rgba(15, 36, 32, 0.07);
+$color-gray-10: rgba(15, 36, 32, 0.1);
+$color-gray-15: rgba(15, 36, 32, 0.15);
+$color-gray-20: rgba(15, 36, 32, 0.2);
+$color-gray-25: rgba(15, 36, 32, 0.25);
 
 $color-green: #4FB4A2;
-$color-green-v1: #8DB401;
+$color-green-v1: #46A598;
+$color-green-v2: #8DB401;
 $color-green-hover: #AEDEA6;
-
 $color-green-20: rgba(79, 180, 162, 0.2);
 
+$color-red: #DA0C09;
+$color-red-v1: #C40B08;
+$color-red-7: rgba(218, 12, 9, 0.07);
+$color-red-10: rgba(218, 12, 9, 0.1);
+$color-red-20: rgba(218, 12, 9, 0.2);
+
 $color-overlay: rgba(15, 36, 32, 0.8);
+$color-icon: #002433;
 
 $gradient-green: linear-gradient(314.63deg, #0B97A0 0%, #AEDEA6 100%);
 $gradient-green-hover: linear-gradient(314.65deg, #2EAFB8 0%, #BBE3B5 100%);
 
 $webkit-color-green: -webkit-linear-gradient(#4FB4A2, #4FB4A2);
 $webkit-gradient-green: -webkit-linear-gradient(314.63deg, #0B97A0 0%, #AEDEA6 100%);
-$webkit-gradient-green-hover: -webkit-linear-gradient(314deg, #0B97A0 -51.72%, #AEDEA6 100%);
+$webkit-gradient-green-hover: -webkit-linear-gradient(314.65deg, #0B97A0 0%, #AEDEA6 100%);
 
 $gradient-black-33: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.33) 100%);
 $gradient-black-60: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);

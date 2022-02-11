@@ -3,19 +3,125 @@
 
 .form {
 
+  &__title {
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.6;
+    color: $color-primary;
+  }
+
   &__row {
     display: flex;
     flex-direction: column;
+    margin-bottom: 24px;
+
+    &--btn {
+      margin: 32px 0;
+    }
+
+    &--select {
+      width: 240px;
+    }
+
+    &--radio {
+      margin: 32px 0;
+    }
   }
 
   &__label {
-
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.14;
+    color: $color-secondary;
   }
 
   &__field {
-    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    padding: 16px;
     border: 0;
-    background: #fff;
+    border-radius: 10px;
+    background: $color-gray-7;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-primary;
+    box-shadow: inset 0 0 0 1px $color-gray-15;
     outline: none;
+    transition: 0.2s;
+
+    &::placeholder {
+      color: $color-secondary;
+    }
+
+    &:not(:disabled) {
+
+      &:hover {
+        background: #fff;
+      }
+    }
+
+    &:not([value]) {
+
+      &:hover {
+        background: $color-gray-7;
+      }
+
+      &:focus {
+        background: #fff;
+        box-shadow: none;
+      }
+    }
+
+    &:focus {
+      background: #fff;
+      box-shadow: none;
+    }
+
+    &:disabled {
+      box-shadow: none;
+      color: $color-secondary;
+    }
+
+    &.error {
+      box-shadow: inset 0 0 0 2px $color-red;
+      background: $color-red-7;
+
+      &:hover {
+        background: $color-red-7;
+      }
+
+      &:focus {
+        background: #fff;
+      }
+      
+      & + .form__error {
+        display: block;
+      }
+    }
+  }
+
+  &__textarea {
+    height: 104px;
+    resize: none;
+  }
+
+  &__error {
+    display: none;
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.14;
+    color: $color-red;
+  }
+
+  .btn {
+
+    & + .btn {
+      margin-top: 16px;
+    }
   }
 }

@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import {Layout} from '@components/common';
 import {Button} from '@components/ui';
-import {AdvantageSlider, AppSlider, Review, ReviewSlider, Searchbar} from '@components/common';
+import {AdvantageSlider, AppSlider, Layout, Review, ReviewSlider, Searchbar} from '@components/common';
 import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {useRouter} from 'next/router';
 import { en } from '../locales/en';
@@ -95,7 +94,7 @@ export default function Home() {
                             <a className="link link--arrow link--gray">
                                 <span>All direction</span>
                                 <span className="icon">
-                                    <ArrowRight />
+                                    <ArrowRight/>
                                 </span>
                             </a>
                         </Link>

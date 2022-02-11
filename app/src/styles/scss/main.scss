@@ -12,6 +12,8 @@ body {
   font-size: 18px;
   line-height: 1.56;
   color: #000;
+  overflow-x: hidden;
+  overflow-y: unset;
 
   @include max-767 {
     font-size: 16px;
@@ -37,11 +39,6 @@ a {
     width: 100%;
     height: 100%;
   }
-}
-
-html {
-  overflow-x: hidden;
-  overflow-y: unset;
 }
 
 .container {
@@ -125,5 +122,41 @@ html {
     font-size: 15px;
     line-height: 1.6;
     letter-spacing: -0.01em;
+  }
+}
+
+.text-note {
+  font-size: 14px;
+  line-height: 1.43;
+  color: $color-secondary;
+
+  .link {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+.gradient-border {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px;
+    margin: -2px;
+    background: $gradient-green;
+    opacity: 0;
+    transition: 0.2s;
+  }
+
+  &.focus {
+
+    &::before {
+      opacity: 1;
+    }
   }
 }

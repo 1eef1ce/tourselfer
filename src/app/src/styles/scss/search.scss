@@ -1,5 +1,6 @@
 @import "variables.scss";
 @import "media.scss";
+@import "mixins";
 
 .search {
 
@@ -60,6 +61,9 @@
     width: 100%;
     height: 100%;
     padding: 12px 124px 12px 24px;
+    background: #fff;
+    box-shadow: none;
+    font-size: 18px;
     line-height: 1.33;
 
     @include max-767 {
@@ -108,11 +112,7 @@
   display: none;
   width: 32px;
   height: 32px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+  @include reset-button;
 
   @include max-1023 {
     display: block;

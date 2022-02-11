@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import {Button, Logo} from '@components/ui';
-import {Appstore, ChevronDown, ChevronRight, Facebook, Googleplay, Instagram, World} from '@components/icons';
+import {Appstore, ChevronDown, Facebook, Googleplay, Instagram, World} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import {FC} from 'react';
+import FooterMenu from '@components/common/Menu/FooterMenu';
 
 const Footer: FC = () => {
     return (
@@ -22,68 +23,7 @@ const Footer: FC = () => {
                             are.
                         </div>
                     </div>
-                    <div className="footer-nav">
-                        <div className="footer-nav__item">
-                            <Link href="#">
-                                <a className="footer-nav__link">
-                                    <span>How the site works?</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="footer-nav__item">
-                            <Link href="#">
-                                <a className="footer-nav__link">
-                                    <span>FAQ</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="footer-nav__item">
-                            <Link href="#">
-                                <a className="footer-nav__link">
-                                    <span>Support</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="footer-nav__item">
-                            <Link href="/about">
-                                <a className="footer-nav__link">
-                                    <span>About us</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="footer-nav__item">
-                            <Link href="#">
-                                <a className="footer-nav__link">
-                                    <span>Become an author</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="footer-nav__item">
-                            <Link href="#">
-                                <a className="footer-nav__link">
-                                    <span>Blog</span>
-                                    <span className="icon footer-nav__icon">
-                                        <ChevronRight />
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                    </div>
+                    <FooterMenu/>
                     <div className="download-app footer__app">
                         <div className="download-app__title">Download our app now:</div>
                         <div className="download-app__items">
