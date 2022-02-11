@@ -2,7 +2,7 @@ import React from 'react';
 
 let xhr;
 
-class IPAddress extends React.Component {
+class IPAddress extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,7 @@ class IPAddress extends React.Component {
 
     processRequest() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
+            const response = JSON.parse(xhr.responseText);
             this.setState({
                 ip_address: response.ip
             });

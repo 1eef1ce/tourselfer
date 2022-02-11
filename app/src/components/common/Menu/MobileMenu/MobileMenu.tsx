@@ -27,7 +27,7 @@ const MobileMenu = (props) =>  {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
 export default MobileMenu;

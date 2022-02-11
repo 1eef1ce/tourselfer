@@ -6,7 +6,7 @@ import {ChevronDown} from '@components/icons';
 const options = [
     { value: 'today', label: 'Сегодня' },
     { value: 'tomorrow', label: 'Завтра' }
-]
+];
 
 const DropdownIndicator = props => {
     return (
@@ -18,11 +18,7 @@ const DropdownIndicator = props => {
     );
 };
 
-const styleProxy = new Proxy({}, {
-    get: (target, propKey) => () => {}
-});
-
-class SelectField extends React.Component {
+class SelectField extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {focus: false};
@@ -50,7 +46,7 @@ class SelectField extends React.Component {
                 <label className="form__label">День доставки</label>
                 <div className={cn("gradient-border", inputClass)}>
                     <Select className="select" classNamePrefix="select"
-                            options={options} components={{ DropdownIndicator }} isSearchable={false} styles={styleProxy}
+                            options={options} components={{ DropdownIndicator }} isSearchable={false}
                             onBlur={this.onBlur} onFocus={this.onFocus}
                     />
                     <div className="form__error">Helper Text</div>

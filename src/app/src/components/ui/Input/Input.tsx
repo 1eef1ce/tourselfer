@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-class Input extends React.Component {
+class Input extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,7 @@ class Input extends React.Component {
         this.setState({focus: false});
     }
     onChange() {
-        this.setState({inputValue: event.target.value});
+        this.setState({inputValue: (event.target as HTMLInputElement).value});
     }
     getClass() {
         if(this.state.focus === true)

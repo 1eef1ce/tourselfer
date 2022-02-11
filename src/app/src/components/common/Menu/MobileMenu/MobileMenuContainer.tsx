@@ -2,7 +2,7 @@ import React from 'react';
 import MobileMenuBtn from "@components/common/Menu/MobileMenu/MobileMenuBtn";
 import MobileMenu from "@components/common/Menu/MobileMenu/MobileMenu";
 
-class MobileMenuContainer extends React.Component {
+class MobileMenuContainer extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ class MobileMenuContainer extends React.Component {
 
     render() {
 
-        let links = [
+        const links = [
             {
                 label: "How the site works?",
                 href: "/how-the-site-works",
