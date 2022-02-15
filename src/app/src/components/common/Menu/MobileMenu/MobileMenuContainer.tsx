@@ -1,6 +1,6 @@
 import React from 'react';
-import MobileMenuBtn from "@components/common/Menu/MobileMenu/MobileMenuBtn";
-import MobileMenu from "@components/common/Menu/MobileMenu/MobileMenu";
+import MobileMenuBtn from './MobileMenuBtn';
+import MobileMenu from './MobileMenu';
 
 class MobileMenuContainer extends React.Component<any, any> {
     constructor(props) {
@@ -24,26 +24,10 @@ class MobileMenuContainer extends React.Component<any, any> {
     }
 
     render() {
-
-        const links = [
-            {
-                label: "How the site works?",
-                href: "/how-the-site-works",
-            },
-            {
-                label: "Become an author",
-                href: "/become-an-author"
-            },
-            {
-                label: "Support",
-                href: "/support"
-            }
-        ];
-
         return (
             <>
                 <MobileMenuBtn handleMouseDown={this.handleMouseDown}/>
-                <MobileMenu handleMouseDown={this.handleMouseDown} menuVisibility={this.state.visible} links={links}/>
+                <MobileMenu handleMouseDown={this.handleMouseDown} menuVisibility={this.state.visible}/>
             </>
         );
     }

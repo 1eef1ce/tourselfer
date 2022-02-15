@@ -9,7 +9,6 @@ export { default as Layout } from './Layout';
 export { default as I18nWidget } from './I18nWidget';
 export { default as IPAddress } from './IPAddress';
 export { default as Pagination } from './Pagination';
-export { default as Review } from './Review';
-export { default as ReviewSlider } from './ReviewSlider';
 export { default as Searchbar } from './Searchbar';
 export { default as TopBanner } from './TopBanner';
+export { default as UserName } from './UserName';

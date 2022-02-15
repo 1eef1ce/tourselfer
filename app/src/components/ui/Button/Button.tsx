@@ -1,55 +1,81 @@
 import cn from 'classnames';
-import React, {
-  forwardRef,
-  ButtonHTMLAttributes,
-  JSXElementConstructor,
-  useRef,
-} from 'react';
-import mergeRefs from 'react-merge-refs';
+import React, {forwardRef, ButtonHTMLAttributes, JSXElementConstructor} from 'react';
 import {Loader} from '@components/ui';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href?: string
-  className?: string
-  active?: boolean
-  type?: 'submit' | 'reset' | 'button'
-  Component?: string | JSXElementConstructor<any>
-  width?: string | number
-  loading?: boolean
-  disabled?: boolean
+    href?: string
+    className?: string
+    variant?: 'outlined' | 'filled'
+    size?: 'medium' | 'large'
+    type?: 'submit' | 'reset' | 'button'
+    Component?: string | JSXElementConstructor<any>
+    loading?: boolean
+    disabled?: boolean
+    isIcon?: boolean
+    icon?
+    isStartIcon?: boolean
+    startIcon?
+    isEndIcon?: boolean
+    endIcon?
 }
 
-// eslint-disable-next-line react/display-name
-const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
-  const {
-    className,
-    children,
-    active,
-    loading = false,
-    disabled = false,
-    Component = 'button',
-    ...rest
-  } = props;
-  const ref = useRef<typeof Component>(null);
+const Button: React.FC<ButtonProps> = ((props) => {
+    const {
+        className,
+        variant,
+        size,
+        isIcon,
+        icon,
+        isStartIcon,
+        startIcon,
+        isEndIcon,
+        endIcon,
+        children,
+        loading = false,
+        disabled = false,
+        Component = 'button',
+        ...rest
+    } = props;
 
-  const rootClassName = cn(
-    className
-  );
+    const rootClassName = cn(
+        'btn',
+        {
+            ['btn--outlined']: variant === 'outlined',
+            ['btn--filled']: variant === 'filled',
+            ['btn--medium']: size === 'medium',
+            ['btn--large']: size === 'large',
+            ['btn--icon']: isIcon === true,
+            ['loading']: loading === true
+        },
+        className
+    );
 
-  return (
-    <Component
-      aria-pressed={active}
-      ref={mergeRefs([ref, buttonRef])}
-      className={rootClassName}
-      disabled={disabled}
-      {...rest}
-    >
-      {children}
-      {loading && (
-        <Loader />
-      )}
-    </Component>
-  );
+    if (isIcon) {
+        return (
+            <Component
+                className={rootClassName}
+                disabled={disabled}
+                {...rest}
+            >
+                <span className="icon">{icon}</span>
+                {loading && (<Loader/>)}
+            </Component>
+        );
+    }
+    else {
+        return (
+            <Component
+                className={rootClassName}
+                disabled={disabled}
+                {...rest}
+            >
+                {isStartIcon && (<span className="icon icon--start">{startIcon}</span>)}
+                {children}
+                {isEndIcon && (<span className="icon icon--end">{endIcon}</span>)}
+                {loading && (<Loader/>)}
+            </Component>
+        );
+    }
 });
 
 export default Button;

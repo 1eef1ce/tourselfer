@@ -1,7 +1,5 @@
-import {Button, Input} from '@components/ui';
+import {Button, Input, SelectField, Textarea} from '@components/ui';
 import Link from 'next/link';
-import SelectField from "@components/ui/SelectField/SelectField";
-import Textarea from "@components/ui/Textarea/Textarea";
 
 const FastOrder = () => {
     return (
@@ -12,7 +10,23 @@ const FastOrder = () => {
                     <Input/>
                 </div>
                 <div className="form__row form__row--select">
-                    <SelectField/>
+                    <SelectField
+                        classPrefix={"select"}
+                        isFilter={false}
+                        id="s_date"
+                        label="Дата доставки"
+                        options = {
+                            [
+                                {value: 'today', label: 'Сегодня'},
+                                {value: 'tomorrow', label: 'Завтра'}
+                            ]
+                        }
+                        defaultOption = {
+                            [
+                                {value: 'today', label: 'Сегодня'}
+                            ]
+                        }
+                    />
                 </div>
                 <div className="form__row form__row--radio">
                     <label className="radio">
@@ -48,7 +62,7 @@ const FastOrder = () => {
                     <Textarea/>
                 </div>
                 <div className="form__row form__row--btn">
-                    <Button className="btn btn--fill btn--submit" type="submit">Оформить заказ</Button>
+                    <Button className="btn btn--fill btn--medium" type="submit">Оформить заказ</Button>
                 </div>
             </form>
             <div className="text-note">

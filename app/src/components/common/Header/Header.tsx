@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import {Button, Logo, Modal} from '@components/ui';
-import {ChevronDown, Heart, SearchIcon, User} from '@components/icons';
+import {Logo, Modal} from '@components/ui';
+import {ChevronDown, Heart, User} from '@components/icons';
 import {I18nWidget, IPAddress} from '@components/common';
 import { useModal } from '@lib/hooks/useModal';
+import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';
 import throttle from 'lodash.throttle';
 import cn from 'classnames';
@@ -12,10 +13,14 @@ import {Callback} from '@components/callback';
 import {FastOrder} from '@components/order';
 import MobileMenuContainer from '@components/common/Menu/MobileMenu';
 import HeaderMenu from '@components/common/Menu/HeaderMenu';
+import MobileSearchContainer from "@components/common/Search/MobileSearch";
 
 const Header = () => {
     const { isShown, toggle } = useModal();
     const [hasScrolled, setHasScrolled] = useState(false);
+    const windowSize = useWindowSize();
+    let isMobile;
+    (windowSize.width < 1024) ? isMobile = true : isMobile = false;
 
     useEffect(() => {
         const handleScroll = throttle(() => {
@@ -38,22 +43,20 @@ const Header = () => {
         <header className={cn("header", {'header--transparent': !hasScrolled})}>
             {/*<IPAddress/>*/}
             <div className="container header__container">
-                <MobileMenuContainer/>
+                {isMobile && <MobileMenuContainer/>}
                 <Link href="/">
                     <a className="logo header__logo icon">
                         <Logo />
                     </a>
                 </Link>
-                <Button className="search-btn icon">
-                    <SearchIcon/>
-                </Button>
+                {isMobile && <MobileSearchContainer/>}
                 <div className="dropdown header__lang">
-                    <Button className="dropdown__btn">
+                    <div className="dropdown__btn">
                         <span>lang</span>
                         <span className="icon dropdown__icon">
                             <ChevronDown />
                         </span>
-                    </Button>
+                    </div>
                     <div className="dropdown__content">
                         <I18nWidget />
                     </div>
@@ -63,7 +66,7 @@ const Header = () => {
                     <div className="header-nav header-nav--icons">
                         <div className="header-nav__item">
                             <Link href="#">
-                                <a className="header-nav__link" href="javascript:void(0)">
+                                <a className="header-nav__link">
                                     <span className="icon header-nav__icon">
                                         <Heart />
                                     </span>
@@ -72,12 +75,12 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="header-nav__item">
-                            <Button className="header-nav__link" onClick={toggle}>
+                            <div className="header-nav__link" onClick={toggle}>
                                 <span className="icon header-nav__icon">
                                     <User />
                                 </span>
                                 <span>Sign in</span>
-                            </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

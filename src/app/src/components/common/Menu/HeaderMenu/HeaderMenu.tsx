@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import {useEffect, useState} from "react";
 
-const HeaderMenu = (props) => {
+const HeaderMenu = () => {
 
     const [items, setItems] = useState<any>([]);
 
     useEffect(()=>{
-        fetch('./headerMenu.json')
+        fetch('/headerMenu.json')
             .then(res => res.json())
             .then((result) => setItems(result));
     },[]);

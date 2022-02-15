@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import cn from 'classnames';
-import {useEffect, useState} from "react";
-
+import {useEffect, useState} from 'react';
 
 const MobileMenu = (props) =>  {
     let visibility;
@@ -12,7 +11,7 @@ const MobileMenu = (props) =>  {
     const [items, setItems] = useState<any>([]);
 
     useEffect(()=>{
-        fetch('./mobileMenu.json')
+        fetch('/mobileMenu.json')
             .then(res => res.json())
             .then((result) => setItems(result));
     },[]);

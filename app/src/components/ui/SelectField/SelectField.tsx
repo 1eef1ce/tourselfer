@@ -3,11 +3,6 @@ import cn from 'classnames';
 import Select, {components, DropdownIndicatorProps} from 'react-select';
 import {ChevronDown} from '@components/icons';
 
-const options = [
-    { value: 'today', label: 'Сегодня' },
-    { value: 'tomorrow', label: 'Завтра' }
-];
-
 const DropdownIndicator = props => {
     return (
         <components.DropdownIndicator {...props}>
@@ -18,6 +13,12 @@ const DropdownIndicator = props => {
     );
 };
 
+const styleProxy = new Proxy({}, {
+    get: (target, propKey) => () => {
+        //clears select styles
+    }
+});
+
 class SelectField extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -26,14 +27,17 @@ class SelectField extends React.Component<any, any> {
         this.onBlur = this.onBlur.bind(this);
         this.getClass = this.getClass.bind(this);
     }
+
     onFocus() {
         this.setState({focus: true});
     }
+
     onBlur() {
         this.setState({focus: false});
     }
+
     getClass() {
-        if(this.state.focus === true)
+        if (this.state.focus === true)
             return "focus";
         else
             return "";
@@ -43,10 +47,13 @@ class SelectField extends React.Component<any, any> {
         const inputClass = this.getClass();
         return (
             <>
-                <label className="form__label">День доставки</label>
+                {(this.props.isFilter)
+                    ? <div className="filter__text">{this.props.label}</div>
+                    : <label className="form__label">{this.props.label}</label>}
                 <div className={cn("gradient-border", inputClass)}>
-                    <Select className="select" classNamePrefix="select"
-                            options={options} components={{ DropdownIndicator }} isSearchable={false}
+                    <Select className="select" classNamePrefix={this.props.classPrefix} instanceId={this.props.id}
+                            options={this.props.options} components={{DropdownIndicator}} isSearchable={false}
+                            styles={styleProxy} defaultValue={this.props.defaultOption}
                             onBlur={this.onBlur} onFocus={this.onFocus}
                     />
                     <div className="form__error">Helper Text</div>

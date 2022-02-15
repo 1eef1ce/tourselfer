@@ -20,6 +20,8 @@ export { default as Instagram } from './Instagram';
 export { default as Man } from './Man';
 export { default as MapPin} from './MapPin';
 export { default as MapPinGray } from './MapPinGray';
+export { default as Minus } from './Minus';
+export { default as Plus } from './Plus';
 export { default as Quotes } from './Quotes';
 export { default as SearchIcon } from './SearchIcon';
 export { default as SocApple } from './SocApple';

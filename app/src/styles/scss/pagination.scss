@@ -65,12 +65,6 @@
     }
   }
 
-  &__icon,
-  &__link {
-
-    @include reset-button
-  }
-
   &__icon {
     width: 24px;
     height: 24px;

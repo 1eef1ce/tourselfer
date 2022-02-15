@@ -1,7 +1,8 @@
 import {Breadcrumbs, Layout, Pagination} from '@components/common';
 import Head from 'next/head';
+import {Button} from '@components/ui';
 import Filter from '@components/filter';
-import Routes from '@components/routes';
+import {RoutesContainer} from "@components/Routes";
 
 export default function RoutesPage() {
     return (
@@ -13,9 +14,12 @@ export default function RoutesPage() {
             <div className="container">
                 <Breadcrumbs/>
                 <h1 className="title-1">Routes</h1>
-                <Filter />
-                <Routes/>
-                <Pagination />
+                <Filter/>
+                <RoutesContainer/>
+                <div className="routes__more">
+                    <Button className="btn btn--alt">See more</Button>
+                </div>
+                <Pagination/>
             </div>
         </Layout>
     );

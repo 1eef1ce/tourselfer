@@ -1,14 +1,19 @@
 @import "variables.scss";
 @import "media.scss";
 
-.select {
+.select,
+.select-filter {
   position: relative;
 
   &--is-disabled {
 
-    .select__control {
-      box-shadow: none;
-      pointer-events: none;
+    .select,
+    .select-filter {
+
+      &__control {
+        box-shadow: none;
+        pointer-events: none;
+      }
     }
   }
 
@@ -18,7 +23,6 @@
     width: 100%;
     height: 56px;
     padding: 16px;
-    border: 0;
     border-radius: 10px;
     background: $color-gray-7;
     font-size: 16px;
@@ -40,8 +44,12 @@
     &--menu-is-open {
       background: #fff;
 
-      .select__dropdown-indicator {
-        transform: scale(1, -1);
+      .select,
+      .select-filter {
+
+        &__dropdown-indicator {
+          transform: scale(1, -1);
+        }
       }
     }
   }
@@ -94,5 +102,21 @@
       color: #fff;
       background: $gradient-green;
     }
+  }
+}
+
+.select-filter {
+
+  &__control {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  &__menu {
+    left: auto;
+    min-width: 160px;
   }
 }

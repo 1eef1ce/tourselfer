@@ -34,10 +34,19 @@ a {
 
 .icon {
   display: inline-flex;
+  flex-shrink: 0;
 
   svg {
     width: 100%;
     height: 100%;
+  }
+
+  &--start {
+    margin-right: 8px;
+  }
+
+  &--end {
+    margin-left: 8px;
   }
 }
 

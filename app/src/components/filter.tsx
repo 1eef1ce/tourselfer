@@ -1,6 +1,8 @@
+import React from 'react';
 import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons';
+import {SelectField} from "@components/ui";
 
-export default function Filter() {
+const Filter = () => {
     return (
         <div className="filter">
             <div className="filter__tags">
@@ -59,20 +61,44 @@ export default function Filter() {
                 </div>
                 <div className="filter__right">
                     <div className="filter__select">
-                        <div className="filter__text">Rating:</div>
-                        <select>
-                            <option>Any rating</option>
-                            <option>4+</option>
-                            <option>3+</option>
-                        </select>
+                        <SelectField
+                            classPrefix={"select-filter"}
+                            isFilter={true}
+                            id="s_rating"
+                            label="Rating:"
+                            options = {
+                                [
+                                    {value: 'Any', label: 'Any rating'},
+                                    {value: '4+', label: '4+'},
+                                    {value: '3+', label: '3+'}
+                                ]
+                            }
+                            defaultOption = {
+                                [
+                                    {value: 'Any', label: 'Any rating'}
+                                ]
+                            }
+                        />
                     </div>
                     <div className="filter__select">
-                        <div className="filter__text">Duration:</div>
-                        <select>
-                            <option>Any duration</option>
-                            <option>1-2 h</option>
-                            <option>2-3 h</option>
-                        </select>
+                        <SelectField
+                            classPrefix={"select-filter"}
+                            isFilter={true}
+                            id="s_duration"
+                            label="Duration:"
+                            options = {
+                                [
+                                    {value: 'Any', label: 'Any duration'},
+                                    {value: '1-2', label: '1-2 h'},
+                                    {value: '2-3', label: '2-3 h'}
+                                ]
+                            }
+                            defaultOption = {
+                                [
+                                    {value: 'Any', label: 'Any duration'}
+                                ]
+                            }
+                        />
                     </div>
                 </div>
             </div>
@@ -80,15 +106,17 @@ export default function Filter() {
                 <a className="filter-btn filter-btn--sort" href="javascript:void(0)">
                     <span>Sorting</span>
                     <span className="filter-btn__icon">
-                        <Sort />
+                        <Sort/>
                     </span>
                 </a>
                 <a className="filter-btn" href="javascript:void(0)">
                     <span className="icon filter-btn__icon">
-                        <FilterIcon />
+                        <FilterIcon/>
                     </span>
                 </a>
             </div>
         </div>
     );
-}
+};
+
+export default Filter;

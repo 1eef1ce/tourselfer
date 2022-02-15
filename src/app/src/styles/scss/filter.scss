@@ -75,7 +75,14 @@
     }
 
     .filter__text {
-      margin-bottom: 0;
+      margin: 0 4px 0 0;
+    }
+
+    .gradient-border {
+
+      &::before {
+        content: none;
+      }
     }
   }
 }

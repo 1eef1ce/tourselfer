@@ -1,0 +1,37 @@
+[
+  {
+    "city": "Paris",
+    "img": "/images/card-big.jpg",
+    "imgMobile": "/images/card-mobile-1.jpg",
+    "tours": "24",
+    "authors": "20"
+  },
+  {
+    "city": "London",
+    "img": "/images/card-medium.jpg",
+    "imgMobile": "/images/card-mobile-2.jpg",
+    "tours": "27",
+    "authors": "22"
+  },
+  {
+    "city": "Rome",
+    "img": "/images/card-small-1.jpg",
+    "imgMobile": "/images/card-mobile-3.jpg",
+    "tours": "21",
+    "authors": "19"
+  },
+  {
+    "city": "Dubai",
+    "img": "/images/card-small-2.jpg",
+    "imgMobile": "/images/card-mobile-4.jpg",
+    "tours": "22",
+    "authors": "18"
+  },
+  {
+    "city": "New York",
+    "img": "/images/card-small-3.jpg",
+    "imgMobile": "/images/card-mobile-5.jpg",
+    "tours": "25",
+    "authors": "23"
+  }
+]

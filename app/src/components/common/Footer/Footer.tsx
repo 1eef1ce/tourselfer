@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {Button, Logo} from '@components/ui';
+import {Logo} from '@components/ui';
 import {Appstore, ChevronDown, Facebook, Googleplay, Instagram, World} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import {FC} from 'react';
@@ -52,7 +52,7 @@ const Footer: FC = () => {
                             </div>
                         </div>
                         <div className="dropdown footer__lang">
-                            <Button className="dropdown__btn">
+                            <div className="dropdown__btn">
                                 <span className="icon dropdown__icon dropdown__icon--left">
                                     <World/>
                                 </span>
@@ -60,7 +60,7 @@ const Footer: FC = () => {
                                 <span className="icon dropdown__icon">
                                     <ChevronDown/>
                                 </span>
-                            </Button>
+                            </div>
                             <div className="dropdown__content dropdown__content--up">
                                 <I18nWidget />
                             </div>

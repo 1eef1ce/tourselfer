@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {Avatar} from '@components/common';
+import {Avatar, UserName} from '@components/common';
 
 export default function Review() {
   return (
@@ -11,10 +11,7 @@ export default function Review() {
                   <div className="user__img">
                       <Avatar/>
                   </div>
-                  <div>
-                      <div className="user__status">Seller</div>
-                      <div className="user__name">Muller Schneider</div>
-                  </div>
+                  <UserName/>
               </div>
           </div>
           <div className="review__content">
@@ -46,7 +43,7 @@ export default function Review() {
                   <div className="review__cost-old">5 €</div>
               </div>
               <div className="review__buttons">
-                  <a className="btn btn--large btn--fill" href="javascript:void(0)">Buy route</a>
+                  <a className="btn btn--large btn--filled" href="javascript:void(0)">Buy route</a>
                   <Link href="#">
                       <a className="link link--color">Learn more</a>
                   </Link>

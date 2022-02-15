@@ -9,7 +9,7 @@ const ForgotPassword = () => {
                     <Input/>
                 </div>
                 <div className="form__row">
-                    <Button className="btn btn--fill btn--submit" type="submit">Отправить ссылку на смену пароля</Button>
+                    <Button className="btn btn--filled btn--medium" type="submit">Отправить ссылку на смену пароля</Button>
                 </div>
             </form>
             <div className="text-note">

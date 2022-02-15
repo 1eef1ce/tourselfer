@@ -42,11 +42,11 @@
   display: flex;
   width: 72px;
   height: 72px;
-  border: 1px solid $color-gray;
   border-radius: 100%;
   background: #fff;
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: inset 0 0 0 1px $color-gray;
   transition: 0.2s;
 
   @include max-1023 {
@@ -62,7 +62,7 @@
   }
 
   &:hover {
-    border-color: transparent;
+    box-shadow: none;
     background: $gradient-green;
 
     &::after {

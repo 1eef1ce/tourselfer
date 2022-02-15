@@ -12,7 +12,7 @@ const Callback = () => {
                     <Input/>
                 </div>
                 <div className="form__row">
-                    <Button className="btn btn--fill btn--submit" type="submit">Заказать звонок</Button>
+                    <Button className="btn btn--filled btn--medium" type="submit">Заказать звонок</Button>
                 </div>
             </form>
             <div className="text-note">

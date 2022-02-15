@@ -2,8 +2,11 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import {Button} from '@components/ui';
-import {AdvantageSlider, AppSlider, Layout, Review, ReviewSlider, Searchbar} from '@components/common';
+import {AdvantageSlider, AppSlider, Layout, Searchbar} from '@components/common';
+import {Review, ReviewSlider} from '@components/Reviews';
 import {Appstore, ArrowRight, Googleplay} from '@components/icons';
+import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
+import {LocationsContainer} from '@components/Locations';
 import {useRouter} from 'next/router';
 import { en } from '../locales/en';
 import { ru } from '../locales/ru';
@@ -29,11 +32,7 @@ export default function Home() {
                 <meta name="description" content="Ready routes for your phone"/>
             </Head>
             <div className="showcase showcase--main">
-                <picture className="showcase__picture">
-                    <source srcSet="/images/main.jpg" media="(min-width: 500px)"/>
-                    <source srcSet="/images/main-mobile.jpg" media="(min-width: 320px)"/>
-                    <img src="/images/main.jpg" alt="img" title=""/>
-                </picture>
+                <ShowcasePicture/>
                 <div className="container showcase__container">
                     <h1 className="showcase__heading">{t.title}</h1>
                     <div className="search showcase__search">
@@ -44,44 +43,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="showcase__bottom container">
-                        <div className="showcase__items">
-                            <Link href="#">
-                                <a className="showcase__item">
-                                    <Image src="/images/route-1.jpg" alt="route" title="" layout="fill"/>
-                                    <div className="showcase__content">
-                                        <div className="showcase__text">Spain</div>
-                                        <div className="title-4 showcase__title">Madrid</div>
-                                    </div>
-                                </a>
-                            </Link>
-                            <Link href="#">
-                                <a className="showcase__item">
-                                    <Image src="/images/route-2.jpg" alt="route" title="" layout="fill"/>
-                                    <div className="showcase__content">
-                                        <div className="showcase__text">Germany</div>
-                                        <div className="title-4 showcase__title">Berlin</div>
-                                    </div>
-                                </a>
-                            </Link>
-                            <Link href="#">
-                                <a className="showcase__item">
-                                    <Image src="/images/route-3.jpg" alt="route" title="" layout="fill"/>
-                                    <div className="showcase__content">
-                                        <div className="showcase__text">Holland</div>
-                                        <div className="title-4 showcase__title">Amsterdam</div>
-                                    </div>
-                                </a>
-                            </Link>
-                            <Link href="#">
-                                <a className="showcase__item">
-                                    <Image src="/images/route-4.jpg" alt="route" title="" layout="fill"/>
-                                    <div className="showcase__content">
-                                        <div className="showcase__text">Сzech</div>
-                                        <div className="title-4 showcase__title">Prague</div>
-                                    </div>
-                                </a>
-                            </Link>
-                        </div>
+                        <ShowcaseItems/>
                     </div>
                 </div>
             </div>{/*showcase*/}
@@ -99,75 +61,9 @@ export default function Home() {
                             </a>
                         </Link>
                     </div>
-                    <div className="locations__items">
-                        <Link href="#">
-                            <a className="locations__item locations__item--big">
-                                <picture className="locations__picture">
-                                    <source srcSet="/images/card-big.jpg" media="(min-width: 500px)"/>
-                                    <source srcSet="/images/card-mobile-1.jpg" media="(min-width: 320px)"/>
-                                    <img src="/images/card-big.jpg" alt="img" title=""/>
-                                </picture>
-                                <div className="locations__content">
-                                    <div className="title-2 locations__title">Paris</div>
-                                    <div className="locations__text">24 unique tours from 20 authors</div>
-                                </div>
-                            </a>
-                        </Link>
-                        <Link href="#">
-                            <a className="locations__item locations__item--medium">
-                                <picture className="locations__picture">
-                                    <source srcSet="/images/card-medium.jpg" media="(min-width: 500px)"/>
-                                    <source srcSet="/images/card-mobile-2.jpg" media="(min-width: 320px)"/>
-                                    <img src="/images/card-big.jpg" alt="img" title=""/>
-                                </picture>
-                                <div className="locations__content">
-                                    <div className="title-2 locations__title">London</div>
-                                    <div className="locations__text">27 unique tours from 22 authors</div>
-                                </div>
-                            </a>
-                        </Link>
-                        <Link href="#">
-                            <a className="locations__item">
-                                <picture className="locations__picture">
-                                    <source srcSet="/images/card-small-1.jpg" media="(min-width: 500px)"/>
-                                    <source srcSet="/images/card-mobile-3.jpg" media="(min-width: 320px)"/>
-                                    <img src="/images/card-big.jpg" alt="img" title=""/>
-                                </picture>
-                                <div className="locations__content">
-                                    <div className="title-2 locations__title">Rome</div>
-                                    <div className="locations__text">24 unique tours from 20 authors</div>
-                                </div>
-                            </a>
-                        </Link>
-                        <Link href="#">
-                            <a className="locations__item">
-                                <picture className="locations__picture">
-                                    <source srcSet="/images/card-small-2.jpg" media="(min-width: 500px)"/>
-                                    <source srcSet="/images/card-mobile-4.jpg" media="(min-width: 320px)"/>
-                                    <img src="/images/card-big.jpg" alt="img" title=""/>
-                                </picture>
-                                <div className="locations__content">
-                                    <div className="title-2 locations__title">Dubai</div>
-                                    <div className="locations__text">24 unique tours from 20 authors</div>
-                                </div>
-                            </a>
-                        </Link>
-                        <Link href="#">
-                            <a className="locations__item">
-                                <picture className="locations__picture">
-                                    <source srcSet="/images/card-small-3.jpg" media="(min-width: 500px)"/>
-                                    <source srcSet="/images/card-mobile-5.jpg" media="(min-width: 320px)"/>
-                                    <img src="/images/card-big.jpg" alt="img" title=""/>
-                                </picture>
-                                <div className="locations__content">
-                                    <div className="title-2 locations__title">New York City</div>
-                                    <div className="locations__text">24 unique tours from 20 authors</div>
-                                </div>
-                            </a>
-                        </Link>
-                    </div>
+                    <LocationsContainer/>
                     <div className="locations__more">
-                        <Button className="btn btn--more">See more...</Button>
+                        <Button className="btn btn--outlined btn--medium">See more...</Button>
                     </div>
                 </div>
             </div>{/*locations*/}

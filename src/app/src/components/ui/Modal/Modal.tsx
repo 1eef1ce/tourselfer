@@ -25,7 +25,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
             <div className="overlay" onClick={hide}/>
             <div className="modal">
                 <div className="modal__container">
-                    <Button className="modal__close" onClick={hide}><Close/></Button>
+                    <div className="modal__close" onClick={hide}><Close/></div>
                     <div className="modal__head">
                         <div className="modal__title">Быстрый заказ</div>
                         <div className="modal__subtitle">

@@ -10,7 +10,7 @@ const LoginView = () => {
                     <Input/>
                 </div>
                 <div className="form__row">
-                    <Button className="btn btn--fill btn--submit" type="submit">Войти</Button>
+                    <Button className="btn btn--filled btn--submit" type="submit">Войти</Button>
                     <Button className="btn btn--more btn--submit" type="submit">Забыли пароль?</Button>
                 </div>
             </form>

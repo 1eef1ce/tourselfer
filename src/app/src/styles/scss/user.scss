@@ -73,6 +73,7 @@
         line-height: 1.43;
         text-transform: none;
         letter-spacing: normal;
+        order: 1;
 
         @include max-767 {
           font-weight: 400;
@@ -108,6 +109,11 @@
     border-radius: 100%;
     background: $gradient-green;
     z-index: 1;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
   }
 
   &__status {
