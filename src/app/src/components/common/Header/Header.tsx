@@ -89,7 +89,10 @@ const Header = () => {
                 isShown={isShown}
                 hide={toggle}
                 modalContent={
-                    <FastOrder/>
+                    <LoginView/>
+                    //<ForgotPassword/>
+                    //<Callback/>
+                    //<FastOrder/>
                 }
             />
         </header>

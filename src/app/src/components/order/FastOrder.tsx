@@ -62,7 +62,13 @@ const FastOrder = () => {
                     <Textarea/>
                 </div>
                 <div className="form__row form__row--btn">
-                    <Button className="btn btn--fill btn--medium" type="submit">Оформить заказ</Button>
+                    <Button
+                        variant="filled"
+                        size="medium"
+                        type="submit"
+                    >
+                        Оформить заказ
+                    </Button>
                 </div>
             </form>
             <div className="text-note">

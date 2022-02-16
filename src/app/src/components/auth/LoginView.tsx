@@ -10,22 +10,34 @@ const LoginView = () => {
                     <Input/>
                 </div>
                 <div className="form__row">
-                    <Button className="btn btn--filled btn--submit" type="submit">Войти</Button>
-                    <Button className="btn btn--more btn--submit" type="submit">Забыли пароль?</Button>
+                    <Button
+                        variant="filled"
+                        size="medium"
+                        type="submit"
+                    >
+                        Войти
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        size="medium"
+                        type="submit"
+                    >
+                        Забыли пароль?
+                    </Button>
                 </div>
             </form>
             <div className="social-auth">
                 <div className="text-note">Войти через социальные сети</div>
                 <div className="social-auth__items">
-                    <Button className="social-auth__item">
+                    <div className="social-auth__item">
                         <span className="social-auth__icon icon"><SocFacebook/></span>
-                    </Button>
-                    <Button className="social-auth__item">
+                    </div>
+                    <div className="social-auth__item">
                         <span className="social-auth__icon icon"><SocGoogle/></span>
-                    </Button>
-                    <Button className="social-auth__item">
+                    </div>
+                    <div className="social-auth__item">
                         <span className="social-auth__icon icon"><SocApple/></span>
-                    </Button>
+                    </div>
                 </div>
             </div>
             <div className="text-note">

@@ -17,7 +17,11 @@ export default function RoutesPage() {
                 <Filter/>
                 <RoutesContainer/>
                 <div className="routes__more">
-                    <Button className="btn btn--alt">See more</Button>
+                    <Button
+                        className="btn--alt"
+                    >
+                        See more
+                    </Button>
                 </div>
                 <Pagination/>
             </div>

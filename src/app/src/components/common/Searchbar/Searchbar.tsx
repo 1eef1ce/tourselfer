@@ -1,5 +1,6 @@
 import React from 'react';
 import {SearchIcon} from '@components/icons';
+import {Button} from '@components/ui';
 
 class Searchbar extends React.Component<any, any> {
     constructor(props) {
@@ -22,7 +23,13 @@ class Searchbar extends React.Component<any, any> {
                     <input className="form__field search__field" type="search" placeholder="for example: Berlin"
                            value={this.state.inputValue} onChange={this.onChange}
                     />
-                    <button className="btn btn--filled search__btn" type="submit">Find</button>
+                    <Button
+                        className="search__btn"
+                        variant="filled"
+                        type="submit"
+                    >
+                        Find
+                    </Button>
                 </div>
             </form>
         );

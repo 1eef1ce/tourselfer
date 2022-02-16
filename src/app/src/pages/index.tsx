@@ -63,7 +63,12 @@ export default function Home() {
                     </div>
                     <LocationsContainer/>
                     <div className="locations__more">
-                        <Button className="btn btn--outlined btn--medium">See more...</Button>
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                        >
+                            See more...
+                        </Button>
                     </div>
                 </div>
             </div>{/*locations*/}
