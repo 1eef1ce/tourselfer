@@ -52,7 +52,7 @@ const Footer: FC = () => {
                             </div>
                         </div>
                         <div className="dropdown footer__lang">
-                            <div className="dropdown__btn">
+                            <button className="dropdown__btn">
                                 <span className="icon dropdown__icon dropdown__icon--left">
                                     <World/>
                                 </span>
@@ -60,7 +60,7 @@ const Footer: FC = () => {
                                 <span className="icon dropdown__icon">
                                     <ChevronDown/>
                                 </span>
-                            </div>
+                            </button>
                             <div className="dropdown__content dropdown__content--up">
                                 <I18nWidget />
                             </div>

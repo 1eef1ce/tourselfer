@@ -13,7 +13,7 @@ import {Callback} from '@components/callback';
 import {FastOrder} from '@components/order';
 import MobileMenuContainer from '@components/common/Menu/MobileMenu';
 import HeaderMenu from '@components/common/Menu/HeaderMenu';
-import MobileSearchContainer from "@components/common/Search/MobileSearch";
+import MobileSearchContainer from '@components/common/Search/MobileSearch';
 
 const Header = () => {
     const { isShown, toggle } = useModal();
@@ -25,7 +25,7 @@ const Header = () => {
     useEffect(() => {
         const handleScroll = throttle(() => {
             const offset = 0;
-            const { scrollTop } = document.documentElement;
+            const {scrollTop} = document.documentElement;
             const scrolled = scrollTop > offset;
 
             if (hasScrolled !== scrolled) {
@@ -46,19 +46,19 @@ const Header = () => {
                 {isMobile && <MobileMenuContainer/>}
                 <Link href="/">
                     <a className="logo header__logo icon">
-                        <Logo />
+                        <Logo/>
                     </a>
                 </Link>
                 {isMobile && <MobileSearchContainer/>}
                 <div className="dropdown header__lang">
-                    <div className="dropdown__btn">
+                    <button className="dropdown__btn">
                         <span>lang</span>
                         <span className="icon dropdown__icon">
-                            <ChevronDown />
+                            <ChevronDown/>
                         </span>
-                    </div>
+                    </button>
                     <div className="dropdown__content">
-                        <I18nWidget />
+                        <I18nWidget/>
                     </div>
                 </div>
                 <HeaderMenu/>
@@ -68,19 +68,19 @@ const Header = () => {
                             <Link href="#">
                                 <a className="header-nav__link">
                                     <span className="icon header-nav__icon">
-                                        <Heart />
+                                        <Heart/>
                                     </span>
                                     <span>My routes</span>
                                 </a>
                             </Link>
                         </div>
                         <div className="header-nav__item">
-                            <div className="header-nav__link" onClick={toggle}>
+                            <button className="header-nav__link" onClick={toggle}>
                                 <span className="icon header-nav__icon">
-                                    <User />
+                                    <User/>
                                 </span>
                                 <span>Sign in</span>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -88,6 +88,9 @@ const Header = () => {
             <Modal
                 isShown={isShown}
                 hide={toggle}
+                width="small"
+                modalTitle="Быстрый заказ"
+                modalSubtitle="Заполните контактные данные, и мы оформим заказ в ближайшее время"
                 modalContent={
                     <LoginView/>
                     //<ForgotPassword/>

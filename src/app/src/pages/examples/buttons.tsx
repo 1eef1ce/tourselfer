@@ -2,7 +2,7 @@ import React from 'react';
 import {Breadcrumbs, Layout} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
-import {ArrowLeft, ArrowRight, Heart, Minus, Plus, Star, User} from "@components/icons";
+import {ArrowLeft, ArrowRight, Heart, Minus, Plus, Star, User} from '@components/icons';
 
 export default function ExampleButtons() {
     const [loading, setLoading] = React.useState(false);

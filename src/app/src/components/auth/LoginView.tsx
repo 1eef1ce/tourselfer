@@ -1,8 +1,13 @@
 import {Button, Input} from '@components/ui';
 import Link from 'next/link';
 import {SocFacebook, SocGoogle, SocApple} from '@components/icons';
+import {ForgotPassword} from '@components/auth';
+import {Modal} from '@components/ui';
+import {useModal} from '@lib/hooks/useModal';
 
 const LoginView = () => {
+    const {isShown, toggle} = useModal();
+
     return (
         <>
             <form className="form">
@@ -20,7 +25,8 @@ const LoginView = () => {
                     <Button
                         variant="outlined"
                         size="medium"
-                        type="submit"
+                        type="button"
+                        onClick={toggle}
                     >
                         Забыли пароль?
                     </Button>
@@ -29,15 +35,15 @@ const LoginView = () => {
             <div className="social-auth">
                 <div className="text-note">Войти через социальные сети</div>
                 <div className="social-auth__items">
-                    <div className="social-auth__item">
+                    <button className="social-auth__item">
                         <span className="social-auth__icon icon"><SocFacebook/></span>
-                    </div>
-                    <div className="social-auth__item">
+                    </button>
+                    <button className="social-auth__item">
                         <span className="social-auth__icon icon"><SocGoogle/></span>
-                    </div>
-                    <div className="social-auth__item">
+                    </button>
+                    <button className="social-auth__item">
                         <span className="social-auth__icon icon"><SocApple/></span>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div className="text-note">
@@ -50,6 +56,17 @@ const LoginView = () => {
                     <a className="link link--color">Положением о конфиденциальности</a>
                 </Link>
             </div>
+
+            <Modal
+                isShown={isShown}
+                hide={toggle}
+                width="small"
+                modalTitle="Забыли пароль?"
+                modalSubtitle="Ничего страшного! Мы отправим вам ссылку для смены пароля. Введите адрес электронной почты, с которой вы заходите на Booking.com."
+                modalContent={
+                    <ForgotPassword/>
+                }
+            />
         </>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons';
-import {SelectField} from "@components/ui";
+import {SelectField} from '@components/ui';
 
 const Filter = () => {
     return (
