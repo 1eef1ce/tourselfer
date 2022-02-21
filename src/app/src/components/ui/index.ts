@@ -6,3 +6,5 @@ export { Modal } from './Modal';
 export { default as Rating } from './Rating';
 export { default as SelectField } from './SelectField';
 export { default as Textarea } from './Textarea';
+export { default as Alert } from './Alert';
+export { default as Scrollbar } from './Scrollbar';
