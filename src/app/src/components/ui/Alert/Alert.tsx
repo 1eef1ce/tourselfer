@@ -9,13 +9,15 @@ interface AlertProps {
     onClick?: () => void;
 }
 
-const Alert = ({
-    type = 'info',
-    icon = false,
-    title,
-    message,
-    ...props
-}: AlertProps) => {
+const Alert: React.FC<AlertProps> = ((props) => {
+    const {
+        type = 'info',
+        icon = false,
+        title,
+        message,
+        ...rest
+    } = props;
+
     const mode = icon ? 'with-icon' : 'no-icon';
     const handleClick = (event) => {
         const target = event.target;
@@ -39,6 +41,6 @@ const Alert = ({
             <button className={'close-btn'} onClick={handleClick}/>
         </div>
     );
-};
+});
 
 export default Alert;

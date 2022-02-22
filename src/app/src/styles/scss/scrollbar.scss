@@ -1,0 +1,38 @@
+@import "variables.scss";
+@import "media.scss";
+
+.scroll-outer {
+    .view {
+        &::-webkit-scrollbar {
+            visibility: hidden;
+        }
+        padding: 16px;
+        box-sizing: border-box;
+        width: 100%;
+        .scroll-inner {
+        }
+    }
+    .vtrack {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block !important;
+    }
+    .vthumb {
+        background: $gradient-green;
+        border-radius: 4px;
+        right: 0;
+    }
+    .htrack {
+        display: block !important;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 6px;
+    }
+    .hthumb {
+        background: $gradient-green;
+        border-radius: 4px;
+        bottom: 0;
+    }
+}
