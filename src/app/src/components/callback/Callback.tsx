@@ -1,5 +1,5 @@
 import {Button, Input} from '@components/ui';
-import Link from 'next/link';
+import {PolicyText} from '@components/common';
 
 const Callback = () => {
     return (
@@ -22,14 +22,11 @@ const Callback = () => {
                 </div>
             </form>
             <div className="text-note">
-                Нажимая на кнопку, вы соглашаетесь с нашими{' '}
-                <Link href="#">
-                    <a className="link link--color">Правилами и условиями</a>
-                </Link>
-                {' '}и{' '}
-                <Link href="">
-                    <a className="link link--color">Положением о конфиденциальности</a>
-                </Link>
+                <PolicyText
+                    description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                    link1="/policy"
+                    title1="Правилами и условиями"
+                />
             </div>
         </>
     );
