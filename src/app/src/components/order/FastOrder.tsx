@@ -1,5 +1,6 @@
 import {Button, Input, SelectField, Textarea} from '@components/ui';
 import Link from 'next/link';
+import {PolicyText} from '@components/common';
 
 const FastOrder = () => {
     return (
@@ -72,14 +73,13 @@ const FastOrder = () => {
                 </div>
             </form>
             <div className="text-note">
-                Нажимая на «Оформить заказ», вы соглашаетесь с{' '}
-                <Link href="#">
-                    <a className="link link--color">условиями оферты</a>
-                </Link>
-                {' '}и{' '}
-                <Link href="">
-                    <a className="link link--color">политикой о конфиденциальности</a>
-                </Link>
+                <PolicyText
+                    description="Нажимая на «Оформить заказ», вы соглашаетесь с"
+                    link1="/policy"
+                    title1="условиями оферты"
+                    link2="/policy"
+                    title2="политикой о конфиденциальности"
+                />
             </div>
         </>
     );

@@ -1,13 +1,15 @@
-import {TopBanner, Header, Footer} from '@components/common';
 import React from 'react';
+import {TopBanner, Header, Footer} from '@components/common';
 
-export default function Layout({ children }) {
+const Layout =({children}) => {
     return (
         <div className="wrapper">
             <TopBanner/>
             <Header/>
             <main>{children}</main>
-            <Footer />
+            <Footer/>
         </div>
     );
-}
+};
+
+export default Layout;

@@ -20,8 +20,8 @@ const Alert: React.FC<AlertProps> = ((props) => {
 
     const mode = icon ? 'with-icon' : 'no-icon';
     const handleClick = (event) => {
-        var target = event.target;
-        var parent = target.parentElement;
+        const target = event.target;
+        const parent = target.parentElement;
         parent.remove();
     };
     return (
