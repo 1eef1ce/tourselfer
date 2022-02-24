@@ -68,7 +68,7 @@ const Modal: FC<ModalProps> = ({
                 <FocusLock>
                     <div className={rootClassName} ref={modalClick} onClick={handleModalClick}>
                         <div className="modal__container">
-                            <button className="modal__close" onClick={hide}><Close/></button>
+                            <button className="modal__close" onClick={hide} tabIndex={-1}><Close/></button>
                             {(modalTitle || modalSubtitle) && (
                                 <div className="modal__head">
                                     {modalTitle && (
