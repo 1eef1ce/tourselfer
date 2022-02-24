@@ -2,7 +2,7 @@ import {Breadcrumbs, Layout, Pagination} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
 import Filter from '@components/filter';
-import {RoutesContainer} from "@components/Routes";
+import {RoutesContainer} from '@components/Routes';
 
 export default function RoutesPage() {
     return (
