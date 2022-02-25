@@ -118,6 +118,17 @@
     color: $color-red;
   }
 
+  &__icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    margin: auto;
+    cursor: pointer;
+  }
+
   .btn {
 
     & + .btn {

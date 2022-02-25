@@ -1,5 +1,4 @@
 import {Button, Input, SelectField, Textarea} from '@components/ui';
-import Link from 'next/link';
 import {PolicyText} from '@components/common';
 
 const FastOrder = () => {

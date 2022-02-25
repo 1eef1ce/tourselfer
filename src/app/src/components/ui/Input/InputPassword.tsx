@@ -4,20 +4,20 @@ import {EyeClosed, EyeOpened} from '@components/icons';
 
 export interface InputProps {
     label: string
-    required: boolean
-    type: 'text' | 'email' | 'password'
 }
 
 export interface InputState {
+    type: string
     focus: boolean
     inputValue: string
     showPassword: boolean
 }
 
-class Input extends React.Component<InputProps, InputState> {
+class InputPassword extends React.Component<InputProps, InputState> {
     constructor(props) {
         super(props);
         this.state = {
+            type: 'password',
             focus: false,
             inputValue: '',
             showPassword: false
@@ -44,24 +44,20 @@ class Input extends React.Component<InputProps, InputState> {
             return "";
     }
     showPassword() {
-        this.setState({showPassword: !this.state.showPassword});
-
+        this.setState({showPassword: !this.state.showPassword,});
     }
 
     render() {
         const inputClass = this.getClass();
         return (
             <>
-                <label className="form__label">
-                    {this.props.label}
-                    {this.props.required && (<span> *</span>)}
-                </label>
+                <label className="form__label">{this.props.label}</label>
                 <div className={cn("gradient-border", inputClass)}>
-                    <input className="form__field" type={this.props.type} value={this.state.inputValue}
-                           required={this.props.required}
+                    <input className="form__field" type={this.state.showPassword ? 'text' : 'password'} value={this.state.inputValue}
+                           required
                            onBlur={this.onBlur} onFocus={this.onFocus} onChange={this.onChange}
                     />
-                    {(this.props.type == 'password' && this.state.inputValue !== '') && (
+                    {(this.state.inputValue !== '') && (
                         <span className="form__icon" onClick={this.showPassword}>
                             {this.state.showPassword ? <EyeOpened/> : <EyeClosed/>}
                         </span>
@@ -73,4 +69,4 @@ class Input extends React.Component<InputProps, InputState> {
     }
 }
 
-export default Input;
+export default InputPassword;

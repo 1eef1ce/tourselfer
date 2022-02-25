@@ -11,6 +11,8 @@ export { default as ChevronRight } from './ChevronRight';
 export { default as ChevronUp } from './ChevronUp';
 export { default as Close } from './Close';
 export { default as Crown } from './Crown';
+export { default as EyeClosed } from './EyeClosed';
+export { default as EyeOpened } from './EyeOpened';
 export { default as Facebook } from './Facebook';
 export { default as FilterIcon } from './Filter';
 export { default as Flag } from './Flag';
