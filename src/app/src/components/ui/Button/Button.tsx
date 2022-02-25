@@ -19,23 +19,22 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     endIcon?: JSX.Element
 }
 
-const Button: React.FC<ButtonProps> = ((props) => {
-    const {
-        className,
-        variant,
-        size,
-        isIcon,
-        icon,
-        isStartIcon,
-        startIcon,
-        isEndIcon,
-        endIcon,
-        children,
-        loading = false,
-        disabled = false,
-        Component = 'button',
-        ...rest
-    } = props;
+const Button: React.FC<ButtonProps> = ({
+    className,
+    variant,
+    size,
+    isIcon,
+    icon,
+    isStartIcon,
+    startIcon,
+    isEndIcon,
+    endIcon,
+    children,
+    loading = false,
+    disabled = false,
+    Component = 'button',
+   ...rest
+}) => {
 
     const rootClassName = cn(
         'btn',
@@ -69,6 +68,6 @@ const Button: React.FC<ButtonProps> = ((props) => {
             {loading && (<Loader/>)}
         </Component>
     );
-});
+};
 
 export default Button;
