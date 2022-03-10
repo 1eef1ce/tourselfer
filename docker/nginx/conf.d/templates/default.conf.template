@@ -1,0 +1,133 @@
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=STATIC:10m inactive=7d use_temp_path=off;
+
+upstream nextjs_front {
+  server nextjs_front:3000;
+}
+
+server {
+    listen 80;
+
+    server_tokens off;
+
+    gzip on;
+    gzip_proxied any;
+    gzip_comp_level 4;
+    gzip_types text/css application/javascript image/svg+xml;
+
+    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+
+    set $auth_basic Restricted;
+
+    auth_basic_user_file /etc/nginx/conf.d/htpasswd;
+
+    if ($host ~* 'tourselfer.com') {
+        set $auth_basic off;
+    }
+
+    auth_basic $auth_basic;
+    
+    if ($host ~* 'tourselfer.com') {
+        rewrite ^(.*)$ https://$host$1 permanent;
+    }
+
+    location /_next/static {
+        proxy_cache STATIC;
+        proxy_pass http://nextjs_front;
+    }
+
+    location ^~ /.well-known/acme-challenge {
+        alias /var/lib/certbot/.well-known/acme-challenge;
+        default_type "text/plain";
+        try_files $uri =404;
+    }
+
+    # STATIC ASSETS (E.G. IMAGES)
+    # Browser cache - "no-cache" headers from Next.js as no build id in url
+    # Server cache - refresh regularly in case of changes
+    location /static {
+        proxy_cache STATIC;
+        proxy_ignore_headers Cache-Control;
+        proxy_cache_valid 60m;
+        proxy_pass http://nextjs_front;
+    }
+
+    # DYNAMIC ASSETS - NO CACHE
+    location / {
+        proxy_pass http://nextjs_front;
+    } 
+}
+
+server {
+    listen 443 ssl;
+
+    # HSTS, nice ...
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
+
+    ssl_certificate ssl/latest/fullchain.pem;
+    ssl_certificate_key ssl/latest/privkey.pem;
+
+    server_tokens off;
+
+    gzip on;
+    gzip_proxied any;
+    gzip_comp_level 4;
+    gzip_types text/css application/javascript image/svg+xml;
+
+    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+
+    set $auth_basic Restricted;
+
+    auth_basic_user_file /etc/nginx/conf.d/htpasswd;
+
+    if ($host ~* 'tourselfer.com') {
+        set $auth_basic off;
+    }
+
+    auth_basic $auth_basic;
+
+    location ^~ /.well-known/acme-challenge {
+        alias /var/lib/certbot/.well-known/acme-challenge;
+        default_type "text/plain";
+        try_files $uri =404;
+    }
+
+    location /_next/static {
+        proxy_cache STATIC;
+        proxy_pass http://nextjs_front;
+    }
+
+    # STATIC ASSETS (E.G. IMAGES)
+    # Browser cache - "no-cache" headers from Next.js as no build id in url
+    # Server cache - refresh regularly in case of changes
+    location /static {
+        proxy_cache STATIC;
+        proxy_ignore_headers Cache-Control;
+        proxy_cache_valid 60m;
+        proxy_pass http://nextjs_front;
+    }
+
+    # DYNAMIC ASSETS - NO CACHE
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Https-Protocol $ssl_protocol;
+
+        proxy_pass http://nextjs_front;
+    }
+
+}

@@ -1,15 +1,36 @@
-version: "3.3"
+version: "3.8"
+
+networks:
+  tourselfer_front_network:
 
 services:
-  nextjs:
+  nginx_front:
+    build: 
+      args:
+        NGINX_HOST: ${HOST}
+        NGINX_EMAIL: ${EMAIL}
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx_front
     ports:
-      - 3000:3000
+      - "80:80"
+      - "443:443"
+    environment:
+      NGINX_HOST: ${HOST}
+      NGINX_EMAIL: ${EMAIL}
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - nextjs_front
+    networks:
+      - tourselfer_front_network
+  nextjs_front:
+    container_name: nextjs_front
     build:
       context: ./
-      dockerfile: Dockerfile
-    volumes:
-      - ./src/app:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
+      dockerfile: ./docker/nextjs/Dockerfile
     env_file:
       - .env
+    networks:
+      - tourselfer_front_network
