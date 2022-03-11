@@ -8,22 +8,13 @@ import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
 import {LocationsContainer} from '@components/Locations';
 import {useRouter} from 'next/router';
-import { en } from '../locales/en';
-import { ru } from '../locales/ru';
-import { zh } from '../locales/zh';
+import { langs } from '../locales/pages/index';
 
 export default function Home() {
 
     const router = useRouter();
-    const r = router.locale;
-    let t = null;
-    switch (r) {
-        case 'ru': t = ru;
-            break;
-        case 'zh-CN': t = zh;
-            break;
-        default: t = en;
-    }
+    const { locale, locales, defaultLocale, asPath } = useRouter();
+    const t = langs[locale];
 
     return (
         <Layout>

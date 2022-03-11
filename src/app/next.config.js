@@ -6,8 +6,8 @@ module.exports = {
         includePaths: [path.join(__dirname, 'styles')],
     },
     i18n: {
-        locales: ['en-US', 'ru', 'zh-CN'],
-        defaultLocale: 'en-US',
+        locales: ['en', 'ru'],
+        defaultLocale: 'en',
     },
     resolve: {
         modules: ['node_modules'],
@@ -17,4 +17,5 @@ module.exports = {
     resolveLoader: {
         modules: ['node_modules']
     },
+    trailingSlash: true
 }

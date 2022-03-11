@@ -9,24 +9,20 @@ interface LOCALE_DATA {
 
 const LOCALES_MAP: Record<string, LOCALE_DATA> = {
     ru: {
-        name: 'Russian (RU)',
+        name: 'Русский (RU)',
         shortName: 'RU',
     },
-    'en-US': {
+    'en': {
         name: 'English (EN)',
         shortName: 'EN',
-    },
-    'zh-CN': {
-        name: 'Chinese (CN)',
-        shortName: 'CN',
-    },
+    }
 };
 
 const I18nWidget: FC = () => {
     const {
         locale,
         locales,
-        defaultLocale = 'en-US',
+        defaultLocale = 'en',
         asPath: currentPath,
     } = useRouter();
 
