@@ -8,13 +8,35 @@ import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
 import {LocationsContainer} from '@components/Locations';
 import {useRouter} from 'next/router';
-import { langs } from '../locales/pages/index';
+import {useState, useEffect} from 'react';
 
-export default function Home() {
+import { i18n } from "next-i18next";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-    const router = useRouter();
-    const { locale, locales, defaultLocale, asPath } = useRouter();
-    const t = langs[locale];
+import {loadHomepage} from '../lib/api/fetch-homepage';
+
+export const getStaticProps = async ({ locale }) => {
+    if (process.env.NODE_ENV === "development") {
+      await i18n?.reloadResources();
+    }
+
+    console.log(process.env.API_HOST);
+    //const data = await loadHomepage();
+    
+    return {
+      props: {
+        //data,
+        ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
+      },
+    };
+};
+
+export default function Homepage ({data}) {
+
+    const { t } = useTranslation("pages__homepage");
+
+    console.log(data);
 
     return (
         <Layout>
@@ -25,9 +47,9 @@ export default function Home() {
             <div className="showcase showcase--main">
                 <ShowcasePicture/>
                 <div className="container showcase__container">
-                    <h1 className="showcase__heading">{t.title}</h1>
+                    <h1 className="showcase__heading">{t('hero.title')}</h1>
                     <div className="search showcase__search">
-                        <div className="search__title">where to?</div>
+                        <div className="search__title">{t('hero.search_title')}</div>
                         <Searchbar/>
                         <div className="search__text">
                             Popular now: <span>Bangkok, Paris, London, Dubai, New-York</span>
@@ -42,10 +64,10 @@ export default function Home() {
             <div className="section locations">
                 <div className="container">
                     <div className="section__head">
-                        <h2 className="title-2">Travelers like these</h2>
+                        <h2 className="title-2">{t('section_locations.title')}</h2>
                         <Link href="#">
                             <a className="link link--arrow link--gray">
-                                <span>All direction</span>
+                                <span>{t('section_locations.more_link')}</span>
                                 <span className="icon">
                                     <ArrowRight/>
                                 </span>
@@ -58,7 +80,7 @@ export default function Home() {
                             variant="outlined"
                             size="medium"
                         >
-                            See more...
+                            {t('section_locations.get_more')}
                         </Button>
                     </div>
                 </div>
@@ -67,10 +89,10 @@ export default function Home() {
             <div className="section advantages">
                 <div className="container">
                     <div className="section__head">
-                        <h2 className="title-2">Traveling with us means</h2>
+                        <h2 className="title-2">{t('section_advantages.title')}</h2>
                         <Link href="/about">
                             <a className="link link--arrow link--gray">
-                                <span>About Tourselfer</span>
+                                <span>{t('section_advantages.about_link')}</span>
                                 <span className="icon">
                                     <ArrowRight />
                                 </span>
@@ -84,10 +106,10 @@ export default function Home() {
             <div className="section reviews">
                 <div className="container">
                     <div className="section__head">
-                        <h2 className="title-2">Routes reviews</h2>
+                        <h2 className="title-2">{t('section_reviews.title')}</h2>
                         <Link href="#">
                             <a className="link link--arrow link--gray">
-                                <span>All direction</span>
+                                <span>{t('section_reviews.more_link')}</span>
                                 <span className="icon">
                                     <ArrowRight />
                                 </span>
@@ -102,10 +124,9 @@ export default function Home() {
             <div className="section app">
                 <div className="container">
                     <div className="section__head section__head--center">
-                        <h2 className="title-2">Everything for an the best trip — in your phone</h2>
+                        <h2 className="title-2">{t('section_app.title')}</h2>
                         <div className="section__text">
-                            Thoughtful tours to popular and unusual places in your mobile. Follow the virtual guide
-                            even without the Internet!
+                            {t('section_app.description')}
                         </div>
                     </div>
                     <AppSlider/>
@@ -115,7 +136,7 @@ export default function Home() {
             <div className="section download">
                 <div className="container">
                     <div className="section__head section__head--center">
-                        <h2 className="title-2">Download our app now:</h2>
+                        <h2 className="title-2">{t('section_download_app.title')}</h2>
                     </div>
                     <div className="download__items">
                         <a className="download__item icon" href="javascript:void(0)">
@@ -124,12 +145,6 @@ export default function Home() {
                         <a className="download__item icon" href="javascript:void(0)">
                             <Appstore />
                         </a>
-                    </div>
-                    <div className="download__block">
-                        <div className="download__text">Or use QR-cod</div>
-                        <div className="download__code">
-                            <Image src="/images/qr.png" alt="qr" title="" layout="fill"/>
-                        </div>
                     </div>
                 </div>
             </div>{/*download*/}
