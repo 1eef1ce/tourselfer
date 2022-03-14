@@ -164,7 +164,7 @@ class Input extends React.Component<InputProps, InputState> {
                                     onChange={this.onChange}
                                     {...props}
                                 />
-                                {((this.state.inputValue !== '') && (this.state.focus === true)) &&
+                                {(((this.state.inputValue !== '') || (this.props.value !== '')) && (this.state.focus === true)) &&
                                 (
                                 <span className="form__icon" onMouseDown={this.clearValue}>
                                     <Close/>

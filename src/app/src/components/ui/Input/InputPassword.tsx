@@ -129,7 +129,7 @@ class InputPassword extends React.Component<InputProps, InputState> {
                         onChange={this.onChange}
                         {...props}
                     />
-                    {((this.state.inputValue !== '') || (this.props.value !== undefined) && (this.props.value !== '')) && (
+                    {((this.state.inputValue !== '') || (this.props.value !== '')) && (
                         <span className="form__icon" onMouseDown={this.showPassword}>
                             {this.state.showPassword ? <EyeOpened/> : <EyeClosed/>}
                         </span>
