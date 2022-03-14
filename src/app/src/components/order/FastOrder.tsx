@@ -7,11 +7,16 @@ const FastOrder = () => {
             <form className="form">
                 <div className="form__title">Доставка</div>
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="address"
+                        name="address"
+                        label="Адрес"
+                        required
+                    />
                 </div>
                 <div className="form__row form__row--select">
                     <SelectField
-                        classPrefix={"select"}
+                        classPrefix="select"
                         isFilter={false}
                         id="s_date"
                         label="Дата доставки"
@@ -50,16 +55,36 @@ const FastOrder = () => {
                 </div>
                 <div className="form__title">Получатель заказа</div>
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="name"
+                        name="name"
+                        label="Имя"
+                        required
+                    />
                 </div>
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="phone"
+                        name="phone"
+                        label="Телефон"
+                        required
+                    />
                 </div>
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        label="Email"
+                        required
+                    />
                 </div>
                 <div className="form__row">
-                    <Textarea/>
+                    <Textarea
+                        id="comment"
+                        name="comment"
+                        label="Комментарий"
+                    />
                 </div>
                 <div className="form__row form__row--btn">
                     <Button

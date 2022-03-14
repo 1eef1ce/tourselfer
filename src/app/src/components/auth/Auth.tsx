@@ -35,9 +35,16 @@ class Auth extends React.Component<any, AuthState> {
                         </div>
                         <form className="form">
                             <div className="form__row">
-                                <Input/>
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    label="Email"
+                                    required
+                                    requiredMessage="Please complete this field"
+                                />
                             </div>
-                            <div className="form__row">
+                            <div className="form__row form__row--btn">
                                 <Button
                                     variant="filled"
                                     size="medium"
@@ -69,9 +76,15 @@ class Auth extends React.Component<any, AuthState> {
                         </div>
                         <form className="form">
                             <div className="form__row">
-                                <Input/>
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    label="Email"
+                                    required
+                                />
                             </div>
-                            <div className="form__row">
+                            <div className="form__row form__row--btn">
                                 <Button
                                     variant="filled"
                                     size="medium"

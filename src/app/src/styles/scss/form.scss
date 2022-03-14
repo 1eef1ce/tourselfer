@@ -14,10 +14,12 @@
   &__row {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 24px;
 
     &--btn {
       margin: 32px 0;
+      align-items: normal;
     }
 
     &--select {
@@ -39,11 +41,44 @@
 
   &__field {
     position: relative;
+    width: 100%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 12px;
+      margin: -2px;
+      background: $gradient-green;
+      opacity: 0;
+      z-index: -1;
+      transition: 0.2s;
+    }
+
+    &.focus {
+
+      &::before {
+        opacity: 1;
+      }
+
+      &.error {
+
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__input {
     display: flex;
     align-items: center;
     width: 100%;
     height: 56px;
-    padding: 16px;
+    padding: 16px 40px 16px 16px;
     border: 0;
     border-radius: 10px;
     background: $color-gray-7;
@@ -65,21 +100,24 @@
       }
     }
 
-    &:not([value]) {
-
-      &:hover {
-        background: $color-gray-7;
-      }
-
-      &:focus {
-        background: #fff;
-        box-shadow: none;
-      }
-    }
-
     &:focus {
       background: #fff;
       box-shadow: none;
+      //box-shadow: inset 0 0 0 2px $color-green;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 2px $color-gray inset, 0 0 0 30px $color-gray-7 inset;
+      transition: background-color 5000s ease-in-out 0s;
+
+      &:hover {
+        -webkit-box-shadow: 0 0 0 2px $color-gray inset, 0 0 0 30px #fff inset;
+      }
+
+      &:focus {
+        -webkit-box-shadow: 0 0 0 30px #fff inset;
+        //-webkit-box-shadow: 0 0 0 2px $color-gray inset, 0 0 0 30px #fff inset;
+      }
     }
 
     &:disabled {
@@ -98,20 +136,23 @@
       &:focus {
         background: #fff;
       }
-      
-      & + .form__error {
-        display: block;
+
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 2px $color-red inset, 0 0 0 30px $color-red-7 inset;
+
+        &:hover {
+          -webkit-box-shadow: 0 0 0 2px $color-red inset, 0 0 0 30px $color-red-7 inset;
+        }
       }
     }
   }
 
   &__textarea {
-    height: 104px;
+    padding: 16px;
     resize: none;
   }
 
   &__error {
-    display: none;
     margin-top: 4px;
     font-size: 14px;
     line-height: 1.14;
@@ -127,6 +168,10 @@
     height: 24px;
     margin: auto;
     cursor: pointer;
+
+    svg * {
+      fill: $color-icon;
+    }
   }
 
   .btn {

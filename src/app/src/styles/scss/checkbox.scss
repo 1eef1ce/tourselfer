@@ -3,7 +3,6 @@
 
 .checkbox {
   position: relative;
-  cursor: pointer;
 
   &__input {
     position: absolute;
@@ -24,14 +23,17 @@
 
       &:not(:checked) {
 
-        &:focus {
+        &:not(.error) {
 
-          & + .checkbox__label {
+          &:focus {
 
-            &::before {
-              border-color: $color-green;
-              background: #fff;
-              box-shadow: 0 0 0 2px $color-gray-10;
+            & + .checkbox__label {
+
+              &::before {
+                border-color: $color-green;
+                background: #fff;
+                box-shadow: 0 0 0 2px $color-gray-10;
+              }
             }
           }
         }
@@ -42,6 +44,7 @@
 
       & + .checkbox__label {
         cursor: auto;
+        color: $color-secondary;
 
         &::before {
           border-color: $color-gray-7;
@@ -93,63 +96,25 @@
         }
       }
     }
-  }
 
-  &__label {
-    position: relative;
-    display: inline-flex;
-    padding-top: 4px;
-    font-size: 16px;
-    line-height: 1.25;
-    color: $color-primary;
+    &.error {
 
-    &::before {
-      content: "";
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      margin: -4px 8px 0 0;
-      border: 1px solid $color-gray-15;
-      border-radius: 8px;
-      background: $color-gray-7;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-
-    &::after {
-      opacity: 0;
-      content: "";
-      position: absolute;
-      left: 9px;
-      top: 4px;
-      width: 8px;
-      height: 13px;
-      border: solid #fff;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-  }
-
-  &.error {
-
-    & > .checkbox__label {
-
-      &::before {
-        border-color: $color-red;
-        background: $color-red-7;
-        box-shadow: 0 0 0 2px $color-red-20;
-      }
-
-      &:hover {
+      & + .checkbox__label {
 
         &::before {
           border-color: $color-red;
           background: $color-red-7;
+          box-shadow: 0 0 0 2px $color-red-20;
+        }
+
+        &:hover {
+
+          &::before {
+            border-color: $color-red;
+            background: $color-red-7;
+          }
         }
       }
-    }
-
-    & > .checkbox__input {
 
       &:focus {
 
@@ -182,6 +147,42 @@
           }
         }
       }
+    }
+  }
+
+  &__label {
+    position: relative;
+    display: inline-flex;
+    padding-top: 4px;
+    font-size: 16px;
+    line-height: 1.25;
+    color: $color-primary;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      margin: -4px 8px 0 0;
+      border: 1px solid $color-gray-15;
+      border-radius: 8px;
+      background: $color-gray-7;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    &::after {
+      opacity: 0;
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 4px;
+      width: 8px;
+      height: 13px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
   }
 }

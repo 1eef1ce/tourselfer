@@ -1,6 +1,6 @@
 import React from 'react';
 import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons';
-import {SelectField} from '@components/ui';
+import {Input} from '@components/ui';
 
 const Filter = () => {
     return (
@@ -61,10 +61,12 @@ const Filter = () => {
                 </div>
                 <div className="filter__right">
                     <div className="filter__select">
-                        <SelectField
-                            classPrefix={"select-filter"}
-                            isFilter={true}
+                        <Input
+                            isSelect
+                            classPrefix="select-filter"
+                            isFilter
                             id="s_rating"
+                            name="s_rating"
                             label="Rating:"
                             options = {
                                 [
@@ -81,10 +83,12 @@ const Filter = () => {
                         />
                     </div>
                     <div className="filter__select">
-                        <SelectField
-                            classPrefix={"select-filter"}
-                            isFilter={true}
+                        <Input
+                            isSelect
+                            classPrefix="select-filter"
+                            isFilter
                             id="s_duration"
+                            name="s_duration"
                             label="Duration:"
                             options = {
                                 [

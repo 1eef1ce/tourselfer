@@ -30,6 +30,7 @@
     color: $color-primary;
     box-shadow: inset 0 0 0 1px $color-gray-15;
     outline: none;
+    cursor: pointer;
     transition: 0.2s;
 
     &:hover {
@@ -56,6 +57,12 @@
 
   &__value-container {
     display: flex;
+    overflow: hidden;
+  }
+
+  &__single-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__indicators {
