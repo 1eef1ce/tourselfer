@@ -19,12 +19,6 @@ class PhNumber extends React.Component<any, any> {
     }
     onBlur() {       
         this.setState({activity: false});
-        if (!this.state.value.match(/[0-9]{11,15}/)) {
-            this.setState({value: '+'});
-        }
-        else {
-            this.setState({value: this.state.value});
-        }
     }
     getClass() {
         if(this.state.activity === true) {
@@ -53,9 +47,10 @@ class PhNumber extends React.Component<any, any> {
                 countryCodeEditable={false}
                 defaultErrorMessage='Error'
                 //onlyCountries={['ru', 'us', 'fr']}	
-                isValid={(value, country) => {
+                isValid={(value) => {
                     if (!value.match(/[0-9]{11,15}/)) {
                         return 'Helper text';
+                        this.setState({value: ''});
                     } else {
                         return true;
                     }
