@@ -34,7 +34,6 @@ class PhNumber extends React.Component<any, any> {
        
         return (
             <PhoneInput
-                value={this.state.value}
                 country={this.state.country}
                 onFocus={this.onFocus}
                 onChange={
