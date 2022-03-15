@@ -3,9 +3,13 @@ import {Logo} from '@components/ui';
 import {Appstore, ChevronDown, Facebook, Googleplay, Instagram, World} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import {FC} from 'react';
+import { useTranslation } from 'next-i18next';
 import FooterMenu from '@components/common/Menu/FooterMenu';
 
 const Footer: FC = () => {
+
+    const {t} = useTranslation("components");
+
     return (
         <footer className="footer">
             <div className="container">
@@ -17,15 +21,12 @@ const Footer: FC = () => {
                             </a>
                         </Link>
                         <div className="footer__description">
-                            Tourselfer - service of ready-made routes and tours. Only high-quality routes from trusted
-                            authors.
-                            A couple more lines of description text. So that everyone can understand what great guys we
-                            are.
+                            {t('footer.service_description')}
                         </div>
                     </div>
                     <FooterMenu/>
                     <div className="download-app footer__app">
-                        <div className="download-app__title">Download our app now:</div>
+                        <div className="download-app__title">{t('footer.download_app_title')}</div>
                         <div className="download-app__items">
                             <a className="download-app__item icon" href="javascript:void(0)">
                                 <Googleplay />
@@ -38,16 +39,16 @@ const Footer: FC = () => {
                 </div>
                 <div className="footer__bottom">
                     <Link href="#">
-                        <a className="link link--underline">Privacy policy</a>
+                        <a className="link link--underline">{t('footer.privacy_policy')}</a>
                     </Link>
                     <div className="footer__links">
                         <div className="social footer__social">
                             <div className="social__items">
                                 <a className="social__item icon" href="javascript:void(0)">
-                                    <Instagram />
+                                    
                                 </a>
                                 <a className="social__item icon" href="javascript:void(0)">
-                                    <Facebook />
+                                   
                                 </a>
                             </div>
                         </div>
