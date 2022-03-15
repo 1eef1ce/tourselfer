@@ -59,6 +59,7 @@ console.log(props.favorite_cities);
                 </div>
             </div>{/*showcase*/}
 
+            {Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
             <div className="section locations">
                 <div className="container">
                     <div className="section__head">
@@ -82,7 +83,8 @@ console.log(props.favorite_cities);
                         </Button>
                     </div>
                 </div>
-            </div>{/*locations*/}
+            </div>
+            }
 
             <div className="section advantages">
                 <div className="container">
@@ -101,11 +103,12 @@ console.log(props.favorite_cities);
                 </div>
             </div>{/*advantages*/}
 
+            {Array.isArray(props.data.route_reviews) && props.data.route_reviews.length > 0 &&
             <div className="section reviews">
                 <div className="container">
                     <div className="section__head">
                         <h2 className="title-2">{t('section_reviews.title')}</h2>
-                        <Link href="#">
+                        <Link href={"routes"}>
                             <a className="link link--arrow link--gray">
                                 <span>{t('section_reviews.more_link')}</span>
                                 <span className="icon">
@@ -114,10 +117,11 @@ console.log(props.favorite_cities);
                             </a>
                         </Link>
                     </div>
-                    <Review/>
-                    <ReviewSlider/>
+                    <Review item={props.data.route_reviews[0]}/>
+                    <ReviewSlider items={props.data.route_reviews[0].reviews}/>
                 </div>
-            </div>{/*reviews*/}
+            </div>
+            }
 
             <div className="section app">
                 <div className="container">

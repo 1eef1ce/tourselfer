@@ -7,7 +7,8 @@ const LocationsContainer = ({items}) => {
         <div className="locations__items">
             {items && items.length>0 && items.map(item => (
                 <Location
-                    key={item.code}
+                    key={item.id}
+                    code={item.code}
                     name={item.name}
                     img={item.picture}
                     imgMobile={item.picture}

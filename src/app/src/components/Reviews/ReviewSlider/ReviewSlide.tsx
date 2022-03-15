@@ -3,7 +3,7 @@ import {Avatar, UserName} from '@components/common';
 import {Rating} from '@components/ui';
 import {ArrowRight, Quotes} from '@components/icons';
 
-const ReviewSlide = () => {
+const ReviewSlide = ({item}) => {
     return (
         <div className="reviews__item">
             <div className="user">
@@ -11,13 +11,13 @@ const ReviewSlide = () => {
                     <div className="icon user__icon">
                         <Quotes />
                     </div>
-                    <Avatar/>
+                    <Avatar user={item.author}/>
                 </div>
-                <UserName/>
+                <UserName user={item.author}/>
             </div>
             <div className="rating reviews__rating">
-                <div className="rating__number">4.0</div>
-                <Rating value={4} />
+                <div className="rating__number">{item.rating}</div>
+                <Rating value={parseFloat(item.rating)} />
             </div>
             <div className="reviews__content">
                 <div className="reviews__block reviews__block--first">

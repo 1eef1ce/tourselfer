@@ -1,28 +1,30 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {Avatar, UserName} from '@components/common';
+import { useTranslation } from 'next-i18next';
 
-export default function Review() {
-  return (
+export default function Review({item}) {
+
+    const { t } = useTranslation("components");
+
+    return (
       <div className="review">
           <div className="review__img">
-              <Image src="/images/review.jpg" alt="Industrial Berlin" title="" layout="fill"/>
+              <Image src={item.picture} alt={item.title} title={item.title} layout="fill"/>
               <div className="review__user user user--white user--medium">
                   <div className="user__img">
-                      <Avatar/>
+                      <Avatar user={item.author} />
                   </div>
-                  <UserName/>
+                  <UserName user={item.author}/>
               </div>
           </div>
           <div className="review__content">
               <div className="rating review__rating">
-                  <div className="rating__number">4.5</div>
+                  <div className="rating__number">{item.rating}</div>
               </div>
-              <div className="review__title title-2">Industrial Berlin</div>
+              <div className="review__title title-2">{item.title}</div>
               <div className="review__description">
-                  You can start at any time, take time out, deviate from the route. Nobody adjusts,
-                  does not limit intime. If you like the location - stay late, not interested -
-                  feel free to move on!
+                  {item.preview_description}
               </div>
               <div className="review__chars chars">
                   <div className="chars__row">
@@ -43,9 +45,9 @@ export default function Review() {
                   <div className="review__cost-old">5 €</div>
               </div>
               <div className="review__buttons">
-                  <a className="btn btn--large btn--filled" href="javascript:void(0)">Buy route</a>
-                  <Link href="#">
-                      <a className="link link--color">Learn more</a>
+                  <a className="btn btn--large btn--filled" href="javascript:void(0)">{t('button.buy_route')}</a>
+                  <Link href={"route/" + item.code}>
+                      <a className="link link--color">{t('links.more')}</a>
                   </Link>
               </div>
           </div>
