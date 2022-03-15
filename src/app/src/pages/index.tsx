@@ -23,21 +23,19 @@ export const getServerSideProps = async ({locale}) => {
         await i18n?.reloadResources();
     }
 
-    const data = await loadHomepage(locale);
-    
     return {
       props: {
-        data,
+        ...(await loadHomepage(locale)),
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
 };
 
 
-export default function Homepage ({data}) {
+export default function Homepage (props) {
 
     const { t } = useTranslation("pages__homepage");
-
+console.log(props.favorite_cities);
     return (
         <Layout>
             <Head>
@@ -56,7 +54,7 @@ export default function Homepage ({data}) {
                         </div>
                     </div>
                     <div className="showcase__bottom container">
-                        <ShowcaseItems/>
+                        <ShowcaseItems items={props.data.favorite_cities}/>
                     </div>
                 </div>
             </div>{/*showcase*/}
@@ -74,7 +72,7 @@ export default function Homepage ({data}) {
                             </a>
                         </Link>
                     </div>
-                    <LocationsContainer/>
+                    <LocationsContainer items={props.data.bestsellers_cities}/>
                     <div className="locations__more">
                         <Button
                             variant="outlined"

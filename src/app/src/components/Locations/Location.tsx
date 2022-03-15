@@ -10,7 +10,7 @@ const Location = (props) => {
                     <img src={props.img} alt="img" title=""/>
                 </picture>
                 <div className="locations__content">
-                    <div className="title-2 locations__title">{props.city}</div>
+                    <div className="title-2 locations__title">{props.name}</div>
                     <div className="locations__text">{props.tours} unique tours from {props.authors} authors</div>
                 </div>
             </a>
