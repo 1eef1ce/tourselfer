@@ -16,27 +16,27 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import {loadHomepage} from '../lib/api/fetch-homepage';
 
-export const getStaticProps = async ({ locale }) => {
-    if (process.env.NODE_ENV === "development") {
-      await i18n?.reloadResources();
+export const getServerSideProps = async ({locale}) => {
+
+    if (process.env.NODE_ENV === "development")
+    {
+        await i18n?.reloadResources();
     }
 
-    console.log(process.env.API_HOST);
-    //const data = await loadHomepage();
+    const data = await loadHomepage(locale);
     
     return {
       props: {
-        //data,
+        data,
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
 };
 
+
 export default function Homepage ({data}) {
 
     const { t } = useTranslation("pages__homepage");
-
-    console.log(data);
 
     return (
         <Layout>

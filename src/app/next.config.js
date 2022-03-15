@@ -16,5 +16,8 @@ module.exports = {
         modules: ['node_modules']
     },
     trailingSlash: true,
-    generateEtags: false
+    generateEtags: false,
+    env: {
+        API_HOST: process.env.API_HOST
+    }
 };

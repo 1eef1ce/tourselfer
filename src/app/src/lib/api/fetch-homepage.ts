@@ -1,7 +1,6 @@
-export async function loadHomepage() {
-    console.log(process.env.API_HOST);
-    const res = await fetch(process.env.API_HOST + '/api/v1/homepage');
-    const data = await res.json();
-  
-    return data;
+export async function loadHomepage(locale: string) {
+
+    const resource = await fetch(process.env.API_HOST + '/api/v1/homepage?language=' + locale);
+    return await resource.json();
+
   }
