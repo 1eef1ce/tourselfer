@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {Logo} from '@components/ui';
-import {ChevronDown, Heart} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';
@@ -11,10 +10,15 @@ import MobileMenuContainer from '@components/common/Menu/MobileMenu';
 import HeaderMenu from '@components/common/Menu/HeaderMenu';
 import MobileSearchContainer from '@components/common/Search/MobileSearch';
 import {SignIn} from '@components/common/UserNav';
+import {FavoritesWidget} from '@components/common/FavoritesWidget';
+
+import { useTranslation } from 'next-i18next';
 
 const Header = () => {
     const [hasScrolled, setHasScrolled] = useState(false);
     const windowSize = useWindowSize();
+    const { t } = useTranslation("components");
+
     let isMobile;
     (windowSize.width < 1024) ? isMobile = true : isMobile = false;
 
@@ -36,8 +40,10 @@ const Header = () => {
     }, [hasScrolled]);
 
     return (
+        
         <header className={cn("header", {'header--transparent': !hasScrolled})}>
             {/*<IPAddress/>*/}
+            
             <div className="container header__container">
                 {isMobile && <MobileMenuContainer/>}
                 <Link href="/">
@@ -47,28 +53,13 @@ const Header = () => {
                 </Link>
                 {isMobile && <MobileSearchContainer/>}
                 <div className="dropdown header__lang">
-                    <button className="dropdown__btn">
-                        <span>lang</span>
-                        <span className="icon dropdown__icon">
-                            <ChevronDown/>
-                        </span>
-                    </button>
-                    <div className="dropdown__content">
                         <I18nWidget/>
-                    </div>
                 </div>
                 <HeaderMenu/>
                 <div className="header__links">
                     <div className="header-nav header-nav--icons">
                         <div className="header-nav__item">
-                            <Link href="#">
-                                <a className="header-nav__link">
-                                    <span className="icon header-nav__icon">
-                                        <Heart/>
-                                    </span>
-                                    <span>My routes</span>
-                                </a>
-                            </Link>
+                            <FavoritesWidget/>
                         </div>
                         <div className="header-nav__item">
                             <SignIn/>

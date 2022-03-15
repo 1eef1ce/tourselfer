@@ -3,10 +3,13 @@ import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import {useState} from 'react';
+import { useTranslation } from 'next-i18next';
 
 const AdvantageSlider = () => {
     const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
     const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+    const {t} = useTranslation("components");
+
     return (
         <div className="advantages__container">
             <div className="swiper-navigation swiper-navigation--outside advantages__nav">
@@ -34,13 +37,11 @@ const AdvantageSlider = () => {
                     <div className="advantages__item">
                         <div className="advantages__number">01</div>
                         <div className="advantages__img">
-                            <Image src="/icons/002-Backpacker.svg" alt="01" title="" layout="fill"/>
+                            <Image src="/icons/002-Backpacker.svg" alt="" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">You are the boss!</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide1.title')}</div>
                         <div className="advantages__text">
-                            You can start at any time, take time out, deviate from the route. Nobody adjusts,
-                            does not limit intime. If you like the location - stay late, not interested - feel
-                            free to move on!
+                            {t('advantages.slide1.description')}
                         </div>
                     </div>
                 </SwiperSlide>
@@ -48,13 +49,11 @@ const AdvantageSlider = () => {
                     <div className="advantages__item">
                         <div className="advantages__number">02</div>
                         <div className="advantages__img">
-                            <Image src="/icons/036-searching.svg" alt="02" title="" layout="fill"/>
+                            <Image src="/icons/036-searching.svg" alt="" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">Не трать время на поиск</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide2.title')}</div>
                         <div className="advantages__text">
-                            Достопримечательностей. Еды. Ближайших остановок и транспорта. Бесплатного Wi-Fi.
-                            Уборных. Времени работы музеев, выставок, торговых центров... Положись на навигатор -
-                            он в курсе актуальной информации.
+                            {t('advantages.slide2.description')}
                         </div>
                     </div>
                 </SwiperSlide>
@@ -64,10 +63,9 @@ const AdvantageSlider = () => {
                         <div className="advantages__img">
                             <Image src="/icons/008-cash.svg" alt="03" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">Не трать деньги</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide3.title')}</div>
                         <div className="advantages__text">
-                            На дорогие экскурсии с оплатой за каждую персону. Покупай один тур, а в путь
-                            отправляйся с дружной компанией.
+                            {t('advantages.slide3.description')}
                         </div>
                     </div>
                 </SwiperSlide>
@@ -75,12 +73,11 @@ const AdvantageSlider = () => {
                     <div className="advantages__item">
                         <div className="advantages__number">04</div>
                         <div className="advantages__img">
-                            <Image src="/icons/021-explorer.svg" alt="04" title="" layout="fill"/>
+                            <Image src="/icons/021-explorer.svg" alt="" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">Без потерь</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide4.title')}</div>
                         <div className="advantages__text">
-                            Приложение синхронизируется с картами Google, где отмечены все точки маршрута.
-                            Даже в незнакомом городе не потеряешься!
+                            {t('advantages.slide4.description')}
                         </div>
                     </div>
                 </SwiperSlide>
@@ -88,12 +85,11 @@ const AdvantageSlider = () => {
                     <div className="advantages__item">
                         <div className="advantages__number">05</div>
                         <div className="advantages__img">
-                            <Image src="/icons/019-tourist.svg" alt="05" title="" layout="fill"/>
+                            <Image src="/icons/019-tourist.svg" alt="" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">Твой путь — твой выбор</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide5.title')}</div>
                         <div className="advantages__text">
-                            Обзорное знакомство, популярные туристические направления и уникальные маршруты для
-                            тех, кто уже все видел. Выбирай то, что интересно тебе!
+                            {t('advantages.slide5.description')}
                         </div>
                     </div>
                 </SwiperSlide>
@@ -103,10 +99,9 @@ const AdvantageSlider = () => {
                         <div className="advantages__img">
                             <Image src="/icons/050-smartphone.svg" alt="06" title="" layout="fill"/>
                         </div>
-                        <div className="title-3 advantages__title">Интернет не нужен!</div>
+                        <div className="title-3 advantages__title">{t('advantages.slide6.title')}</div>
                         <div className="advantages__text">
-                            Если ты за границей, навигатор проведет тебя по выбранному маршруту без подключения
-                            к мобильному интернету.
+                            {t('advantages.slide6.description')}
                         </div>
                     </div>
                 </SwiperSlide>
