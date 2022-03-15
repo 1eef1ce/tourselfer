@@ -8,8 +8,8 @@ const SignIn = () => {
 
     return (
         <>
-            <div className="header-nav__link" onClick={toggle}>
-                <span className="icon header-nav__icon">
+            <div className="header-links__link" onClick={toggle}>
+                <span className="icon header-links__icon">
                     <User />
                 </span>
                 <span>Sign in</span>

@@ -1,43 +1,37 @@
 import React from 'react';
-import {Bus, Car, FilterIcon, Man, Sort} from '@components/icons';
-import {Input} from '@components/ui';
+import {Bus, Car, Close, FilterIcon, Man, Sort} from '@components/icons';
+import {Button, Input} from '@components/ui';
 
 const Filter = () => {
     return (
         <div className="filter">
-            <div className="filter__tags">
-                <a className="tag" href="javascript:void(0)"><span>Активный</span></a>
-                <a className="tag active" href="javascript:void(0)"><span>Красота природы</span></a>
-                <a className="tag" href="javascript:void(0)"><span>Архитектура</span></a>
-                <a className="tag" href="javascript:void(0)"><span>Религия</span></a>
-                <a className="tag" href="javascript:void(0)"><span>Интересно детям</span></a>
-            </div>
-            <div className="filter__block filter__block--desktop">
+            <div className="filter__block">
                 <div className="filter__items">
                     <div className="filter__item">
-                        <div className="filter__text">Costs</div>
+                        <div className="filter__text">Route costs</div>
                         <div className="switch">
                             <a className="switch__option active" href="javascript:void(0)">All</a>
+                            <a className="switch__option" href="javascript:void(0)">Free</a>
                             <a className="switch__option" href="javascript:void(0)">$</a>
                             <a className="switch__option" href="javascript:void(0)">$$</a>
                             <a className="switch__option" href="javascript:void(0)">$$$</a>
                         </div>
                     </div>
                     <div className="filter__item">
-                        <div className="filter__text">Route types</div>
+                        <div className="filter__text">Way to travel</div>
                         <div className="switch">
                             <a className="switch__option active">All</a>
-                            <a className="switch__option" href="javascript:void(0)">
+                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
                                 <span className="icon switch__icon">
                                     <Man/>
                                 </span>
                             </a>
-                            <a className="switch__option" href="javascript:void(0)">
+                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
                                 <span className="icon switch__icon">
                                     <Car/>
                                 </span>
                             </a>
-                            <a className="switch__option" href="javascript:void(0)">
+                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
                                 <span className="icon switch__icon">
                                     <Bus/>
                                 </span>
@@ -59,64 +53,65 @@ const Filter = () => {
                         </div>
                     </div>
                 </div>
-                <div className="filter__right">
-                    <div className="filter__select">
-                        <Input
-                            isSelect
-                            classPrefix="select-filter"
-                            isFilter
-                            id="s_rating"
-                            name="s_rating"
-                            label="Rating:"
-                            options = {
-                                [
-                                    {value: 'Any', label: 'Any rating'},
-                                    {value: '4+', label: '4+'},
-                                    {value: '3+', label: '3+'}
-                                ]
-                            }
-                            defaultOption = {
-                                [
-                                    {value: 'Any', label: 'Any rating'}
-                                ]
-                            }
-                        />
+            </div>
+            <div className="filter-tags">
+                <div className="filter-tags__row">
+                    <div className="filter-tags__title">Route type</div>
+                    <div className="filter-tags__items">
+                        <a className="tag" href="javascript:void(0)"><span>Active</span></a>
+                        <a className="tag active" href="javascript:void(0)">
+                            <span>Beauty of nature</span>
+                            <span className="tag__icon icon"><Close/></span>
+                        </a>
+                        <a className="tag" href="javascript:void(0)"><span>Religion</span></a>
+                        <a className="tag" href="javascript:void(0)"><span>Local color</span></a>
+                        <a className="tag" href="javascript:void(0)"><span>Entertainment</span></a>
                     </div>
-                    <div className="filter__select">
-                        <Input
-                            isSelect
-                            classPrefix="select-filter"
-                            isFilter
-                            id="s_duration"
-                            name="s_duration"
-                            label="Duration:"
-                            options = {
-                                [
-                                    {value: 'Any', label: 'Any duration'},
-                                    {value: '1-2', label: '1-2 h'},
-                                    {value: '2-3', label: '2-3 h'}
-                                ]
-                            }
-                            defaultOption = {
-                                [
-                                    {value: 'Any', label: 'Any duration'}
-                                ]
-                            }
-                        />
+                </div>
+                <div className="filter-tags__row">
+                    <div className="filter-tags__title">Route duration</div>
+                    <div className="filter-tags__items">
+                        <a className="tag" href="javascript:void(0)"><span>Less than 3 hours</span></a>
+                        <a className="tag" href="javascript:void(0)"><span>All day</span></a>
+                        <a className="tag" href="javascript:void(0)"><span>1–2 days</span></a>
+                        <a className="tag" href="javascript:void(0)"><span>2 days or more</span></a>
                     </div>
                 </div>
             </div>
-            <div className="filter__block filter__block--mobile">
-                <a className="filter-btn filter-btn--sort" href="javascript:void(0)">
-                    <span>Sorting</span>
-                    <span className="filter-btn__icon">
-                        <Sort/>
-                    </span>
-                </a>
+            <div className="filter__more">
+                <Button
+                    className="btn btn--more"
+                >
+                    More filters
+                </Button>
+            </div>
+            <div className="filter__actions">
+                <div className="filter__select">
+                    <Input
+                        isSelect
+                        classPrefix="select-filter"
+                        id="filter"
+                        name="filter"
+                        options = {
+                            [
+                                {value: 'Route rating', label: 'Route rating'},
+                                {value: 'Author rating', label: 'Author rating'},
+                                {value: 'Cost', label: 'Cost'},
+                                {value: 'Duration', label: 'Duration'}
+                            ]
+                        }
+                        defaultOption = {
+                            [
+                                {value: 'Route rating', label: 'Route rating'}
+                            ]
+                        }
+                    />
+                </div>
                 <a className="filter-btn" href="javascript:void(0)">
                     <span className="icon filter-btn__icon">
                         <FilterIcon/>
                     </span>
+                    <span>Filter</span>
                 </a>
             </div>
         </div>

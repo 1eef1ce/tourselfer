@@ -52,7 +52,7 @@ export default function ExampleForm() {
                         initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
-                            alert(JSON.stringify(values, null, 2))
+                            alert(JSON.stringify(values, null, 2));
                         }}
                     >
                         {({
@@ -60,10 +60,9 @@ export default function ExampleForm() {
                               status,
                               touched,
                               getFieldProps,
-                            handleBlur,
-                            setFieldValue
+                              handleBlur,
+                              setFieldValue
                           }) => (
-
                             <Form className="form examples__form" noValidate>
                                 <div className="form__title">Text</div>
                                 <div className="form__row">
@@ -178,10 +177,12 @@ export default function ExampleForm() {
                                         //     ]
                                         // }
                                         {...getFieldProps('exampleDate')}
-                                        onBlur={()=>{
-                                            handleBlur({ target: {name:'exampleDate'} });
+                                        onBlur={() => {
+                                            handleBlur({target: {name: 'exampleDate'}});
                                         }}
-                                        onChange={(option) => {setFieldValue("exampleDate",option.value);}}
+                                        onChange={(option) => {
+                                            setFieldValue("exampleDate", option.value);
+                                        }}
                                     />
                                     {touched.exampleDate && errors.exampleDate ? (
                                         <div className="form__error">{errors.exampleDate}</div>

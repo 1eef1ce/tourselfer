@@ -26,7 +26,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     required?: boolean
     type?: 'text' | 'email' | 'password'
     isSelect?: boolean
-    isFilter?: boolean
     classPrefix?: string
     options?: object[]
     defaultOption?: object[]
@@ -96,7 +95,6 @@ class Input extends React.Component<InputProps, InputState> {
             required,
             type = 'text',
             isSelect = false,
-            isFilter,
             classPrefix,
             options,
             defaultOption,
@@ -121,16 +119,10 @@ class Input extends React.Component<InputProps, InputState> {
         return (
             <>
                 {label != null && label !== '' && (
-                    !isFilter
-                        ? (
-                            <label className="form__label" htmlFor={id}>
-                                {label}
-                                {required && (<span> *</span>)}
-                            </label>
-                        )
-                        : (
-                            <label className="filter__text">{label}</label>
-                        )
+                    <label className="form__label" htmlFor={id}>
+                        {label}
+                        {required && (<span> *</span>)}
+                    </label>
                 )}
                 <div className={cn("form__field", inputClass(), errorClass())}>
                     {isSelect
