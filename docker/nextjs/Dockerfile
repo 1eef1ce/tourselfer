@@ -6,6 +6,9 @@ ENV PORT 3000
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+# Install PM2 globally
+RUN npm install --global pm2
+
 # Installing dependencies
 COPY ./src/app/package*.json /usr/src/app/
 RUN npm install
@@ -17,5 +20,9 @@ COPY ./src/app /usr/src/app
 RUN npm run build
 EXPOSE 3000
 
-# Running the app
-CMD "npm" "run" "dev"
+# Run container as non-root (unprivileged) user
+# The "node" user is provided in the Node.js Alpine base image
+USER node
+
+# Launch app with PM2
+CMD [ "pm2-runtime", "start", "npm", "--", "start" ]

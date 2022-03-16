@@ -2,9 +2,11 @@ import {User} from '@components/icons';
 import {Modal} from '@components/ui';
 import {useModal} from '@lib/hooks/useModal';
 import {Auth} from '@components/auth';
+import { useTranslation } from 'next-i18next';
 
 const SignIn = () => {
     const { isShown, toggle } = useModal();
+    const {t} = useTranslation('components');
 
     return (
         <>
@@ -12,7 +14,7 @@ const SignIn = () => {
                 <span className="icon header-links__icon">
                     <User />
                 </span>
-                <span>Sign in</span>
+                <span>{t('header.link.signIn')}</span>
             </div>
             <Modal
                 isShown={isShown}

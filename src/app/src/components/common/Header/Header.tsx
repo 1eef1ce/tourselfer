@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import {Logo} from '@components/ui';
-import {ChevronDown, Heart} from '@components/icons';
-import {I18nWidget, Searchbar} from '@components/common';
+import {ChevronDown} from '@components/icons';
+import {I18nWidget} from '@components/common';
 import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';
 import throttle from 'lodash.throttle';
@@ -12,10 +12,14 @@ import HeaderMenu from '@components/common/Menu/HeaderMenu';
 import MobileSearchContainer from '@components/common/Search/MobileSearch';
 import {SignIn} from '@components/common/UserNav';
 import BottomMenu from '@components/common/Menu/BottomMenu';
+import {FavoritesWidget} from '@components/common/FavoritesWidget';
+import { useTranslation } from 'next-i18next';
 
 const Header = () => {
     const [hasScrolled, setHasScrolled] = useState(false);
     const windowSize = useWindowSize();
+    const { t } = useTranslation("components");
+
     let isMobile;
     (windowSize.width < 768) ? isMobile = true : isMobile = false;
 
@@ -62,14 +66,7 @@ const Header = () => {
                     <HeaderMenu/>
                     <div className="header-links">
                         <div className="header-links__item">
-                            <Link href="#">
-                                <a className="header-links__link">
-                                    <span className="icon header-links__icon">
-                                        <Heart/>
-                                    </span>
-                                    <span>My routes</span>
-                                </a>
-                            </Link>
+                            <FavoritesWidget/>
                         </div>
                         <div className="header-links__item">
                             <SignIn/>
