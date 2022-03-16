@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {Button} from '@components/ui';
 import {AdvantageSlider, AppSlider, Layout, Searchbar} from '@components/common';
+import {HeroPopularCities} from '@components/common/HeroPopularCities';
 import {Review, ReviewSlider} from '@components/Reviews';
 import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
@@ -35,7 +36,7 @@ export const getServerSideProps = async ({locale}) => {
 export default function Homepage (props) {
 
     const { t } = useTranslation("pages__homepage");
-console.log(props.favorite_cities);
+
     return (
         <Layout>
             <Head>
@@ -49,9 +50,8 @@ console.log(props.favorite_cities);
                     <div className="search showcase__search">
                         <div className="search__title">{t('hero.search_title')}</div>
                         <Searchbar/>
-                        <div className="search__text">
-                            Popular now: <span>Bangkok, Paris, London, Dubai, New-York</span>
-                        </div>
+                        <HeroPopularCities items={props.data.popular_now} />
+                        
                     </div>
                     <div className="showcase__bottom container">
                         <ShowcaseItems items={props.data.favorite_cities}/>
@@ -118,7 +118,7 @@ console.log(props.favorite_cities);
                         </Link>
                     </div>
                     <Review item={props.data.route_reviews[0]}/>
-                    <ReviewSlider items={props.data.route_reviews[0].reviews}/>
+                    <ReviewSlider route={props.data.route_reviews[0]} items={props.data.route_reviews[0].reviews}/>
                 </div>
             </div>
             }

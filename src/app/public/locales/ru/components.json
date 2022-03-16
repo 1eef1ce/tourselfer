@@ -25,7 +25,36 @@
     "advantages.slide6.title": "Интернет не нужен!",
     "advantages.slide6.description": "Если ты за границей, навигатор проведет тебя по выбранному маршруту без подключения к мобильному интернету.",
 
-    "button.buy_route": "Купить маршрут",
+    "route.props.locations_count": "Количество локаций",
+    "route.props.duration": "Продолжительность маршрута",
+    "route.props.duration_value_range": "{{start}}-{{end}} ч.",
+    "route.props.duration_value": "{{start}} ч.",
 
-    "links.more": "Подробнее"
+    "route.props.type": "Вариант прохождения маршрута",
+    "route.props.type_foot": "пеший",
+    "route.props.type_car": "авто",
+    "route.props.type_bus": "общественный транспорт",
+
+    "review.recommended": "Рекомендует маршрут: ",
+    "review.liked": "Что понравилось: ",
+    "review.not_liked": "Что не впечатлило: ",
+    "review.more_link": "Читать далее",
+
+    "button.buy_route": "Купить маршрут",
+    "button.get_route": "Пройти бесплатно",
+    "button.search": "Искать",
+
+    "links.more": "Подробнее",
+
+    "price.free": "бесплатно",
+
+    "user.type_user": "Путешественник",
+    "user.type_author": "Автор маршрутов",
+
+    "hero.popular_now": "Популярно сейчас: ",
+
+    "searchbar.placeholder": "например: Санкт-Петербург",
+
+    "yes": "Да",
+    "no": "Нет"
 }

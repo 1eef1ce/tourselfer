@@ -3,7 +3,12 @@ import {Avatar, UserName} from '@components/common';
 import {Rating} from '@components/ui';
 import {ArrowRight, Quotes} from '@components/icons';
 
-const ReviewSlide = ({item}) => {
+import { useTranslation } from 'next-i18next';
+
+const ReviewSlide = ({item, route}) => {
+
+    const { t } = useTranslation("components");
+
     return (
         <div className="reviews__item">
             <div className="user">
@@ -21,25 +26,29 @@ const ReviewSlide = ({item}) => {
             </div>
             <div className="reviews__content">
                 <div className="reviews__block reviews__block--first">
-                    <span>Recommends a route: </span>
-                    <span className="reviews__text">Yes</span>
-                </div>
-                <div className="reviews__block">
-                    <span>Liked:</span>
+                    <span>{t('review.recommended')}</span>
                     <span className="reviews__text">
-                        Sights. Food. The nearest stops and transport. Free Wi-Fi. Restrooms. Opening
-                        hours of museums, exhibitions, shopping centers ... Rely on the navigator -
-                        it is up to date with the latest information.
+                        {item.recommends ? t('yes') : t('no')}
                     </span>
                 </div>
+                {item.positive.length > 10 &&
                 <div className="reviews__block">
-                    <span>Not like:</span>
-                    <span className="reviews__text">Sights. Food.</span>
+                    <span>{t('review.liked')}</span>
+                    <span className="reviews__text" dangerouslySetInnerHTML={{__html: item.positive}}></span>
                 </div>
+                }
+
+                {item.negative.length > 10 &&
+                <div className="reviews__block">
+                    <span>{t('review.not_liked')}</span>
+                    <span className="reviews__text" dangerouslySetInnerHTML={{__html: item.negative}}></span>
+                </div>
+                }
             </div>
-            <Link href="#">
+
+            <Link href={"/route/" + route.code + "/reviews/"}>
                 <a className="reviews__link link link--arrow link--color">
-                    <span>Entire review</span>
+                    <span>{t('review.more_link')}</span>
                     <span className="icon">
                         <ArrowRight />
                     </span>

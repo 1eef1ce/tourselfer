@@ -5,7 +5,7 @@ import ReviewSlide from './ReviewSlide';
 
 import {useState} from 'react';
 
-const ReviewSlider = ({items}) => {
+const ReviewSlider = ({items, route}) => {
     const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
     const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
     return (
@@ -30,7 +30,7 @@ const ReviewSlider = ({items}) => {
             >
                 {items && items.length>0 && items.map(item => (
                     <SwiperSlide key={item.id}>
-                        <ReviewSlide item={item}/>
+                        <ReviewSlide item={item} route={route} />
                     </SwiperSlide>
                 ))}
             </Swiper>
