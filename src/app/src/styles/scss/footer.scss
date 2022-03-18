@@ -45,6 +45,7 @@
   &__logo {
     max-width: 253px;
     height: 48px;
+    flex-shrink: 0;
 
     svg * {
       fill: #fff;

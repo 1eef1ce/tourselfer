@@ -9,6 +9,8 @@ export default function ExampleButtons() {
     function handleClick() {
         setLoading(true);
     }
+
+    const style = {margin: '8px'};
     
     return (
         <Layout>
@@ -32,12 +34,14 @@ export default function ExampleButtons() {
 
                 <div>
                     <Button
+                        style={style}
                         loading={loading}
                         onClick={handleClick}
                     >
                         Unstyled
                     </Button>
                     <Button
+                        style={style}
                         disabled={true}
                         loading={loading}
                         onClick={handleClick}
@@ -45,6 +49,7 @@ export default function ExampleButtons() {
                         Disabled
                     </Button>
                     <Button
+                        style={style}
                         isStartIcon={true}
                         startIcon={<Plus/>}
                         loading={loading}
@@ -53,6 +58,7 @@ export default function ExampleButtons() {
                         Unstyled
                     </Button>
                     <Button
+                        style={style}
                         isEndIcon={true}
                         endIcon={<Plus/>}
                         loading={loading}
@@ -61,6 +67,7 @@ export default function ExampleButtons() {
                         Unstyled
                     </Button>
                     <Button
+                        style={style}
                         isIcon={true}
                         icon={<Plus/>}
                         loading={loading}
@@ -70,6 +77,7 @@ export default function ExampleButtons() {
 
                 <div>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="large"
                         loading={loading}
@@ -78,6 +86,7 @@ export default function ExampleButtons() {
                         Large
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="medium"
                         loading={loading}
@@ -86,6 +95,7 @@ export default function ExampleButtons() {
                         Medium
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="medium"
                         disabled={true}
@@ -95,6 +105,7 @@ export default function ExampleButtons() {
                         Disabled
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="large"
                         isStartIcon={true}
@@ -105,6 +116,7 @@ export default function ExampleButtons() {
                         Large
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="medium"
                         isStartIcon={true}
@@ -115,6 +127,7 @@ export default function ExampleButtons() {
                         Medium
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="large"
                         isEndIcon={true}
@@ -125,6 +138,7 @@ export default function ExampleButtons() {
                         Large
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="medium"
                         isEndIcon={true}
@@ -135,6 +149,7 @@ export default function ExampleButtons() {
                         Medium
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="large"
                         isStartIcon={true}
@@ -146,6 +161,7 @@ export default function ExampleButtons() {
                         Disabled
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="large"
                         isIcon={true}
@@ -154,102 +170,8 @@ export default function ExampleButtons() {
                         onClick={handleClick}
                     />
                     <Button
+                        style={style}
                         variant="outlined"
-                        size="medium"
-                        isIcon={true}
-                        icon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    />
-                </div>
-
-                <div>
-                    <Button
-                        variant="filled"
-                        size="large"
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Large
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="medium"
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Medium
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="medium"
-                        disabled={true}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Disabled
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="large"
-                        isStartIcon={true}
-                        startIcon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Large
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="medium"
-                        isStartIcon={true}
-                        startIcon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Medium
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="large"
-                        isEndIcon={true}
-                        endIcon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Large
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="medium"
-                        isEndIcon={true}
-                        endIcon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Medium
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="large"
-                        isStartIcon={true}
-                        startIcon={<Plus/>}
-                        disabled={true}
-                        loading={loading}
-                        onClick={handleClick}
-                    >
-                        Disabled
-                    </Button>
-                    <Button
-                        variant="filled"
-                        size="large"
-                        isIcon={true}
-                        icon={<Plus/>}
-                        loading={loading}
-                        onClick={handleClick}
-                    />
-                    <Button
-                        variant="filled"
                         size="medium"
                         isIcon={true}
                         icon={<Plus/>}
@@ -260,6 +182,112 @@ export default function ExampleButtons() {
 
                 <div>
                     <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                </div>
+
+                <div>
+                    <Button
+                        style={style}
                         variant="filled"
                         size="large"
                         isStartIcon={true}
@@ -270,6 +298,7 @@ export default function ExampleButtons() {
                         Large
                     </Button>
                     <Button
+                        style={style}
                         variant="filled"
                         size="medium"
                         isEndIcon={true}
@@ -280,6 +309,7 @@ export default function ExampleButtons() {
                         Medium
                     </Button>
                     <Button
+                        style={style}
                         variant="outlined"
                         size="medium"
                         isStartIcon={true}
@@ -292,6 +322,7 @@ export default function ExampleButtons() {
                         Medium
                     </Button>
                     <Button
+                        style={style}
                         variant="filled"
                         size="medium"
                         isIcon={true}
@@ -300,6 +331,7 @@ export default function ExampleButtons() {
                         onClick={handleClick}
                     />
                     <Button
+                        style={style}
                         isIcon={true}
                         icon={<User/>}
                         loading={loading}

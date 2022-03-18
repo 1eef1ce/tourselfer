@@ -14,6 +14,7 @@ class Scrollbar extends Component {
                 renderThumbVertical={(props) => <div {...props} className="vthumb" />}
                 renderTrackHorizontal={(props) => <div {...props} className="htrack" />}
                 renderThumbHorizontal={(props) => <div {...props} className="hthumb" />}
+                universal={true}
             >
                 <div className={'scroll-inner'}>
                     {this.props.children}  

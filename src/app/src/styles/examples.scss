@@ -1,34 +1,52 @@
+@import "scss/media";
+
 .examples {
-  >div {
+
+  &__form {
+    width: 30%;
+
+    @include max-1440 {
+      width: 50%;
+    }
+
+    @include max-767 {
+      width: 100%;
+    }
+  }
+
+  > div {
     display: flex;
     align-items: center;
+  }
 
-    button {
-      margin: 8px;
+  .scroll-outer {
+    width: 40%;
+
+    &.horizontal {
+      margin-left: 20px;
+
+      .f-blocks {
+        display: flex;
+
+        .item {
+          width: 350px;
+          padding: 16px;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &.vertical {
+      max-height: 300px;
+
+      > div {
+        max-height: 300px !important;
+
+        .view {
+          max-height: 300px !important;
+        }
+      }
     }
   }
 }
-.scroll-outer {
-      width: 40%;
-      &.horizontal {
-          margin-left: 20px;
-          .f-blocks {
-              display: flex;
-              .item {
-                  width: 350px;
-                  padding: 16px;
-                  flex-shrink: 0;
-              }
-          }
-      }
-      &.vertical {
-          max-height: 300px;
-          >div {
-              max-height: 300px !important;
-              .view {
-                  max-height: 300px !important;
-              }
-          }
-      }
-  }
 

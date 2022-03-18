@@ -3,7 +3,6 @@
 
 .radio {
   position: relative;
-  cursor: pointer;
 
   &__input {
     position: absolute;
@@ -24,14 +23,17 @@
 
       &:not(:checked) {
 
-        &:focus {
+        &:not(.error) {
 
-          & + .radio__label {
+          &:focus {
 
-            &::before {
-              border-color: $color-green;
-              background: #fff;
-              box-shadow: 0 0 0 2px $color-gray-10;
+            & + .radio__label {
+
+              &::before {
+                border-color: $color-green;
+                background: #fff;
+                box-shadow: 0 0 0 2px $color-gray-10;
+              }
             }
           }
         }
@@ -42,6 +44,7 @@
 
       & + .radio__label {
         cursor: auto;
+        color: $color-secondary;
 
         &::before {
           border-color: $color-gray-7;
@@ -71,6 +74,17 @@
         }
       }
 
+      &:disabled {
+
+        & + .radio__label {
+
+          &::before {
+            border-color: $color-gray-7;
+            background: $color-gray-20;
+          }
+        }
+      }
+
       &:focus {
 
         & + .radio__label {
@@ -82,22 +96,55 @@
         }
       }
     }
+
+    &.error {
+
+      & + .radio__label {
+
+        &::before {
+          border-color: $color-red;
+          background: $color-red-7;
+          box-shadow: 0 0 0 2px $color-red-20;
+        }
+
+        &:hover {
+
+          &::before {
+            border-color: $color-red;
+            background: $color-red-7;
+          }
+        }
+      }
+
+      &:checked {
+
+        & + .radio__label {
+
+          &::before {
+            border-color: $color-red;
+            background: $color-red;
+            box-shadow: 0 0 0 2px $color-red-20;
+          }
+        }
+      }
+    }
   }
 
   &__label {
     position: relative;
     display: inline-flex;
-    padding-top: 4px;
+    align-items: center;
     font-size: 16px;
     line-height: 1.25;
     color: $color-primary;
+    cursor: pointer;
 
     &::before {
       content: "";
       display: inline-block;
       width: 28px;
       height: 28px;
-      margin: -4px 8px 0 0;
+      margin-right: 8px;
       border: 1px solid $color-gray-15;
       border-radius: 100%;
       background: $color-gray-7;
@@ -115,39 +162,6 @@
       height: 12px;
       background: #fff;
       border-radius: 100%;
-    }
-  }
-
-  &.error {
-
-    & > .radio__label {
-
-      &::before {
-        border-color: $color-red;
-        background: $color-red-7;
-        box-shadow: 0 0 0 2px $color-red-20;
-      }
-
-      &:hover {
-
-        &::before {
-          border-color: $color-red;
-          background: $color-red-7;
-        }
-      }
-    }
-
-    & > .radio__input {
-
-      &:checked {
-
-        & + .radio__label {
-
-          &::before {
-            background: $color-red;
-          }
-        }
-      }
     }
   }
 }

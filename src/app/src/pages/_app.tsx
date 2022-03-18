@@ -4,7 +4,14 @@ import '../styles/vendor/normalize.css';
 import '../styles/scss/style.scss';
 import '../styles/examples.scss';
 
+import {SessionProvider} from "next-auth/react";
 
-const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />;
+function App({Component, pageProps: {session, ...pageProps}}) {
+    return (
+        <SessionProvider session={session}>
+            <Component {...pageProps} />
+        </SessionProvider>
+    );
+}
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(App);
