@@ -19,5 +19,11 @@ module.exports = {
     generateEtags: false,
     env: {
         API_HOST: process.env.API_HOST
+    },
+    images: {
+        domains: [
+            'api.stage1.test.tourselfer.tech',
+            'localhost'
+        ]
     }
 };

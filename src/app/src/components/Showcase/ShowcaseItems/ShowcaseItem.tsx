@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const ShowcaseItem = (props) => {
     return (
-        <Link href="#">
+        <Link href={"routes/" + props.code}>
             <a className="showcase__item">
                 <Image src={props.img} alt="{props.city}" title="" layout="fill"/>
                 <div className="showcase__content">
