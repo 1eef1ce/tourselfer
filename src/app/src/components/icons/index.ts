@@ -31,3 +31,5 @@ export { default as Sort } from './Sort';
 export { default as Star } from './Star';
 export { default as User } from './User';
 export { default as World } from './World';
+export { default as MapPinBlack } from './MapPinBlack';
+export {default as TourselferIcon} from './TourselferIcon';

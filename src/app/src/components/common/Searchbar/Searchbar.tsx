@@ -1,26 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect, createRef } from 'react';
 import debounce from 'lodash.debounce';
-import {SearchIcon} from '@components/icons';
+import {SearchIcon, MapPinBlack, TourselferIcon} from '@components/icons';
 import {Button} from '@components/ui';
+import {SearchbarItems} from '@components/common/SearchbarItems';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router'
 
 
 class SearchbarClass extends React.Component<any, any, any> {
     
+    wrapperRef = createRef();
+
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
+            visibleItems: false
         };
 
         this.onChange = this.onChange.bind(this);
-        this.fetchData = debounce(this.fetchData, 500);
+        this.onClick = this.onClick.bind(this);
+
+        this.fetchData = debounce(this.fetchData, 500);        
     }
+
 
     onChange(event) {
         this.fetchData(event.target.value);
     }
+
+    onClick(event) {
+        if (this.state.items && this.state.items.length > 0 && !this.state.visibleItems) {
+            this.setState({
+                visibleItems: true
+            });
+        }
+    }
+
 
     fetchData(phrase) {
         const { locale } = this.props.route;
@@ -29,7 +45,8 @@ class SearchbarClass extends React.Component<any, any, any> {
             .then(response => response.json())
             .then(result => {
                 this.setState({
-                    items: result
+                    items: result,
+                    visibleItems: true
                 });
             });
     }
@@ -38,12 +55,12 @@ class SearchbarClass extends React.Component<any, any, any> {
         const { t } = this.props.t;
 
         return (
-            <form className="form search__form">
+            <div className="form search__form">
                 <div className="search__wrapper">
                     <div className="icon search__icon">
                         <SearchIcon />
                     </div>
-                    <input className="form__field search__field" type="search" placeholder={t('searchbar.placeholder')} onChange={this.onChange} />
+                    <input className="form__field search__field" type="search" placeholder={t('searchbar.placeholder')} onClick={this.onClick} onChange={this.onChange} />
                     <Button
                         className="search__btn"
                         variant="filled"
@@ -52,21 +69,17 @@ class SearchbarClass extends React.Component<any, any, any> {
                         {t('button.search')}
                     </Button>
                 </div>
-                {this.state.items && this.state.items.length > 0 &&
-                    <div className="search__suggestions__wrapper">
-                    {this.state.items.map(item => (
-                        <div className="item">
-                            <div className="label">{item.label.general}</div>
-                            {Array.isArray(item.label.subs) && item.label.subs.length > 0 &&
-                                <div className="subs">
-                                    {item.label.subs.join(', ')}
-                                </div>
-                            }
-                        </div>
-                    ))}
-                    </div>
-                }
-            </form>
+                
+                <SearchbarItems
+                    items={this.state.items}
+                    visibleItems={this.state.visibleItems}
+                    onOutsideClick={() => {
+                        this.setState({
+                            visibleItems: false
+                        });
+                    }}
+                />
+            </div>
             
         );
     }
