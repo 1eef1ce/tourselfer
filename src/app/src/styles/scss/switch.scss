@@ -3,25 +3,31 @@
 
 .switch {
   display: flex;
-  height: 48px;
+  width: 100%;
+  height: 56px;
   padding: 4px 2px;
-  border: 1px solid $color-gray;
-  border-radius: 8px;
+  border: 1px solid $color-gray-15;
+  border-radius: 10px;
 
   &__option {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 16px;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 12px 20px;
     margin: 0 2px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 16px;
     line-height: 1.5;
     color: $color-primary;
     white-space: nowrap;
     transition: 0.2s;
 
-    &:hover,
+    &:hover {
+      background: $color-gray-7;
+    }
+
     &.active {
       background: $gradient-green;
       color: #fff;
@@ -32,6 +38,10 @@
           fill: #fff;
         }
       }
+    }
+
+    &--icon {
+      padding: 12px;
     }
   }
 

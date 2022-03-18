@@ -6,8 +6,9 @@
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
+  margin: 4px;
   border-radius: 20px;
-  background: $color-gray-bg;
+  background: $color-gray-7;
   font-size: 16px;
   line-height: 1.5;
   color: $color-primary;
@@ -15,38 +16,34 @@
   transition: 0.2s;
 
   @include max-767 {
-    font-size: 15px;
-    line-height: 1.33;
-  }
-
-  &:not(:last-of-type) {
-    margin-right: 8px;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
+    padding: 6px 12px;
+    margin: 6px;
+    font-size: 14px;
+    line-height: 1.43;
   }
 
   &:hover {
-    background: $gradient-green;
-    color: #fff;
+    box-shadow: 0 0 0 1px inset $color-gray-20;
   }
 
   &.active {
     background: $gradient-green;
     color: #fff;
+    box-shadow: none;
 
-    span {
-
-      &::before {
-        content: "";
-        width: 18px;
-        height: 24px;
-        background: url("../../assets/icons/icon-check.svg") no-repeat center;
-        background-size: contain;
-        margin-right: 4px;
-      }
+    &:hover {
+      background: $gradient-green-light;
     }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    margin-right: -8px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
   }
 }

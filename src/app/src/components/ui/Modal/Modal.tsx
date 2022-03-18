@@ -4,6 +4,7 @@ import cn from 'classnames';
 import {Close} from '@components/icons';
 import {disableBodyScroll, clearAllBodyScrollLocks} from 'body-scroll-lock';
 import FocusLock from 'react-focus-lock';
+import Scrollbars from 'react-custom-scrollbars-2';
 
 export interface ModalProps {
     isShown: boolean
@@ -66,24 +67,32 @@ const Modal: FC<ModalProps> = ({
         <>
             <div className="overlay" onClick={hide}>
                 <FocusLock>
-                    <div className={rootClassName} ref={modalClick} onClick={handleModalClick}>
-                        <div className="modal__container">
-                            <button className="modal__close" onClick={hide} tabIndex={-1}><Close/></button>
-                            {(modalTitle || modalSubtitle) && (
-                                <div className="modal__head">
-                                    {modalTitle && (
-                                        <div className="modal__title">{modalTitle}</div>
+                        <div className={rootClassName} ref={modalClick} onClick={handleModalClick}>
+                            <Scrollbars
+                                hideTracksWhenNotNeeded={true}
+                                autoHeight
+                                autoHeightMin={440}
+                                autoHeightMax='80vh'
+                                universal={true}
+                            >
+                                <div className="modal__container">
+                                    <button className="modal__close" onClick={hide} tabIndex={-1}><Close/></button>
+                                    {(modalTitle || modalSubtitle) && (
+                                        <div className="modal__head">
+                                            {modalTitle && (
+                                                <div className="modal__title">{modalTitle}</div>
+                                            )}
+                                            {modalSubtitle && (
+                                                <div className="modal__subtitle">{modalSubtitle}</div>
+                                            )}
+                                        </div>
                                     )}
-                                    {modalSubtitle && (
-                                        <div className="modal__subtitle">{modalSubtitle}</div>
-                                    )}
+                                    <div className="modal__body">
+                                        {children}
+                                    </div>
                                 </div>
-                            )}
-                            <div className="modal__body">
-                                {children}
-                            </div>
+                            </Scrollbars>
                         </div>
-                    </div>
                 </FocusLock>
             </div>
         </>

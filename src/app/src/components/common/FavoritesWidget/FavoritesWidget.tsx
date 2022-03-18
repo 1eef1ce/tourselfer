@@ -9,8 +9,8 @@ const FavoritesWidget = () => {
     return (
         <>
             <Link href="#">
-                <a className="header-nav__link">
-                    <span className="icon header-nav__icon">
+                <a className="header-links__link">
+                    <span className="icon header-links__icon">
                         <Heart />
                     </span>
                     <span>{t('header.link.favorites')}</span>

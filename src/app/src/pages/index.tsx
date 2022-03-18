@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import {Button} from '@components/ui';
 import {AdvantageSlider, AppSlider, Layout, Searchbar} from '@components/common';
@@ -7,14 +6,10 @@ import {Review, ReviewSlider} from '@components/Reviews';
 import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
 import {LocationsContainer} from '@components/Locations';
-import {useRouter} from 'next/router';
-import {useState, useEffect} from 'react';
-
 import { i18n } from "next-i18next";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import {loadHomepage} from '../lib/api/fetch-homepage';
+import {loadHomepage} from '@lib/api/fetch-homepage';
 
 export const getServerSideProps = async ({locale}) => {
 

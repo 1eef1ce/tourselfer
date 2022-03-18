@@ -18,7 +18,7 @@ const HeaderMenu = () => {
         <div className="header-nav">
 
             <div className="header-nav__item">
-                <Link href="/how-it-works">
+                <Link href="/how-the-site-works">
                     <a className="header-nav__link">{t('header.how_it_works')}</a>
                 </Link>
             </div>
