@@ -44,16 +44,25 @@ class SelectField extends React.Component<any, any> {
     }
 
     render() {
+        const {
+            isFilter,
+            id,
+            label,
+            classPrefix,
+            options,
+            defaultOption
+        } = this.props;
         const inputClass = this.getClass();
         return (
             <>
-                {(this.props.isFilter)
-                    ? <div className="filter__text">{this.props.label}</div>
-                    : <label className="form__label">{this.props.label}</label>}
+                {isFilter
+                    ? <div className="filter__text">{label}</div>
+                    : <label className="form__label">{label}</label>
+                }
                 <div className={cn("gradient-border", inputClass)}>
-                    <Select className="select" classNamePrefix={this.props.classPrefix} instanceId={this.props.id}
-                            options={this.props.options} components={{DropdownIndicator}} isSearchable={false}
-                            styles={styleProxy} defaultValue={this.props.defaultOption}
+                    <Select className="select" classNamePrefix={classPrefix} instanceId={id}
+                            options={options} components={{DropdownIndicator}} isSearchable={false}
+                            styles={styleProxy} defaultValue={defaultOption}
                             onBlur={this.onBlur} onFocus={this.onFocus}
                     />
                     <div className="form__error">Helper Text</div>

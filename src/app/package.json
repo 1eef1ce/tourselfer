@@ -11,10 +11,12 @@
   "dependencies": {
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
+    "formik": "^2.2.9",
     "lodash.throttle": "^4.1.1",
-    "next": "^12.0.8",
+    "next": "^12.1.0",
+    "next-auth": "^4.3.0",
     "next-i18next": "^10.5.0",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "^3.2.3",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-custom-scrollbars-2": "^4.4.0",
@@ -23,34 +25,39 @@
     "react-merge-refs": "^1.1.0",
     "react-phone-input-2": "^2.15.0",
     "react-select": "^5.2.2",
+<<<<<<< HEAD
     "swiper": "^7.4.1"   
+=======
+    "swiper": "^8.0.7",
+    "yup": "^0.32.11"
+>>>>>>> bba97e4048332c8cb81ecd172086fca2d7e106aa
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.7",
     "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-essentials": "^5.3.21",
+    "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
     "@storybook/builder-webpack5": "^6.4.19",
     "@storybook/manager-webpack5": "^6.4.19",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.1.21",
+    "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/lodash.throttle": "^4.1.6",
-    "@types/node": "^17.0.12",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
     "babel-loader": "^8.2.3",
-    "css-loader": "^6.6.0",
-    "eslint": "^8.7.0",
-    "eslint-config-next": "^12.0.8",
-    "sass": "^1.49.8",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.11.0",
+    "eslint-config-next": "^12.1.0",
+    "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
-    "typescript": "^4.5.5",
-    "webpack": "^5.69.1"
+    "typescript": "^4.6.2",
+    "webpack": "^5.70.0"
   }
 }

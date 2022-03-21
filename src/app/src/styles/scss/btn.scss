@@ -157,4 +157,16 @@
       background: $gradient-green-light;
     }
   }
+
+  &--more {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    color: $color-secondary;
+
+    &:hover {
+      color: $color-primary;
+      background: $color-gray-7;
+    }
+  }
 }

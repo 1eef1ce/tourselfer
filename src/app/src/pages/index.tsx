@@ -1,20 +1,16 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import {Button} from '@components/ui';
 import {AdvantageSlider, AppSlider, Layout, Searchbar} from '@components/common';
+import {HeroPopularCities} from '@components/common/HeroPopularCities';
 import {Review, ReviewSlider} from '@components/Reviews';
 import {Appstore, ArrowRight, Googleplay} from '@components/icons';
 import {ShowcasePicture, ShowcaseItems} from '@components/Showcase';
 import {LocationsContainer} from '@components/Locations';
-import {useRouter} from 'next/router';
-import {useState, useEffect} from 'react';
-
 import { i18n } from "next-i18next";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-import {loadHomepage} from '../lib/api/fetch-homepage';
+import {loadHomepage} from '@lib/api/fetch-homepage';
 
 export const getServerSideProps = async ({locale}) => {
 
@@ -23,18 +19,16 @@ export const getServerSideProps = async ({locale}) => {
         await i18n?.reloadResources();
     }
 
-    const data = await loadHomepage(locale);
-    
     return {
       props: {
-        data,
+        ...(await loadHomepage(locale)),
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
 };
 
 
-export default function Homepage ({data}) {
+export default function Homepage (props) {
 
     const { t } = useTranslation("pages__homepage");
 
@@ -51,16 +45,16 @@ export default function Homepage ({data}) {
                     <div className="search showcase__search">
                         <div className="search__title">{t('hero.search_title')}</div>
                         <Searchbar/>
-                        <div className="search__text">
-                            Popular now: <span>Bangkok, Paris, London, Dubai, New-York</span>
-                        </div>
+                        <HeroPopularCities items={props.data.popular_now} />
+                        
                     </div>
                     <div className="showcase__bottom container">
-                        <ShowcaseItems/>
+                        <ShowcaseItems items={props.data.favorite_cities}/>
                     </div>
                 </div>
             </div>{/*showcase*/}
 
+            {Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
             <div className="section locations">
                 <div className="container">
                     <div className="section__head">
@@ -74,7 +68,7 @@ export default function Homepage ({data}) {
                             </a>
                         </Link>
                     </div>
-                    <LocationsContainer/>
+                    <LocationsContainer items={props.data.bestsellers_cities}/>
                     <div className="locations__more">
                         <Button
                             variant="outlined"
@@ -84,7 +78,8 @@ export default function Homepage ({data}) {
                         </Button>
                     </div>
                 </div>
-            </div>{/*locations*/}
+            </div>
+            }
 
             <div className="section advantages">
                 <div className="container">
@@ -103,11 +98,12 @@ export default function Homepage ({data}) {
                 </div>
             </div>{/*advantages*/}
 
+            {Array.isArray(props.data.route_reviews) && props.data.route_reviews.length > 0 &&
             <div className="section reviews">
                 <div className="container">
                     <div className="section__head">
                         <h2 className="title-2">{t('section_reviews.title')}</h2>
-                        <Link href="#">
+                        <Link href={"routes"}>
                             <a className="link link--arrow link--gray">
                                 <span>{t('section_reviews.more_link')}</span>
                                 <span className="icon">
@@ -116,10 +112,11 @@ export default function Homepage ({data}) {
                             </a>
                         </Link>
                     </div>
-                    <Review/>
-                    <ReviewSlider/>
+                    <Review item={props.data.route_reviews[0]}/>
+                    <ReviewSlider route={props.data.route_reviews[0]} items={props.data.route_reviews[0].reviews}/>
                 </div>
-            </div>{/*reviews*/}
+            </div>
+            }
 
             <div className="section app">
                 <div className="container">

@@ -6,12 +6,22 @@ const Callback = () => {
         <>
             <form className="form">
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="name"
+                        name="name"
+                        label="Имя"
+                        required
+                    />
                 </div>
                 <div className="form__row">
-                    <Input/>
+                    <Input
+                        id="phone"
+                        name="phone"
+                        label="Телефон"
+                        required
+                    />
                 </div>
-                <div className="form__row">
+                <div className="form__row form__row--btn">
                     <Button
                         variant="filled"
                         size="medium"
