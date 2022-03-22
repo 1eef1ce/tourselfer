@@ -17,7 +17,6 @@ const FastOrder = () => {
                 <div className="form__row form__row--select">
                     <SelectField
                         classPrefix="select"
-                        isFilter={false}
                         id="s_date"
                         label="Дата доставки"
                         options = {

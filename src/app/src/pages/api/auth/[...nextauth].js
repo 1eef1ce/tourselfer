@@ -7,11 +7,10 @@ export default NextAuth({
             name: 'Credentials',
             credentials: {
                 email: {label: 'email', type: 'email'},
-                password: { label: "Password", type: "password" }
+                password: {label: "Password", type: "password"}
             },
             async authorize(credentials) {
-
-                 const res = await fetch('http://localhost:3000/login.json', {
+                 const res = await fetch('https://api.stage1.test.tourselfer.tech/api/v1/login', {
                      method: 'POST',
                      body: JSON.stringify(credentials),
                      headers: {
@@ -20,6 +19,7 @@ export default NextAuth({
                  });
 
                 const user = await res.json();
+
                 if (!res.ok) {
                     throw new Error(user.exception);
                 }
@@ -28,19 +28,19 @@ export default NextAuth({
                 }
                 return null;
             },
-        })
+        }),
     ],
     secret: "secret",
     jwt: {
-        secret: "ksdkfsldferSDFSDFSDf",
+        secret: "qqq",
         encryption: true,
     },
     pages: {
-        signIn: '/auth/signin',
-        signOut: '/auth/signout',
-        error: '/auth/error', // Error code passed in query string as ?error=
-        verifyRequest: '/auth/verify-request', // (used for check email message)
-        newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+        signIn: '/signin',
+        signOut: '/signout',
+        error: '/error', // Error code passed in query string as ?error=
+        verifyRequest: '/verify-request', // (used for check email message)
+        newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     },
     callbacks: {
         async jwt({ token, user, account }) {

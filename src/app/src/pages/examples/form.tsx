@@ -161,7 +161,6 @@ export default function ExampleForm() {
                                         className={"select" + (touched.exampleDate && errors.exampleDate ? ' error' : '')}
                                         isSelect
                                         classPrefix="select"
-                                        isFilter={false}
                                         id="exampleDate"
                                         name="exampleDate"
                                         label="Дата доставки"
@@ -177,12 +176,12 @@ export default function ExampleForm() {
                                         //     ]
                                         // }
                                         {...getFieldProps('exampleDate')}
-                                        onBlur={() => {
+/*                                        onBlur={() => {
                                             handleBlur({target: {name: 'exampleDate'}});
                                         }}
                                         onChange={(option) => {
                                             setFieldValue("exampleDate", option.value);
-                                        }}
+                                        }}*/
                                     />
                                     {touched.exampleDate && errors.exampleDate ? (
                                         <div className="form__error">{errors.exampleDate}</div>

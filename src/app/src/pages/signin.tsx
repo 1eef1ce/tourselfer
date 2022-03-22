@@ -4,6 +4,18 @@ import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 
+/*fetch("https://api.stage1.test.tourselfer.tech/api/v1/login", {
+    method: 'POST'
+}).then(async response => {
+    try {
+        const data = await response.json();
+        console.log('response data?', data);
+    } catch(error) {
+        console.log('Error happened here!');
+        console.error(error);
+    }
+});*/
+
 export default function SignIn({ csrfToken }) {
     const router = useRouter();
     const [error, setError] = useState(null);
