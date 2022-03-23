@@ -1,46 +1,40 @@
-import Link from 'next/link'
-import { useAuth } from '../hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import {Breadcrumbs, Layout} from '@components/common';
+import Head from 'next/head';
+import Cookies from 'js-cookie';
+import {Auth} from '@components/auth';
 
-const Login = () => {
-    const router = useRouter()
+export default function AuthPage() {
 
-    const { login } = useAuth({
-        middleware: 'guest',
-        redirectIfAuthenticated: '/',
+    /*const csrf = fetch('https://api.stage1.test.tourselfer.tech/api/v1/csrf-cookie', {
+        method: "GET",
+        credentials: "include",
+        //mode: "cors",
     })
+    .then((response) => {
+        fetch('https://api.stage1.test.tourselfer.tech/api/v1/login', {
+            method: "POST",
+            credentials: "include",
+            mode: "cors",
+            body: JSON.stringify({
+                email: "sss@ssss.ru",
+                password: "123333"
+            }),
+            headers: {
+                //'X-XSRF-TOKEN': 
+            }
+        });
+        console.log(Cookies.get('XSRF-TOKEN'));
+    });*/
 
-    //const [email, setEmail] = useState('')
-    //const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
-
-    useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
-        } else {
-            setStatus(null)
-        }
-    });
-
-    const email = 'johnson@gmail.com';
-    const password = '12345678';
-
-    const submitForm = async event => {
-        event.preventDefault()
-
-        login({ email, password, setErrors, setStatus })
-    }
-
-    console.log(status);
-    console.log(errors);
+   
 
     return (
-        
-        <button onClick={submitForm}>Sign in</button>
-
-    )
+        <Layout>
+            <Head>
+                <title>About us</title>
+            </Head>
+            <Auth />
+            asd
+        </Layout>
+    );
 }
-
-export default Login

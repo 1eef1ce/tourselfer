@@ -4,13 +4,19 @@ import SocialAuth from '@components/auth/SocialAuth';
 import {PolicyText} from '@components/common';
 import {Formik, Form} from 'formik';
 import * as Yup from "yup";
+import Cookies from 'js-cookie';
+import {useAuth} from '../../hooks/auth'
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router'
 
 export interface AuthState {
     showAuth: boolean
     showForgot: boolean
 }
 
-class Auth extends React.Component<any, AuthState> {
+class AuthClass extends React.Component<any, AuthState> {
+    
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +24,10 @@ class Auth extends React.Component<any, AuthState> {
             showForgot: false
         };
         this.toggleForgot = this.toggleForgot.bind(this);
+    }
+
+    componentDidMount() {
+        
     }
 
     toggleForgot() {
@@ -39,6 +49,8 @@ class Auth extends React.Component<any, AuthState> {
             email: ''
         };
 
+        const { login } = this.props.auth;
+
         return (
             <div className="auth">
                 {this.state.showAuth && (
@@ -48,9 +60,14 @@ class Auth extends React.Component<any, AuthState> {
                         </div>
                         <Formik
                             initialValues={initialValues}
-                            validationSchema={validationSchema}
+                            
                             onSubmit={(values) => {
-                                alert(JSON.stringify(values, null, 2));
+                                
+                                login(values);
+                                    
+                                    //console.log(Cookies.get('XSRF-TOKEN'));
+                                
+                                //alert(JSON.stringify(values, null, 2));
                             }}
                         >
                             {({
@@ -165,4 +182,15 @@ class Auth extends React.Component<any, AuthState> {
     }
 }
 
-export default Auth;
+const Auth = Component => props => {
+    const t = useTranslation('components');
+    const route = useRouter();
+    const auth = useAuth({
+        middleware: 'guest',
+        redirectIfAuthenticated: '/dashboard'
+    });
+
+    return <Component {...props} auth={auth} t={t} route={route} />;
+};
+
+export default Auth(AuthClass);

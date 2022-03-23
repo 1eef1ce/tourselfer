@@ -16,9 +16,9 @@ const Route = () => {
                         <div className="icon user__icon">
                             <Crown />
                         </div>
-                        <Avatar/>
+                        Avatar
                     </div>
-                    <UserName/>
+                    UserName
                 </div>
             </div>
             <div className="route-params">

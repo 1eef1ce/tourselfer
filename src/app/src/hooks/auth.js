@@ -4,7 +4,8 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
-    const router = useRouter()
+
+    const router = useRouter();
 
     const { data: user, error, revalidate } = useSWR('/api/v1/user', () =>
         axios
@@ -17,9 +18,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             }),
     )
 
-    const csrf = () => axios.get('/api/v1/csrf-cookie').then(response => {
-        console.log(response);
-    })
+    const csrf = () => axios.get('/api/v1/csrf-cookie');
 
     const register = async ({ setErrors, ...props }) => {
         await csrf();
