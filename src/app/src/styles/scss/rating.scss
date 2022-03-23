@@ -8,9 +8,9 @@
   &__number {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 53px;
     height: 36px;
-    padding-left: 8px;
     margin-right: 12px;
     background: url("../../assets/images/rating-bage.svg") no-repeat center;
     background-size: contain;

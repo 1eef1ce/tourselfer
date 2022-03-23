@@ -67,9 +67,11 @@
   }
 
   &__search {
+    max-width: 571px;
     margin-top: 52px;
 
     @include max-767 {
+      max-width: 100%;
       margin-top: 36px;
     }
   }

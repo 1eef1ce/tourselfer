@@ -1,23 +1,6 @@
 import React, {InputHTMLAttributes} from 'react';
 import cn from 'classnames';
-import Select, {components, DropdownIndicatorProps} from 'react-select';
-import {ChevronDown, Close} from '@components/icons';
-
-const DropdownIndicator = props => {
-    return (
-        <components.DropdownIndicator {...props}>
-            <div className="icon">
-                <ChevronDown/>
-            </div>
-        </components.DropdownIndicator>
-    );
-};
-
-const styleProxy = new Proxy({}, {
-    get: (target, propKey) => () => {
-        //clears select styles
-    }
-});
+import {Close} from '@components/icons';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string
@@ -25,10 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string
     required?: boolean
     type?: 'text' | 'email' | 'password'
-    isSelect?: boolean
     classPrefix?: string
-    options?: object[]
-    defaultOption?: object[]
     pattern?: string,
     requiredMessage?: string
     patternMessage?: string
@@ -94,10 +74,6 @@ class Input extends React.Component<InputProps, InputState> {
             label,
             required,
             type = 'text',
-            isSelect = false,
-            classPrefix,
-            options,
-            defaultOption,
             pattern,
             requiredMessage,
             patternMessage,
@@ -125,46 +101,25 @@ class Input extends React.Component<InputProps, InputState> {
                     </label>
                 )}
                 <div className={cn("form__field", inputClass(), errorClass())}>
-                    {isSelect
-                        ? (
-                            <Select
-                                className={cn("select", errorClass())}
-                                classNamePrefix={classPrefix}
-                                instanceId={id}
-                                name={name}
-                                options={options}
-                                components={{DropdownIndicator}}
-                                isSearchable={false}
-                                styles={styleProxy}
-                                defaultValue={defaultOption}
-                                onBlur={this.onBlur}
-                                onFocus={this.onFocus}
-                            />
-                        )
-                        : (
-                            <>
-                                <input
-                                    className={cn("form__input", errorClass())}
-                                    id={id}
-                                    name={name}
-                                    type={type}
-                                    value={this.state.inputValue}
-                                    required={required}
-                                    pattern={pattern}
-                                    onBlur={this.onBlur}
-                                    onFocus={this.onFocus}
-                                    onChange={this.onChange}
-                                    {...props}
-                                />
-                                {(((this.state.inputValue !== '') || (this.props.value !== '')) && (this.state.focus === true)) &&
-                                (
-                                <span className="form__icon" onMouseDown={this.clearValue}>
-                                    <Close/>
-                                </span>
-                                )}
-                            </>
-                        )
-                    }
+                    <input
+                        className={cn("form__input", errorClass())}
+                        id={id}
+                        name={name}
+                        type={type}
+                        value={this.state.inputValue}
+                        required={required}
+                        pattern={pattern}
+                        onBlur={this.onBlur}
+                        onFocus={this.onFocus}
+                        onChange={this.onChange}
+                        {...props}
+                    />
+                    {(((this.state.inputValue !== '') || (this.props.value !== '')) && (this.state.focus === true)) &&
+                    (
+                    <span className="form__icon" onMouseDown={this.clearValue}>
+                        <Close/>
+                    </span>
+                    )}
                 </div>
                 {this.state.missingRequired && <div className="form__error">{requiredMessage}</div>}
                 {(!this.state.missingRequired && !this.state.patternMatch) && <div className="form__error">{patternMessage}</div>}

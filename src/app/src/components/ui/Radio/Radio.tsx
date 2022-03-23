@@ -1,5 +1,4 @@
 import React, {InputHTMLAttributes} from 'react';
-import {extend} from "swiper/angular/angular/src/utils/utils";
 
 interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string

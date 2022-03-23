@@ -9,8 +9,11 @@ const HeroPopularCities = ({items}) => {
         <div className="search__text">
             {t('hero.popular_now')}
             <span>
-                {items && items.length>0 && items.map(item => (
-                    <Link href={"/routes/" + item.code}>{item.name}</Link>
+                {items && items.length>0 && items.map((item, index) => (
+                    <>
+                    {index ? ', ' : ''}
+                    <Link href={"/routes/" + item.code} key={item.code}>{item.name}</Link>
+                    </>
                 ))}
             </span>
         </div>

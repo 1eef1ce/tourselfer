@@ -5,7 +5,6 @@
 
   &__row {
     display: flex;
-    align-items: center;
 
     &:not(:last-of-type) {
       margin-bottom: 12px;
@@ -23,6 +22,10 @@
     @include max-767 {
       font-weight: 500;
     }
+
+    @include max-500 {
+      white-space: normal;
+    }
   }
 
   &__value {
@@ -30,13 +33,13 @@
     width: 100%;
     font-weight: 700;
     color: $color-primary;
-    white-space: nowrap;
 
     &::before {
       content: "";
-      width: 100%;
+      min-width: 10%;
+      flex-grow: 1;
       border-bottom: 1px dashed $color-tertiary;
-      margin: 0 12px 0.5em;
+      margin: 1em 12px auto;
     }
   }
 }

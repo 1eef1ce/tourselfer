@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import Alert from './Alert';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 

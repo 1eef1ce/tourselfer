@@ -1,40 +1,33 @@
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import {useEffect, useState} from "react";
 
 const HeaderMenu = () => {
-
     const {t} = useTranslation("menu");
 
-    /*const [items, setItems] = useState<any>([]);
-
-    useEffect(()=>{
-        fetch('/headerMenu.json')
-            .then(res => res.json())
-            .then((result) => setItems(result));
-    },[]);*/
+    const items = [
+        {
+            "href": "/how-it-works",
+            "label": t('header.how_it_works')
+        },
+        {
+            "href": "/become-an-author",
+            "label": t('header.become_an_author')
+        },
+        {
+            "href": "/support",
+            "label": t('header.support')
+        }
+    ];
 
     return (
         <div className="header-nav">
-
-            <div className="header-nav__item">
-                <Link href="/how-the-site-works">
-                    <a className="header-nav__link">{t('header.how_it_works')}</a>
-                </Link>
-            </div>
-
-            <div className="header-nav__item">
-                <Link href="/become-an-author">
-                    <a className="header-nav__link">{t('header.become_an_author')}</a>
-                </Link>
-            </div>
-
-            <div className="header-nav__item">
-                <Link href="/support">
-                    <a className="header-nav__link">{t('header.support')}</a>
-                </Link>
-            </div>
-
+            {items && items.length>0 && items.map(item => (
+                <div key={item.href} className="header-nav__item">
+                    <Link href={item.href}>
+                        <a className="header-nav__link">{item.label}</a>
+                    </Link>
+                </div>
+            ))}
         </div>
     );
 };

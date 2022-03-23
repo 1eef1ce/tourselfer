@@ -1,5 +1,5 @@
 import React from 'react';
-import {Bus, Car, Close, FilterIcon, Man, Sort} from '@components/icons';
+import {Bus, Car, Close, FilterIcon, Man} from '@components/icons';
 import {Button, Input} from '@components/ui';
 
 const Filter = () => {

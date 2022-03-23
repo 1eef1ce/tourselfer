@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import {Breadcrumbs, Layout, Searchbar} from '@components/common';
-import {Button, Checkbox, Input, InputPassword, PasswordsContainer, Radio, Textarea} from '@components/ui';
+import {Breadcrumbs, Layout} from '@components/common';
+import {Button, Checkbox, Input, InputPassword, PasswordsContainer, Radio, SelectField, Textarea} from '@components/ui';
 import {Formik, Form} from 'formik';
 import * as Yup from "yup";
 
@@ -157,9 +157,8 @@ export default function ExampleForm() {
 
                                 <div className="form__title">Select</div>
                                 <div className="form__row form__row--select">
-                                    <Input
+                                    <SelectField
                                         className={"select" + (touched.exampleDate && errors.exampleDate ? ' error' : '')}
-                                        isSelect
                                         classPrefix="select"
                                         id="exampleDate"
                                         name="exampleDate"
@@ -262,11 +261,6 @@ export default function ExampleForm() {
                             </Form>
                         )}
                     </Formik>
-                </div>
-
-                <h2 className="title-2">Search</h2>
-                <div style={{margin: "1em 0"}}>
-                    <Searchbar/>
                 </div>
             </div>
         </Layout>

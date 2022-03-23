@@ -50,7 +50,6 @@ class PasswordsContainer extends React.Component<any, any> {
             requiredMessage,
             patternMessage,
             minLengthMessage,
-            ...props
         } = this.props;
         return (
             <>
