@@ -16,7 +16,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
                 router.push('/api/v1/email/verification-notification')
             }),
-    )
+    );
 
     const csrf = () => axios.get('/api/v1/csrf-cookie');
 
@@ -41,9 +41,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setErrors([])
         setStatus(null)
 
-        axios
+        return axios
             .post('/api/v1/login', props, {withCredentials: true})
-            .then(() => revalidate())
+            .then((response) => {
+                revalidate();
+
+                return response.data;
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -83,6 +87,18 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
+    const checkEmail = async ({...props}) => {
+        return axios
+            .post('/api/v1/user/checkEmail', props)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                console.warn(error);
+                return {result: false}
+            });
+    }
+
     const resendEmailVerification = ({ setStatus }) => {
         axios
             .post('/api/v1/email/verification-notification')
@@ -112,5 +128,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resetPassword,
         resendEmailVerification,
         logout,
+        checkEmail
     }
 }
