@@ -1,6 +1,6 @@
 import React from 'react';
 import {Bus, Car, Close, FilterIcon, Man} from '@components/icons';
-import {Button, Input} from '@components/ui';
+import {Button, SelectField} from '@components/ui';
 
 const Filter = () => {
     return (
@@ -87,8 +87,7 @@ const Filter = () => {
             </div>
             <div className="filter__actions">
                 <div className="filter__select">
-                    <Input
-                        isSelect
+                    <SelectField
                         classPrefix="select-filter"
                         id="filter"
                         name="filter"

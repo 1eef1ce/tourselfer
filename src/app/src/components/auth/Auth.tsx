@@ -55,7 +55,6 @@ class Auth extends React.Component<any, AuthState> {
                         >
                             {({
                                   errors,
-                                  status,
                                   touched,
                                   getFieldProps
                               }) => (
@@ -114,7 +113,6 @@ class Auth extends React.Component<any, AuthState> {
                         >
                             {({
                                   errors,
-                                  status,
                                   touched,
                                   getFieldProps
                               }) => (

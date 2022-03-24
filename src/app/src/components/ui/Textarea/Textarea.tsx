@@ -8,14 +8,12 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     name: string
     label?: string
     required?: boolean
-    requiredMessage?: string
 }
 
 interface TextareaState {
     currentHeight: number
     focus: boolean
     inputValue: string
-    missingRequired: boolean
 }
 
 class Textarea extends React.Component<TextareaProps, TextareaState> {
@@ -24,8 +22,7 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
         this.state = {
             currentHeight: 104,
             focus: false,
-            inputValue: '',
-            missingRequired: false
+            inputValue: ''
         };
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -38,13 +35,6 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
 
     onBlur() {
         this.setState({focus: false});
-
-        if ((this.props.required == true) && (this.state.inputValue == '')) {
-            this.setState({missingRequired: true});
-        }
-        else {
-            this.setState({missingRequired: false});
-        }
     }
 
     onChange(e) {
@@ -57,7 +47,6 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
             name,
             label,
             required,
-            requiredMessage,
             ...props
         } = this.props;
 
@@ -69,9 +58,6 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
                 return "";
             }
         };
-        const errorClass = () => {
-            return (this.state.missingRequired) ? 'error' : '';
-        };
 
         return (
             <>
@@ -81,9 +67,9 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
                         {required && (<span> *</span>)}
                     </label>
                 )}
-                <div className={cn("form__field", inputClass(), errorClass())}>
+                <div className={cn("form__field", inputClass())}>
                     <textarea
-                        className={cn("form__input form__textarea", errorClass())}
+                        className="form__input form__textarea"
                         style={{height: this.state.currentHeight}}
                         id={id}
                         name={name}
@@ -95,7 +81,6 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
                         {...props}
                     />
                 </div>
-                {this.state.missingRequired && <div className="form__error">{requiredMessage}</div>}
             </>
         );
     }

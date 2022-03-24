@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {Crown, Man, MapPin, MapPinGray} from '@components/icons';
+import {Crown, Man, MapPin} from '@components/icons';
 import {Avatar, UserName} from '@components/common';
 
 const Route = () => {
