@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TopBanner, Header, Footer} from '@components/common';
 
 const Layout =({children}) => {
+    const showBanner = false;
     return (
         <div className="wrapper">
-            <TopBanner/>
+            {showBanner && <TopBanner/>}
             <Header/>
             <main>{children}</main>
             <Footer/>

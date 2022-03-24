@@ -6,35 +6,50 @@
   align-items: center;
 
   &__number {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 53px;
+    width: 42px;
     height: 36px;
-    margin-right: 12px;
-    background: url("../../assets/images/rating-bage.svg") no-repeat center;
-    background-size: contain;
+    margin-right: 11px;
+    background: $color-green;
+    border-radius: 4px;
+    //background: url("../../assets/images/rating-bage.svg") no-repeat center;
+    //background-size: contain;
     font-weight: 700;
     line-height: 1;
     color: #fff;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 17px solid transparent;
+      border-left: 11px solid $color-green;
+      border-bottom: 17px solid transparent;
+    }
   }
 
   &__stars {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 -4px;
+    margin-left: 12px;
   }
 
   &__star {
-    width: 16px;
-    height: 15px;
-    margin: 0 4px;
+    width: 24px;
+    height: 24px;
 
     &:not(&--outline) {
 
       svg * {
-        fill: $color-green-v2;
+        fill: $color-green;
       }
     }
   }

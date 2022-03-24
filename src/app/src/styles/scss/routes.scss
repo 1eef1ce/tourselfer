@@ -111,7 +111,7 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 1.33;
-    color: $color-tertiary;
+    color: $color-secondary;
 
     &:not(:last-of-type) {
       margin-right: 24px;
@@ -152,7 +152,7 @@
     font-size: 15px;
     line-height: 1.87;
     text-transform: uppercase;
-    color: $color-secondary;
+    color: $color-semi;
 
     @include max-767 {
       font-weight: 400;

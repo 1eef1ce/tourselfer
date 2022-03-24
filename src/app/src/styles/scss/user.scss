@@ -14,6 +14,29 @@
     }
   }
 
+  &--large {
+
+    .user {
+
+      &__img {
+        margin-right: 16px;
+      }
+
+      &__name {
+        font-size: 24px;
+        line-height: 1.33;
+      }
+
+      &__status {
+        margin: 4px 0 0;
+        font-size: 16px;
+        line-height: 1.5;
+        text-transform: none;
+        color: $color-semi;
+      }
+    }
+  }
+
   &--medium {
 
     .user {
@@ -49,8 +72,6 @@
       }
 
       &__icon {
-        top: auto;
-        bottom: 0;
         width: 16px;
         height: 16px;
       }
@@ -82,7 +103,6 @@
         }
       }
     }
-
   }
 
   &__img {
@@ -109,6 +129,11 @@
     border-radius: 100%;
     background: $gradient-green;
     z-index: 1;
+
+    &--bottom {
+      top: auto;
+      bottom: 0;
+    }
   }
 
   &__content {
@@ -121,7 +146,7 @@
     font-family: $font-secondary;
     font-size: 12px;
     line-height: 1.67;
-    color: $color-tertiary;
+    color: $color-secondary;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 

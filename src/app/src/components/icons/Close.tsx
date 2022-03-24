@@ -12,7 +12,6 @@ const Close = ({...props}) => {
                     fill="white"/>
             </g>
         </svg>
-
     );
 };
 

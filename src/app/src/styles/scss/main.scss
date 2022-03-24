@@ -52,6 +52,7 @@ a {
 
 .container {
   max-width: 1416px;
+  width: 100%;
   margin: 0 auto;
 
   @include max-1440 {
@@ -137,7 +138,7 @@ a {
 .text-note {
   font-size: 14px;
   line-height: 1.43;
-  color: $color-secondary;
+  color: $color-semi;
 
   .link {
     font-size: inherit;

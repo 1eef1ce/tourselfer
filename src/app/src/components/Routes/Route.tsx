@@ -13,7 +13,7 @@ const Route = () => {
                 </div>
                 <div className="routes__user user user--white user--small">
                     <div className="user__img">
-                        <div className="icon user__icon">
+                        <div className="icon user__icon user__icon--bottom">
                             <Crown />
                         </div>
                         <Avatar/>

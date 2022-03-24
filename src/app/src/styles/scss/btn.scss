@@ -29,7 +29,7 @@
   }
 
   .loader__dot {
-    background: $color-secondary;
+    background: $color-semi;
   }
 
   &:hover,
@@ -43,7 +43,7 @@
   }
 
   &:disabled {
-    color: $color-secondary;
+    color: $color-semi;
     pointer-events: none;
 
     .icon {
@@ -85,7 +85,7 @@
   }
 
   &--outlined {
-    color: $color-secondary;
+    color: $color-semi;
     box-shadow: inset 0 0 0 1px $color-green;
 
     &:hover {
@@ -102,7 +102,7 @@
     }
 
     &:disabled {
-      color: $color-tertiary;
+      color: $color-secondary;
 
       &.loading {
         color: transparent;
@@ -162,7 +162,7 @@
     width: 100%;
     padding: 8px;
     border-radius: 10px;
-    color: $color-secondary;
+    color: $color-semi;
 
     &:hover {
       color: $color-primary;

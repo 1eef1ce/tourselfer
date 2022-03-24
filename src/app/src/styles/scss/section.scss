@@ -34,7 +34,7 @@
   &__text {
     max-width: 708px;
     margin: 24px auto 0;
-    color: $color-secondary;
+    color: $color-semi;
 
     @include max-767 {
       max-width: 100%;

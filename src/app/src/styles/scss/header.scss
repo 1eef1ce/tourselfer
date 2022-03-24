@@ -93,7 +93,7 @@
 
   &__lang {
     margin-right: 32px;
-    color: $color-secondary;
+    color: $color-semi;
 
     @include max-1200 {
       margin-right: 24px;
@@ -104,7 +104,7 @@
     }
 
     svg * {
-      fill: $color-secondary;
+      fill: $color-semi;
     }
   }
 }

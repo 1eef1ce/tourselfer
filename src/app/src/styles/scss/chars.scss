@@ -16,7 +16,7 @@
   }
 
   &__name {
-    color: $color-tertiary;
+    color: $color-secondary;
     white-space: nowrap;
 
     @include max-767 {
@@ -38,7 +38,7 @@
       content: "";
       min-width: 10%;
       flex-grow: 1;
-      border-bottom: 1px dashed $color-tertiary;
+      border-bottom: 1px dashed $color-secondary;
       margin: 1em 12px auto;
     }
   }
