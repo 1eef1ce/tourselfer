@@ -1,4 +1,4 @@
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import axios from '../lib/axios'
 import { useEffect, useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -6,61 +6,28 @@ import { useRouter } from 'next/router'
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     
-
+    const { mutate } = useSWRConfig()
     const router = useRouter();
     //const [state, dispatch] = useReducer(reducer, initialState);
     const [csrfToken, setCsrfToken] = useState(null);
     const [userData, setUserData] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(null);
 
-    /*const { data: user, error, revalidate } = useSWR('/api/v1/user', () =>
+    const { data: user, error, revalidate } = useSWR('/api/v1/user', () =>
         axios
             .get('/api/v1/user')
-            .then(res => res.data)
+            .then(response => response.data)
             .catch(error => {
-                //if (error.response.status !== 409) throw error
+                if (error.response.status !== 409)
+                    throw error;
 
                 //router.push('/api/v1/email/verification-notification')
             }),
-    );*/
+    );
 
+    const csrf = () => axios.get('/api/v1/csrf-cookie');
     
-
-    const csrf = async () => {
-        if (csrfToken === null) {
-            setCsrfToken(true);
-            return axios.get('/api/v1/csrf-cookie');
-        }
-    }
-
-    const user = async () => {
-        await csrf();
-    };
-
-    /*const user = async ({}) => {
-        //await csrf();
-
-        return await axios
-            .get('/api/v1/user')
-            .then(response => response.data)
-            
-    };*/
-
-    const register = async ({ setErrors, ...props }) => {
-        await csrf();
-
-        setErrors([])
-
-        axios
-            .post('/api/v1/register', props)
-            .then(() => revalidate())
-            .catch(error => {
-                if (error.response.status !== 422) throw error
-
-                setErrors(Object.values(error.response.data.errors).flat())
-            })
-    }
-
+//console.log(revalidate);
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf();
 
@@ -70,17 +37,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         return axios
             .post('/api/v1/login', props, {withCredentials: true})
             .then((response) => {
-                revalidate();
-
-                console.log('Then');
-                console.log(error.response);
+                mutate('/api/v1/user');
 
                 return response.data;
             })
             .catch(error => {
 
-                if (typeof error.respons === 'object') {
-                    if (error.response.status === 422) {
+                if (typeof error.response === 'object') {
+                    if (error.response.status == 422) {
                         setErrors({
                             password: "Введенный пароль неверен"
                         });
@@ -91,9 +55,24 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                     }
                 }
 
-                //if (error.response.status !== 422) throw error
+                return error.response;
+            })
+    }
 
-                //setErrors(Object.values(error.response.data.errors).flat())
+    const register = async ({ setErrors, ...props }) => {
+        await csrf();
+
+        setErrors([])
+
+        return axios
+            .post('/api/v1/register', props.data)
+            .then(() => {
+                mutate('/api/v1/user');
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(Object.values(error.response.data.errors).flat())
             })
     }
 
@@ -107,9 +86,16 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .post('/api/v1/forgot-password', { email })
             .then(response => setStatus(response.data.status))
             .catch(error => {
-                if (error.response.status !== 422) throw error
+                if (error.response.status === 422) {
+                    setErrors({
+                        email: "Пользователь с указанным email не найден"
+                    });
+                    return;
+                } 
 
-                setErrors(Object.values(error.response.data.errors).flat())
+                setErrors({
+                    email: "Произошла непредвиденная ошибка. Повторите запрос позже"
+                });
             })
     }
 
@@ -129,10 +115,16 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const checkEmail = async ({...props}) => {
+    const checkEmail = async ({setErrors, setStatus, ...props}) => {
         return axios
             .post('/api/v1/user/checkEmail', props)
             .then(response => {
+                if (typeof response !== 'object') {
+                    setErrors({
+                        email: "Произошла непредвиденная ошибка"
+                    });
+                }
+                
                 return response.data;
             })
             .catch(error => {
@@ -147,14 +139,17 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .then(response => setStatus(response.data.status))
     }
 
-    const logout = async () => {
+    const logout = async ({...props}) => {
         if (! error) {
-            await axios.post('/api/v1/logout')
+            return axios.post('/api/v1/logout')
+                .then(response => {
+                    mutate('/api/v1/user');
+                });
 
-            revalidate()
+            
+
+            //revalidate();
         }
-
-        window.location.pathname = '/login'
     }
 
     //useEffect(() => {
@@ -163,13 +158,15 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     //}, [user, error])
 
     return {
+        isLoadingUserData: !error && !user,
+        isAuthorize: (typeof user === 'object' && !error),
         user,
-        register,
-        login,
+        checkEmail,
         forgotPassword,
-        resetPassword,
-        resendEmailVerification,
         logout,
-        checkEmail
+        login,
+        register,
+        resetPassword,
+        resendEmailVerification        
     }
 }

@@ -15,45 +15,24 @@ const Auth = (props) => {
         minPasswordLength: 8
     };
 
-    const { user, login, checkEmail } = useAuth({
+    const { user, isLoadingUserData, isAuthorize, login, checkEmail, forgotPassword, logout, register } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     })
 
     const [showLoader, setShowLoader] = useState(false);
     const [action, setAction] = useState('');
-    const [email, setEmail] = useState('johnson@gmail.com');
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('johnson2@gmail.com');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState(null);
 
-    //if (typeof user === 'object' && typeof user.data === 'object') {
-    //    setAction('isAuthorized');
-    //}
-
-    
-
-    
-    user().then((response) => {
-        
-        //if (typeof response === 'object' && typeof response.data === 'object') {
-        //    setAction('isAuthorized');
-        //}
-    });
-
-    user().then((response) => {});
-
-
     useEffect(() => {
-        /*if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset));
-        } else {
-            setStatus(null);
-        }*/
-//console.log('useEffect');
-        
-    });
+        setErrors({});
+    }, [action]);
 
     useEffect(() => {
         if (action === 'createNewAccount') {
@@ -82,11 +61,8 @@ const Auth = (props) => {
         event.preventDefault();
 
         setShowLoader(true);
-        checkEmail({email}).then((response) => {
+        checkEmail({email, setErrors, setStatus}).then((response) => {
             setShowLoader(false);
-
-            if (typeof response !== 'object')
-                throw new Error();
 
             if (response.result === true) {
                 setAction('setPassword');
@@ -95,13 +71,7 @@ const Auth = (props) => {
                 setAction('createNewAccount');
                 return;
             }
-
-            throw new Error();
             
-        }).catch(error => {
-            setErrors({
-                email: error.message.length > 0 ? error.message : 'Произошла непредвиденная ошибка. Повторите запрос позже'
-            });
         });
     };
 
@@ -111,36 +81,66 @@ const Auth = (props) => {
         setShowLoader(true);
         login({ email, password, setErrors, setStatus }).then((response) => {
             setShowLoader(false);
-            
-            if (typeof response !== 'object') {
-                setErrors({
-                    password: 'Произошла непредвиденная ошибка'
-                });
-
-                return false;
-            }
-
-            if (!!response.error && typeof response.error === 'string') {
-                setErrors({
-                    password: response.error
-                });
-
-                return false;
-            }
-
-            if (!!response.status && response.status === 'success' && !!response.token) {
-                setAction('successAuth');
-            }
-
         });
         
     };
 
     const submitRegForm = async event => {
         event.preventDefault();
+
+        if (password.length <= 0 || repeatPassword.length <= 0)
+            setErrors({
+                password: "Укажите пароль для новой учетной записи"
+            });
+
+        if (Object.entries(errors).length === 0) {
+            
+            let data = {
+                name: name,
+                email: email,
+                password: password,
+                password_confirmation: repeatPassword
+            };
+
+            setShowLoader(true);
+            register({setErrors, data}).then((response) => {
+                setShowLoader(false);
+            });
+        }
     };
 
+    const submitForgotPasswordForm = async event => {
+        event.preventDefault();
 
+        setShowLoader(true);
+
+        forgotPassword({email, setErrors, setStatus}).then((response) => {
+            setShowLoader(false);
+        });
+    };
+
+    if (isLoadingUserData) {
+        return (
+            <></>
+        );
+    }
+
+    if (isAuthorize) {
+        return (
+            <>
+                <Button
+                            variant="outlined"
+                            size="medium"
+                            type="button"
+                            onClick={logout}
+                        >
+                            Выйти
+                        </Button>
+            </>
+        );
+    }
+
+    //if (!isAuthorize) {
     return (
         <>
         {action === '' &&
@@ -179,6 +179,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            onClick={() => setAction('forgotPassword')}
                         >
                             Забыли пароль?
                         </Button>
@@ -224,7 +225,7 @@ const Auth = (props) => {
                                 variant="outlined"
                                 size="medium"
                                 type="button"
-                                
+                                onClick={() => setAction('forgotPassword')}
                             >
                                 Забыли пароль?
                             </Button>
@@ -236,17 +237,33 @@ const Auth = (props) => {
         {action === 'createNewAccount' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Создание пароля</div>
+                    <div className="auth__title">Создание аккаунта</div>
                     <div className="auth__subtitle">Пароль должен состоять из заглавных и строчных букв и цифр. Длина — не менее {config.minPasswordLength} символов.</div>
                 </div>
                 <div className="form">
+
+                    <div className="form__row">
+                        <Input
+                            className={"form__input" + (!!errors && errors['name'] ? ' error' : '')}
+                            onChange={event => setName(event.target.value)}
+                            value={name}
+                            id="form__reg__field-name"
+                            name="name"
+                            type="text"
+                            label="Ваше имя"
+                            required
+                        />
+                        {!!errors && errors['name'] ? (
+                            <div className="form__error">{errors['name']}</div>
+                        ) : null}
+                    </div>
                 
                     <div className="form__row">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
                             value={password}
-                            id="password"
+                            id="form__reg__field-password"
                             name="password"
                             type="password"
                             label="Пароль"
@@ -262,7 +279,7 @@ const Auth = (props) => {
                             className={"form__input" + (!!errors && errors['repeatPassword'] ? ' error' : '')}
                             onChange={event => setRepeatPassword(event.target.value)}
                             value={repeatPassword}
-                            id="repeat-password"
+                            id="form__reg__field-repeat-password"
                             name="repeat-password"
                             type="password"
                             label="Повторите пароль"
@@ -320,7 +337,62 @@ const Auth = (props) => {
             </div>
         }
 
-        {action === 'isAuthorized' &&
+        {action === 'forgotPassword' && 
+            <div className="auth">
+                <div className="auth__head">
+                    <div className="auth__title">Забыли пароль?</div>
+                    <div className="auth__subtitle">
+                        Ничего страшного! Мы отправим вам ссылку для смены пароля. Введите адрес электронной
+                        почты, с которой вы заходите на <span>Tourselfer.com</span>.
+                    </div>
+                </div>
+                <div className="form">
+                        <div className="form__row">
+                            <Input
+                                className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
+                                onChange={event => setEmail(event.target.value)}
+                                value={email}
+                                id="email"
+                                name="email"
+                                type="email"
+                                label="Email"
+                                required
+                                autoFocus
+                            />
+                            {!!errors && errors['email'] ? (
+                                <div className="form__error">{errors['email']}</div>
+                            ) : null}
+                        </div>
+
+                        <div className="form__row form__row--btn">
+                                <Button
+                                    variant="filled"
+                                    size="medium"
+                                    type="button"
+                                    onClick={submitForgotPasswordForm}
+                                    loading={showLoader}
+                                >
+                                Отправить ссылку на смену пароля
+                                </Button>
+                                
+                                <Button
+                                    variant="outlined"
+                                    size="medium"
+                                    type="button"
+                                    onClick={() => setAction('')}
+                                >
+                                    Я вспомнил пароль
+                                </Button>
+                                
+                        </div>
+                    </div>
+            </div>
+        }
+        </>
+    );
+
+    /*} else {
+        return (
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Вы уже авторизованы</div>
@@ -338,9 +410,8 @@ const Auth = (props) => {
                     </div>
                 </div>
             </div>
-        }
-        </>
-    );
+        );
+    }*/
 
 };
 
