@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, createRef } from 'react';
-import debounce from 'lodash.debounce';
+import debounce from 'lodash/debounce';
 import {SearchIcon, MapPinBlack, TourselferIcon} from '@components/icons';
 import {Button} from '@components/ui';
 import {SearchbarItems} from '@components/common/SearchbarItems';

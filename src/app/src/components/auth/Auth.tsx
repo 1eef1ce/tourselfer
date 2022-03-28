@@ -15,7 +15,7 @@ const Auth = (props) => {
         minPasswordLength: 8
     };
 
-    const { login, checkEmail } = useAuth({
+    const { user, login, checkEmail } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     })
@@ -28,13 +28,30 @@ const Auth = (props) => {
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState(null);
 
+    //if (typeof user === 'object' && typeof user.data === 'object') {
+    //    setAction('isAuthorized');
+    //}
+
+    
+
+    
+    user().then((response) => {
+        
+        //if (typeof response === 'object' && typeof response.data === 'object') {
+        //    setAction('isAuthorized');
+        //}
+    });
+
+    user().then((response) => {});
+
+
     useEffect(() => {
         /*if (router.query.reset?.length > 0 && errors.length === 0) {
             setStatus(atob(router.query.reset));
         } else {
             setStatus(null);
         }*/
-
+//console.log('useEffect');
         
     });
 
@@ -95,20 +112,26 @@ const Auth = (props) => {
         login({ email, password, setErrors, setStatus }).then((response) => {
             setShowLoader(false);
             
-            if (typeof response !== 'object')
-                throw new Error();
+            if (typeof response !== 'object') {
+                setErrors({
+                    password: 'Произошла непредвиденная ошибка'
+                });
 
-            if (!!response.error && typeof response.error === 'string')
-                throw new Error(response.error);
+                return false;
+            }
+
+            if (!!response.error && typeof response.error === 'string') {
+                setErrors({
+                    password: response.error
+                });
+
+                return false;
+            }
 
             if (!!response.status && response.status === 'success' && !!response.token) {
                 setAction('successAuth');
             }
 
-        }).catch(error => {
-            setErrors({
-                password: error.message.length > 0 ? error.message : 'Произошла непредвиденная ошибка. Повторите запрос позже'
-            });
         });
         
     };
@@ -116,6 +139,7 @@ const Auth = (props) => {
     const submitRegForm = async event => {
         event.preventDefault();
     };
+
 
     return (
         <>
@@ -172,7 +196,7 @@ const Auth = (props) => {
                     
                     <div className="form__row">
                         <Input
-                            className={"form__input"}
+                            className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
                             value={password}
                             id="password"
@@ -182,7 +206,9 @@ const Auth = (props) => {
                             required
                             autoComplete="current-password"
                         />
-                        
+                        {!!errors && errors['password'] ? (
+                            <div className="form__error">{errors['password']}</div>
+                        ) : null}
                     </div>
                     <div className="form__row form__row--btn">
                             <Button

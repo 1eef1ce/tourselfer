@@ -9,7 +9,7 @@ export default function Review() {
               <Image src="/images/review.jpg" alt="Industrial Berlin" title="" layout="fill"/>
               <div className="review__user user user--white user--medium">
                   <div className="user__img">
-                      <Avatar/>
+                      <Avatar user={null}/>
                   </div>
                   <div>
                       <div className="user__status">Seller</div>

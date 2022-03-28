@@ -1,24 +1,50 @@
 import useSWR from 'swr'
 import axios from '../lib/axios'
-import { useEffect } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
-    const router = useRouter();
+    
 
-    const { data: user, error, revalidate } = useSWR('/api/v1/user', () =>
+    const router = useRouter();
+    //const [state, dispatch] = useReducer(reducer, initialState);
+    const [csrfToken, setCsrfToken] = useState(null);
+    const [userData, setUserData] = useState(null);
+    const [isAuthorized, setIsAuthorized] = useState(null);
+
+    /*const { data: user, error, revalidate } = useSWR('/api/v1/user', () =>
         axios
             .get('/api/v1/user')
             .then(res => res.data)
             .catch(error => {
-                if (error.response.status !== 409) throw error
+                //if (error.response.status !== 409) throw error
 
-                router.push('/api/v1/email/verification-notification')
+                //router.push('/api/v1/email/verification-notification')
             }),
-    );
+    );*/
 
-    const csrf = () => axios.get('/api/v1/csrf-cookie');
+    
+
+    const csrf = async () => {
+        if (csrfToken === null) {
+            setCsrfToken(true);
+            return axios.get('/api/v1/csrf-cookie');
+        }
+    }
+
+    const user = async () => {
+        await csrf();
+    };
+
+    /*const user = async ({}) => {
+        //await csrf();
+
+        return await axios
+            .get('/api/v1/user')
+            .then(response => response.data)
+            
+    };*/
 
     const register = async ({ setErrors, ...props }) => {
         await csrf();
@@ -46,12 +72,28 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .then((response) => {
                 revalidate();
 
+                console.log('Then');
+                console.log(error.response);
+
                 return response.data;
             })
             .catch(error => {
-                if (error.response.status !== 422) throw error
 
-                setErrors(Object.values(error.response.data.errors).flat())
+                if (typeof error.respons === 'object') {
+                    if (error.response.status === 422) {
+                        setErrors({
+                            password: "Введенный пароль неверен"
+                        });
+                    } else {
+                        setErrors({
+                            password: error.response.data.message
+                        });
+                    }
+                }
+
+                //if (error.response.status !== 422) throw error
+
+                //setErrors(Object.values(error.response.data.errors).flat())
             })
     }
 
@@ -115,10 +157,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         window.location.pathname = '/login'
     }
 
-    useEffect(() => {
+    //useEffect(() => {
         //if (middleware === 'guest' && redirectIfAuthenticated && user) router.push(redirectIfAuthenticated)
         //if (middleware === 'auth' && error) logout()
-    }, [user, error])
+    //}, [user, error])
 
     return {
         user,
