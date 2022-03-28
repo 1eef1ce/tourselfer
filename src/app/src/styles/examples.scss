@@ -50,3 +50,15 @@
   }
 }
 
+
+.loader-example {
+    width: 200px;
+    height: 100px;
+    border-radius: 8px;
+    background: linear-gradient(314.63deg, #0B97A0 0%, #AEDEA6 100%);
+    .loader {
+        position: relative;
+        left: 0;
+        transform: translateY(-50%) translateX(0);
+    }
+}

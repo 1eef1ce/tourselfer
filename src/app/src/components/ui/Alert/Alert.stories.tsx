@@ -8,39 +8,29 @@ export default {
     component: Alert,
 } as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
+const Template: ComponentStory<typeof Alert> = (args) => (<Alert {...args}>
+    <span className={'alert-title'}>Alert title</span>
+    <span className={'alert-msg'}>Alert text</span>
+</Alert>);
 
 export const Info = Template.bind({});
 Info.args = {
-    message: 'Info message',
-    title: 'Title alert',
     icon: true
 };
 
 export const Success = Template.bind({});
 Success.args = {
     type: 'success',
-    message: 'Success message',
-    title: 'Title alert',
     icon: true
 };
 
 export const Error = Template.bind({});
 Error.args = {
     type: 'error',
-    message: 'Error message',
-    title: 'Title alert',
-    icon: true
-};
-
-export const NoTitle = Template.bind({});
-NoTitle.args = {
-    message: 'Info message',
     icon: true
 };
 
 export const NoIcon = Template.bind({});
 NoIcon.args = {
-    title: 'Title alert',
-    message: 'Info message',
+    icon: false
 };
