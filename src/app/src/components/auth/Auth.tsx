@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input } from '@components/ui';
 import SocialAuth from '@components/auth/SocialAuth';
 import { PolicyText } from '@components/common';
+import {ArrowRight} from '@components/icons'
 import { Formik, Form } from 'formik';
 import { useAuth } from '../../hooks/auth'
+import { useNotify } from '../../hooks/notify'
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router'
 import { render } from 'react-dom';
@@ -18,13 +20,15 @@ const Auth = (props) => {
     const { user, isLoadingUserData, isAuthorize, login, checkEmail, forgotPassword, logout, register } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
-    })
+    });
+
+    const {errorNotify} = useNotify();
 
     const [showLoader, setShowLoader] = useState(false);
     const [action, setAction] = useState('');
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('johnson2@gmail.com');
+    const [name, setName] = useState('Ivan');
+    const [email, setEmail] = useState('johnson5@gmail.com');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [errors, setErrors] = useState({});
@@ -88,13 +92,18 @@ const Auth = (props) => {
     const submitRegForm = async event => {
         event.preventDefault();
 
+        if (name.length <= 2)
+            setErrors({
+                name: "Введите ваше имя"
+            });
+
         if (password.length <= 0 || repeatPassword.length <= 0)
             setErrors({
                 password: "Укажите пароль для новой учетной записи"
             });
 
         if (Object.entries(errors).length === 0) {
-            
+
             let data = {
                 name: name,
                 email: email,
@@ -105,6 +114,10 @@ const Auth = (props) => {
             setShowLoader(true);
             register({setErrors, data}).then((response) => {
                 setShowLoader(false);
+
+                if (typeof response === 'object' && !!response.status && response.status === 'success') {
+                    setAction('needEmailConfirm');
+                }
             });
         }
     };
@@ -140,9 +153,12 @@ const Auth = (props) => {
         );
     }
 
+    
+
     //if (!isAuthorize) {
     return (
         <>
+
         {action === '' &&
         <div className="auth">
             <div className="auth__head">
@@ -185,6 +201,15 @@ const Auth = (props) => {
                         </Button>
                     </div>
             </div>
+            <div className="text-note">
+                    <PolicyText
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        link1="/policy"
+                        title1="Правилами и условиями"
+                        link2="/policy"
+                        title2="Положением о конфиденциальности"
+                    />
+                </div>
         </div>
         }
 
@@ -314,6 +339,40 @@ const Auth = (props) => {
                     />
                 </div>
 
+            </div>
+        }
+
+        {action === 'needEmailConfirm' &&
+            <div className="auth">
+                <div className="auth__head">
+                    <div className="auth__title">Проверьте папку «Входящие»</div>
+                    <div className="auth__subtitle">Мы отправили на {email} ссылку для подтверждения email адреса. Письмо должно прийти через несколько минут.</div>
+                </div>
+                <div className="form">
+
+                    <div className="form__row form__row--btn">
+                            <Button
+                                variant="filled"
+                                size="medium"
+                                type="button"
+                                endIcon={<ArrowRight/>}
+                                isEndIcon={true}
+                            >
+                                На страницу входа
+                            </Button>
+                            
+                    </div>
+                </div>
+
+                <div className="text-note">
+                    <PolicyText
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        link1="/policy"
+                        title1="Правилами и условиями"
+                        link2="/policy"
+                        title2="Положением о конфиденциальности"
+                    />
+                </div>
             </div>
         }
 

@@ -1,5 +1,6 @@
 import useSWR, { useSWRConfig } from 'swr'
 import axios from '../lib/axios'
+import { useNotify } from './notify'
 import { useEffect, useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -8,6 +9,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     
     const { mutate } = useSWRConfig()
     const router = useRouter();
+    const {errorNotify} = useNotify();
     //const [state, dispatch] = useReducer(reducer, initialState);
     const [csrfToken, setCsrfToken] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -18,8 +20,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .get('/api/v1/user')
             .then(response => response.data)
             .catch(error => {
-                if (error.response.status !== 409)
-                    throw error;
+                throw error;
+                console.log(error);
+                //if (error.response.status !== 409)
+                //    throw error;
 
                 //router.push('/api/v1/email/verification-notification')
             }),
@@ -27,7 +31,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const csrf = () => axios.get('/api/v1/csrf-cookie');
     
-//console.log(revalidate);
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf();
 
@@ -66,13 +69,37 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         return axios
             .post('/api/v1/register', props.data)
-            .then(() => {
-                mutate('/api/v1/user');
+            .then((response) => {
+                if (typeof response.data === 'object' && !!response.data.error && typeof response.data.error === 'string') {
+
+                    errorNotify({
+                        title: 'Ошибка',
+                        message: response.data.error
+                    });
+
+                } else {
+                    mutate('/api/v1/user');
+                }
+                
+                return response.data;
             })
             .catch(error => {
-                if (error.response.status !== 422) throw error
+                if (typeof error.response === 'object') {
+                    
 
-                setErrors(Object.values(error.response.data.errors).flat())
+                    if (typeof error.response.data === 'object' && !!error.response.data.error && typeof error.response.data.error === 'string') {
+                        setErrors({});
+
+                        errorNotify({
+                            title: 'Ошибка',
+                            message: error.response.data.error
+                        });
+                    }
+                    
+                    //if (error.response.status !== 422) throw error
+
+                    //setErrors(Object.values(error.response.data.errors).flat())
+                }
             })
     }
 
@@ -84,7 +111,18 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/api/v1/forgot-password', { email })
-            .then(response => setStatus(response.data.status))
+            .then((response) => {
+                if (typeof response.data === 'object' && !!response.data.error && typeof response.data.error === 'string') {
+
+                    errorNotify({
+                        title: 'Ошибка',
+                        message: response.data.error
+                    });
+
+                }
+
+                return response.data;
+            })
             .catch(error => {
                 if (error.response.status === 422) {
                     setErrors({

@@ -1,5 +1,7 @@
 import { appWithTranslation } from 'next-i18next';
-
+import { Provider } from 'react-redux';
+import store from '../store/store';
+import React from 'react';
 
 import '../styles/vendor/normalize.css';
 import '../styles/scss/style.scss';
@@ -10,9 +12,11 @@ import {SessionProvider} from "next-auth/react";
 function App({Component, pageProps: {session, ...pageProps}}) {
 
     return (
-        <SessionProvider session={session}>
-            <Component {...pageProps} />
-        </SessionProvider>
+        <Provider store={ store }>
+            <SessionProvider session={session}>
+                <Component {...pageProps} />
+            </SessionProvider>
+        </Provider>
     );
 }
 
