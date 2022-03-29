@@ -10,6 +10,7 @@ export { default as I18nWidget } from './I18nWidget';
 export { default as IPAddress } from './IPAddress';
 export { default as Pagination } from './Pagination';
 export { default as PolicyText } from './PolicyText';
+export { default as RouteGallerySlider } from './RouteGallerySlider';
 export { default as Searchbar } from './Searchbar';
 export { default as TopBanner } from './TopBanner';
 export { default as UserName } from './UserName';

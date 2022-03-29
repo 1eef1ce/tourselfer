@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {TopBanner, Header, Footer} from '@components/common';
 
 const Layout =({children}) => {

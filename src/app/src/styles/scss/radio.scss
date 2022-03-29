@@ -3,6 +3,8 @@
 
 .radio {
   position: relative;
+  display: flex;
+  align-items: flex-start;
 
   &__input {
     position: absolute;
@@ -163,5 +165,9 @@
       background: #fff;
       border-radius: 100%;
     }
+  }
+
+  & + & {
+    margin-top: 12px;
   }
 }

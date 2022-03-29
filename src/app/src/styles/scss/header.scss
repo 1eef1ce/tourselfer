@@ -64,8 +64,12 @@
     align-items: center;
     padding: 20px 0;
 
-    @include max-1023 {
-      padding: 16px 0;
+    @include max-1440 {
+      padding: 20px 16px;
+    }
+
+    @include max-767 {
+      padding: 16px;
     }
   }
 

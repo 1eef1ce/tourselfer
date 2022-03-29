@@ -11,9 +11,8 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.56;
-  color: #000;
-  overflow-x: hidden;
-  overflow-y: unset;
+  color: $color-primary;
+  overflow: hidden auto;
 
   @include max-767 {
     font-size: 16px;
@@ -56,12 +55,16 @@ a {
   margin: 0 auto;
 
   @include max-1440 {
-    margin: 0 16px;
+    padding: 0 16px;
   }
 }
 
 .title-1, .title-2, .title-3, .title-4, .title-5, .title-6 {
   margin: 0;
+
+  span {
+    color: $color-secondary;
+  }
 }
 
 .title-1 {

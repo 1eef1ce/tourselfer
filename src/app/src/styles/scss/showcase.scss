@@ -39,7 +39,7 @@
   &--route {
     height: 696px;
     margin-top: -88px;
-    margin-bottom: 68px;
+    margin-bottom: 116px;
     color: #fff;
 
     @include max-1200 {
@@ -49,16 +49,37 @@
     @include max-767 {
       height: 340px;
       margin-top: -80px;
+      margin-bottom: 110px;
     }
 
     .showcase__container {
       position: relative;
       margin-top: 88px;
       z-index: 1;
+
+      @include max-767 {
+        padding: 0;
+        margin: 88px 0 0;
+      }
     }
 
-    .showcase__picture {
-      filter: grayscale(1);
+    .breadcrumbs {
+
+      @include max-767 {
+        padding: 0 16px;
+      }
+    }
+
+    .showcase {
+
+      &__picture {
+        overflow: hidden;
+      }
+
+      &__img {
+        margin: -48px;
+        filter: blur(14px);
+      }
     }
   }
 

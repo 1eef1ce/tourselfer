@@ -116,7 +116,7 @@
     &:not(:last-of-type) {
       margin-right: 24px;
 
-      @include max-374 {
+      @include max-359 {
         margin-right: 14px;
       }
     }
@@ -159,7 +159,7 @@
       line-height: 1.33;
     }
 
-    @include max-374 {
+    @include max-359 {
       font-size: 12px;
     }
   }
