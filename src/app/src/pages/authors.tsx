@@ -1,7 +1,7 @@
 import {Breadcrumbs, Layout, Pagination} from '@components/common';
 import Head from 'next/head';
 import {Button, SelectField} from '@components/ui';
-import {AuthorsContainer} from "@components/Authors";
+import {AuthorsContainer} from '@components/Authors';
 
 export default function AuthorsPage() {
     return (

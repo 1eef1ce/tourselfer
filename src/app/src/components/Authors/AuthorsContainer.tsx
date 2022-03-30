@@ -1,20 +1,42 @@
-import {Author} from "@components/Authors";
+import {Author} from '@components/Authors';
 
 const AuthorsContainer = () => {
     return (
         <div className="authors__container">
             <div className="authors__items">
                 <div className="authors__item">
-                    <Author/>
+                    <Author
+                        name="Tamar Golan"
+                        professionalAuthor
+                        rating={4.9}
+                        country="Japan"
+                        routesNumber={6}
+                    />
                 </div>
                 <div className="authors__item">
-                    <Author/>
+                    <Author
+                        name="Natalya Kuznetsova"
+                        professionalAuthor
+                        rating={4.9}
+                        country="Japan"
+                        routesNumber={6}
+                    />
                 </div>
                 <div className="authors__item">
-                    <Author/>
+                    <Author
+                        name="Cai Hong-yan"
+                        rating={4.9}
+                        country="Japan"
+                        routesNumber={6}
+                    />
                 </div>
                 <div className="authors__item">
-                    <Author/>
+                    <Author
+                        name="Rayford Chenail"
+                        rating={4.9}
+                        country="Japan"
+                        routesNumber={6}
+                    />
                 </div>
             </div>
         </div>

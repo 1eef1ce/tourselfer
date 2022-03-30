@@ -3,7 +3,7 @@ import {Breadcrumbs, Layout} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
 import {RoutesContainer} from '@components/Routes';
-import {Author, AuthorsContainer} from "@components/Authors";
+import {Author, AuthorsContainer} from '@components/Authors';
 
 export default function AuthorDetailPage() {
     const [isShow, setShow] = useState(false);
@@ -25,7 +25,14 @@ export default function AuthorDetailPage() {
                         <div className="author-info">
                             <div className="author-info__items">
                                 <div className="author-info__item">
-                                    <Author authorDetailPage/>
+                                    <Author
+                                        name="Tatiana Sidorenko"
+                                        professionalAuthor
+                                        rating={4.9}
+                                        country="Japan"
+                                        routesNumber={6}
+                                        authorDetailPage
+                                    />
                                 </div>
                                 <div className="author-info__item">
                                     <div className="author-info__title">Country of Residence</div>
