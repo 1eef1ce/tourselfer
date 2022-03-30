@@ -13,7 +13,7 @@ const ReviewSlide = ({item, route}) => {
         <div className="reviews__item">
             <div className="user">
                 <div className="user__img">
-                    <div className="icon user__icon">
+                    <div className="icon user__icon user__icon--bottom">
                         <Quotes />
                     </div>
                     <Avatar user={item.author}/>
@@ -21,7 +21,7 @@ const ReviewSlide = ({item, route}) => {
                 <UserName user={item.author}/>
             </div>
             <div className="rating reviews__rating">
-                <div className="rating__number">{item.rating}</div>
+                <div className="rating-number">{item.rating}</div>
                 <Rating value={parseFloat(item.rating)} />
             </div>
             <div className="reviews__content">

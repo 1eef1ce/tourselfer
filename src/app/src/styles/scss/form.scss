@@ -81,7 +81,7 @@
     padding: 16px 40px 16px 16px;
     border: 0;
     border-radius: 10px;
-    background: $color-gray-7;
+    background: #fff;
     font-size: 16px;
     line-height: 1.5;
     color: $color-primary;
@@ -107,7 +107,7 @@
     }
 
     &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 2px $color-gray inset, 0 0 0 30px $color-gray-7 inset;
+      -webkit-box-shadow: 0 0 0 2px $color-gray inset, 0 0 0 30px #fff inset;
       transition: background-color 5000s ease-in-out 0s;
 
       &:hover {

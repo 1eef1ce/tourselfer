@@ -2,11 +2,6 @@
 @import "media.scss";
 
 .filter {
-  margin-bottom: 16px;
-
-  @include max-767 {
-    margin-bottom: 24px;
-  }
 
   &__block {
     display: flex;
@@ -37,24 +32,27 @@
   }
 
   &__select {
-    display: inline-flex;
-    align-items: center;
+    min-width: 296px;
 
-    .form__field {
+    &--simple {
+      min-width: auto;
 
-      &::before {
-        content: none;
+      .form__field {
+
+        &::before {
+          content: none;
+        }
       }
     }
-  }
-
-  &__more {
-    margin-top: 16px;
   }
 
   &__actions {
     display: flex;
     align-items: center;
+    margin-top: 16px;
+  }
+
+  .more {
     margin-top: 16px;
   }
 }

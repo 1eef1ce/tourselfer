@@ -8,17 +8,19 @@ const Route = () => {
         <div className="routes__item">
             <div className="routes__img">
                 <Image src="/images/route-1.jpg" alt="route" title="" layout="fill"/>
-                <div className="rating routes__rating">
-                    <div className="rating__number">4.5</div>
-                </div>
-                <div className="routes__user user user--white user--small">
-                    <div className="user__img">
-                        <div className="icon user__icon user__icon--bottom">
-                            <Crown />
-                        </div>
-                        <Avatar/>
+                <div className="routes__content">
+                    <div className="rating routes__rating">
+                        <div className="rating-number">4.5</div>
                     </div>
-                    <UserName/>
+                    <div className="routes__user user user--white user--small">
+                        <div className="user__img">
+                            <div className="icon user__icon">
+                                <Crown />
+                            </div>
+                            <Avatar/>
+                        </div>
+                        <UserName/>
+                    </div>
                 </div>
             </div>
             <div className="route-params">

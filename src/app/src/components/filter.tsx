@@ -78,15 +78,15 @@ const Filter = () => {
                     </div>
                 </div>
             </div>
-            <div className="filter__more">
+            <div className="more">
                 <Button
-                    className="btn btn--more"
+                    squared={true}
                 >
                     More filters
                 </Button>
             </div>
             <div className="filter__actions">
-                <div className="filter__select">
+                <div className="filter__select filter__select--simple">
                     <SelectField
                         classPrefix="select-filter"
                         id="filter"

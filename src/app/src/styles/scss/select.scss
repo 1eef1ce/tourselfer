@@ -24,7 +24,7 @@
     height: 56px;
     padding: 16px;
     border-radius: 10px;
-    background: $color-gray-7;
+    background: #fff;
     font-size: 16px;
     line-height: 1.5;
     color: $color-primary;
@@ -85,8 +85,8 @@
 
   &__dropdown-indicator {
     display: flex;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     margin: auto;
     opacity: 0.5;
     transition: 0.2s;
@@ -135,6 +135,11 @@
     box-shadow: none;
     font-weight: 600;
     color: $color-semi;
+  }
+
+  &__dropdown-indicator {
+    width: 16px;
+    height: 16px;
   }
 
   &__menu {

@@ -41,11 +41,11 @@ a {
   }
 
   &--start {
-    margin-right: 8px;
+    margin-right: 4px;
   }
 
   &--end {
-    margin-left: 8px;
+    margin-left: 4px;
   }
 }
 
@@ -138,6 +138,14 @@ a {
   }
 }
 
+p {
+  margin: 0;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1em;
+  }
+}
+
 .text-note {
   font-size: 14px;
   line-height: 1.43;
@@ -146,5 +154,17 @@ a {
   .link {
     font-size: inherit;
     line-height: inherit;
+  }
+}
+
+.more {
+  margin-top: 48px;
+
+  @include max-767 {
+    margin-top: 32px;
+  }
+
+  .btn {
+    width: 100%;
   }
 }

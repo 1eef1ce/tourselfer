@@ -18,8 +18,8 @@ export default function Review() {
               </div>
           </div>
           <div className="review__content">
-              <div className="rating review__rating">
-                  <div className="rating__number">4.5</div>
+              <div className="review__rating">
+                  <div className="rating-number">4.5</div>
               </div>
               <div className="review__title title-2">Industrial Berlin</div>
               <div className="review__description">

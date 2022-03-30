@@ -97,8 +97,8 @@ export default function Review({item}) {
               </div>
           </div>
           <div className="review__content">
-              <div className="rating review__rating">
-                  <div className="rating__number">{item.rating}</div>
+              <div className="review__rating">
+                  <div className="rating-number">{item.rating}</div>
               </div>
               <div className="review__title title-2">{item.title}</div>
               <div className="review__description">

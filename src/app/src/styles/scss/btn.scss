@@ -6,48 +6,60 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 32px;
+  padding: 8px 12px;
   border: 0;
   border-radius: 32px;
   background: transparent;
   font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
-  color: $color-primary;
+  color: $color-semi;
   cursor: pointer;
   transition: 0.2s;
 
   .icon {
     width: 24px;
     height: 24px;
-    opacity: 0.5;
     transition: 0.2s;
 
     svg * {
-      fill: $color-icon;
+      fill: $color-semi;
     }
   }
 
   .loader__dot {
-    background: $color-semi;
+    background: $color-green;
   }
 
   &:hover,
-  &.active {
-    background: $color-black-7;
-    box-shadow: none;
+  &:focus {
+    color: $color-primary;
+  }
+
+  &:hover {
+    background: $color-gray-7;
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 2px $color-gray-20;
+    background: transparent;
+    box-shadow: inset 0 0 0 2px $color-gray-30;
+  }
+
+  &.active {
+    color: $color-primary;
+    background: $color-gray-15;
+    box-shadow: none;
   }
 
   &:disabled {
-    color: $color-semi;
+    color: $color-secondary;
     pointer-events: none;
 
     .icon {
-      opacity: 0.3;
+
+      svg * {
+        fill: $color-secondary;
+      }
     }
   }
 
@@ -64,8 +76,12 @@
     }
   }
 
+  &--squared {
+    border-radius: 10px;
+  }
+
   &--icon {
-    padding: 13px;
+    padding: 8px;
   }
 
   &--medium {
@@ -84,21 +100,38 @@
     }
   }
 
+  &--medium,
+  &--large {
+
+    .icon {
+
+      &--start {
+        margin-right: 8px;
+      }
+
+      &--end {
+        margin-left: 8px;
+      }
+    }
+  }
+
   &--outlined {
     color: $color-semi;
-    box-shadow: inset 0 0 0 1px $color-green;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $color-gray-15;
 
     &:hover {
-      color: #fff;
-      background: $gradient-green-light;
+      box-shadow: none;
+    }
 
-      .icon {
-        opacity: 1;
+    &:focus {
+      background: transparent;
+      box-shadow: inset 0 0 0 2px $color-gray-30;
+    }
 
-        svg * {
-          fill: #fff;
-        }
-      }
+    &.active {
+      color: $color-primary;
+      background: $color-gray-15;
     }
 
     &:disabled {
@@ -108,65 +141,140 @@
         color: transparent;
       }
     }
+    
+    &.btn--colored {
+      box-shadow: inset 0 0 0 1px $color-green;
 
-    .loader__dot {
-      background: $color-green;
+      &:hover {
+        color: #fff;
+        background: $gradient-green-light;
+        box-shadow: none;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+
+      &:focus {
+        color: $color-semi;
+        background: transparent;
+        box-shadow: inset 0 0 0 2px $color-gray-30;
+
+        .icon {
+
+          svg * {
+            fill: $color-semi;
+          }
+        }
+      }
+
+      &.active {
+        color: #fff;
+        background: $gradient-green;
+        box-shadow: none;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
     }
   }
 
   &--filled {
-    color: #fff;
-    background: $gradient-green;
+    background: $color-gray-7;
 
     &:hover {
-      color: #fff;
-      background: $gradient-green-light;
+      background: $color-gray-10;
+    }
+
+    &:focus {
+      background: $color-gray-7;
+      box-shadow: inset 0 0 0 2px $color-gray-30;
+    }
+
+    &.active {
+      color: $color-primary;
+      background: $color-gray-15;
     }
 
     &:disabled {
-      color: $color-white-75;
-      background: $gradient-green-light;
 
       &.loading {
         color: transparent;
       }
     }
 
-    .icon {
-      opacity: 1;
+    &.btn--colored {
+      color: #fff;
+      background: $gradient-green;
 
-      svg * {
-        fill: #fff;
+      &:hover,
+      &:focus {
+        background: $gradient-green-light;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+
+      &.active {
+        color: #fff;
+        background: $gradient-green;
+      }
+
+      &:disabled {
+        color: $color-white-75;
+        background: $gradient-green-light;
+      }
+
+      .icon {
+
+        svg * {
+          fill: #fff;
+        }
+      }
+
+      &.loading {
+        color: transparent;
+
+        .icon {
+          opacity: 0;
+        }
+      }
+
+      .loader__dot {
+        background: #fff;
       }
     }
-
-    .loader__dot {
-      background: #fff;
+  }
+  
+  &__text {
+    
+    &--less {
+      display: none;
     }
   }
-
-  &--alt {
-    width: 100%;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px $color-gray;
-    font-weight: 500;
-
-    &:hover {
-      color: #fff;
-      background: $gradient-green-light;
-    }
-  }
-
+  
   &--more {
-    width: 100%;
-    padding: 8px;
-    border-radius: 10px;
-    color: $color-semi;
-
-    &:hover {
-      color: $color-primary;
-      background: $color-gray-7;
+    
+    .btn__text {
+      
+      &--more {
+        display: none;
+      }
+      
+      &--less {
+        display: block;
+      }
     }
   }
 }

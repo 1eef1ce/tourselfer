@@ -4,6 +4,26 @@ import Image from 'next/image';
 import {CheckRounded, Lock, Man, MapPin} from '@components/icons';
 import {Button, Rating} from '@components/ui';
 
+const User = ({userType}) => {
+    return (
+        <div className={`user user--${userType}`}>
+            <div className="user__img">
+                <div className="icon user__icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12L3 7L6 8L8 3L10 8L13 7L11 12H5Z" fill="white"/>
+                    </svg>
+                </div>
+                <img src="/images/user.jpg" alt="" title=""/>
+            </div>
+            <div className="user__content">
+                <div className="user__name">Tatiana Sidorenko</div>
+                <div className="user__status">Professional author</div>
+            </div>
+        </div>
+    );
+};
+
 export default function RouteDetailPage() {
     return (
         <Layout>
@@ -25,8 +45,8 @@ export default function RouteDetailPage() {
                                 <Image src="/images/route-main.jpg" alt="" title="" layout="fill"/>
                             </div>
                             <div className="route-cover__content">
-                                <div className="rating route-cover__rating">
-                                    <div className="rating__number">4.5</div>
+                                <div className="route-cover__rating">
+                                    <div className="rating-number">4.5</div>
                                 </div>
                                 <div>
                                     <h1 className="route-cover__heading">Tokyo kaleidoscope</h1>
@@ -58,21 +78,7 @@ export default function RouteDetailPage() {
                 <div className="container">
                     <div className="route-about">
                         <div className="route-about__user">
-                            <div className="user user--large">
-                                <div className="user__img">
-                                    <div className="icon user__icon user__icon--bottom">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 12L3 7L6 8L8 3L10 8L13 7L11 12H5Z" fill="white"/>
-                                        </svg>
-                                    </div>
-                                    <img src="/images/user.jpg" alt="" title=""/>
-                                </div>
-                                <div className="user__content">
-                                    <div className="user__name">Tatiana Sidorenko</div>
-                                    <div className="user__status">Professional author</div>
-                                </div>
-                            </div>
+                            <User userType='large'/>
                         </div>
                         <div className="route-about__params">
                             <div className="route-about__param">
@@ -208,21 +214,7 @@ export default function RouteDetailPage() {
                         <div className="route-comment__content">
                             <div className="route-review">
                                 <div className="route-review__head">
-                                    <div className="user user--review">
-                                        <div className="user__img">
-                                            <div className="icon user__icon user__icon--bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 12L3 7L6 8L8 3L10 8L13 7L11 12H5Z" fill="white"/>
-                                                </svg>
-                                            </div>
-                                            <img src="/images/user.jpg" alt="" title=""/>
-                                        </div>
-                                        <div className="user__content">
-                                            <div className="user__name">Kelly Harris</div>
-                                            <div className="user__status">Traveler, USA</div>
-                                        </div>
-                                    </div>
+                                    <User userType='review'/>
                                     <div className="route-review__block">
                                         <div className="rating rating--small"><Rating value={5}/></div>
                                         <div className="route-review__date">Jun 2021</div>
@@ -369,9 +361,7 @@ export default function RouteDetailPage() {
                     </div>{/*route-content*/}
                     <div className="route-section route-reviews">
                         <div className="route-reviews__head">
-                            <div className="rating">
-                                <div className="rating__number">4.5</div>
-                            </div>
+                            <div className="rating-number">4.5</div>
                             <h2 className="title-2">Reviews <span>(5)</span></h2>
                         </div>
                         <div className="route-reviews__container">
@@ -380,21 +370,7 @@ export default function RouteDetailPage() {
                                     <div className="route-reviews__item">
                                         <div className="route-review">
                                             <div className="route-review__head">
-                                                <div className="user user--review">
-                                                    <div className="user__img">
-                                                        <div className="icon user__icon user__icon--bottom">
-                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M5 12L3 7L6 8L8 3L10 8L13 7L11 12H5Z" fill="white"/>
-                                                            </svg>
-                                                        </div>
-                                                        <img src="/images/user.jpg" alt="" title=""/>
-                                                    </div>
-                                                    <div className="user__content">
-                                                        <div className="user__name">Kelly Harris</div>
-                                                        <div className="user__status">Traveler, USA</div>
-                                                    </div>
-                                                </div>
+                                                <User userType='review'/>
                                                 <div className="route-review__block">
                                                     <div className="rating rating--small"><Rating value={5}/></div>
                                                     <div className="route-review__date">Jun 2021</div>
@@ -410,21 +386,7 @@ export default function RouteDetailPage() {
                                     <div className="route-reviews__item">
                                         <div className="route-review">
                                             <div className="route-review__head">
-                                                <div className="user user--review">
-                                                    <div className="user__img">
-                                                        <div className="icon user__icon user__icon--bottom">
-                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M5 12L3 7L6 8L8 3L10 8L13 7L11 12H5Z" fill="white"/>
-                                                            </svg>
-                                                        </div>
-                                                        <img src="/images/user.jpg" alt="" title=""/>
-                                                    </div>
-                                                    <div className="user__content">
-                                                        <div className="user__name">Kelly Harris</div>
-                                                        <div className="user__status">Traveler, USA</div>
-                                                    </div>
-                                                </div>
+                                                <User userType='review'/>
                                                 <div className="route-review__block">
                                                     <div className="rating rating--small"><Rating value={5}/></div>
                                                     <div className="route-review__date">Jun 2021</div>
@@ -461,7 +423,7 @@ export default function RouteDetailPage() {
                                         name="s5"
                                     />
                                     <span className="checkbox__label">
-                                        <span className="rating"><Rating value={5}/></span>
+                                        <Rating value={5}/>
                                         <span className="route-reviews__number">2</span>
                                     </span>
                                 </label>
@@ -473,7 +435,7 @@ export default function RouteDetailPage() {
                                         name="s4"
                                     />
                                     <span className="checkbox__label">
-                                        <span className="rating"><Rating value={4}/></span>
+                                        <Rating value={4}/>
                                         <span className="route-reviews__number">1</span>
                                     </span>
                                 </label>
@@ -485,7 +447,7 @@ export default function RouteDetailPage() {
                                         name="s3"
                                     />
                                     <span className="checkbox__label">
-                                        <span className="rating"><Rating value={3}/></span>
+                                        <Rating value={3}/>
                                         <span className="route-reviews__number">1</span>
                                     </span>
                                 </label>
@@ -497,7 +459,7 @@ export default function RouteDetailPage() {
                                         name="s2"
                                     />
                                     <span className="checkbox__label">
-                                        <span className="rating"><Rating value={2}/></span>
+                                        <Rating value={2}/>
                                         <span className="route-reviews__number">1</span>
                                     </span>
                                 </label>
@@ -510,7 +472,7 @@ export default function RouteDetailPage() {
                                         disabled
                                     />
                                     <span className="checkbox__label">
-                                        <span className="rating"><Rating value={1}/></span>
+                                        <Rating value={1}/>
                                         <span className="route-reviews__number">0</span>
                                     </span>
                                 </label>

@@ -89,6 +89,7 @@ const FastOrder = () => {
                     <Button
                         variant="filled"
                         size="medium"
+                        colored={true}
                         type="submit"
                     >
                         Оформить заказ

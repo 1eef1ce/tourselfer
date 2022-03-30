@@ -251,6 +251,7 @@ export default function ExampleForm() {
                                     <Button
                                         variant="filled"
                                         size="medium"
+                                        colored={true}
                                         type="submit"
                                     >
                                         Submit

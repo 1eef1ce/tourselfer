@@ -1,4 +1,4 @@
-const Routes = ({...props}) => {
+const RoutesIcon = ({...props}) => {
     return (
         <svg width="24"
              height="24"
@@ -13,4 +13,4 @@ const Routes = ({...props}) => {
     );
 };
 
-export default Routes;
+export default RoutesIcon;

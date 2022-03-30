@@ -76,6 +76,7 @@ class Auth extends React.Component<any, AuthState> {
                                         <Button
                                             variant="filled"
                                             size="medium"
+                                            colored={true}
                                             type="submit"
                                         >
                                             Войти
@@ -83,6 +84,7 @@ class Auth extends React.Component<any, AuthState> {
                                         <Button
                                             variant="outlined"
                                             size="medium"
+                                            colored={true}
                                             type="button"
                                             onClick={this.toggleForgot}
                                         >
@@ -134,6 +136,7 @@ class Auth extends React.Component<any, AuthState> {
                                         <Button
                                             variant="filled"
                                             size="medium"
+                                            colored={true}
                                             type="submit"
                                         >
                                             Отправить ссылку на смену пароля

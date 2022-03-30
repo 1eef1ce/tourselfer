@@ -11,19 +11,22 @@ export default function RoutesPage() {
                 <title>Routes</title>
             </Head>
 
-            <div className="container">
-                <Breadcrumbs/>
-                <h1 className="title-1">Routes</h1>
-                <Filter/>
-                <RoutesContainer/>
-                <div className="routes__more">
-                    <Button
-                        className="btn--alt"
-                    >
-                        See more
-                    </Button>
+            <div className="routes">
+                <div className="container">
+                    <Breadcrumbs/>
+                    <h1 className="title-1">Routes</h1>
+                    <Filter/>
+                    <RoutesContainer/>
+                    <div className="more">
+                        <Button
+                            variant='outlined'
+                            size='medium'
+                        >
+                            See more
+                        </Button>
+                    </div>
+                    <Pagination/>
                 </div>
-                <Pagination/>
             </div>
         </Layout>
     );

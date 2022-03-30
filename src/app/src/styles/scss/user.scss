@@ -40,8 +40,6 @@
         margin: 4px 0 0;
         font-size: 16px;
         line-height: 1.5;
-        text-transform: none;
-        letter-spacing: normal;
         color: $color-semi;
       }
     }
@@ -102,8 +100,6 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 1.43;
-        text-transform: none;
-        letter-spacing: normal;
         order: 1;
 
         @include max-767 {
@@ -151,14 +147,49 @@
         margin: 4px 0 0;
         font-size: 16px;
         line-height: 1.5;
-        text-transform: none;
-        letter-spacing: normal;
         color: $color-semi;
 
         @include max-767 {
           margin: 0;
           font-size: 14px;
           line-height: 1.43;
+        }
+      }
+    }
+  }
+
+  &--profile {
+    align-items: flex-start;
+
+    .user {
+
+      &__img {
+        width: 80px;
+        height: 80px;
+        margin-right: 16px;
+
+        @include max-767 {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      &__name {
+
+        @include max-767 {
+          font-size: 20px;
+          line-height: 1.2;
+        }
+      }
+
+      &__status {
+        margin: 8px 0 0;
+        font-size: 16px;
+        line-height: 1.5;
+        color: $color-semi;
+
+        @include max-767 {
+          margin-top: 4px;
         }
       }
     }
@@ -182,7 +213,7 @@
 
   &__icon {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 24px;
     height: 24px;
@@ -190,15 +221,16 @@
     background: $gradient-green;
     z-index: 1;
 
-    &--bottom {
-      top: auto;
-      bottom: 0;
+    &--top {
+      top: 0;
+      bottom: auto;
     }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 
   &__status {
@@ -207,8 +239,6 @@
     font-size: 12px;
     line-height: 1.67;
     color: $color-secondary;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
 
     @include max-767 {
       font-size: 10px;
@@ -216,14 +246,41 @@
     }
   }
 
+  &__header {
+    display: flex;
+    align-items: flex-start;
+  }
+
   &__name {
     font-weight: 700;
     font-size: 20px;
     line-height: 1.4;
 
+    & + .user__rating {
+      margin-left: 8px;
+    }
+
     @include max-767 {
       font-size: 18px;
       line-height: 1.56;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    height: 28px;
+
+    @include max-767 {
+      height: 24px;
+    }
+  }
+
+  &__tag {
+    margin-top: 16px;
+
+    @include max-767 {
+      margin-top: 12px;
     }
   }
 }

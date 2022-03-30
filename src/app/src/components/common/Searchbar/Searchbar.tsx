@@ -90,6 +90,7 @@ class SearchbarClass extends React.Component<any, any, any> {
                     <Button
                         className="search__btn"
                         variant="filled"
+                        colored={true}
                         type="submit"
                     >
                         {t('button.search')}
