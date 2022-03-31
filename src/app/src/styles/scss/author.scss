@@ -12,27 +12,6 @@
       margin-top: 16px;
     }
   }
-
-  .routes {
-
-    &__container {
-      margin-top: 48px;
-
-      @include max-767 {
-        margin-top: 24px;
-      }
-    }
-  }
-
-  .authors {
-
-    &__container {
-
-      @include max-767 {
-        margin-top: 24px;
-      }
-    }
-  }
 }
 
 .author-info {

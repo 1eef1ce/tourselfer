@@ -16,7 +16,7 @@ export default function RoutesPage() {
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
                     <Filter/>
-                    <RoutesContainer/>
+                    <RoutesContainer classMod="afterSort"/>
                     <div className="more">
                         <Button
                             variant='outlined'

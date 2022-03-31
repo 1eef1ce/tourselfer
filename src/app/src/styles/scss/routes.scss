@@ -5,10 +5,18 @@
 
   &__container {
     display: flex;
-    margin-top: 16px;
+    margin-top: 48px;
 
     @include max-767 {
       margin-top: 24px;
+    }
+
+    &--afterSort {
+      margin-top: 16px;
+
+      @include max-767 {
+        margin-top: 24px;
+      }
     }
   }
 

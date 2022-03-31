@@ -2,13 +2,13 @@ import React from 'react';
 import {RoutesIcon} from '@components/icons';
 import {Button} from '@components/ui';
 
-interface AuthorProps {
+export interface AuthorProps {
     name: string;
     professionalAuthor?: boolean;
-    rating: number;
+    rating?: number;
     country: string;
-    routesNumber: number;
-    authorDetailPage?: boolean;
+    routesNumber?: number;
+    languages?: string[]
 }
 
 const Author:React.FC<AuthorProps> = ({
@@ -16,8 +16,7 @@ const Author:React.FC<AuthorProps> = ({
     professionalAuthor,
     rating,
     country,
-    routesNumber,
-    authorDetailPage
+    routesNumber
                                       }) => {
     return (
         <div className="user user--profile">
@@ -34,17 +33,17 @@ const Author:React.FC<AuthorProps> = ({
             </div>
             <div className="user__content">
                 <div className="user__header">
-                    {!authorDetailPage && (<div className="user__name">{name}</div>)}
+                    <div className="user__name">{name}</div>
                     <div className="user__rating">
                         <div className="rating-number rating-number--small">{rating}</div>
                     </div>
                 </div>
                 <div className="user__status">
                     {professionalAuthor && <span>Professional author</span>}
-                    {(!authorDetailPage && professionalAuthor && country) && (', ')}
-                    {!authorDetailPage && (<span>{country}</span>)}
+                    {(professionalAuthor && country) && (', ')}
+                    <span>{country}</span>
                 </div>
-                {!authorDetailPage && (
+                {routesNumber &&
                 <div className="user__tag">
                     <Button
                         variant='filled'
@@ -55,7 +54,7 @@ const Author:React.FC<AuthorProps> = ({
                         {routesNumber} routes
                     </Button>
                 </div>
-                )}
+                }
             </div>
         </div>
     );
