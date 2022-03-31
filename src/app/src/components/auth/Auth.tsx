@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Input } from '@components/ui';
 import SocialAuth from '@components/auth/SocialAuth';
 import { PolicyText } from '@components/common';
-import {ArrowRight} from '@components/icons'
-import { Formik, Form } from 'formik';
 import { useAuth } from '../../hooks/auth'
 import { useNotify } from '../../hooks/notify'
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router'
-import { render } from 'react-dom';
+
 
 const Auth = (props) => {
 
@@ -17,7 +15,7 @@ const Auth = (props) => {
         minPasswordLength: 8
     };
 
-    const { user, isLoadingUserData, isAuthorize, login, checkEmail, forgotPassword, logout, register } = useAuth({
+    const { user, refresh, isLoadingUserData, isAuthorize, login, checkEmail, forgotPassword, logout, register } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     });
@@ -27,8 +25,8 @@ const Auth = (props) => {
     const [showLoader, setShowLoader] = useState(false);
     const [action, setAction] = useState('');
 
-    const [name, setName] = useState('Ivan');
-    const [email, setEmail] = useState('johnson5@gmail.com');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [errors, setErrors] = useState({});
@@ -65,28 +63,40 @@ const Auth = (props) => {
         event.preventDefault();
 
         setShowLoader(true);
-        checkEmail({email, setErrors, setStatus}).then((response) => {
-            setShowLoader(false);
-console.log(response);
-            if (typeof response === 'object') {
-                if (response.result === true) {
-                    setAction('setPassword');
-                    return;
-                } else if (response.result === false) {
-                    setAction('createNewAccount');
-                    return;
+        checkEmail({email, setErrors, setStatus})
+            .then((response) => {
+                setShowLoader(false);
+
+                if (typeof response === 'object') {
+                    if (response.result === true) {
+                        setAction('setPassword');
+                        return;
+                    } else if (response.result === false) {
+                        setAction('createNewAccount');
+                        return;
+                    }
                 }
-            }
-        });
+            })
+            .catch(error => {
+
+                errorNotify({
+                    title: 'Ошибка',
+                    message: error.toString()
+                });
+
+            });
     };
 
     const submitLoginForm = async event => {
         event.preventDefault();
 
         setShowLoader(true);
-        login({ email, password, setErrors, setStatus }).then((response) => {
-            setShowLoader(false);
-        });
+
+        login({ email, password, setErrors, setStatus })
+            .then((response) => {
+                setShowLoader(false);
+                refresh();
+            });
         
     };
 
@@ -113,13 +123,15 @@ console.log(response);
             };
 
             setShowLoader(true);
-            register({setErrors, data}).then((response) => {
-                setShowLoader(false);
 
-                if (typeof response === 'object' && !!response.status && response.status === 'success') {
-                    setAction('needEmailConfirm');
-                }
-            });
+            register({setErrors, data})
+                .then(response => {
+                    setShowLoader(false);
+
+                    if (response) {
+                        setAction('needEmailConfirm');
+                    }
+                });
         }
     };
 
@@ -128,9 +140,32 @@ console.log(response);
 
         setShowLoader(true);
 
-        forgotPassword({email, setErrors, setStatus}).then((response) => {
-            setShowLoader(false);
-        });
+        forgotPassword({email, setErrors, setStatus})
+            .then(response => {
+                setShowLoader(false);
+                if (response) {
+                    setAction('forgotPasswordConfirm');
+                }
+            });
+    };
+
+    const submitLogout = async event => {
+        event.preventDefault();
+
+        setShowLoader(true);
+
+        logout()
+            .then(response => {
+                setShowLoader(false);
+                setAction('');
+            })
+            .catch(error => {
+                setShowLoader(false);
+                errorNotify({
+                    title: 'Ошибка',
+                    message: error.toString()
+                });
+            });
     };
 
     if (isLoadingUserData) {
@@ -141,16 +176,13 @@ console.log(response);
 
     if (isAuthorize) {
         return (
-            <>
-                <Button
-                            variant="outlined"
-                            size="medium"
-                            type="button"
-                            onClick={logout}
-                        >
-                            Выйти
-                        </Button>
-            </>
+            <div className="auth">
+                <div className="auth__head">
+                    <div className="auth__title">Вы уже авторизованы</div>
+                    <div className="auth__subtitle">Если желаете выйти из аккаунта, нажмите <a href="#" onClick={submitLogout}>здесь</a>.</div>
+                </div>
+                
+            </div>
         );
     }
 
@@ -356,10 +388,9 @@ console.log(response);
                                 variant="filled"
                                 size="medium"
                                 type="button"
-                                endIcon={<ArrowRight/>}
-                                isEndIcon={true}
+                                onClick={refresh}
                             >
-                                На страницу входа
+                                Хорошо
                             </Button>
                             
                     </div>
@@ -389,6 +420,7 @@ console.log(response);
                             variant="filled"
                             size="medium"
                             type="button"
+                            onClick={refresh}
                         >
                             Хорошо
                         </Button>
@@ -448,221 +480,43 @@ console.log(response);
                     </div>
             </div>
         }
-        </>
-    );
 
-    /*} else {
-        return (
+        {action === 'forgotPasswordConfirm' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Вы уже авторизованы</div>
-                    <div className="auth__subtitle">Если желаете выйти из аккаунта, нажмите кнопку ниже.</div>
+                    <div className="auth__title">Проверьте папку «Входящие»</div>
+                    <div className="auth__subtitle">Мы отправили на {email} ссылку для восстановления пароля. Письмо должно прийти через несколько минут.</div>
                 </div>
                 <div className="form">
+
                     <div className="form__row form__row--btn">
-                        <Button
-                            variant="filled"
-                            size="medium"
-                            type="button"
-                        >
-                            Хорошо
-                        </Button>
+                            <Button
+                                variant="filled"
+                                size="medium"
+                                type="button"
+                            >
+                                Хорошо
+                            </Button>
+                            
                     </div>
                 </div>
-            </div>
-        );
-    }*/
-
-};
-
-export default Auth;
-
-
-/*export interface AuthState {
-    showAuth: boolean
-    showForgot: boolean
-}
-
-class AuthClass extends React.Component<any, any, AuthState> {
-    
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            showAuth: true,
-            showForgot: false,
-            email: "",
-            errors: [],
-            status: null
-        };
-        this.toggleForgot = this.toggleForgot.bind(this);
-    }
-
-    componentDidMount() {
-        
-    }
-
-    toggleForgot() {
-        this.setState({
-            showAuth: false,
-            showForgot: true
-        });
-    }
-
-    render() {
-
-        const validationSchema = Yup.object({
-            email: Yup.string()
-                .email('Некорректный адрес электронной почты')
-                .required('Введите адрес электронной почты')
-        });
-
-        const initialValues = {
-            email: ''
-        };
-
-        const { login } = this.props.auth;
-
-        return (
-            <div className="auth">
-                {this.state.showAuth && (
-                    <>
-                        <div className="auth__head">
-                            <div className="auth__title">Войдите или создайте аккаунт</div>
-                        </div>
-                        <Formik
-                            initialValues={initialValues}
-                            
-                            onSubmit={(values) => {
-                                
-                                login('asd@asdasd.ru', '123', );
-                                    
-                                    //console.log(Cookies.get('XSRF-TOKEN'));
-                                
-                                //alert(JSON.stringify(values, null, 2));
-                            }}
-                        >
-                            {({
-                                  errors,
-                                  status,
-                                  touched,
-                                  getFieldProps
-                              }) => (
-                                <Form className="form">
-                                    <div className="form__row">
-                                        <Input
-                                            className={"form__input" + (touched.email && errors.email ? ' error' : '')}
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            label="Email"
-                                            {...getFieldProps('email')}
-                                        />
-                                        {touched.email && errors.email ? (
-                                            <div className="form__error">{errors.email}</div>
-                                        ) : null}
-                                    </div>
-                                    <div className="form__row form__row--btn">
-                                        <Button
-                                            variant="filled"
-                                            size="medium"
-                                            type="submit"
-                                        >
-                                            Войти
-                                        </Button>
-                                        <Button
-                                            variant="outlined"
-                                            size="medium"
-                                            type="button"
-                                            onClick={this.toggleForgot}
-                                        >
-                                            Забыли пароль?
-                                        </Button>
-                                    </div>
-                                </Form>
-                            )}
-                        </Formik>
-                    </>
-                )}
-
-                {this.state.showForgot && (
-                    <>
-                        <div className="auth__head">
-                            <div className="auth__title">Забыли пароль?</div>
-                            <div className="auth__subtitle">
-                                Ничего страшного! Мы отправим вам ссылку для смены пароля. Введите адрес электронной
-                                почты, с которой вы заходите на <span>Booking.com</span>.
-                            </div>
-                        </div>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={(values) => {
-                                alert(JSON.stringify(values, null, 2));
-                            }}
-                        >
-                            {({
-                                  errors,
-                                  status,
-                                  touched,
-                                  getFieldProps
-                              }) => (
-                                <Form className="form">
-                                    <div className="form__row">
-                                        <Input
-                                            className={"form__input" + (touched.email && errors.email ? ' error' : '')}
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            label="Email"
-                                            {...getFieldProps('email')}
-                                        />
-                                        {touched.email && errors.email ? (
-                                            <div className="form__error">{errors.email}</div>
-                                        ) : null}
-                                    </div>
-                                    <div className="form__row form__row--btn">
-                                        <Button
-                                            variant="filled"
-                                            size="medium"
-                                            type="submit"
-                                        >
-                                            Отправить ссылку на смену пароля
-                                        </Button>
-                                    </div>
-                                </Form>
-                            )}
-                        </Formik>
-                    </>
-                )}
-
-                {this.state.showAuth && (
-                    <SocialAuth/>
-                )}
 
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1="Правилами и условиями"
                         link2="/policy"
                         title2="Положением о конфиденциальности"
                     />
                 </div>
             </div>
-        );
-    }
-}
+        }
+        </>
+    );
 
-const Auth = Component => props => {
-    const t = useTranslation('components');
-    const route = useRouter();
-    const auth = useAuth({
-        middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard'
-    });
+    
 
-    return <Component {...props} auth={auth} t={t} route={route} />;
 };
 
-export default Auth(AuthClass);*/
+export default Auth;

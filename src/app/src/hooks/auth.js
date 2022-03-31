@@ -4,6 +4,14 @@ import { useNotify } from './notify'
 import { useEffect, useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
 
+class ValidationError extends Error {
+    constructor(message, property) {
+        super(message);
+        this.name = "ValidationError";
+        this.property = property;
+    }
+}
+
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     
@@ -27,9 +35,18 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
                 //router.push('/api/v1/email/verification-notification')
             }),
-    );
+    {
+        refreshWhenHidden: false,
+        refreshWhenOffline: true,
+        revalidateIfStale: false,
+        shouldRetryOnError: false
+    });
 
     const csrf = () => axios.get('/api/v1/csrf-cookie');
+
+    const refresh = async () => {
+        mutate('/api/v1/user');
+    };
     
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf();
@@ -38,27 +55,46 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setStatus(null)
 
         return axios
-            .post('/api/v1/login', props, {withCredentials: true})
+            .post('/api/v1/login', props, {
+                withCredentials: true,
+                validateStatus: status => {
+                    return status == 200 || status == 422
+                }
+            })
             .then((response) => {
-                mutate('/api/v1/user');
+                
+                if (typeof response === 'object') {
 
-                return response.data;
+                    if (response.status == 422) {
+
+                        throw new ValidationError("Введенный пароль неверен", "password");
+
+                    } else if (response.status == 200) {
+
+                        return true;
+                    }
+
+                }
+
+                //return response.data;
             })
             .catch(error => {
 
-                if (typeof error.response === 'object') {
-                    if (error.response.status == 422) {
-                        setErrors({
-                            password: "Введенный пароль неверен"
-                        });
-                    } else {
-                        setErrors({
-                            password: error.response.data.message
-                        });
-                    }
-                }
+                if (error instanceof ValidationError) {
 
-                return error.response;
+                    let errors = {};
+                    errors[error.property] = error.message;
+                    
+                    setErrors(errors);
+
+                } else if (error instanceof Error) {
+
+                    errorNotify({
+                        title: 'Ошибка',
+                        message: error.toString()
+                    });
+                }
+                
             })
     }
 
@@ -70,70 +106,87 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         return axios
             .post('/api/v1/register', props.data)
             .then((response) => {
-                if (typeof response.data === 'object' && !!response.data.error && typeof response.data.error === 'string') {
+                
+                if (typeof response === 'object') {
+
+                    if (response.status == 200) {
+
+                        if (response.data && response.data.status === "success")
+                            return true;
+                        else
+                            throw new Error(response.data.error);
+                    }
+                }
+
+                throw new Error("Непредвиденная ошибка. Повторите запрос позже");
+                
+            })
+            .catch(error => {
+
+                if (error instanceof ValidationError) {
+
+                    let errors = {};
+                    errors[error.property] = error.message;
+                    
+                    setErrors(errors);
+
+                } else if (error instanceof Error) {
 
                     errorNotify({
                         title: 'Ошибка',
-                        message: response.data.error
+                        message: error.toString()
                     });
-
-                } else {
-                    mutate('/api/v1/user');
                 }
                 
-                return response.data;
-            })
-            .catch(error => {
-                if (typeof error.response === 'object') {
-                    
-
-                    if (typeof error.response.data === 'object' && !!error.response.data.error && typeof error.response.data.error === 'string') {
-                        setErrors({});
-
-                        errorNotify({
-                            title: 'Ошибка',
-                            message: error.response.data.error
-                        });
-                    }
-                    
-                    //if (error.response.status !== 422) throw error
-
-                    //setErrors(Object.values(error.response.data.errors).flat())
-                }
             })
     }
 
     const forgotPassword = async ({ setErrors, setStatus, email }) => {
         await csrf()
 
-        setErrors([])
+        setErrors({})
         setStatus(null)
 
-        axios
+        return axios
             .post('/api/v1/forgot-password', { email })
-            .then((response) => {
-                if (typeof response.data === 'object' && !!response.data.error && typeof response.data.error === 'string') {
+            .then(response => {
+
+                if (typeof response === 'object') {
+
+                    if (response.status == 200) {
+                        /*if (typeof response.data === 'object' &&
+                            typeof response.data.message === 'string' &&
+                            response.data.message.indexOf('We have emailed your password reset link')
+                        )
+                        {
+                            throw new ValidationError("Непредвиденная ошибка. Повторите запрос позже");
+                        }*/
+
+                        return true;
+                    }
+                }
+
+
+                throw new Error("Непредвиденная ошибка. Повторите запрос позже");
+
+            })
+            .catch(error => {
+
+                if (error instanceof ValidationError) {
+
+                    let errors = {};
+                    errors[error.property] = error.message;
+                    
+                    setErrors(errors);
+
+                } else if (error instanceof Error) {
 
                     errorNotify({
                         title: 'Ошибка',
-                        message: response.data.error
+                        message: error.toString()
                     });
-
                 }
-
-                return response.data;
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    setErrors({
-                        email: "Пользователь с указанным email не найден"
-                    });
-                    return;
-                } 
-
-                setErrors({
-                    email: "Произошла непредвиденная ошибка. Повторите запрос позже"
-                });
+                
             })
     }
 
@@ -164,19 +217,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 }
                 
                 return response.data;
-            })
-            .catch(error => {
-
-                errorNotify({
-                    title: 'Ошибка',
-                    message: error.toString()
-                });
-
             });
     }
 
     const resendEmailVerification = ({ setStatus }) => {
-        axios
+        return axios
             .post('/api/v1/email/verification-notification')
             .then(response => setStatus(response.data.status))
             .catch(error => {
@@ -192,17 +237,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             return axios.post('/api/v1/logout')
                 .then(response => {
                     mutate('/api/v1/user');
-                })
-                .catch(error => {
-                    errorNotify({
-                        title: 'Ошибка',
-                        message: error.toString()
-                    });
-                })
-
-            
-
-            //revalidate();
+                });
         }
     }
 
@@ -221,6 +256,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         login,
         register,
         resetPassword,
-        resendEmailVerification        
+        resendEmailVerification,
+        refresh   
     }
 }

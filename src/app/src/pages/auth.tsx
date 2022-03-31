@@ -12,7 +12,7 @@ export default function AuthPage() {
                 <title>About us</title>
             </Head>
             <Auth />
-            asd
+            
         </Layout>
     );
 }
