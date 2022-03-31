@@ -166,8 +166,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 return response.data;
             })
             .catch(error => {
-                console.warn(error);
-                return {result: false}
+
+                errorNotify({
+                    title: 'Ошибка',
+                    message: error.toString()
+                });
+
             });
     }
 
@@ -175,6 +179,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         axios
             .post('/api/v1/email/verification-notification')
             .then(response => setStatus(response.data.status))
+            .catch(error => {
+                errorNotify({
+                    title: 'Ошибка',
+                    message: error.toString()
+                });
+            })
     }
 
     const logout = async ({...props}) => {
@@ -182,7 +192,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             return axios.post('/api/v1/logout')
                 .then(response => {
                     mutate('/api/v1/user');
-                });
+                })
+                .catch(error => {
+                    errorNotify({
+                        title: 'Ошибка',
+                        message: error.toString()
+                    });
+                })
 
             
 

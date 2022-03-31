@@ -45,16 +45,19 @@ export default function Homepage (props) {
                     <div className="search showcase__search">
                         <div className="search__title">{t('hero.search_title')}</div>
                         <Searchbar/>
+                        {(typeof props.data === 'object') && Array.isArray(props.data.popular_now) &&
                         <HeroPopularCities items={props.data.popular_now} />
-                        
+                        }
                     </div>
+                    {(typeof props.data === 'object') && Array.isArray(props.data.favorite_cities) &&
                     <div className="showcase__bottom container">
                         <ShowcaseItems items={props.data.favorite_cities}/>
                     </div>
+                    }
                 </div>
             </div>{/*showcase*/}
 
-            {Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
+            {(typeof props.data === 'object') && Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
             <div className="section locations">
                 <div className="container">
                     <div className="section__head">
@@ -98,7 +101,7 @@ export default function Homepage (props) {
                 </div>
             </div>{/*advantages*/}
 
-            {Array.isArray(props.data.route_reviews) && props.data.route_reviews.length > 0 &&
+            {(typeof props.data === 'object') && Array.isArray(props.data.route_reviews) && props.data.route_reviews.length > 0 &&
             <div className="section reviews">
                 <div className="container">
                     <div className="section__head">

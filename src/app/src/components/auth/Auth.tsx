@@ -67,15 +67,16 @@ const Auth = (props) => {
         setShowLoader(true);
         checkEmail({email, setErrors, setStatus}).then((response) => {
             setShowLoader(false);
-
-            if (response.result === true) {
-                setAction('setPassword');
-                return;
-            } else if (response.result === false) {
-                setAction('createNewAccount');
-                return;
+console.log(response);
+            if (typeof response === 'object') {
+                if (response.result === true) {
+                    setAction('setPassword');
+                    return;
+                } else if (response.result === false) {
+                    setAction('createNewAccount');
+                    return;
+                }
             }
-            
         });
     };
 
