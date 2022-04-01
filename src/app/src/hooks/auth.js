@@ -211,6 +211,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .post('/api/v1/user/checkEmail', props)
             .then(response => {
                 if (typeof response !== 'object') {
+                    
                     setErrors({
                         email: "Произошла непредвиденная ошибка"
                     });

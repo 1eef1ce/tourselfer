@@ -88,7 +88,7 @@ const Auth = (props) => {
                     }
                 })
                 .catch(error => {
-
+                    setShowLoader(false);
                     errorNotify({
                         title: 'Ошибка',
                         message: error.toString()
