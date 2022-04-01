@@ -1,17 +1,20 @@
-image: ubuntu:latest
+image: alpine:latest
 
 stages:
   - deploy
 
 deploy_dev:
   stage: deploy
-  script:
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    - eval $(ssh-agent -s)
+    - echo "$STAGE_SSH_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
-    - cat ./deploy/known_hosts >> ~/.ssh/known_hosts
-    - cat ~/.ssh/known_hosts
-    - echo "$STAGE_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $STAGE_SSH_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+  script:
     - cat ./deploy/script.sh | ssh -T ubuntu@$STAGE_SSH_HOST
   only:
     - dev
