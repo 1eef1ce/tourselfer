@@ -1,4 +1,4 @@
-image: alpine:latest
+image: ubuntu:latest
 
 stages:
   - deploy
@@ -6,14 +6,13 @@ stages:
 deploy_dev:
   stage: deploy
   before_script:
-    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    - apt-get update -qq
+    - apt-get install -qq git
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
-    - echo "$STAGE_SSH_KEY" | tr -d '\r' | ssh-add -
+    - ssh-add <(echo "$STAGE_SSH_KEY")
     - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan $STAGE_SSH_HOST >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - cat ./deploy/script.sh | ssh -T ubuntu@$STAGE_SSH_HOST
   only:
