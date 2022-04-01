@@ -1,20 +1,28 @@
 import Link from 'next/link';
 import cn from 'classnames';
-import {useEffect, useState} from 'react';
+import { useTranslation } from 'next-i18next';
 
 const MobileMenu = (props) =>  {
+    const {t} = useTranslation("menu");
     let visibility;
     if (props.menuVisibility) {
         visibility = 'show';
     }
 
-    const [items, setItems] = useState<any>([]);
-
-    useEffect(()=>{
-        fetch('/mobileMenu.json')
-            .then(res => res.json())
-            .then((result) => setItems(result));
-    },[]);
+    const items = [
+        {
+            "href": "/how-it-works",
+            "label": t('header.how_it_works')
+        },
+        {
+            "href": "/become-an-author",
+            "label": t('header.become_an_author')
+        },
+        {
+            "href": "/support",
+            "label": t('header.support')
+        }
+    ];
 
     return (
         <div className={cn("mobile-menu", visibility)} onMouseDown={props.handleMouseDown}>

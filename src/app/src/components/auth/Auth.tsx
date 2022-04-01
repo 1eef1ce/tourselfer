@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input } from '@components/ui';
-import SocialAuth from '@components/auth/SocialAuth';
 import { PolicyText } from '@components/common';
-import { useAuth } from '../../hooks/auth'
-import { useNotify } from '../../hooks/notify'
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router'
+import { useAuth } from '../../hooks/auth';
+import { useNotify } from '../../hooks/notify';
+import { useRouter } from 'next/router';
 
 
 const Auth = (props) => {
 
-    const router = useRouter()
+    const router = useRouter();
     const config = {
         minPasswordLength: 8
     };
@@ -120,25 +118,25 @@ const Auth = (props) => {
                     refresh();
                 });
         }
-        
+
         setErrors(oErrors);
     };
 
     const submitRegForm = async event => {
         event.preventDefault();
 
-        let oErrors = {};
+        const oErrors = {};
 
-        if (name.length <= 2) 
+        if (name.length <= 2)
             oErrors['name'] = "Введите ваше имя";
-        
+
         if (password.length <= 0 || repeatPassword.length <= 0)
             oErrors['password'] = "Укажите пароль для новой учетной записи";
-        
+
 
         if (Object.entries(oErrors).length === 0) {
 
-            let data = {
+            const data = {
                 name: name,
                 email: email,
                 password: password,
@@ -219,23 +217,23 @@ const Auth = (props) => {
                     <div className="auth__title">Вы уже авторизованы</div>
                     <div className="auth__subtitle">Если желаете выйти из аккаунта, нажмите <a href="#" onClick={submitLogout}>здесь</a>.</div>
                 </div>
-                
+
             </div>
         );
     }
 
-    
+
 
     //if (!isAuthorize) {
     return (
         <>
 
-        {action === '' &&
-        <div className="auth">
-            <div className="auth__head">
-                <div className="auth__title">Войдите или создайте аккаунт</div>
-            </div>
-            <div className="form">
+            {action === '' &&
+            <div className="auth">
+                <div className="auth__head">
+                    <div className="auth__title">Войдите или создайте аккаунт</div>
+                </div>
+                <div className="form">
                     <div className="form__row">
                         <Input
                             className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
@@ -271,26 +269,26 @@ const Auth = (props) => {
                             Забыли пароль?
                         </Button>
                     </div>
-            </div>
-            <div className="text-note">
+                </div>
+                <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1="Правилами и условиями"
                         link2="/policy"
                         title2="Положением о конфиденциальности"
                     />
                 </div>
-        </div>
-        }
-
-        {action === 'setPassword' &&
-        <div className="auth">
-            <div className="auth__head">
-                <div className="auth__title">Войдите или создайте аккаунт</div>
             </div>
-            <div className="form">
-                    
+            }
+
+            {action === 'setPassword' &&
+            <div className="auth">
+                <div className="auth__head">
+                    <div className="auth__title">Войдите или создайте аккаунт</div>
+                </div>
+                <div className="form">
+
                     <div className="form__row">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
@@ -308,33 +306,33 @@ const Auth = (props) => {
                         ) : null}
                     </div>
                     <div className="form__row form__row--btn">
-                            <Button
-                                variant="filled"
-                                size="medium"
-                                type="button"
-                                loading={showLoader}
-                                onClick={submitLoginForm}
-                            >
-                                Войти
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                size="medium"
-                                type="button"
-                                onClick={() => setAction('forgotPassword')}
-                            >
-                                Забыли пароль?
-                            </Button>
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                            loading={showLoader}
+                            onClick={submitLoginForm}
+                        >
+                            Войти
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                            type="button"
+                            onClick={() => setAction('forgotPassword')}
+                        >
+                            Забыли пароль?
+                        </Button>
                     </div>
+                </div>
             </div>
-        </div>
-        }
+            }
 
-        {action === 'createNewAccount' &&
+            {action === 'createNewAccount' &&
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Создание аккаунта</div>
-                    <div className="auth__subtitle">Пароль должен состоять из заглавных и строчных букв и цифр. Длина — не менее {config.minPasswordLength} символов.</div>
+                    <div className="auth__subtitle">Пароль должен состоять из заглавных и строчных букв и цифр. Длина — не менее {config.minPasswordLength} символов.</div>
                 </div>
                 <div className="form">
 
@@ -353,7 +351,7 @@ const Auth = (props) => {
                             <div className="form__error">{errors['name']}</div>
                         ) : null}
                     </div>
-                
+
                     <div className="form__row">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
@@ -387,16 +385,16 @@ const Auth = (props) => {
                     </div>
 
                     <div className="form__row form__row--btn">
-                            <Button
-                                variant="filled"
-                                size="medium"
-                                type="button"
-                                onClick={submitRegForm}
-                                loading={showLoader}
-                            >
-                                Создать аккаунт
-                            </Button>
-                            
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                            onClick={submitRegForm}
+                            loading={showLoader}
+                        >
+                            Создать аккаунт
+                        </Button>
+
                     </div>
                 </div>
 
@@ -411,42 +409,42 @@ const Auth = (props) => {
                 </div>
 
             </div>
-        }
+            }
 
-        {action === 'needEmailConfirm' &&
+            {action === 'needEmailConfirm' &&
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Проверьте папку «Входящие»</div>
-                    <div className="auth__subtitle">Мы отправили на {email} ссылку для подтверждения email адреса. Письмо должно прийти через несколько минут.</div>
+                    <div className="auth__subtitle">Мы отправили на {email} ссылку для подтверждения email адреса. Письмо должно прийти через несколько минут.</div>
                 </div>
                 <div className="form">
 
                     <div className="form__row form__row--btn">
-                            <Button
-                                variant="filled"
-                                size="medium"
-                                type="button"
-                                onClick={refresh}
-                            >
-                                Хорошо
-                            </Button>
-                            
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                            onClick={refresh}
+                        >
+                            Хорошо
+                        </Button>
+
                     </div>
                 </div>
 
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1="Правилами и условиями"
                         link2="/policy"
                         title2="Положением о конфиденциальности"
                     />
                 </div>
             </div>
-        }
+            }
 
-        {action === 'successAuth' &&
+            {action === 'successAuth' &&
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Вы успешно выполнили вход</div>
@@ -465,9 +463,9 @@ const Auth = (props) => {
                     </div>
                 </div>
             </div>
-        }
+            }
 
-        {action === 'forgotPassword' && 
+            {action === 'forgotPassword' &&
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Забыли пароль?</div>
@@ -477,83 +475,83 @@ const Auth = (props) => {
                     </div>
                 </div>
                 <div className="form">
-                        <div className="form__row">
-                            <Input
-                                className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
-                                onChange={event => setEmail(event.target.value)}
-                                value={email}
-                                id="email"
-                                name="email"
-                                type="email"
-                                label="Email"
-                                required
-                                autoFocus
-                            />
-                            {!!errors && errors['email'] ? (
-                                <div className="form__error">{errors['email']}</div>
-                            ) : null}
-                        </div>
-
-                        <div className="form__row form__row--btn">
-                                <Button
-                                    variant="filled"
-                                    size="medium"
-                                    type="button"
-                                    onClick={submitForgotPasswordForm}
-                                    loading={showLoader}
-                                >
-                                Отправить ссылку на смену пароля
-                                </Button>
-                                
-                                <Button
-                                    variant="outlined"
-                                    size="medium"
-                                    type="button"
-                                    onClick={() => setAction('')}
-                                >
-                                    Я вспомнил пароль
-                                </Button>
-                                
-                        </div>
+                    <div className="form__row">
+                        <Input
+                            className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
+                            onChange={event => setEmail(event.target.value)}
+                            value={email}
+                            id="email"
+                            name="email"
+                            type="email"
+                            label="Email"
+                            required
+                            autoFocus
+                        />
+                        {!!errors && errors['email'] ? (
+                            <div className="form__error">{errors['email']}</div>
+                        ) : null}
                     </div>
-            </div>
-        }
 
-        {action === 'forgotPasswordConfirm' &&
+                    <div className="form__row form__row--btn">
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                            onClick={submitForgotPasswordForm}
+                            loading={showLoader}
+                        >
+                            Отправить ссылку на смену пароля
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                            type="button"
+                            onClick={() => setAction('')}
+                        >
+                            Я вспомнил пароль
+                        </Button>
+
+                    </div>
+                </div>
+            </div>
+            }
+
+            {action === 'forgotPasswordConfirm' &&
             <div className="auth">
                 <div className="auth__head">
                     <div className="auth__title">Проверьте папку «Входящие»</div>
-                    <div className="auth__subtitle">Мы отправили на {email} ссылку для восстановления пароля. Письмо должно прийти через несколько минут.</div>
+                    <div className="auth__subtitle">Мы отправили на {email} ссылку для восстановления пароля. Письмо должно прийти через несколько минут.</div>
                 </div>
                 <div className="form">
 
                     <div className="form__row form__row--btn">
-                            <Button
-                                variant="filled"
-                                size="medium"
-                                type="button"
-                            >
-                                Хорошо
-                            </Button>
-                            
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                        >
+                            Хорошо
+                        </Button>
+
                     </div>
                 </div>
 
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1="Правилами и условиями"
                         link2="/policy"
                         title2="Положением о конфиденциальности"
                     />
                 </div>
             </div>
-        }
+            }
         </>
     );
 
-    
+
 
 };
 

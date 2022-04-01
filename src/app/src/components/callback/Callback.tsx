@@ -25,6 +25,7 @@ const Callback = () => {
                     <Button
                         variant="filled"
                         size="medium"
+                        colored={true}
                         type="submit"
                     >
                         Заказать звонок

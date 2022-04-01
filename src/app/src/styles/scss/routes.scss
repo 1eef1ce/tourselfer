@@ -3,19 +3,38 @@
 
 .routes {
 
+  &__container {
+    display: flex;
+    margin-top: 48px;
+
+    @include max-767 {
+      margin-top: 24px;
+    }
+
+    &--afterSort {
+      margin-top: 16px;
+
+      @include max-767 {
+        margin-top: 24px;
+      }
+    }
+  }
+
   &__items {
     display: flex;
     flex-wrap: wrap;
-    margin: -16px -12px;
+    width: calc(100% + 24px);
+    margin: -24px -12px;
 
     @include max-767 {
-      margin: -12px 0;
+      width: 100%;
+      margin: -16px 0;
     }
   }
 
   &__item {
     width: calc(33.33% - 24px);
-    margin: 16px 12px;
+    margin: 24px 12px;
 
     @include max-1200 {
       width: calc(50% - 24px);
@@ -23,7 +42,7 @@
 
     @include max-767 {
       width: 100%;
-      margin: 12px 0;
+      margin: 16px 0;
     }
   }
 
@@ -31,16 +50,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 256px;
-    padding: 12px;
+    padding-bottom: 58%;
     border-radius: 8px;
     overflow: hidden;
 
-    @include max-500 {
-      height: 196px;
-    }
-
-    > img {
+    img {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -63,6 +77,14 @@
     }
   }
 
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+  }
+
   &__rating {
     position: relative;
     z-index: 2;
@@ -78,32 +100,16 @@
     display: inline-block;
     margin-top: 8px;
     font-weight: 700;
-    font-size: 24px;
-    line-height: 1.17;
+    font-size: 20px;
+    line-height: 1.4;
     color: $color-primary;
-
-    @include max-767 {
-      font-size: 20px;
-      line-height: 1.2;
-    }
-  }
-
-  &__more {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 32px;
   }
 }
 
 .route-params {
   display: flex;
   align-items: flex-start;
-  margin-top: 8px;
-
-  @include max-767 {
-    align-items: center;
-  }
+  margin-top: 12px;
 
   &__item {
     display: flex;
@@ -111,13 +117,13 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 1.33;
-    color: $color-tertiary;
+    color: $color-secondary;
 
     &:not(:last-of-type) {
       margin-right: 24px;
 
-      @include max-374 {
-        margin-right: 14px;
+      @include max-500 {
+        margin-right: 16px;
       }
     }
   }
@@ -148,19 +154,11 @@
 
   &__text {
     margin-left: 4px;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 1.87;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.67;
     text-transform: uppercase;
-    color: $color-secondary;
-
-    @include max-767 {
-      font-weight: 400;
-      line-height: 1.33;
-    }
-
-    @include max-374 {
-      font-size: 12px;
-    }
+    letter-spacing: 0.3px;
+    color: $color-semi;
   }
 }

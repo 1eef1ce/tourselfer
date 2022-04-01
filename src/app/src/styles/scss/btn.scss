@@ -6,40 +6,49 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 32px;
+  padding: 8px 12px;
   border: 0;
   border-radius: 32px;
   background: transparent;
   font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
-  color: $color-primary;
+  color: $color-semi;
   cursor: pointer;
   transition: 0.2s;
 
   .icon {
     width: 24px;
     height: 24px;
-    opacity: 0.5;
     transition: 0.2s;
 
     svg * {
-      fill: $color-icon;
+      fill: $color-semi;
     }
   }
 
   .loader__dot {
-    background: $color-secondary;
+    background: $color-green;
   }
 
   &:hover,
-  &.active {
-    background: $color-black-7;
-    box-shadow: none;
+  &:focus {
+    color: $color-primary;
+  }
+
+  &:hover {
+    background: $color-gray-7;
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 2px $color-gray-20;
+    background: transparent;
+    box-shadow: inset 0 0 0 2px $color-gray-30;
+  }
+
+  &.active {
+    color: $color-primary;
+    background: $color-gray-15;
+    box-shadow: none;
   }
 
   &:disabled {
@@ -47,7 +56,10 @@
     pointer-events: none;
 
     .icon {
-      opacity: 0.3;
+
+      svg * {
+        fill: $color-secondary;
+      }
     }
   }
 
@@ -64,8 +76,12 @@
     }
   }
 
+  &--squared {
+    border-radius: 10px;
+  }
+
   &--icon {
-    padding: 13px;
+    padding: 8px;
   }
 
   &--medium {
@@ -84,89 +100,181 @@
     }
   }
 
+  &--medium,
+  &--large {
+
+    .icon {
+
+      &--start {
+        margin-right: 8px;
+      }
+
+      &--end {
+        margin-left: 8px;
+      }
+    }
+  }
+
   &--outlined {
-    color: $color-secondary;
-    box-shadow: inset 0 0 0 1px $color-green;
+    color: $color-semi;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $color-gray-15;
 
     &:hover {
+      box-shadow: none;
+    }
+
+    &:focus {
+      background: transparent;
+      box-shadow: inset 0 0 0 2px $color-gray-30;
+    }
+
+    &.active {
+      color: $color-primary;
+      background: $color-gray-15;
+    }
+
+    &:disabled {
+      color: $color-secondary;
+
+      &.loading {
+        color: transparent;
+      }
+    }
+    
+    &.btn--colored {
+      box-shadow: inset 0 0 0 1px $color-green;
+
+      &:hover {
+        color: #fff;
+        background: $gradient-green-light;
+        box-shadow: none;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+
+      &:focus {
+        color: $color-semi;
+        background: transparent;
+        box-shadow: inset 0 0 0 2px $color-gray-30;
+
+        .icon {
+
+          svg * {
+            fill: $color-semi;
+          }
+        }
+      }
+
+      &.active {
+        color: #fff;
+        background: $gradient-green;
+        box-shadow: none;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  &--filled {
+    background: $color-gray-7;
+
+    &:hover {
+      background: $color-gray-10;
+    }
+
+    &:focus {
+      background: $color-gray-7;
+      box-shadow: inset 0 0 0 2px $color-gray-30;
+    }
+
+    &.active {
+      color: $color-primary;
+      background: $color-gray-15;
+    }
+
+    &:disabled {
+
+      &.loading {
+        color: transparent;
+      }
+    }
+
+    &.btn--colored {
       color: #fff;
-      background: $gradient-green-light;
+      background: $gradient-green;
+
+      &:hover,
+      &:focus {
+        background: $gradient-green-light;
+
+        .icon {
+
+          svg * {
+            fill: #fff;
+          }
+        }
+      }
+
+      &.active {
+        color: #fff;
+        background: $gradient-green;
+      }
+
+      &:disabled {
+        color: $color-white-75;
+        background: $gradient-green-light;
+      }
 
       .icon {
-        opacity: 1;
 
         svg * {
           fill: #fff;
         }
       }
-    }
-
-    &:disabled {
-      color: $color-tertiary;
 
       &.loading {
         color: transparent;
+
+        .icon {
+          opacity: 0;
+        }
+      }
+
+      .loader__dot {
+        background: #fff;
       }
     }
-
-    .loader__dot {
-      background: $color-green;
+  }
+  
+  &__text {
+    
+    &--less {
+      display: none;
     }
   }
-
-  &--filled {
-    color: #fff;
-    background: $gradient-green;
-
-    &:hover {
-      color: #fff;
-      background: $gradient-green-light;
-    }
-
-    &:disabled {
-      color: $color-white-75;
-      background: $gradient-green-light;
-
-      &.loading {
-        color: transparent;
-      }
-    }
-
-    .icon {
-      opacity: 1;
-
-      svg * {
-        fill: #fff;
-      }
-    }
-
-    .loader__dot {
-      background: #fff;
-    }
-  }
-
-  &--alt {
-    width: 100%;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px $color-gray;
-    font-weight: 500;
-
-    &:hover {
-      color: #fff;
-      background: $gradient-green-light;
-    }
-  }
-
+  
   &--more {
-    width: 100%;
-    padding: 8px;
-    border-radius: 10px;
-    color: $color-secondary;
-
-    &:hover {
-      color: $color-primary;
-      background: $color-gray-7;
+    
+    .btn__text {
+      
+      &--more {
+        display: none;
+      }
+      
+      &--less {
+        display: block;
+      }
     }
   }
 }

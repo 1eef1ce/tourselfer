@@ -3,14 +3,14 @@ import {TopBanner, Header, Footer, Notifications} from '@components/common';
 import { useAuth } from '../../../hooks/auth';
 
 const Layout =({children}) => {
-
+    const showBanner = false;
     const { user } = useAuth();
 
     return (
         <>
             <Notifications/>
             <div className="wrapper">
-                <TopBanner/>
+                {showBanner && <TopBanner/>}
                 <Header/>
                 <main>{children}</main>
                 <Footer/>
