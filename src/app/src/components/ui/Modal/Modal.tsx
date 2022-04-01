@@ -1,4 +1,4 @@
-import React, {FC, useRef, useEffect, useCallback} from 'react';
+import React, {FC, useEffect, useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import cn from 'classnames';
 import {Close} from '@components/icons';

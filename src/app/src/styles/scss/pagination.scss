@@ -38,7 +38,7 @@
     font-weight: 600;
     font-size: 16px;
     line-height: 1.5;
-    color: $color-secondary;
+    color: $color-semi;
     flex-shrink: 0;
     cursor: pointer;
     transition: 0.2s;
@@ -52,7 +52,7 @@
 
   &__arrow {
 
-    @include max-374 {
+    @include max-359 {
       flex-shrink: 1;
     }
 

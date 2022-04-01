@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {Heart, Impression, Routes, SearchIcon, User} from '@components/icons';
+import {Heart, Impression, RoutesIcon, SearchIcon, User} from '@components/icons';
 
 const BottomMenu = () => {
     return (
@@ -23,7 +23,7 @@ const BottomMenu = () => {
             <Link href="#">
                 <a className="bottom-menu__item">
                     <div className="bottom-menu__icon icon">
-                        <Routes/>
+                        <RoutesIcon/>
                     </div>
                     <div className="bottom-menu__title">Routes</div>
                 </a>

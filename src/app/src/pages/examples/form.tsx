@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import {Breadcrumbs, Layout, Searchbar} from '@components/common';
-import {Button, Checkbox, Input, InputPassword, PasswordsContainer, Radio, Textarea} from '@components/ui';
+import {Breadcrumbs, Layout} from '@components/common';
+import {Button, Checkbox, Input, InputPassword, Radio, SelectField, Textarea} from '@components/ui';
 import {Formik, Form} from 'formik';
 import * as Yup from "yup";
 
@@ -19,8 +19,17 @@ export default function ExampleForm() {
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
             .required('Confirm Password is required'),
-        exampleDate: Yup.object()
+        exampleTextarea: Yup.string()
+            .matches(/.*\S.*/, 'Empty')
             .required('Required'),
+        exampleDate: Yup.array()
+            .min(1, 'Required')
+            .of(
+                Yup.object({
+                    label: Yup.string().required(),
+                    value: Yup.string().required(),
+                })
+            ),
         exampleRadio: Yup.string()
             .required('Required'),
         exampleCheckbox1: Yup.boolean()
@@ -32,7 +41,8 @@ export default function ExampleForm() {
         exampleEmail: '',
         password: '',
         confirmPassword: '',
-        exampleDate: '',
+        exampleTextarea: '',
+        exampleDate: [],
         exampleRadio: '',
         exampleCheckbox1: false
     };
@@ -56,8 +66,8 @@ export default function ExampleForm() {
                         }}
                     >
                         {({
+                              values,
                               errors,
-                              status,
                               touched,
                               getFieldProps,
                               handleBlur,
@@ -73,9 +83,6 @@ export default function ExampleForm() {
                                         type="text"
                                         label="Text"
                                         required
-                                        //pattern="[^0-9]"
-                                        //requiredMessage="Please complete this field"
-                                        //patternMessage="This field must not contain numbers"
                                         {...getFieldProps('exampleText')}
                                     />
                                     {touched.exampleText && errors.exampleText ? (
@@ -92,9 +99,6 @@ export default function ExampleForm() {
                                         type="email"
                                         label="Email"
                                         required
-                                        //requiredMessage="Please complete this field"
-                                        //pattern="^(.+)@(.+)$"
-                                        //patternMessage="Email must contain an '@'"
                                         {...getFieldProps('exampleEmail')}
                                     />
                                     {touched.exampleEmail && errors.exampleEmail ? (
@@ -130,38 +134,25 @@ export default function ExampleForm() {
                                     ) : null}
                                 </div>
 
-                                {/*                        <div className="form__title">Confirm password</div>
-                        <PasswordsContainer
-                            id="password"
-                            name="password"
-                            label="Password"
-                            confirmId="passwordRepeat"
-                            confirmName="passwordRepeat"
-                            confirmLabel="Repeat password"
-                            required
-                            requiredMessage="Please complete this field"
-                            //minLength={6}
-                            minLengthMessage="Password must contain minimum six characters"
-                        />*/}
-
                                 <div className="form__title">Textarea</div>
                                 <div className="form__row">
-                            <Textarea
-                                id="exampleTextarea"
-                                name="exampleTextarea"
-                                label="Comment"
-                                //required
-                                //requiredMessage="Please complete this field"
-                            />
+                                    <Textarea
+                                        className={"form__input form__textarea" + (touched.exampleTextarea && errors.exampleTextarea ? ' error' : '')}
+                                        id="exampleTextarea"
+                                        name="exampleTextarea"
+                                        label="Comment"
+                                        {...getFieldProps('exampleTextarea')}
+                                    />
+                                    {touched.exampleTextarea && errors.exampleTextarea ? (
+                                        <div className="form__error">{errors.exampleTextarea}</div>
+                                    ) : null}
                                 </div>
 
                                 <div className="form__title">Select</div>
                                 <div className="form__row form__row--select">
-                                    <Input
+                                    <SelectField
                                         className={"select" + (touched.exampleDate && errors.exampleDate ? ' error' : '')}
-                                        isSelect
                                         classPrefix="select"
-                                        isFilter={false}
                                         id="exampleDate"
                                         name="exampleDate"
                                         label="Дата доставки"
@@ -171,12 +162,13 @@ export default function ExampleForm() {
                                                 {value: 'tomorrow', label: 'Завтра'}
                                             ]
                                         }
-                                        // defaultOption={
-                                        //     [
-                                        //         {value: 'today', label: 'Сегодня'}
-                                        //     ]
-                                        // }
+/*                                        defaultOption={
+                                             [
+                                                 {value: 'today', label: 'Сегодня'}
+                                             ]
+                                        }*/
                                         {...getFieldProps('exampleDate')}
+                                        //value={values.exampleDate}
                                         onBlur={() => {
                                             handleBlur({target: {name: 'exampleDate'}});
                                         }}
@@ -198,6 +190,8 @@ export default function ExampleForm() {
                                         value="Default"
                                         label="Default"
                                         {...getFieldProps('exampleRadio')}
+                                        checked={values.exampleRadio === "Default"}
+                                        onChange={() => setFieldValue("exampleRadio", "Default")}
                                     />
                                     <Radio
                                         className={"radio__input" + (touched.exampleRadio && errors.exampleRadio ? ' error' : '')}
@@ -207,6 +201,8 @@ export default function ExampleForm() {
                                         label="Checked"
                                         //defaultChecked
                                         {...getFieldProps('exampleRadio')}
+                                        checked={values.exampleRadio === "Checked"}
+                                        onChange={() => setFieldValue("exampleRadio", "Checked")}
                                     />
                                     <Radio
                                         id="exampleRadio3"
@@ -255,6 +251,7 @@ export default function ExampleForm() {
                                     <Button
                                         variant="filled"
                                         size="medium"
+                                        colored={true}
                                         type="submit"
                                     >
                                         Submit
@@ -263,11 +260,6 @@ export default function ExampleForm() {
                             </Form>
                         )}
                     </Formik>
-                </div>
-
-                <h2 className="title-2">Search</h2>
-                <div style={{margin: "1em 0"}}>
-                    <Searchbar/>
                 </div>
             </div>
         </Layout>

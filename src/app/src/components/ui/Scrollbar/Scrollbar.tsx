@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import cn from 'classnames';
 
 class Scrollbar extends Component {
     render() {

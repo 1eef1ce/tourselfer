@@ -38,7 +38,7 @@ export default function ExampleButtons() {
                         loading={loading}
                         onClick={handleClick}
                     >
-                        Unstyled
+                        Default
                     </Button>
                     <Button
                         style={style}
@@ -55,7 +55,7 @@ export default function ExampleButtons() {
                         loading={loading}
                         onClick={handleClick}
                     >
-                        Unstyled
+                        Default
                     </Button>
                     <Button
                         style={style}
@@ -64,10 +64,293 @@ export default function ExampleButtons() {
                         loading={loading}
                         onClick={handleClick}
                     >
-                        Unstyled
+                        Default
                     </Button>
                     <Button
                         style={style}
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                </div>
+
+                <div>
+                    <Button
+                        style={style}
+                        variant='filled'
+                        squared={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Squared
+                    </Button>
+                    <Button
+                        style={style}
+                        variant='filled'
+                        squared={true}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Squared
+                    </Button>
+                    <Button
+                        style={style}
+                        variant='filled'
+                        squared={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Squared
+                    </Button>
+                    <Button
+                        style={style}
+                        variant='filled'
+                        squared={true}
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Squared
+                    </Button>
+                    <Button
+                        style={style}
+                        variant='filled'
+                        squared={true}
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                </div>
+
+                <div>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="large"
+                        colored={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="medium"
+                        colored={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="medium"
+                        colored={true}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="large"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="medium"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="large"
+                        colored={true}
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="medium"
+                        colored={true}
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="large"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="large"
+                        colored={true}
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                    <Button
+                        style={style}
+                        variant="outlined"
+                        size="medium"
+                        colored={true}
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                </div>
+
+                <div>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        colored={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        colored={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        colored={true}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        colored={true}
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Large
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        colored={true}
+                        isEndIcon={true}
+                        endIcon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Medium
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        colored={true}
+                        isStartIcon={true}
+                        startIcon={<Plus/>}
+                        disabled={true}
+                        loading={loading}
+                        onClick={handleClick}
+                    >
+                        Disabled
+                    </Button>
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="large"
+                        colored={true}
+                        isIcon={true}
+                        icon={<Plus/>}
+                        loading={loading}
+                        onClick={handleClick}
+                    />
+                    <Button
+                        style={style}
+                        variant="filled"
+                        size="medium"
+                        colored={true}
                         isIcon={true}
                         icon={<Plus/>}
                         loading={loading}
@@ -290,6 +573,7 @@ export default function ExampleButtons() {
                         style={style}
                         variant="filled"
                         size="large"
+                        colored={true}
                         isStartIcon={true}
                         startIcon={<Heart/>}
                         loading={loading}
@@ -299,7 +583,7 @@ export default function ExampleButtons() {
                     </Button>
                     <Button
                         style={style}
-                        variant="filled"
+                        variant='filled'
                         size="medium"
                         isEndIcon={true}
                         endIcon={<Star/>}
@@ -312,6 +596,7 @@ export default function ExampleButtons() {
                         style={style}
                         variant="outlined"
                         size="medium"
+                        squared={true}
                         isStartIcon={true}
                         startIcon={<ArrowLeft/>}
                         isEndIcon={true}
@@ -323,8 +608,8 @@ export default function ExampleButtons() {
                     </Button>
                     <Button
                         style={style}
-                        variant="filled"
                         size="medium"
+                        squared={true}
                         isIcon={true}
                         icon={<Minus/>}
                         loading={loading}

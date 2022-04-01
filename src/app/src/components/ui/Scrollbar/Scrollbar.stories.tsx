@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import Scrollbar from './Scrollbar';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
