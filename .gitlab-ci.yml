@@ -1,6 +1,9 @@
 image: ubuntu:latest
 
-build stage job:
+stages:
+  - deploy
+
+deploy_dev:
   stage: deploy
   script:
     - mkdir -p ~/.ssh
