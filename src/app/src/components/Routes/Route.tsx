@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {Crown, Man, MapPin} from '@components/icons';
-import {Avatar, UserName} from '@components/common';
 
 const Route = () => {
     return (
@@ -17,9 +16,9 @@ const Route = () => {
                             <div className="icon user__icon">
                                 <Crown />
                             </div>
-                            <Avatar/>
+                            Avatar
                         </div>
-                        <UserName/>
+                        UserName
                     </div>
                 </div>
             </div>

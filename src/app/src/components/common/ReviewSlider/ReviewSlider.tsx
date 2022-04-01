@@ -37,7 +37,7 @@ const ReviewSlider = () => {
                                 <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={{avatar: null, name: 'User', last_name: 'Lastname'}}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
@@ -82,7 +82,7 @@ const ReviewSlider = () => {
                                 <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={{avatar: null, name: 'User', last_name: 'Lastname'}}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
@@ -120,7 +120,7 @@ const ReviewSlider = () => {
                                 <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={null}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
