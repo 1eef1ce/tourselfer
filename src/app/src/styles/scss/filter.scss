@@ -2,11 +2,6 @@
 @import "media.scss";
 
 .filter {
-  margin-bottom: 16px;
-
-  @include max-767 {
-    margin-bottom: 24px;
-  }
 
   &__block {
     display: flex;
@@ -33,28 +28,31 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 1.14;
-    color: $color-secondary;
+    color: $color-semi;
   }
 
   &__select {
-    display: inline-flex;
-    align-items: center;
+    min-width: 296px;
 
-    .form__field {
+    &--simple {
+      min-width: auto;
 
-      &::before {
-        content: none;
+      .form__field {
+
+        &::before {
+          content: none;
+        }
       }
     }
-  }
-
-  &__more {
-    margin-top: 16px;
   }
 
   &__actions {
     display: flex;
     align-items: center;
+    margin-top: 16px;
+  }
+
+  .more {
     margin-top: 16px;
   }
 }
@@ -66,7 +64,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
-  color: $color-secondary;
+  color: $color-semi;
 
   &__icon {
     width: 24px;
@@ -74,7 +72,7 @@
     margin-right: 8px;
 
     svg * {
-      fill: $color-secondary;
+      fill: $color-semi;
     }
   }
 }
@@ -105,7 +103,7 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 1.14;
-    color: $color-secondary;
+    color: $color-semi;
 
     @include max-767 {
       width: auto;

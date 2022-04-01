@@ -1,19 +1,19 @@
 import React, { createRef } from 'react';
-import { MapPinBlack, TourselferIcon } from '@components/icons';
+import { MapPinBlack } from '@components/icons';
 
 
-class SearchbarItems extends React.Component {
+class SearchbarItems extends React.Component<any, any, any> {
     wrapperRef = createRef();
 
     constructor(props) {
         super(props);
         this.state = {
             currentIndex: -1
-        }
+        };
     }
 
     static defaultProps = {
-        onOutsideClick: () => { },
+        onOutsideClick: () => { /*return nothing*/ },
         items: [],
         visibleItems: false
     };
@@ -29,7 +29,7 @@ class SearchbarItems extends React.Component {
     }
 
     onClickOutside(event) {
-        if (
+        /*if (
             this.wrapperRef.current &&
             !this.wrapperRef.current.contains(event.target)
         ) {
@@ -37,7 +37,7 @@ class SearchbarItems extends React.Component {
             this.setState({
                 currentIndex: -1
             });
-        }
+        }*/
     }
 
     onKeyDown(event) {
@@ -49,7 +49,7 @@ class SearchbarItems extends React.Component {
                 if (this.props.items[this.state.currentIndex + 1]) {
                     this.setState({
                         currentIndex: this.state.currentIndex + 1
-                    })
+                    });
                 }
 
                 break;
@@ -59,7 +59,7 @@ class SearchbarItems extends React.Component {
                 if (this.state.currentIndex - 1 >= 0) {
                     this.setState({
                         currentIndex: this.state.currentIndex - 1
-                    })
+                    });
                 }
 
                 break;
@@ -85,14 +85,14 @@ class SearchbarItems extends React.Component {
 
         if (this.props.visibleItems && this.props.items && this.props.items.length > 0) {
             return (
-                <div className="search__suggestions__wrapper" ref={this.wrapperRef}>
+                <div className="search__suggestions__wrapper" /*ref={this.wrapperRef}*/>
                     {this.props.items.map((item, key) => (
-                        <div className={"search__suggestions__item" + (this.state.currentIndex == key ? ' active' : '')}>
-                            <MapPinBlack />
-                            <div className="search__suggestions__title">
-                                <div className="label">{item.label.general}</div>
+                        <div className={"search-suggestions__item" + (this.state.currentIndex == key ? ' active' : '')} key={item.label.general}>
+                            <div className="icon search-suggestions__icon"><MapPinBlack /></div>
+                            <div className="search-suggestions__title">
+                                <div className="search-suggestions__label">{item.label.general}</div>
                                 {Array.isArray(item.label.subs) && item.label.subs.length > 0 &&
-                                    <div className="subs">
+                                    <div className="search-suggestions__subs">
                                         {item.label.subs.join(', ')}
                                     </div>
                                 }

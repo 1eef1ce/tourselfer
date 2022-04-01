@@ -21,14 +21,17 @@ export interface Breadcrumb {
 
 export interface BreadcrumbsProps {
     rootLabel?: string | null;
+    rootClass?: string;
 }
 
 const defaultProps: BreadcrumbsProps = {
     rootLabel: 'Main',
+    rootClass: 'breadcrumbs'
 };
 
 const Breadcrumbs = ({
      rootLabel,
+     rootClass,
  }: BreadcrumbsProps) => {
     const router = useRouter();
     const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb> | null>(
@@ -56,7 +59,7 @@ const Breadcrumbs = ({
     }
 
     return (
-        <ul className="breadcrumbs">
+        <ul className={rootClass}>
             <li className="breadcrumbs__item">
                 <Link href="/">
                     <a className="breadcrumbs__link">

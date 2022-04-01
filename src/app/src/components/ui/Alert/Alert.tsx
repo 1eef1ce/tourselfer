@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 
 interface AlertProps {
     type?: 'success' | 'error' | 'info';
@@ -15,7 +14,6 @@ const Alert: React.FC<AlertProps> = ((props) => {
         icon = false,
         title,
         message,
-        ...rest
     } = props;
 
     const mode = icon ? 'with-icon' : 'no-icon';

@@ -9,7 +9,7 @@ export default function Review() {
               <Image src="/images/review.jpg" alt="Industrial Berlin" title="" layout="fill"/>
               <div className="review__user user user--white user--medium">
                   <div className="user__img">
-                      <Avatar/>
+                      <Avatar user={null}/>
                   </div>
                   <div>
                       <div className="user__status">Seller</div>
@@ -18,8 +18,8 @@ export default function Review() {
               </div>
           </div>
           <div className="review__content">
-              <div className="rating review__rating">
-                  <div className="rating__number">4.5</div>
+              <div className="review__rating">
+                  <div className="rating-number">4.5</div>
               </div>
               <div className="review__title title-2">Industrial Berlin</div>
               <div className="review__description">
