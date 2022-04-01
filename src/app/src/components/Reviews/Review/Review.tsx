@@ -7,14 +7,14 @@ export default function Review({item}) {
 
     const { t } = useTranslation("components");
 
-    let props = [];
+    const props = [];
 
     if (typeof item.duration.start !== 'undefined')
     {
         if (parseFloat(item.duration.start) > 0 && parseFloat(item.duration.end) > 0)
         {
-            let start = Math.round(item.duration.start / 60),
-                end = Math.round(item.duration.end / 60);
+            const start = Math.round(item.duration.start / 60),
+                  end = Math.round(item.duration.end / 60);
 
             if (start != end)
             {
@@ -58,20 +58,20 @@ export default function Review({item}) {
 
     if (typeof item.type !== 'undefined' && Array.isArray(item.type))
     {
-        let values = [];
-        for (var key in item.type) {
+        const values = [];
+        for (const key in item.type) {
             switch(item.type[key])
             {
                 case 'foot':
-                    values.push(t('route.props.type_foot'))
+                    values.push(t('route.props.type_foot'));
                     break;
 
                 case 'car':
-                    values.push(t('route.props.type_car'))
+                    values.push(t('route.props.type_car'));
                     break;
 
                 case 'bus':
-                    values.push(t('route.props.type_bus'))
+                    values.push(t('route.props.type_bus'));
                     break;
             }
         }
@@ -97,8 +97,8 @@ export default function Review({item}) {
               </div>
           </div>
           <div className="review__content">
-              <div className="rating review__rating">
-                  <div className="rating__number">{item.rating}</div>
+              <div className="review__rating">
+                  <div className="rating-number">{item.rating}</div>
               </div>
               <div className="review__title title-2">{item.title}</div>
               <div className="review__description">
@@ -107,7 +107,7 @@ export default function Review({item}) {
               <div className="review__chars chars">
 
               {props && props.length>0 && props.map(prop => (
-                  <div className="chars__row">
+                  <div className="chars__row" key={prop.label}>
                     <div className="chars__name">{prop.label}</div>
                     <div className="chars__value">{prop.value}</div>
                 </div>

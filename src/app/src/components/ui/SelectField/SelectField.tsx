@@ -22,10 +22,12 @@ const styleProxy = new Proxy({}, {
 class SelectField extends React.Component<any, any> {
     constructor(props) {
         super(props);
+        this.state = {
+            focus: false
+        };
         this.state = {focus: false};
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
-        this.getClass = this.getClass.bind(this);
     }
 
     onFocus() {
@@ -36,36 +38,48 @@ class SelectField extends React.Component<any, any> {
         this.setState({focus: false});
     }
 
-    getClass() {
-        if (this.state.focus === true)
-            return "focus";
-        else
-            return "";
-    }
-
     render() {
         const {
-            isFilter,
             id,
+            name,
             label,
+            required,
             classPrefix,
             options,
             defaultOption
         } = this.props;
-        const inputClass = this.getClass();
+
+        const inputClass = () => {
+            if (this.state.focus === true) {
+                return "focus";
+            }
+            else {
+                return "";
+            }
+        };
+
         return (
             <>
-                {isFilter
-                    ? <div className="filter__text">{label}</div>
-                    : <label className="form__label">{label}</label>
-                }
-                <div className={cn("gradient-border", inputClass)}>
-                    <Select className="select" classNamePrefix={classPrefix} instanceId={id}
-                            options={options} components={{DropdownIndicator}} isSearchable={false}
-                            styles={styleProxy} defaultValue={defaultOption}
-                            onBlur={this.onBlur} onFocus={this.onFocus}
+                {label != null && label !== '' && (
+                    <label className="form__label" htmlFor={id}>
+                        {label}
+                        {required && (<span> *</span>)}
+                    </label>
+                )}
+                <div className={cn("form__field", inputClass())}>
+                    <Select
+                        className="select"
+                        classNamePrefix={classPrefix}
+                        name={name}
+                        instanceId={id}
+                        options={options}
+                        components={{DropdownIndicator}}
+                        isSearchable={false}
+                        styles={styleProxy}
+                        defaultValue={defaultOption}
+                        onBlur={this.onBlur}
+                        onFocus={this.onFocus}
                     />
-                    <div className="form__error">Helper Text</div>
                 </div>
             </>
         );

@@ -34,10 +34,10 @@ const ReviewSlider = () => {
                     <div className="reviews__item">
                         <div className="user">
                             <div className="user__img">
-                                <div className="icon user__icon">
+                                <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={{avatar: null, name: 'User', last_name: 'Lastname'}}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
@@ -45,7 +45,7 @@ const ReviewSlider = () => {
                             </div>
                         </div>
                         <div className="rating reviews__rating">
-                            <div className="rating__number">4.0</div>
+                            <div className="rating-number">4.0</div>
                             <Rating value={4} />
                         </div>
                         <div className="reviews__content">
@@ -79,10 +79,10 @@ const ReviewSlider = () => {
                     <div className="reviews__item">
                         <div className="user">
                             <div className="user__img">
-                                <div className="icon user__icon">
+                                <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={{avatar: null, name: 'User', last_name: 'Lastname'}}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
@@ -90,10 +90,8 @@ const ReviewSlider = () => {
                             </div>
                         </div>
                         <div className="rating reviews__rating">
-                            <div className="rating__number">5.0</div>
-                            <div className="rating__stars">
+                            <div className="rating-number">5.0</div>
                                 <Rating value={5} />
-                            </div>
                         </div>
                         <div className="reviews__content">
                             <div className="reviews__block reviews__block--first">
@@ -119,10 +117,10 @@ const ReviewSlider = () => {
                     <div className="reviews__item">
                         <div className="user">
                             <div className="user__img">
-                                <div className="icon user__icon">
+                                <div className="icon user__icon user__icon--top">
                                     <Quotes />
                                 </div>
-                                <Avatar/>
+                                <Avatar user={null}/>
                             </div>
                             <div>
                                 <div className="user__status">traveller</div>
@@ -130,7 +128,7 @@ const ReviewSlider = () => {
                             </div>
                         </div>
                         <div className="rating reviews__rating">
-                            <div className="rating__number">4.0</div>
+                            <div className="rating-number">4.0</div>
                             <Rating value={4} />
                         </div>
                         <div className="reviews__content">

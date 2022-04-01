@@ -6,28 +6,66 @@ export default NextAuth({
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" }
+                email: {label: 'email', type: 'email'},
+                password: {label: "Password", type: "password"}
             },
-            async authorize(credentials, req) {
-                const res = await fetch("/your/endpoint", {
-                    method: 'POST',
-                    body: JSON.stringify(credentials),
-                    headers: { "Content-Type": "application/json" }
-                });
+            async authorize(credentials) {
+                 const res = await fetch('https://api.stage1.test.tourselfer.tech/api/v1/login', {
+                     method: 'POST',
+                     body: JSON.stringify(credentials),
+                     headers: {
+                         'Content-Type': 'application/json'
+                     },
+                 });
+
                 const user = await res.json();
-                if (res.ok && user) {
-                    return user
+
+                if (!res.ok) {
+                    throw new Error(user.exception);
                 }
-                return null
-            }
-        })
+                if (res.ok && user) {
+                    return user;
+                }
+                return null;
+            },
+        }),
     ],
+    secret: "secret",
+    jwt: {
+        secret: "qqq",
+        encryption: true,
+    },
     pages: {
-        signIn: '/auth/signin',
-        signOut: '/auth/signout',
-        error: '/auth/error', // Error code passed in query string as ?error=
-        verifyRequest: '/auth/verify-request', // (used for check email message)
-        newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-    }
+        signIn: '/signin',
+        signOut: '/signout',
+        error: '/error', // Error code passed in query string as ?error=
+        verifyRequest: '/verify-request', // (used for check email message)
+        newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+    },
+    callbacks: {
+        async jwt({ token, user, account }) {
+            if (user) {
+                return {
+                    ...token,
+                    accessToken: user.data.token,
+                    refreshToken: user.data.refreshToken,
+                };
+            }
+
+            return token;
+        },
+
+        async session({ session, token }) {
+            session.user.accessToken = token.accessToken;
+            session.user.refreshToken = token.refreshToken;
+            session.user.accessTokenExpires = token.accessTokenExpires;
+
+            return session;
+        },
+    },
+    session: {
+        jwt: true,
+        maxAge: 30 * 24 * 60 * 60,
+    },
+    debug: process.env.NODE_ENV === 'development',
 });

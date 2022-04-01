@@ -11,12 +11,12 @@
   }
 
   &--gray {
-    color: $color-tertiary;
+    color: $color-secondary;
 
     .icon {
 
       svg * {
-        fill: $color-tertiary;
+        fill: $color-secondary;
       }
     }
   }

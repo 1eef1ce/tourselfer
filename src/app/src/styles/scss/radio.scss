@@ -3,6 +3,8 @@
 
 .radio {
   position: relative;
+  display: flex;
+  align-items: flex-start;
 
   &__input {
     position: absolute;
@@ -44,7 +46,7 @@
 
       & + .radio__label {
         cursor: auto;
-        color: $color-secondary;
+        color: $color-semi;
 
         &::before {
           border-color: $color-gray-7;
@@ -163,5 +165,9 @@
       background: #fff;
       border-radius: 100%;
     }
+  }
+
+  & + & {
+    margin-top: 12px;
   }
 }

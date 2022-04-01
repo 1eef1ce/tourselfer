@@ -1,5 +1,4 @@
 import Location from './Location';
-import {useState, useEffect} from 'react';
 
 const LocationsContainer = ({items}) => {
     

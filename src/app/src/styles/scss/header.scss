@@ -64,8 +64,12 @@
     align-items: center;
     padding: 20px 0;
 
-    @include max-1023 {
-      padding: 16px 0;
+    @include max-1440 {
+      padding: 20px 16px;
+    }
+
+    @include max-767 {
+      padding: 16px;
     }
     @include max-767 {
       padding: 16px 0 8px;
@@ -96,7 +100,7 @@
 
   &__lang {
     margin-right: 32px;
-    color: $color-secondary;
+    color: $color-semi;
 
     @include max-1200 {
       margin-right: 24px;
@@ -107,7 +111,7 @@
     }
 
     svg * {
-      fill: $color-secondary;
+      fill: $color-semi;
     }
   }
 }
