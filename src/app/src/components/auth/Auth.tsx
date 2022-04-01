@@ -34,7 +34,7 @@ const Auth = (props) => {
 
     useEffect(() => {
         setErrors({});
-    }, [action]);
+    }, [action, name, email, password]);
 
     useEffect(() => {
         if (action === 'createNewAccount') {
@@ -62,58 +62,81 @@ const Auth = (props) => {
     const checkAvaliableEmail = async event => {
         event.preventDefault();
 
-        setShowLoader(true);
-        checkEmail({email, setErrors, setStatus})
-            .then((response) => {
-                setShowLoader(false);
+        let oErrors = {};
 
-                if (typeof response === 'object') {
-                    if (response.result === true) {
-                        setAction('setPassword');
-                        return;
-                    } else if (response.result === false) {
-                        setAction('createNewAccount');
-                        return;
+        if (email.length <= 5 || email.indexOf('@') == -1 || email.indexOf('.') == -1)
+            oErrors = {
+                email: "Введите ваш email-адрес"
+            };
+
+
+        if (Object.entries(oErrors).length === 0) {
+
+            setShowLoader(true);
+            checkEmail({email, setErrors, setStatus})
+                .then((response) => {
+                    setShowLoader(false);
+
+                    if (typeof response === 'object') {
+                        if (response.result === true) {
+                            setAction('setPassword');
+                            return;
+                        } else if (response.result === false) {
+                            setAction('createNewAccount');
+                            return;
+                        }
                     }
-                }
-            })
-            .catch(error => {
+                })
+                .catch(error => {
 
-                errorNotify({
-                    title: 'Ошибка',
-                    message: error.toString()
+                    errorNotify({
+                        title: 'Ошибка',
+                        message: error.toString()
+                    });
+
                 });
+        }
 
-            });
+        setErrors(oErrors);
     };
 
     const submitLoginForm = async event => {
         event.preventDefault();
 
-        setShowLoader(true);
+        let oErrors = {};
 
-        login({ email, password, setErrors, setStatus })
-            .then((response) => {
-                setShowLoader(false);
-                refresh();
-            });
+        if (password.length <= 4)
+            oErrors = {
+                email: "Введите пароль от учетной записи"
+            };
+
+        if (Object.entries(oErrors).length === 0) {
+
+            setShowLoader(true);
+
+            login({ email, password, setErrors, setStatus })
+                .then((response) => {
+                    setShowLoader(false);
+                    refresh();
+                });
+        }
         
+        setErrors(oErrors);
     };
 
     const submitRegForm = async event => {
         event.preventDefault();
 
-        if (name.length <= 2)
-            setErrors({
-                name: "Введите ваше имя"
-            });
+        let oErrors = {};
 
+        if (name.length <= 2) 
+            oErrors['name'] = "Введите ваше имя";
+        
         if (password.length <= 0 || repeatPassword.length <= 0)
-            setErrors({
-                password: "Укажите пароль для новой учетной записи"
-            });
+            oErrors['password'] = "Укажите пароль для новой учетной записи";
+        
 
-        if (Object.entries(errors).length === 0) {
+        if (Object.entries(oErrors).length === 0) {
 
             let data = {
                 name: name,
@@ -133,20 +156,35 @@ const Auth = (props) => {
                     }
                 });
         }
+
+        setErrors(oErrors);
     };
 
     const submitForgotPasswordForm = async event => {
         event.preventDefault();
 
-        setShowLoader(true);
+        let oErrors = {};
 
-        forgotPassword({email, setErrors, setStatus})
-            .then(response => {
-                setShowLoader(false);
-                if (response) {
-                    setAction('forgotPasswordConfirm');
-                }
-            });
+        if (email.length <= 5 || email.indexOf('@') == -1 || email.indexOf('.') == -1)
+            oErrors = {
+                email: "Введите ваш email-адрес"
+            };
+
+
+        if (Object.entries(oErrors).length === 0) {
+
+            setShowLoader(true);
+
+            forgotPassword({email, setErrors, setStatus})
+                .then(response => {
+                    setShowLoader(false);
+                    if (response) {
+                        setAction('forgotPasswordConfirm');
+                    }
+                });
+        }
+
+        setErrors(oErrors);
     };
 
     const submitLogout = async event => {
