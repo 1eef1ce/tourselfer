@@ -8,10 +8,7 @@ deploy_dev:
   before_script:
     - mkdir -p ~/.ssh
     - cat ./deploy/known_hosts >> ~/.ssh/known_hosts
-    - cat ~/.ssh/known_hosts
-    - echo "$STAGE_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - cat ~/.ssh/known_hosts
-    - chmod 600 ~/.ssh/id_rsa
+   - (umask  077 ; echo $STAGE_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
   script:
     - cat ./deploy/script.sh | ssh -T ubuntu@$STAGE_SSH_HOST
   only:
