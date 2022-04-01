@@ -67,6 +67,9 @@
     @include max-1023 {
       padding: 16px 0;
     }
+    @include max-767 {
+      padding: 16px 0 8px;
+    }
   }
 
   &__logo {
@@ -83,7 +86,7 @@
     @include max-767 {
       width: 48px;
       height: 48px;
-      margin: 0 auto;
+      margin-right: 12px;
     }
 
     svg * {

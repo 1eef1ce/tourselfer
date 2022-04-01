@@ -45,7 +45,6 @@ const Header = () => {
             <header className={cn("header", {'header--transparent': !hasScrolled})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
-                    {isMobile && <MobileMenuContainer/>}
                     <Link href="/">
                         <a className="logo header__logo icon">
                             <Logo/>

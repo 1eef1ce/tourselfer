@@ -15,7 +15,7 @@ class SearchbarClass extends React.Component<any, any, any> {
         super(props);
         this.state = {
             items: [],
-            visibleItems: false
+            visibleItems: false,
         };
 
         this.onChange = this.onChange.bind(this);
@@ -60,7 +60,8 @@ class SearchbarClass extends React.Component<any, any, any> {
                     <div className="icon search__icon">
                         <SearchIcon />
                     </div>
-                    <input className="form__field search__field" type="search" placeholder={t('searchbar.placeholder')} onClick={this.onClick} onChange={this.onChange} />
+                    <input className="form__field search__field" type="search" placeholder={t('searchbar.placeholder')} onClick={this.onClick} onChange={this.onChange, value => this.setState({value})} />
+                    <div className="close-btn"></div>
                     <Button
                         className="search__btn"
                         variant="filled"
