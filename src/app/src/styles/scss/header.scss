@@ -10,11 +10,12 @@
   color: $color-primary;
   transition: 0.2s;
 
-  &--transparent {
+  &--static {
     border-bottom: 0;
-    background: transparent;
+    background: #fff;
     &.mainpage {
         color: #fff;
+        background: transparent;
 
     .header {
 
@@ -73,7 +74,7 @@
       padding: 16px;
     }
     @include max-767 {
-      padding: 16px 0 8px;
+      padding: 16px 16px 8px;
     }
   }
 

@@ -49,7 +49,7 @@ const Header: React.FC<AlertProps> = ((props) => {
 
     return (
         <>
-            <header className={cn("header", {'header--transparent': !hasScrolled}, {'mainpage': mainPage})}>
+            <header className={cn("header", {'header--static': !hasScrolled}, {'mainpage': mainPage})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
                     <Link href="/">
