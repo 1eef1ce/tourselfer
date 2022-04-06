@@ -53,18 +53,7 @@ const Footer: FC = () => {
                             </div>
                         </div>
                         <div className="dropdown footer__lang">
-                            <button className="dropdown__btn">
-                                <span className="icon dropdown__icon dropdown__icon--left">
-                                    <World/>
-                                </span>
-                                <span>lang{/*{LOCALES_MAP[currentLocale].name}*/}</span>
-                                <span className="icon dropdown__icon">
-                                    <ChevronDown/>
-                                </span>
-                            </button>
-                            <div className="dropdown__content dropdown__content--up">
-                                <I18nWidget />
-                            </div>
+                            <I18nWidget type={'footer'} />
                         </div>
                     </div>
                 </div>
