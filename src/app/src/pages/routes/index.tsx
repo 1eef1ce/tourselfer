@@ -4,28 +4,18 @@ import {Button} from '@components/ui';
 import Filter from '@components/filter';
 import {RoutesContainer} from '@components/Routes';
 
-export default function RoutesPage() {
+export default function RoutesIndexPage() {
     return (
         <Layout>
             <Head>
-                <title>Routes</title>
+                <title>Routes index</title>
             </Head>
 
             <div className="routes">
                 <div className="container">
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
-                    <Filter/>
-                    <RoutesContainer classMod="afterSort"/>
-                    <div className="more">
-                        <Button
-                            variant='outlined'
-                            size='medium'
-                        >
-                            See more
-                        </Button>
-                    </div>
-                    <Pagination/>
+                    Text here...
                 </div>
             </div>
         </Layout>

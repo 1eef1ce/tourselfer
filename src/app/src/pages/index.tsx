@@ -10,7 +10,7 @@ import {LocationsContainer} from '@components/Locations';
 import { i18n } from "next-i18next";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import {loadHomepage} from '@lib/api/fetch-homepage';
+import {Api} from '@lib/api';
 
 export const getServerSideProps = async ({locale}) => {
 
@@ -19,9 +19,11 @@ export const getServerSideProps = async ({locale}) => {
         await i18n?.reloadResources();
     }
 
+    let api = new Api({locale});
+
     return {
       props: {
-        ...(await loadHomepage(locale)),
+        ...(await api.getHomepage()),
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };

@@ -25,15 +25,15 @@
     "advantages.slide6.title": "Интернет не нужен!",
     "advantages.slide6.description": "Если ты за границей, навигатор проведет тебя по выбранному маршруту без подключения к мобильному интернету.",
 
-    "route.props.locations_count": "Количество локаций",
-    "route.props.duration": "Продолжительность маршрута",
+    "route.props.locations_count": "Локации",
+    "route.props.duration": "Длительность",
     "route.props.duration_value_range": "{{start}}-{{end}} ч.",
     "route.props.duration_value": "{{start}} ч.",
 
     "route.props.type": "Вариант прохождения маршрута",
-    "route.props.type_foot": "пеший",
-    "route.props.type_car": "авто",
-    "route.props.type_bus": "общественный транспорт",
+    "route.props.type_foot": "Пеший",
+    "route.props.type_car": "Авто",
+    "route.props.type_bus": "Городской транспорт",
 
     "review.recommended": "Рекомендует маршрут: ",
     "review.liked": "Что понравилось: ",
