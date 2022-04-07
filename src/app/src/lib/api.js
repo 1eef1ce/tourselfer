@@ -45,15 +45,16 @@ export class Api {
         let params = {
             language: this.locale
         };
+        let methodURL = !!props.countryCode && props.countryCode.length > 0 ? '/api/v1/route/findByCountryCode/' + encodeURI(props.countryCode) : '/api/v1/route';
 
-        if (!!props.filter)
-            params.filter = props.filter;
+        //if (!!props.filter)
+        //    params.filter = props.filter;
 
         Object.assign(params, this.setPagination(props));
 
         console.log(params);
 
-        return await fetch(this.getURL('/api/v1/route', params))
+        return await fetch(this.getURL(methodURL, params))
             .then(resource => resource.json())
             .then((response) => {
                 return response;

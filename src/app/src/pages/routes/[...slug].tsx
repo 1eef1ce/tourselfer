@@ -11,10 +11,19 @@ import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
 
 
-export const getServerSideProps = async ({locale}) => {
+export const getServerSideProps = async ({locale, params}) => {
 
+console.log(params);
     //const {getRoutesList} = api();
     let api = new Api({locale});
+    let queryParams = {
+        countryCode: params.slug[0],
+        filter: {},
+        pagination: {
+            limit: 12,
+            page: 1
+        }
+    };
 
     if (process.env.NODE_ENV === "development")
     {
@@ -23,14 +32,7 @@ export const getServerSideProps = async ({locale}) => {
 
     return {
       props: {
-        //...(await loadHomepage(locale)),
-        list: await api.getRoutesList({
-            filter: {},
-            pagination: {
-                limit: 12,
-                page: 1
-            }
-        }),
+        list: await api.getRoutesList(queryParams),
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
@@ -39,16 +41,15 @@ export const getServerSideProps = async ({locale}) => {
 export default function RoutesListPage(props) {
 
     const router = useRouter();
-    const {locale} = useRouter();
+    const {locale, pathname, asPath} = useRouter();
     const { slug } = router.query;
-
+console.log(asPath);
     const [items, setItems] = useState(props.list.data);
 
     const getItems = async () => {
         let api = new Api({locale});
     }
 
-//console.log(props);
     return (
         <Layout>
             <Head>
@@ -69,7 +70,7 @@ export default function RoutesListPage(props) {
                             See more
                         </Button>
                     </div>
-                    <Pagination/>
+                    <Pagination data={props.list.meta} path={asPath}/>
                 </div>
             </div>
         </Layout>
