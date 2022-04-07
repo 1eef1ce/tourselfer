@@ -59,6 +59,9 @@ class SearchbarClass extends React.Component<any, any, any> {
                     items: result,
                     visibleItems: true
                 });
+            })
+            .catch(error => {
+                console.log(error);
             });
     }
     
@@ -75,7 +78,6 @@ class SearchbarClass extends React.Component<any, any, any> {
                         className="form__input search__input"
                         type="text"
                         placeholder={t('searchbar.placeholder')}
-                        onClick={this.onClick}
                         onChange={this.onChange}
                         value={this.state.inputValue}
                         onBlur={this.onBlur}
