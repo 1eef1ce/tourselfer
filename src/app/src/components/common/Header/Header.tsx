@@ -19,7 +19,7 @@ interface HeaderProps {
     mainPage: boolean;
 }
 
-const Header: React.FC<AlertProps> = ((props) => {
+const Header: React.FC<HeaderProps> = ((props) => {
     const {
         mainPage = false
     } = props;

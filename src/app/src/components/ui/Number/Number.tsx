@@ -37,7 +37,7 @@ class PhNumber extends React.Component<any, any> {
                 country={this.state.country}
                 onFocus={this.onFocus}
                 onChange={
-                    value => this.setState({value}),
+                    //value => this.setState({value}),
                     country => this.setState({country})
                 }
                 onBlur={this.onBlur}
