@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Bus, Car, Close, FilterIcon, Man} from '@components/icons';
 import {Button, SelectField} from '@components/ui';
+import Link from 'next/link'
 
-const Filter = () => {
+const Filter = ({initialData, updateData}) => {
+
+    //updateData({hello: "world"});
+console.log(initialData);
+    const [data, setData] = useState(initialData);
+    const options = {
+        costs: [
+            {
+                label: 'All',
+                value: undefined
+            },
+            {
+                label: 'Free',
+                value: 0
+            },
+            {
+                label: '$',
+                value: 1
+            },
+            {
+                label: '$$',
+                value: 2
+            },
+            {
+                label: '$$$',
+                value: 3
+            },
+            {
+                label: '$$$$',
+                value: 4
+            },
+        ]
+    };
+
+    useEffect(() => {
+        updateData(data);
+    }, data);
+
+    const setOption = (key, value) => {
+        let bufData = Object.assign(data, {});
+
+        bufData[key] = value;
+
+        console.log(bufData);
+
+        setData(bufData);
+        updateData(bufData);
+    };
+
     return (
         <div className="filter">
             <div className="filter__block">
@@ -10,18 +59,16 @@ const Filter = () => {
                     <div className="filter__item">
                         <div className="filter__text">Route costs</div>
                         <div className="switch">
-                            <a className="switch__option active" href="javascript:void(0)">All</a>
-                            <a className="switch__option" href="javascript:void(0)">Free</a>
-                            <a className="switch__option" href="javascript:void(0)">$</a>
-                            <a className="switch__option" href="javascript:void(0)">$$</a>
-                            <a className="switch__option" href="javascript:void(0)">$$$</a>
+                            {options.costs.map(option => (
+                                <a onClick={(e) => setOption('costs', option.value)} className={'switch__option' + (data?.costs === option.value ? ' active' : '')}>{option.label}</a>
+                            ))}
                         </div>
                     </div>
                     <div className="filter__item">
                         <div className="filter__text">Way to travel</div>
                         <div className="switch">
-                            <a className="switch__option active">All</a>
-                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
+                            <a className="switch__option">All</a>
+                            <a className="switch__option active switch__option--icon" href="javascript:void(0)">
                                 <span className="icon switch__icon">
                                     <Man/>
                                 </span>

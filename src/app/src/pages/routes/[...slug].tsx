@@ -21,7 +21,7 @@ console.log(params);
         filter: {},
         pagination: {
             limit: 12,
-            page: 1
+            page: params?.page ?? 1
         }
     };
 
@@ -41,15 +41,21 @@ console.log(params);
 export default function RoutesListPage(props) {
 
     const router = useRouter();
-    const {locale, pathname, asPath} = useRouter();
+    const {locale, pathname} = useRouter();
     const { slug } = router.query;
-console.log(asPath);
+
     const [items, setItems] = useState(props.list.data);
+    const [filter, setFilter] = useState({});
 
     const getItems = async () => {
         let api = new Api({locale});
-    }
+    };
 
+    const updateFilterData = (data) => {
+        setFilter(data);
+    };
+
+    console.log(filter);
     return (
         <Layout>
             <Head>
@@ -60,7 +66,7 @@ console.log(asPath);
                 <div className="container">
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
-                    <Filter/>
+                    <Filter initialData={filter} updateData={updateFilterData} />
                     <RoutesContainer items={items} classMod="afterSort"/>
                     <div className="more">
                         <Button
@@ -70,7 +76,7 @@ console.log(asPath);
                             See more
                         </Button>
                     </div>
-                    <Pagination data={props.list.meta} path={asPath}/>
+                    <Pagination data={props.list.meta} pathname={pathname} basepath={'/routes/' + slug[0]}/>
                 </div>
             </div>
         </Layout>

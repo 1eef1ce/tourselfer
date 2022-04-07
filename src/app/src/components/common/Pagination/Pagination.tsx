@@ -1,7 +1,7 @@
 import {ChevronRight} from '@components/icons';
 import Link from 'next/link'
 
-export default function Pagination({data, path}) {
+export default function Pagination({data, pathname, basepath}) {
 
     let links = {
         prev: null,
@@ -66,7 +66,8 @@ export default function Pagination({data, path}) {
                 {links.pages.map(item => (
                     <li className="pagination__item active">
                         <Link
-                            href={`${path}/?page=${item.page}`}
+                            href={{pathname: pathname, query: {page: item.page}}}
+                            as={`${basepath}/?page=${item.page}`}
                         >
                             <a className="pagination__link">{item.page}</a>
                         </Link>

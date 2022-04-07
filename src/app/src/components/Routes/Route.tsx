@@ -119,7 +119,7 @@ const Route = ({item}) => {
                 </div>
                 }
             </div>
-            <Link href={"route/" + item.code}>
+            <Link href={"/route/" + item.code}>
                 <a className="routes__title">{item.title}</a>
             </Link>
         </div>
