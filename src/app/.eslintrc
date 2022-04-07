@@ -6,8 +6,10 @@
   ],
   "rules": {
     "semi": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/display-name": "off",
     "@typescript-eslint/semi": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/no-empty-interface": [
       "error",

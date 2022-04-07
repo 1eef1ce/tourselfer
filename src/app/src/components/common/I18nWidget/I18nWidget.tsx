@@ -76,7 +76,7 @@ const I18nWidget = (props) => {
                     ))}
                 </div>
             </>
-        )
+        );
     }
 };
 
