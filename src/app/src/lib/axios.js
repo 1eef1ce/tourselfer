@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import Axios from 'axios';
 
 const axios = Axios.create({
     baseURL: process.env.API_HOST,
@@ -8,4 +8,4 @@ const axios = Axios.create({
     withCredentials: true,
 });
 
-export default axios
+export default axios;
