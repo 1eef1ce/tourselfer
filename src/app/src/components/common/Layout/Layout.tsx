@@ -3,7 +3,7 @@ import {TopBanner, Header, Footer, Notifications} from '@components/common';
 import { useAuth } from '../../../hooks/auth';
 
 interface LayoutProps {
-    mainPage: boolean;
+    mainPage?: boolean;
 }
 
 const Layout: React.FC<LayoutProps> = ((props) => {
