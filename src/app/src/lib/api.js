@@ -6,8 +6,37 @@ export class Api {
         this.baseURL = process.env.API_HOST ?? 'http://localhost'
     }
 
-    getURL(method, params) {
-        return this.baseURL + method + '?' + new URLSearchParams(params).toString();
+    getURL(method, data) {
+
+        const params = new URLSearchParams();
+        
+        Object.entries(data).forEach(([key, value]) => {
+            if (typeof value === 'object') {
+                Object.entries(value).forEach(([index, value]) => {
+
+                    if (typeof value !== 'undefined') {
+                        if (Array.isArray(value) && value.length > 0) {
+                            console.log(value);
+                            params.append(key + '[' + index + ']', value.join(';'));
+                        } else {
+                            params.append(key + '[' + index + ']', value.toString());
+                        }
+                    }
+                    
+                });
+            } else if (Array.isArray(value)) {
+
+                value.forEach(value => params.append(key, value.toString()));
+
+            } else if (typeof value != 'undefined') {
+                params.append(key, value.toString());
+            }
+
+        });
+
+        console.log(params.toString());
+
+        return this.baseURL + method + '?' + params.toString();
     }
 
     setPagination(params) {
@@ -23,6 +52,8 @@ export class Api {
 
         return pagination;
     }
+
+    
 
     async getHomepage() {
 
@@ -45,10 +76,15 @@ export class Api {
         let params = {
             language: this.locale
         };
-        let methodURL = !!props.countryCode && props.countryCode.length > 0 ? '/api/v1/route/findByCountryCode/' + encodeURI(props.countryCode) : '/api/v1/route';
+        let methodURL = '/api/v1/route';
+        if (!!props.countryCode && props.countryCode.length)
+            methodURL = '/api/v1/route/findByCountryCode/' + encodeURI(props.countryCode);
 
-        //if (!!props.filter)
-        //    params.filter = props.filter;
+        if (!!props.cityCode && props.cityCode.length)
+            methodURL = '/api/v1/route/findByCityCode/' + encodeURI(props.cityCode);
+
+        if (!!props.filter)
+            params.filter = props.filter;
 
         Object.assign(params, this.setPagination(props));
 

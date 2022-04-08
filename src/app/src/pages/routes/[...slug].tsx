@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Breadcrumbs, Layout, Pagination} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
@@ -13,11 +13,9 @@ import {Api} from "@lib/api"
 
 export const getServerSideProps = async ({locale, params}) => {
 
-console.log(params);
-    //const {getRoutesList} = api();
     let api = new Api({locale});
     let queryParams = {
-        countryCode: params.slug[0],
+        cityCode: params.slug[0],
         filter: {},
         pagination: {
             limit: 12,
@@ -45,17 +43,34 @@ export default function RoutesListPage(props) {
     const { slug } = router.query;
 
     const [items, setItems] = useState(props.list.data);
+    const [pagination, setPagination] = useState(props.list.meta);
     const [filter, setFilter] = useState({});
 
     const getItems = async () => {
         let api = new Api({locale});
+        let queryParams = {
+            cityCode: slug[0],
+            filter: filter,
+            pagination: {
+                limit: 12,
+                //page: params?.page ?? 1
+            }
+        };
+
+        api.getRoutesList(queryParams)
+            .then(response => {
+                setItems(response?.data ?? []);
+                setPagination(response?.meta ?? {});
+            });
+
+        //console.log(queryParams);
     };
 
-    const updateFilterData = (data) => {
-        setFilter(data);
-    };
+    useEffect(() => {
+        getItems()
+    }, [filter]);
 
-    console.log(filter);
+    //console.log(filter);
     return (
         <Layout>
             <Head>
@@ -66,7 +81,7 @@ export default function RoutesListPage(props) {
                 <div className="container">
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
-                    <Filter initialData={filter} updateData={updateFilterData} />
+                    <Filter data={filter} updateData={setFilter} />
                     <RoutesContainer items={items} classMod="afterSort"/>
                     <div className="more">
                         <Button
@@ -76,7 +91,7 @@ export default function RoutesListPage(props) {
                             See more
                         </Button>
                     </div>
-                    <Pagination data={props.list.meta} pathname={pathname} basepath={'/routes/' + slug[0]}/>
+                    <Pagination data={pagination} pathname={pathname} basepath={'/routes/' + slug[0]}/>
                 </div>
             </div>
         </Layout>

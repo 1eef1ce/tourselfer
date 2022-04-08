@@ -47,11 +47,9 @@ export default function Pagination({data, pathname, basepath}) {
 
         });
         
-
-        console.log(links);
     }
 
-    if (links.pages.length > 0) {
+    if (links.pages.length > 1) {
         return (
             <div className="pagination">
                 {!!links.prev && links.currentPage != 1 &&

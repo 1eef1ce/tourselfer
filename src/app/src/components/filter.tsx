@@ -1,55 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import {Bus, Car, Close, FilterIcon, Man} from '@components/icons';
-import {Button, SelectField} from '@components/ui';
+import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
+import { Button, SelectField } from '@components/ui';
 import Link from 'next/link'
 
-const Filter = ({initialData, updateData}) => {
+const Filter = props => {
 
-    //updateData({hello: "world"});
-console.log(initialData);
-    const [data, setData] = useState(initialData);
     const options = {
-        costs: [
-            {
-                label: 'All',
-                value: undefined
-            },
-            {
-                label: 'Free',
-                value: 0
-            },
-            {
-                label: '$',
-                value: 1
-            },
-            {
-                label: '$$',
-                value: 2
-            },
-            {
-                label: '$$$',
-                value: 3
-            },
-            {
-                label: '$$$$',
-                value: 4
-            },
+        cost: [
+            { label: 'All', value: undefined },
+            { label: 'Free', value: 0 },
+            { label: '$', value: 1 },
+            { label: '$$', value: 2 },
+            { label: '$$$', value: 3 },
+            { label: '$$$$', value: 4 },
+        ],
+        type: [
+            { label: 'All', value: undefined },
+            { label: <span className="icon switch__icon"><Man /></span>, value: 'foot', className: 'switch__option--icon' },
+            { label: <span className="icon switch__icon"><Car /></span>, value: 'car', className: 'switch__option--icon' },
+            { label: <span className="icon switch__icon"><Bus /></span>, value: 'bus', className: 'switch__option--icon' },
+        ],
+        superPlace: [
+            { label: 'All', value: undefined },
+            { label: 'Super places', value: true },
+        ],
+        profAuthor: [
+            { label: 'All', value: undefined },
+            { label: 'Professional', value: true },
+        ],
+        duration: [
+            { label: 'Less than 3 hours', valueMin: 30, valueMax: 180 },
+            { label: 'All day', valueMin: 30, valueMax: 1440 },
+            { label: '1–2 days', valueMin: 1440, valueMax: 2880 },
+            { label: '2 days or more', valueMin: 2880, valueMax: 99999 },
         ]
     };
 
-    useEffect(() => {
-        updateData(data);
-    }, data);
 
     const setOption = (key, value) => {
-        let bufData = Object.assign(data, {});
+        props.updateData(prevState => ({
+            ...prevState,
+            [key]: value
+        }));
+    };
 
-        bufData[key] = value;
+    const setMultipleOption = (key, value) => {
+        let valueArray = props.data[key] ?? [];
 
-        console.log(bufData);
+        if (valueArray.indexOf(value) !== -1) {
+            delete valueArray[valueArray.indexOf(value)];
+        } else {
+            valueArray.push(value);
+        }
 
-        setData(bufData);
-        updateData(bufData);
+        props.updateData(prevState => ({
+            ...prevState,
+            [key]: valueArray
+        }));
+
     };
 
     return (
@@ -59,44 +67,35 @@ console.log(initialData);
                     <div className="filter__item">
                         <div className="filter__text">Route costs</div>
                         <div className="switch">
-                            {options.costs.map(option => (
-                                <a onClick={(e) => setOption('costs', option.value)} className={'switch__option' + (data?.costs === option.value ? ' active' : '')}>{option.label}</a>
+                            {options.cost.map(option => (
+                                <a href="javascript:void(0)" onClick={(e) => setOption('cost', option.value)} className={'switch__option' + (props.data?.cost == option.value ? ' active' : '')}>{option.label}</a>
                             ))}
                         </div>
                     </div>
                     <div className="filter__item">
                         <div className="filter__text">Way to travel</div>
                         <div className="switch">
-                            <a className="switch__option">All</a>
-                            <a className="switch__option active switch__option--icon" href="javascript:void(0)">
-                                <span className="icon switch__icon">
-                                    <Man/>
-                                </span>
-                            </a>
-                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
-                                <span className="icon switch__icon">
-                                    <Car/>
-                                </span>
-                            </a>
-                            <a className="switch__option switch__option--icon" href="javascript:void(0)">
-                                <span className="icon switch__icon">
-                                    <Bus/>
-                                </span>
-                            </a>
+                            {options.type.map(option => (
+                                <a onClick={(e) => setOption('type', option.value)} className={"switch__option " + option?.className + (props.data?.type == option.value ? ' active' : '')} href="javascript:void(0)">
+                                    {option.label}
+                                </a>
+                            ))}
                         </div>
                     </div>
                     <div className="filter__item">
                         <div className="filter__text">Super place</div>
                         <div className="switch">
-                            <a className="switch__option active" href="javascript:void(0)">All</a>
-                            <a className="switch__option" href="javascript:void(0)">Super places</a>
+                            {options.superPlace.map(option => (
+                                <a className={'switch__option' + (props.data?.superPlace == option.value ? ' active' : '')} onClick={(e) => setOption('superPlace', option.value)} href="javascript:void(0)">{option.label}</a>
+                            ))}
                         </div>
                     </div>
                     <div className="filter__item">
                         <div className="filter__text">Autor</div>
                         <div className="switch">
-                            <a className="switch__option active" href="javascript:void(0)">All</a>
-                            <a className="switch__option" href="javascript:void(0)">Professional</a>
+                            {options.profAuthor.map(option => (
+                                <a className={'switch__option' + (props.data?.profAuthor == option.value ? ' active' : '')} onClick={(e) => setOption('profAuthor', option.value)} href="javascript:void(0)">{option.label}</a>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -108,7 +107,7 @@ console.log(initialData);
                         <a className="tag" href="javascript:void(0)"><span>Active</span></a>
                         <a className="tag active" href="javascript:void(0)">
                             <span>Beauty of nature</span>
-                            <span className="tag__icon icon"><Close/></span>
+                            <span className="tag__icon icon"><Close /></span>
                         </a>
                         <a className="tag" href="javascript:void(0)"><span>Religion</span></a>
                         <a className="tag" href="javascript:void(0)"><span>Local color</span></a>
@@ -118,50 +117,55 @@ console.log(initialData);
                 <div className="filter-tags__row">
                     <div className="filter-tags__title">Route duration</div>
                     <div className="filter-tags__items">
-                        <a className="tag" href="javascript:void(0)"><span>Less than 3 hours</span></a>
-                        <a className="tag" href="javascript:void(0)"><span>All day</span></a>
-                        <a className="tag" href="javascript:void(0)"><span>1–2 days</span></a>
-                        <a className="tag" href="javascript:void(0)"><span>2 days or more</span></a>
+
+                        {options.duration.map(option => (
+                            <a className={"tag" + (Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('duration', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                                <span>
+                                    {option.label}
+                                </span>
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>
-            <div className="more">
+            {/*<div className="more">
                 <Button
                     squared={true}
                 >
                     More filters
                 </Button>
-            </div>
+                        </div>*/}
             <div className="filter__actions">
                 <div className="filter__select filter__select--simple">
                     <SelectField
                         classPrefix="select-filter"
                         id="filter"
                         name="filter"
-                        options = {
+                        options={
                             [
-                                {value: 'Route rating', label: 'Route rating'},
-                                {value: 'Author rating', label: 'Author rating'},
-                                {value: 'Cost', label: 'Cost'},
-                                {value: 'Duration', label: 'Duration'}
+                                { value: 'Route rating', label: 'Route rating' },
+                                { value: 'Author rating', label: 'Author rating' },
+                                { value: 'Cost', label: 'Cost' },
+                                { value: 'Duration', label: 'Duration' }
                             ]
                         }
-                        defaultOption = {
+                        defaultOption={
                             [
-                                {value: 'Route rating', label: 'Route rating'}
+                                { value: 'Route rating', label: 'Route rating' }
                             ]
                         }
                     />
                 </div>
                 <a className="filter-btn" href="javascript:void(0)">
                     <span className="icon filter-btn__icon">
-                        <FilterIcon/>
+                        <FilterIcon />
                     </span>
                     <span>Filter</span>
                 </a>
             </div>
         </div>
     );
+
 };
 
 export default Filter;
