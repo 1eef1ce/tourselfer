@@ -1,0 +1,26 @@
+@import "variables.scss";
+@import "media.scss";
+
+.personal {
+    display: flex;
+    .column {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 0;
+        flex-shrink: 0;
+        &.left {
+            width: 456px;
+            margin-right: 184px;
+        }
+        &.right {
+            flex-grow: 1;
+            .tab-content {
+                display: none;
+                &.active {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

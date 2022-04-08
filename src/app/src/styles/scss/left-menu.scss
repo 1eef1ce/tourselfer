@@ -1,0 +1,70 @@
+@import "variables.scss";
+@import "media.scss";
+
+.left-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 32px;
+
+  &__item {
+    display: flex;
+    padding: 16px 20px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    transition: 0.2s;
+    &:hover, &.active {
+      background-color: $color-gray-7;
+      .left-menu__icon {
+        &.routes {
+          background: url("../../assets/icons/routes-color.svg") no-repeat center;
+        }
+        &.profile {
+          background: url("../../assets/icons/profile-color.svg") no-repeat center;
+        }
+        &.lock {
+          background: url("../../assets/icons/lock-color.svg") no-repeat center;
+        }
+        &.payment {
+          background: url("../../assets/icons/payments-color.svg") no-repeat center;
+        }
+      }
+    }
+  }
+  
+  &__icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    margin-right: 16px;
+    &.routes {
+      background: url("../../assets/icons/routes.svg") no-repeat center;
+    }
+    &.profile {
+      background: url("../../assets/icons/profile.svg") no-repeat center;
+    }
+    &.lock {
+      background: url("../../assets/icons/lock.svg") no-repeat center;
+    }
+    &.payment {
+      background: url("../../assets/icons/payments.svg") no-repeat center;
+    }
+  }
+  
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 178%;
+    color: $color-primary;
+  }
+  &__desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: $color-semi;
+  }
+}

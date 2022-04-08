@@ -7,6 +7,7 @@ export { default as Logo } from './Logo';
 export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';
 export { default as Rating } from './Rating';
+export { default as RatingNumber } from './RatingNumber';
 export { default as SelectField } from './SelectField';
 export { default as Number } from './Number';
 export { default as Scrollbar } from './Scrollbar';
