@@ -15,3 +15,4 @@ export { default as Searchbar } from './Searchbar';
 export { default as TopBanner } from './TopBanner';
 export { default as UserName } from './UserName';
 export { default as Notifications } from './Notifications';
+export { default as SeeMore } from './SeeMore';

@@ -7,7 +7,7 @@ export class Api {
     }
 
     getURL(method, data) {
-
+        
         const params = new URLSearchParams();
         
         Object.entries(data).forEach(([key, value]) => {
@@ -33,8 +33,6 @@ export class Api {
             }
 
         });
-
-        console.log(params.toString());
 
         return this.baseURL + method + '?' + params.toString();
     }
@@ -88,7 +86,27 @@ export class Api {
 
         Object.assign(params, this.setPagination(props));
 
-        console.log(params);
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
+    }
+
+    async getRouteTagsList(props) {
+        let params = {
+            language: this.locale
+        };
+        let methodURL = '/api/v1/route/tags';
 
         return await fetch(this.getURL(methodURL, params))
             .then(resource => resource.json())
@@ -104,5 +122,6 @@ export class Api {
                     meta: null
                 };
             });
+        
     }
 }

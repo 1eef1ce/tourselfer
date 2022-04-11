@@ -66,6 +66,7 @@ export default function Pagination({data, pathname, basepath}) {
                         <Link
                             href={{pathname: pathname, query: {page: item.page}}}
                             as={`${basepath}/?page=${item.page}`}
+                            shallow={true}
                         >
                             <a className="pagination__link">{item.page}</a>
                         </Link>

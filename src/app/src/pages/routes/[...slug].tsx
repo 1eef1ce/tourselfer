@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Breadcrumbs, Layout, Pagination} from '@components/common';
+import {Breadcrumbs, Layout, Pagination, SeeMore} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
 import Filter from '@components/filter';
@@ -11,15 +11,15 @@ import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
 
 
-export const getServerSideProps = async ({locale, params}) => {
-
+export const getServerSideProps = async ({locale, params, query}) => {
+//console.log(query);
     let api = new Api({locale});
     let queryParams = {
         cityCode: params.slug[0],
         filter: {},
         pagination: {
             limit: 12,
-            page: params?.page ?? 1
+            page: query?.page ?? 1
         }
     };
 
@@ -42,35 +42,41 @@ export default function RoutesListPage(props) {
     const {locale, pathname} = useRouter();
     const { slug } = router.query;
 
+    console.log(props.list);
+
     const [items, setItems] = useState(props.list.data);
     const [pagination, setPagination] = useState(props.list.meta);
     const [filter, setFilter] = useState({});
 
-    const getItems = async () => {
+    let currentPage = props?.list?.meta?.current_page ?? 1;
+
+    const getItems = async (updateList = true) => {
         let api = new Api({locale});
         let queryParams = {
             cityCode: slug[0],
             filter: filter,
             pagination: {
                 limit: 12,
-                //page: params?.page ?? 1
+                page: currentPage
             }
         };
 
         api.getRoutesList(queryParams)
             .then(response => {
-                setItems(response?.data ?? []);
+                if (updateList) {
+                    setItems(response?.data ?? []);
+                } else {
+                    setItems(items.concat(response?.data ?? []));
+                }
                 setPagination(response?.meta ?? {});
             });
-
-        //console.log(queryParams);
     };
 
     useEffect(() => {
-        getItems()
+        getItems();
     }, [filter]);
 
-    //console.log(filter);
+
     return (
         <Layout>
             <Head>
@@ -81,16 +87,12 @@ export default function RoutesListPage(props) {
                 <div className="container">
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
-                    <Filter data={filter} updateData={setFilter} />
+                    <Filter data={filter} updateData={setFilter} locale={locale}/>
                     <RoutesContainer items={items} classMod="afterSort"/>
-                    <div className="more">
-                        <Button
-                            variant='outlined'
-                            size='medium'
-                        >
-                            See more
-                        </Button>
-                    </div>
+                    <SeeMore data={pagination} pathname={pathname} basepath={'/routes/' + slug[0]} onClick={(page) => {
+                        currentPage = page;
+                        getItems(false);
+                    }} />
                     <Pagination data={pagination} pathname={pathname} basepath={'/routes/' + slug[0]}/>
                 </div>
             </div>

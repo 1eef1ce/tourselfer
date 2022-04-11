@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
 import { Button, SelectField } from '@components/ui';
-import Link from 'next/link'
+import Link from 'next/link';
+import {Api} from "@lib/api"
 
 const Filter = props => {
 
@@ -45,10 +46,11 @@ const Filter = props => {
     };
 
     const setMultipleOption = (key, value) => {
-        let valueArray = props.data[key] ?? [];
+        let valueArray = props.data[key] ?? [],
+            index = valueArray.indexOf(value);
 
-        if (valueArray.indexOf(value) !== -1) {
-            delete valueArray[valueArray.indexOf(value)];
+        if (index !== -1) {
+            valueArray.splice(index, 1);
         } else {
             valueArray.push(value);
         }
@@ -59,6 +61,23 @@ const Filter = props => {
         }));
 
     };
+
+    const getTagsList = () => {
+        let api = new Api({locale: props.locale});
+        let queryParams = {};
+
+        api.getRouteTagsList(queryParams)
+            .then(response => {
+                setTags(response?.data ?? []);
+            });
+    }
+
+    const [tags, setTags] = useState([]);
+
+    useEffect(() => {
+        getTagsList();
+    }, []);
+
 
     return (
         <div className="filter">
@@ -104,14 +123,15 @@ const Filter = props => {
                 <div className="filter-tags__row">
                     <div className="filter-tags__title">Route type</div>
                     <div className="filter-tags__items">
-                        <a className="tag" href="javascript:void(0)"><span>Active</span></a>
-                        <a className="tag active" href="javascript:void(0)">
-                            <span>Beauty of nature</span>
-                            <span className="tag__icon icon"><Close /></span>
-                        </a>
-                        <a className="tag" href="javascript:void(0)"><span>Religion</span></a>
-                        <a className="tag" href="javascript:void(0)"><span>Local color</span></a>
-                        <a className="tag" href="javascript:void(0)"><span>Entertainment</span></a>
+                        {tags.map(tag => (
+                            <a className={"tag" + (Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
+                                <span>{tag.title}</span>
+                                {(Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1) &&
+                                    <span className="tag__icon icon"><Close /></span>
+                                }
+                            </a>
+                        ))}
+                        
                     </div>
                 </div>
                 <div className="filter-tags__row">
@@ -123,6 +143,9 @@ const Filter = props => {
                                 <span>
                                     {option.label}
                                 </span>
+                                {Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
+                                    <span className="tag__icon icon"><Close /></span>
+                                }
                             </a>
                         ))}
                     </div>
