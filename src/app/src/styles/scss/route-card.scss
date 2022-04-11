@@ -24,10 +24,19 @@
       background: linear-gradient(360deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.55) 13.67%, rgba(0, 0, 0, 0.45) 28.83%, rgba(0, 0, 0, 0.35) 47.54%, rgba(0, 0, 0, 0) 100%), transparent;
     }
     .rating-number {
-       position: absolute;
-       top: 16px;
-       left: 16px;
-       z-index: 5;
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 5;
+    }
+    .user {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      z-index: 5;
+      &__name {
+          color: #fff;
+      }
     }
   }
   .route-desc {

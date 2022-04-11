@@ -16,3 +16,4 @@ export { default as TopBanner } from './TopBanner';
 export { default as UserName } from './UserName';
 export { default as Notifications } from './Notifications';
 export { default as RouteCard } from './RouteCard';
+export { default as PersonalForm } from './PersonalForm';
