@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@components/ui';
 import { link } from 'fs';
 
-export default function SeeMore({ data, onClick, pathname, basepath }) {
+export default function SeeMore({ data, onClick, pathname }) {
 
     const links = {
         next: null,

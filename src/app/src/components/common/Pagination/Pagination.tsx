@@ -1,16 +1,19 @@
 import {ChevronRight} from '@components/icons';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 
 export default function Pagination({data, pathname, basepath}) {
 
-    const links = {
+    const  links = {
         prev: null,
         next: null,
         pages: [],
         currentPage: 1
     };
+    const router = useRouter();
+    const { slug } = router.query;
 
-    if (typeof data === 'object' && !!data?.links && Array.isArray(data?.links)) {
+    if (typeof data === 'object' && Array.isArray(data.links)) {
 
         let pageCounter = 1;
 
@@ -64,9 +67,16 @@ export default function Pagination({data, pathname, basepath}) {
                 {links.pages.map(item => (
                     <li className="pagination__item active">
                         <Link
-                            href={{pathname: pathname, query: {page: item.page}}}
-                            as={`${basepath}/?page=${item.page}`}
+                            /*href={"/routes/berlin/?page=" + item.page}*/
+                            href={{
+                                pathname: pathname,
+                                query: {
+                                    slug: slug,
+                                    page: item.page
+                                }
+                            }}
                             shallow={true}
+                            scroll={true}
                         >
                             <a className="pagination__link">{item.page}</a>
                         </Link>

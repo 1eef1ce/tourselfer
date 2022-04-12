@@ -10,12 +10,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
 
-
-export const getServerSideProps = async ({locale, params, query}) => {
-//console.log(query);
-    let api = new Api({locale});
-    let queryParams = {
-        cityCode: params.slug[0],
+const getQueryParams = (route) => {
+   
+    const {locale, query} = route;
+    const queryParams = {
+        cityCode: query.slug[0],
         filter: {},
         pagination: {
             limit: 12,
@@ -23,6 +22,21 @@ export const getServerSideProps = async ({locale, params, query}) => {
         }
     };
 
+    /*Object.assign(queryParams, {
+        pagination: {
+            page: 2
+        }
+    });*/
+console.log(queryParams);
+
+    return queryParams;
+};
+
+export async function getServerSideProps ({locale, params, query}) {
+
+    const api = new Api({locale});
+    const queryParams = getQueryParams({locale, query});
+    
     if (process.env.NODE_ENV === "development")
     {
         await i18n?.reloadResources();
@@ -39,31 +53,25 @@ export const getServerSideProps = async ({locale, params, query}) => {
 export default function RoutesListPage(props) {
 
     const router = useRouter();
-    const {locale, pathname} = useRouter();
+    const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
-
-    console.log(props.list);
 
     const [items, setItems] = useState(props.list.data);
     const [pagination, setPagination] = useState(props.list.meta);
     const [filter, setFilter] = useState({});
 
+    //const list = props.list.data;
+
     let currentPage = props?.list?.meta?.current_page ?? 1;
 
-    const getItems = async (updateList = true) => {
-        let api = new Api({locale});
-        let queryParams = {
-            cityCode: slug[0],
-            filter: filter,
-            pagination: {
-                limit: 12,
-                page: currentPage
-            }
-        };
+    const getItems = async (lazyLoad = false) => {
+
+        const api = new Api({locale});
+        const queryParams = getQueryParams({locale, query});
 
         api.getRoutesList(queryParams)
             .then(response => {
-                if (updateList) {
+                if (!lazyLoad) {
                     setItems(response?.data ?? []);
                 } else {
                     setItems(items.concat(response?.data ?? []));
@@ -75,6 +83,20 @@ export default function RoutesListPage(props) {
     useEffect(() => {
         getItems();
     }, [filter]);
+
+    useEffect(() => {
+        setItems(props.list.data);
+    }, [props.list.data]);
+
+    useEffect(() => {
+        setPagination(props.list.meta);
+    }, [props.list.meta]);
+
+    useEffect(() => {
+        if (!!router.query?.page && router.query?.page != currentPage) {
+            getItems(!!router.query?.lazy);
+        }
+    }, [router.query?.page]);
 
 
     return (
@@ -89,11 +111,24 @@ export default function RoutesListPage(props) {
                     <h1 className="title-1">Routes</h1>
                     <Filter data={filter} updateData={setFilter} locale={locale}/>
                     <RoutesContainer items={items} classMod="afterSort"/>
-                    <SeeMore data={pagination} pathname={pathname} basepath={'/routes/' + slug[0]} onClick={(page) => {
-                        currentPage = page;
-                        getItems(false);
-                    }} />
-                    <Pagination data={pagination} pathname={pathname} basepath={'/routes/' + slug[0]}/>
+                    <SeeMore
+                        data={pagination}
+                        pathname={pathname}
+                        onClick={(page) => {
+                            router.push({
+                                pathname: pathname,
+                                query: {
+                                    slug: slug,
+                                    page: page,
+                                    lazy: true
+                                }
+                            }, undefined, { shallow: true })
+                        }} />
+                    <Pagination
+                        data={pagination}
+                        pathname={pathname}
+                        basepath={`/routes/${encodeURIComponent(slug[0])}`}
+                    />
                 </div>
             </div>
         </Layout>
