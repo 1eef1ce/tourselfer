@@ -4,19 +4,19 @@ import { link } from 'fs';
 
 export default function SeeMore({ data, onClick, pathname, basepath }) {
 
-    let links = {
+    const links = {
         next: null,
         pages: [],
         currentPage: 1
     };
 
-    if (typeof data === 'object' && Array.isArray(data.links)) {
+    if (typeof data === 'object' && !!data?.links && Array.isArray(data?.links)) {
 
         let pageCounter = 1;
 
         data.links.forEach(item => {
 
-            if (item.label.indexOf('Previous') === -1 && item.label.indexOf('Next') === -1) {
+            if (item?.label.indexOf('Previous') === -1 && item?.label.indexOf('Next') === -1) {
                 
                 if (item.active === true) {
                     links.currentPage = pageCounter;

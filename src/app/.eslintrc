@@ -6,6 +6,8 @@
   ],
   "rules": {
     "semi": "off",
+    "prefer-const": "off",
+    "react/jsx-key": "off",
     "react-hooks/rules-of-hooks": "off",
     "react/display-name": "off",
     "@typescript-eslint/semi": [

@@ -34,6 +34,12 @@ const Filter = props => {
             { label: 'All day', valueMin: 30, valueMax: 1440 },
             { label: '1–2 days', valueMin: 1440, valueMax: 2880 },
             { label: '2 days or more', valueMin: 2880, valueMax: 99999 },
+        ],
+        price: [
+            { label: 'Free', valueMin: 0, valueMax: 0 },
+            { label: 'Less $30', valueMin: 1, valueMax: 30 },
+            { label: '$30-$50', valueMin: 30, valueMax: 50 },
+            { label: '$50+', valueMin: 50, valueMax: 999 },
         ]
     };
 
@@ -73,6 +79,7 @@ const Filter = props => {
     }
 
     const [tags, setTags] = useState([]);
+    const [showMoreFilters, setShowMoreFilters] = useState(false);
 
     useEffect(() => {
         getTagsList();
@@ -150,14 +157,52 @@ const Filter = props => {
                         ))}
                     </div>
                 </div>
+
+                {showMoreFilters &&
+                <>
+                    <div className="filter-tags__row">
+                        <div className="filter-tags__title">Route price</div>
+                        <div className="filter-tags__items">
+                            {options.price.map(option => (
+                                <a className={"tag" + (Array.isArray(props.data?.price) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('price', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                                    <span>
+                                        {option.label}
+                                    </span>
+                                    {Array.isArray(props.price?.duration) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
+                                        <span className="tag__icon icon"><Close /></span>
+                                    }
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="filter-tags__row">
+                        <div className="filter-tags__title">Conveniences</div>
+                        <div className="filter-tags__items">
+
+                        </div>
+                    </div>
+
+                    <div className="filter-tags__row">
+                        <div className="filter-tags__title">Route language</div>
+                        <div className="filter-tags__items">
+
+                        </div>
+                    </div>
+                </>
+                }
             </div>
-            {/*<div className="more">
-                <Button
-                    squared={true}
-                >
-                    More filters
-                </Button>
-                        </div>*/}
+
+            <div className="more">
+                    <Button
+                        squared={true}
+                        onClick={(e) => setShowMoreFilters(!showMoreFilters)}
+                    >
+                        {!showMoreFilters ? <>More filters</> : <>Less filters</>}
+                    </Button>
+                </div>
+
+
             <div className="filter__actions">
                 <div className="filter__select filter__select--simple">
                     <SelectField

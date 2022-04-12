@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 export default function Pagination({data, pathname, basepath}) {
 
-    let links = {
+    const links = {
         prev: null,
         next: null,
         pages: [],
         currentPage: 1
     };
 
-    if (typeof data === 'object' && Array.isArray(data.links)) {
+    if (typeof data === 'object' && !!data?.links && Array.isArray(data?.links)) {
 
         let pageCounter = 1;
 
