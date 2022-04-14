@@ -93,7 +93,8 @@ export default function RoutesListPage(props) {
     }, [props.list.meta]);
 
     useEffect(() => {
-        if (!!router.query?.page && router.query?.page != currentPage) {
+        
+        if (!!router.query?.page && router.query?.page != pagination?.current_page) {
             getItems(!!router.query?.lazy);
         }
     }, [router.query?.page]);

@@ -94,7 +94,7 @@ const Filter = props => {
                         <div className="filter__text">Route costs</div>
                         <div className="switch">
                             {options.cost.map(option => (
-                                <a href="javascript:void(0)" onClick={(e) => setOption('cost', option.value)} className={'switch__option' + (props.data?.cost == option.value ? ' active' : '')}>{option.label}</a>
+                                <a key={option.value} href="javascript:void(0)" onClick={(e) => setOption('cost', option.value)} className={'switch__option' + (props.data?.cost == option.value ? ' active' : '')}>{option.label}</a>
                             ))}
                         </div>
                     </div>
@@ -102,7 +102,7 @@ const Filter = props => {
                         <div className="filter__text">Way to travel</div>
                         <div className="switch">
                             {options.type.map(option => (
-                                <a onClick={(e) => setOption('type', option.value)} className={"switch__option " + option?.className + (props.data?.type == option.value ? ' active' : '')} href="javascript:void(0)">
+                                <a key={option.value} onClick={(e) => setOption('type', option.value)} className={"switch__option " + option?.className + (props.data?.type == option.value ? ' active' : '')} href="javascript:void(0)">
                                     {option.label}
                                 </a>
                             ))}
@@ -111,16 +111,16 @@ const Filter = props => {
                     <div className="filter__item">
                         <div className="filter__text">Super place</div>
                         <div className="switch">
-                            {options.superPlace.map(option => (
-                                <a className={'switch__option' + (props.data?.superPlace == option.value ? ' active' : '')} onClick={(e) => setOption('superPlace', option.value)} href="javascript:void(0)">{option.label}</a>
+                            {options.superPlace.map((option, index) => (
+                                <a key={index} className={'switch__option' + (props.data?.superPlace == option.value ? ' active' : '')} onClick={(e) => setOption('superPlace', option.value)} href="javascript:void(0)">{option.label}</a>
                             ))}
                         </div>
                     </div>
                     <div className="filter__item">
                         <div className="filter__text">Autor</div>
                         <div className="switch">
-                            {options.profAuthor.map(option => (
-                                <a className={'switch__option' + (props.data?.profAuthor == option.value ? ' active' : '')} onClick={(e) => setOption('profAuthor', option.value)} href="javascript:void(0)">{option.label}</a>
+                            {options.profAuthor.map((option, index) => (
+                                <a key={index} className={'switch__option' + (props.data?.profAuthor == option.value ? ' active' : '')} onClick={(e) => setOption('profAuthor', option.value)} href="javascript:void(0)">{option.label}</a>
                             ))}
                         </div>
                     </div>
@@ -131,7 +131,7 @@ const Filter = props => {
                     <div className="filter-tags__title">Route type</div>
                     <div className="filter-tags__items">
                         {tags.map(tag => (
-                            <a className={"tag" + (Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
+                            <a key={tag.code} className={"tag" + (Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
                                 <span>{tag.title}</span>
                                 {(Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1) &&
                                     <span className="tag__icon icon"><Close /></span>
@@ -146,7 +146,7 @@ const Filter = props => {
                     <div className="filter-tags__items">
 
                         {options.duration.map(option => (
-                            <a className={"tag" + (Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('duration', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                            <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('duration', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
                                 <span>
                                     {option.label}
                                 </span>
@@ -164,7 +164,7 @@ const Filter = props => {
                         <div className="filter-tags__title">Route price</div>
                         <div className="filter-tags__items">
                             {options.price.map(option => (
-                                <a className={"tag" + (Array.isArray(props.data?.price) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('price', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                                <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(props.data?.price) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('price', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
                                     <span>
                                         {option.label}
                                     </span>
