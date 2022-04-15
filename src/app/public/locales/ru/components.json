@@ -56,5 +56,45 @@
     "searchbar.placeholder": "например: Санкт-Петербург",
 
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+
+    "filter.cost": "Расходы на маршруте",
+    "filter.cost_all": "Все",
+    "filter.cost_free": "Бесплатно",
+    "filter.cost_1": "$",
+    "filter.cost_2": "$$",
+    "filter.cost_3": "$$$",
+    "filter.cost_4": "$$$$",
+
+    "filter.type": "Способ прохождения",
+    "filter.type_all": "Все",
+
+    "filter.superPlace": "Суперместо на маршруте",
+    "filter.superPlace_all": "Все",
+    "filter.type_all_has": "Суперместо",
+
+    "filter.author": "Автор",
+    "filter.profAuthor_all": "Все",
+    "filter.profAuthor_has": "Профессиональный автор",
+
+    "filter.tags": "Метки маршрута",
+
+    "filter.duration": "Продолжительность",
+    "filter.duration_less_3_hour": "Менее 3х часов",
+    "filter.duration_all_day": "Весь день",
+    "filter.duration_1-2_days": "1-2 дня",
+    "filter.duration_2_days_more": "2 дня и более",
+
+    "filter.price": "Стоимость маршрута",
+    "filter.price_free": "Бесплатно",
+    "filter.price_less_30": "Менее $30",
+    "filter.price_30-50": "$30-$50",
+    "filter.price_50_more": "$50+",
+
+    "filter.conveniences": "Удобства на маршруте",
+
+    "filter.route_language": "Язык маршрута",
+
+    "filter.button_more_filters": "Другие фильтры",
+    "filter.button_less_filters": "Скрыть фильтры"
 }

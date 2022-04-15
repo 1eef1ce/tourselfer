@@ -1,7 +1,7 @@
 import {Breadcrumbs, Layout, Pagination} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
-import Filter from '@components/filter';
+import {Filter, FilterClass} from '@components/RoutesFilter';
 import {RoutesContainer} from '@components/Routes';
 
 export default function RoutesIndexPage() {
