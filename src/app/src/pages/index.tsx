@@ -11,6 +11,8 @@ import { i18n } from "next-i18next";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import {loadHomepage} from '@lib/api/fetch-homepage';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const getServerSideProps = async ({locale}) => {
 
@@ -45,19 +47,48 @@ export default function Homepage (props) {
                     <div className="search showcase__search">
                         <div className="search__title">{t('hero.search_title')}</div>
                         <Searchbar/>
-                        {(typeof props.data === 'object') && Array.isArray(props.data.popular_now) &&
+                        <HeroPopularCities items={props.data}/>
+                        {/*{(typeof props.data === 'object') && Array.isArray(props.data.popular_now) &&
                         <HeroPopularCities items={props.data.popular_now} />
-                        }
+                        }*/}
                     </div>
-                    {(typeof props.data === 'object') && Array.isArray(props.data.favorite_cities) &&
+                    <div className="showcase__bottom container">
+                        <ShowcaseItems items={props.data}/>
+                    </div>
+                    {/*{(typeof props.data === 'object') && Array.isArray(props.data.favorite_cities) &&
                     <div className="showcase__bottom container">
                         <ShowcaseItems items={props.data.favorite_cities}/>
                     </div>
-                    }
-                </div>
+                    }*/}
+                </div>           
             </div>{/*showcase*/}
 
-            {(typeof props.data === 'object') && Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
+            <div className="section locations">
+                <div className="container">
+                    <div className="section__head">
+                        <h2 className="title-2">{t('section_locations.title')}</h2>
+                        <Link href="#">
+                            <a className="link link--arrow link--gray">
+                                <span>{t('section_locations.more_link')}</span>
+                                <span className="icon">
+                                    <ArrowRight/>
+                                </span>
+                            </a>
+                        </Link>
+                    </div>
+                    <LocationsContainer items={props.data}/>
+                    <div className="locations__more">
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                        >
+                            {t('section_locations.get_more')}
+                        </Button>
+                    </div>
+                </div>
+            </div>
+
+            {/*{(typeof props.data === 'object') && Array.isArray(props.data.bestsellers_cities) && props.data.bestsellers_cities.length > 0 &&
             <div className="section locations">
                 <div className="container">
                     <div className="section__head">
@@ -82,7 +113,7 @@ export default function Homepage (props) {
                     </div>
                 </div>
             </div>
-            }
+            }*/}
 
             <div className="section advantages">
                 <div className="container">

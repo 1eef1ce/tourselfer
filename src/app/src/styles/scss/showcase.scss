@@ -136,6 +136,34 @@
     padding: 24px 12px;
     background: #fff;
     border-radius: 16px;
+    
+    .skeleton-items {
+        display: flex;
+        width: 100%;
+        .item {
+            height: 200px;
+            background-color: #E0E5ED;
+            border-radius: 8px;
+            width: calc(100% / 4 - 16px);
+            display: flex;
+            align-items: flex-end;
+            padding: 12px 20px;
+            &:not(:last-of-type) {
+                margin-right: 24px;
+            }
+            .item-title {
+                width: 120px;
+                height: 32px;
+                background: #F7F9FC;
+                border-radius: 16px;
+                -webkit-animation: pulse 2.5s infinite; 
+                animation: pulse 2.5s infinite;
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
 
     @include max-767 {
       padding: 12px 4px;
@@ -225,4 +253,12 @@
   &__title {
 
   }
+}
+
+@-webkit-keyframes pulse {
+    50% {opacity: 0;}
+}
+
+@keyframes pulse {
+    50% {opacity: 0;}
 }
