@@ -53,15 +53,7 @@ const Header = () => {
                     </Link>
                     {isMobile && <MobileSearchContainer/>}
                     <div className="dropdown header__lang">
-                        <button className="dropdown__btn">
-                            <span>lang</span>
-                            <span className="icon dropdown__icon">
-                                <ChevronDown/>
-                            </span>
-                        </button>
-                        <div className="dropdown__content">
                             <I18nWidget/>
-                        </div>
                     </div>
                     <HeaderMenu/>
                     <div className="header-links">

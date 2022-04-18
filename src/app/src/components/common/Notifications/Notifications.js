@@ -4,7 +4,11 @@ import { useSelector } from "react-redux";
 
 const Notifications = () => {
 
-    const items = useSelector(state => state.notifications);
+    const selector = useSelector(state => state);
+    let items = [];
+
+    if (selector && Array.isArray(selector.notifications))
+        items = selector.notifications;
 
     return (
        <>

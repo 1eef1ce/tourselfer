@@ -8,5 +8,6 @@ export { default as Modal } from './Modal';
 export { default as Radio } from './Radio';
 export { default as Rating } from './Rating';
 export { default as SelectField } from './SelectField';
+export { default as Number } from './Number';
 export { default as Scrollbar } from './Scrollbar';
 export { default as Textarea } from './Textarea';
