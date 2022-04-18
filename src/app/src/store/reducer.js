@@ -10,6 +10,11 @@ const notifyReducer = (state = [], action) => {
                 title: action.payload.title,
                 message: action.payload.message,
             }]);
+        
+        case actions.NOTIFY_REMOVE:
+            return state.filter(
+                ({ id }) => id !== action.index
+            );
 
         default:
             return state

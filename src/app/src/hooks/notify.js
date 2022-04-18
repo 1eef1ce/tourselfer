@@ -14,9 +14,12 @@ export const useNotify = () => {
                 title: props.title,
                 message: props.message
             }));
+            setTimeout(() => {
+                dispatch(actions.removeNotify());
+            }, 5000);
         }
     }
-
+            
     const errorNotify = ({...props}) => {
 
         let data = {
