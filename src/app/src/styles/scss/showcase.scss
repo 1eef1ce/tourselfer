@@ -163,6 +163,15 @@
                 }
             }
         }
+        @include max-767 {
+            padding: 12px 4px;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            .item {
+                width: 282px;
+                flex-shrink: 0;
+            }
+        }
     }
 
     @include max-767 {
