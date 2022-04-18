@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import {Breadcrumbs, Layout} from '@components/common';
 import {Button, Checkbox, Input, InputPassword, Radio, SelectField, Textarea} from '@components/ui';
@@ -82,6 +82,9 @@ export default function ExampleForm() {
                                         name="exampleText"
                                         type="text"
                                         label="Text"
+                                        mask="99/99/99"
+                                        maskPlaceholder="-"
+                                        alwaysShowMask
                                         required
                                         {...getFieldProps('exampleText')}
                                     />
