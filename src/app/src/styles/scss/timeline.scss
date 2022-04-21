@@ -1,0 +1,70 @@
+@import "variables.scss";
+@import "media.scss";
+
+.timeline {
+  position: relative;
+  display: flex;
+
+  &__dash {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-bottom: 1px dashed $color-primary;
+    z-index: -1;
+
+    @include max-767 {
+      top: 0;
+      bottom: 0;
+      left: 9px;
+      right: auto;
+      border-bottom: 0;
+      border-right: 1px dashed $color-primary;
+    }
+  }
+
+  &__placeholder {
+    background: #fff;
+
+    @include max-767 {
+      align-self: flex-start;
+    }
+  }
+
+  &__time {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 2px 6px 2px 2px;
+    background: $color-primary;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.14;
+    color: #fff;
+
+    &::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+      border-radius: 100%;
+      background: $color-green;
+    }
+
+    &--last {
+      position: absolute;
+      right: 0;
+      padding: 2px;
+
+      @include max-767 {
+        right: auto;
+        bottom: 0;
+      }
+
+      &::before {
+        margin-right: 0;
+      }
+    }
+  }
+}

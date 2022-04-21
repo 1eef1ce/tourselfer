@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FC } from 'react';
 import { useRouter } from 'next/router';
 import { ChevronDown, World } from '@components/icons';
 import { useTranslation } from 'next-i18next';

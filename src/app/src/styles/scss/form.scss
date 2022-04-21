@@ -13,13 +13,34 @@
 
   &__row {
     display: flex;
+    margin: 24px -8px -8px;
+
+    &--end {
+      align-items: flex-end;
+    }
+
+    .form__group {
+      margin: 8px;
+    }
+  }
+
+  &__group {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
     margin-bottom: 24px;
 
     &--btn {
       margin: 32px 0;
       align-items: normal;
+
+      .btn {
+
+        & + .btn {
+          margin-top: 16px;
+        }
+      }
     }
 
     &--select {
@@ -28,6 +49,16 @@
 
     &--radio {
       margin: 32px 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4px -4px -4px;
+
+    .btn {
+      margin: 4px;
     }
   }
 
@@ -90,7 +121,7 @@
     transition: 0.2s;
 
     &::placeholder {
-      color: $color-semi;
+      color: $color-secondary;
     }
 
     &:not(:disabled) {
@@ -152,6 +183,15 @@
     resize: none;
   }
 
+  &__length {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 14px;
+    line-height: 1.14;
+    color: $color-secondary;
+  }
+
   &__error {
     margin-top: 4px;
     font-size: 14px;
@@ -174,10 +214,13 @@
     }
   }
 
-  .btn {
-
-    & + .btn {
-      margin-top: 16px;
-    }
+  &__divider {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    margin: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-secondary;
   }
 }

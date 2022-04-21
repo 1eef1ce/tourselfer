@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {Logo} from '@components/ui';
-import {ChevronDown} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';

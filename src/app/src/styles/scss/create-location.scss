@@ -1,0 +1,16 @@
+@import "variables.scss";
+@import "media.scss";
+
+.create-location {
+  padding: 48px;
+  margin-top: 48px;
+  border: 1px solid $color-gray-10;
+  border-radius: 16px;
+
+  @include max-767 {
+    padding: 32px 16px;
+    margin: 32px -16px 0;
+    border-width: 1px 0 1px 0;
+    border-radius: 0;
+  }
+}

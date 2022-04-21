@@ -1,4 +1,4 @@
-import React, { useState, useMemo, Component } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {Logo} from '@components/ui';
-import {Appstore, ChevronDown, Facebook, Googleplay, Instagram, World} from '@components/icons';
+import {Appstore, Googleplay} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import {FC} from 'react';
 import { useTranslation } from 'next-i18next';

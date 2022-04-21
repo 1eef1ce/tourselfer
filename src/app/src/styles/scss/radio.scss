@@ -5,6 +5,7 @@
   position: relative;
   display: flex;
   align-items: flex-start;
+  margin-top: 16px;
 
   &__input {
     position: absolute;
@@ -165,9 +166,5 @@
       background: #fff;
       border-radius: 100%;
     }
-  }
-
-  & + & {
-    margin-top: 12px;
   }
 }

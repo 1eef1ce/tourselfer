@@ -1,6 +1,7 @@
 export { default as Alert } from './Alert';
 export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
+export { FileUpload, ImageUpload } from './FileUpload';
 export { Input, InputPassword } from './Input';
 export { default as Loader } from './Loader';
 export { default as Logo } from './Logo';

@@ -1,15 +1,13 @@
 import React, {InputHTMLAttributes} from 'react';
 import cn from 'classnames';
 import {Close} from '@components/icons';
-import InputMask from "react-input-mask";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string
     name: string
     label?: string
     required?: boolean
-    type?: 'text' | 'email' | 'password',
-    mask?:string
+    type?: 'text' | 'email' | 'password'
 }
 
 interface InputState {
@@ -54,7 +52,6 @@ class Input extends React.Component<InputProps, InputState> {
             label,
             required,
             type = 'text',
-            mask,
             ...props
         } = this.props;
 
@@ -76,14 +73,13 @@ class Input extends React.Component<InputProps, InputState> {
                     </label>
                 )}
                 <div className={cn("form__field", inputClass())}>
-                    <InputMask
+                    <input
                         className="form__input"
                         id={id}
                         name={name}
                         type={type}
                         value={this.state.inputValue}
                         required={required}
-                        mask={mask}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         onChange={this.onChange}
