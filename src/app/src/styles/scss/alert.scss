@@ -39,7 +39,7 @@
     }
   
     &-info {
-        background-color: rgba(15, 36, 32, 0.1);
+        background-color: #e7e9e9;
         .icon {
             background: url("../../assets/icons/info-24.svg") no-repeat center;
         }
@@ -51,7 +51,7 @@
     }
 
     &-error {
-        background-color: rgba(218, 12, 9, 0.1);
+        background-color: #fbe7e6;
         .icon {
             background: url("../../assets/icons/error-24.svg") no-repeat center;
         }
@@ -63,7 +63,7 @@
     }
   
     &-success {
-        background-color: rgba(103, 166, 0, 0.1);
+        background-color: #f0f6e6;
         .icon {
             background: url("../../assets/icons/check-24.svg") no-repeat center;
         }

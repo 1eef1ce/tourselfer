@@ -8,4 +8,4 @@ export const addNotify = notify => ({
 export const removeNotify = id => ({
     type: actions.NOTIFY_REMOVE,
     payload: { id }
-})
+});
