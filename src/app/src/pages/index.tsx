@@ -35,7 +35,7 @@ export default function Homepage (props) {
     const { t } = useTranslation("pages__homepage");
 
     return (
-        <Layout>
+        <Layout mainPage={true}>
             <Head>
                 <title>Tourselfer</title>
                 <meta name="description" content="Ready routes for your phone"/>

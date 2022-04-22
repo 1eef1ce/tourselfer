@@ -3,8 +3,6 @@ import React from 'react';
 interface AlertProps {
     type?: 'success' | 'error' | 'info';
     icon?: boolean;
-    title?: string;
-    message: string;
     onClick?: () => void;
 }
 
@@ -12,8 +10,8 @@ const Alert: React.FC<AlertProps> = ((props) => {
     const {
         type = 'info',
         icon = false,
-        title,
-        message,
+        children,
+        ...rest
     } = props;
 
     const mode = icon ? 'with-icon' : 'no-icon';
@@ -30,11 +28,8 @@ const Alert: React.FC<AlertProps> = ((props) => {
             {icon && (
                 <div className={'icon'}/>
             )}
-            <div className={'alert-content'}>
-            {title && (
-                <span className={'alert-title'}>{title}</span>
-            )}
-                <span className={'alert-msg'}>{message}</span>
+            <div className={'alert-content'}>               
+                {children}
             </div>
             <button className={'close-btn'} onClick={handleClick}/>
         </div>

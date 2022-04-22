@@ -56,5 +56,11 @@
     "searchbar.placeholder": "например: Санкт-Петербург",
 
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+    
+    "alert.title": "Заголовок всплывашки",
+    "alert.message_error": "Сообщение об ошибке",
+    "alert.message_info": "Информационное сообщение",
+    "alert.message_success": "Отправлено успешно"
+    
 }

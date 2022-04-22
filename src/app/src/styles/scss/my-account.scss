@@ -1,0 +1,185 @@
+@import "variables.scss";
+@import "media.scss";
+
+.personal {
+    display: flex;
+    .column {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 0;
+        flex-shrink: 0;
+        &.left {
+            width: 456px;
+            margin-right: 184px;
+        }
+        &.right {
+            width: calc(100% - 640px);
+            flex-grow: 1;
+            .tab-content {
+                display: none;
+                &.active {
+                    display: flex;
+                    flex-direction: column;
+                }
+                h2 {
+                    margin-top: 0;
+                    margin-bottom: 32px;
+                    line-height: 48px;
+                    font-size: 34px;
+                }
+            }
+        }
+    }
+    .change-avatar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+        .avatar {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+        button:not(:last-child) {
+            margin-right: 4px;
+        }
+    }
+    .payment-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 28px;
+        padding-bottom: 14px;
+        .title {
+            font-weight: 700;
+            line-height: 32px;
+            margin-bottom: 4px;
+        }
+        .desc {
+            color: $color-semi;
+            padding-bottom: 8px;
+        }
+        .payment-items {
+            display: flex;
+            flex-wrap: wrap;
+            .item {
+                padding: 16px;
+                border: 1px solid rgba(0, 0, 0, 0.09);
+                box-sizing: border-box;
+                border-radius: 10px;
+                transition: 0.2s;
+                cursor: pointer;
+                width: calc(100% / 2 - 8px);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 16px;
+                &:nth-child(odd) {
+                    margin-right: 16px;
+                }
+                &:hover, &.active {
+                    border: 1px solid #fff;
+                    box-shadow: 0px 0px 0px 2px $color-green;
+                }
+                .desc {
+                    font-size: 16px;
+                }
+                .logo {
+                    width: 128px;
+                    height: 64px;
+                    margin-left: 24px;
+                }
+                &.cards {
+                    .logo {
+                        background: url("../../assets/images/cards.png") no-repeat center;
+                    }
+                }
+                &.yandex {
+                    .logo {
+                        background: url("../../assets/images/yandex.png") no-repeat center;
+                    }
+                }
+                &.sber {
+                    .logo {
+                        background: url("../../assets/images/sber.png") no-repeat center;
+                    }
+                }
+            }
+        }
+    }
+    .button-row {
+        margin-top: 18px;
+    }
+    @media(max-width: 1270px) {
+        .column {
+            &.left {
+                margin-right: 24px;
+            }
+            &.right {
+                width: calc(100% - 480px);
+            }
+            .payment-group {
+                .payment-items {
+                    .item {
+                        width: 100%;
+                        &:nth-child(odd) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 1023px) {
+        flex-direction: column;
+        .column {
+            &.left, &.right {
+                width: 100%;
+                margin-right: 0;
+            }
+            &.left {
+                margin-bottom: 32px;
+            }
+            .payment-group .payment-items .item {
+                &.checked {
+                    .payment-system {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        &::after {
+                            content: "";
+                            display: inline-block;
+                            position: absolute;
+                            left: 8px;
+                            top: 8px;
+                            width: 12px;
+                            height: 12px;
+                            box-sizing: border-box;
+                            background: #fff;
+                            border-radius: 100%;
+                        }
+                        &::before {
+                            content: "";
+                            display: inline-block;
+                            width: 28px;
+                            height: 28px;
+                            margin-right: 8px;
+                            border-radius: 100%;
+                            background: rgba(15, 36, 32, 0.07);
+                            flex-shrink: 0;
+                            box-sizing: border-box;
+                            background: #12B4F7;
+                            border-color: #12B4F7;
+                        }
+                    }
+                }
+            }
+        }
+        .change-avatar .avatar {
+            width: 48px;
+            height: 48px;
+        }
+    }
+}

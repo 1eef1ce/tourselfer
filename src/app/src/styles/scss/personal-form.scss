@@ -1,0 +1,107 @@
+@import "variables.scss";
+@import "media.scss";
+
+.personal-form {
+    width: 100%;
+    max-width: 616px;
+    .form__row {
+        flex-direction: row;
+        .form__item {
+            width: calc(100% / 2 - 12px);
+            &:first-child {
+                margin-right: 24px;
+            }
+            .PhNumber.react-tel-input {
+                width: 100%;
+                .form-control {
+                    background-color: #fff;
+                    width: 100%;
+                    &:focus, &.active {
+                        width: calc(100% - 4px);
+                    }
+                }
+            }
+            &.date-of-birth {
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                &::before, &::after {
+                    content: '/';
+                    color: $color-secondary;
+                    z-index: 15;
+                    display: block;
+                    position: absolute;
+                    left: 56px;
+                    top: 41px;
+                    font-size: 20px;
+                }
+                &::before {
+                    left: 50px;
+                }
+                &::after {
+                    left: 102px;
+                }
+                .form__label {
+                    width: 100%;  
+                    position: absolute;
+                    top: 4px;
+                }
+                .form__field {
+                    width: 172px;
+                    position: absolute;
+                    left: 0;
+                    top: 28px;
+                    box-shadow: inset 0 0 0 1px $color-gray-7;
+                    border-radius: 10px;
+                    height: 56px;
+                    .form__input {
+                        position: absolute;
+                        box-shadow: unset;
+                        padding: 12px;
+                        top: 1px;
+                        height: 54px;
+                        &.month {
+                            left: 1px;
+                            z-index: 10;
+                            width: 58px;
+                            border-radius: 10px 0 0 10px;
+                        }
+                        &.day {
+                            left: 58px;
+                            z-index: 5;
+                            width: 50px;
+                            border-radius: 0;
+                        }
+                        &.year {
+                            left: 108px;
+                            width: 63px;
+                            border-radius: 0 10px 10px 0;
+                        }
+                    }
+                    .form__icon {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width: 1270px) {
+        .form__row {
+            flex-direction: column;
+            margin-bottom: 0;
+            &.form__row--btn {
+                width: fit-content;
+            }
+            .form__item {
+                width: 100%;
+                margin-bottom: 8px;
+                &:first-child {
+                    margin-right: 0;
+                }
+                &.date-of-birth {
+                    height: 84px;
+                }
+            }
+        }
+    }
+}
