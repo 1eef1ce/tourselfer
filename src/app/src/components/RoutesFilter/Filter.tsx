@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
@@ -7,31 +7,43 @@ import FilterClass from './FilterClass';
 import Link from 'next/link';
 import {Api} from "@lib/api"
 
+interface FilterData {
+    cost?: any
+    type?: any,
+    superPlace?: any,
+    profAuthor?: any,
+    tag?: any,
+    duration?: any,
+    price?: any,
+    conveniences?: any,
+    language?: any
+}
+
 const Filter = props => {
 
     const router = useRouter();
     const { t } = useTranslation("components");
 
+    const BaseApi = new Api({locale: props.locale});
     const FilterApi = new FilterClass({router, t});
     const options = FilterApi.getParams();
 
+    const needUpdate = useRef(false);
+    const [data, setData] = useState<FilterData>(FilterApi.getFromURL());
+    const [tags, setTags] = useState([]);
+    const [showMoreFilters, setShowMoreFilters] = useState(false);
+
     const setOption = (key, value) => {
-        props.updateData(prevState => ({
+        setData(prevState => ({
             ...prevState,
             [key]: value
         }));
-        
-        /*if (!!props.onChanged && typeof props.onChanged === 'function') {
-            props.onChanged();
-        }*/
+
+        needUpdate.current = true;
     };
 
-    useEffect(() => {
-        console.log('updateData from comp Filter');
-    }, [props.data]);
-
     const setMultipleOption = (key, value) => {
-        let valueArray = props.data[key] ?? [],
+        let valueArray = data[key] ?? [],
             index = valueArray.indexOf(value);
 
         if (index !== -1) {
@@ -40,32 +52,39 @@ const Filter = props => {
             valueArray.push(value);
         }
 
-        props.updateData(prevState => ({
+        setData(prevState => ({
             ...prevState,
             [key]: valueArray
         }));
 
+        needUpdate.current = true;
+
     };
 
-    const getTagsList = () => {
-        let api = new Api({locale: props.locale});
-        let queryParams = {};
+    useEffect(() => {
+        const queryParams = {};
 
-        api.getRouteTagsList(queryParams)
+        BaseApi.getRouteTagsList(queryParams)
             .then(response => {
                 setTags(response?.data ?? []);
             });
-    }
-
-    const [tags, setTags] = useState([]);
-    const [showMoreFilters, setShowMoreFilters] = useState(false);
-
-    useEffect(() => {
-        getTagsList();
     }, []);
 
     useEffect(() => {
-        const moreFilters = [props.data?.price].filter(item => {
+        if (needUpdate.current == true) {
+
+            needUpdate.current = false;
+            if (props?.onChanged && typeof props?.onChanged === 'function') {
+                
+                props?.onChanged.call(this, data);
+            }
+
+            return;
+        }
+    }, [data]);
+
+    useEffect(() => {
+        const moreFilters = [data?.price].filter(item => {
             if (Array.isArray(item) && item.length > 0) {
                 return true;
             } else if (typeof item !== 'undefined') {
@@ -76,7 +95,7 @@ const Filter = props => {
 
         setShowMoreFilters(moreFilters);
 
-    }, [props.data]);
+    }, [data]);
 
     return (
         <div className="filter">
@@ -86,7 +105,7 @@ const Filter = props => {
                         <div className="filter__text">{t('filter.cost')}</div>
                         <div className="switch">
                             {options.cost.map(option => (
-                                <a key={option.value} href="javascript:void(0)" onClick={(e) => setOption('cost', option.value)} className={'switch__option' + (props.data?.cost == option.value ? ' active' : '')}>{option.label}</a>
+                                <a key={option.value} href="javascript:void(0)" onClick={(e) => setOption('cost', option.value)} className={'switch__option' + (data?.cost == option.value ? ' active' : '')}>{option.label}</a>
                             ))}
                         </div>
                     </div>
@@ -94,7 +113,7 @@ const Filter = props => {
                         <div className="filter__text">{t('filter.type')}</div>
                         <div className="switch">
                             {options.type.map(option => (
-                                <a key={option.value} onClick={(e) => setOption('type', option.value)} className={"switch__option " + option?.className + (props.data?.type == option.value ? ' active' : '')} href="javascript:void(0)">
+                                <a key={option.value} onClick={(e) => setOption('type', option.value)} className={"switch__option " + option?.className + (data?.type == option.value ? ' active' : '')} href="javascript:void(0)">
                                     {option.label}
                                 </a>
                             ))}
@@ -104,7 +123,7 @@ const Filter = props => {
                         <div className="filter__text">{t('filter.superPlace')}</div>
                         <div className="switch">
                             {options.superPlace.map((option, index) => (
-                                <a key={index} className={'switch__option' + (props.data?.superPlace == option.value ? ' active' : '')} onClick={(e) => setOption('superPlace', option.value)} href="javascript:void(0)">{option.label}</a>
+                                <a key={index} className={'switch__option' + (data.superPlace == option.value ? ' active' : '')} onClick={(e) => setOption('superPlace', option.value)} href="javascript:void(0)">{option.label}</a>
                             ))}
                         </div>
                     </div>
@@ -112,7 +131,7 @@ const Filter = props => {
                         <div className="filter__text">{t('filter.author')}</div>
                         <div className="switch">
                             {options.profAuthor.map((option, index) => (
-                                <a key={index} className={'switch__option' + (props.data?.profAuthor == option.value ? ' active' : '')} onClick={(e) => setOption('profAuthor', option.value)} href="javascript:void(0)">{option.label}</a>
+                                <a key={index} className={'switch__option' + (data?.profAuthor == option.value ? ' active' : '')} onClick={(e) => setOption('profAuthor', option.value)} href="javascript:void(0)">{option.label}</a>
                             ))}
                         </div>
                     </div>
@@ -123,9 +142,9 @@ const Filter = props => {
                     <div className="filter-tags__title">{t('filter.tags')}</div>
                     <div className="filter-tags__items">
                         {tags.map(tag => (
-                            <a key={tag.code} className={"tag" + (Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
+                            <a key={tag.code} className={"tag" + (Array.isArray(data?.tag) && data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
                                 <span>{tag.title}</span>
-                                {(Array.isArray(props.data?.tag) && props.data?.tag.indexOf(tag.code) !== -1) &&
+                                {(Array.isArray(data?.tag) && data?.tag.indexOf(tag.code) !== -1) &&
                                     <span className="tag__icon icon"><Close /></span>
                                 }
                             </a>
@@ -138,11 +157,11 @@ const Filter = props => {
                     <div className="filter-tags__items">
 
                         {options.duration.map(option => (
-                            <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('duration', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                            <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(data?.duration) && data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('duration', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
                                 <span>
                                     {option.label}
                                 </span>
-                                {Array.isArray(props.data?.duration) && props.data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
+                                {Array.isArray(data?.duration) && data?.duration.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
                                     <span className="tag__icon icon"><Close /></span>
                                 }
                             </a>
@@ -156,11 +175,11 @@ const Filter = props => {
                         <div className="filter-tags__title">{t('filter.price')}</div>
                         <div className="filter-tags__items">
                             {options.price.map(option => (
-                                <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(props.data?.price) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('price', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
+                                <a key={option.valueMin + ':' + option.valueMax} className={"tag" + (Array.isArray(data?.price) && data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('price', option.valueMin + ':' + option.valueMax)} href="javascript:void(0)">
                                     <span>
                                         {option.label}
                                     </span>
-                                    {Array.isArray(props.data?.price) && props.data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
+                                    {Array.isArray(data?.price) && data?.price.indexOf(option.valueMin + ':' + option.valueMax) !== -1 &&
                                         <span className="tag__icon icon"><Close /></span>
                                     }
                                 </a>
@@ -171,14 +190,32 @@ const Filter = props => {
                     <div className="filter-tags__row">
                         <div className="filter-tags__title">{t('filter.conveniences')}</div>
                         <div className="filter-tags__items">
-
+                            {options.conveniences.map(option => (
+                                <a key={option.value} className={"tag" + (Array.isArray(data?.conveniences) && data?.conveniences.indexOf(option.value) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('conveniences', option.value)} href="javascript:void(0)">
+                                    <span>
+                                        {option.label}
+                                    </span>
+                                    {Array.isArray(data?.conveniences) && data?.conveniences.indexOf(option.value) !== -1 &&
+                                        <span className="tag__icon icon"><Close /></span>
+                                    }
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     <div className="filter-tags__row">
                         <div className="filter-tags__title">{t('filter.route_language')}</div>
                         <div className="filter-tags__items">
-
+                            {options.language.map(option => (
+                                <a key={option.value} className={"tag" + (Array.isArray(data?.language) && data?.language.indexOf(option.value) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('language', option.value)} href="javascript:void(0)">
+                                    <span>
+                                        {option.label}
+                                    </span>
+                                    {Array.isArray(data?.language) && data?.language.indexOf(option.value) !== -1 &&
+                                        <span className="tag__icon icon"><Close /></span>
+                                    }
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </>

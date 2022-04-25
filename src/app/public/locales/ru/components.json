@@ -92,8 +92,13 @@
     "filter.price_50_more": "$50+",
 
     "filter.conveniences": "Удобства на маршруте",
+    "filter.conveniences_wifi": "Wi-fi",
+    "filter.conveniences_restroom": "Туалет",
+    "filter.conveniences_cafe": "Кафе",
 
     "filter.route_language": "Язык маршрута",
+    "filter.route_language_en": "Английский",
+    "filter.route_language_ru": "Русский",
 
     "filter.button_more_filters": "Другие фильтры",
     "filter.button_less_filters": "Скрыть фильтры"

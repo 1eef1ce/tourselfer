@@ -1,8 +1,9 @@
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {ChevronRight} from '@components/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 
-export default function Pagination({data, pathname, basepath}) {
+export default function Pagination({data, onClick}) {
 
     const  links = {
         prev: null,
@@ -11,6 +12,7 @@ export default function Pagination({data, pathname, basepath}) {
         currentPage: 1
     };
     const router = useRouter();
+    const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
 
     if (typeof data === 'object' && !!data?.links && Array.isArray(data.links)) {
@@ -67,18 +69,18 @@ export default function Pagination({data, pathname, basepath}) {
                 {links.pages.map(item => (
                     <li className="pagination__item active">
                         <Link
-                            /*href={"/routes/berlin/?page=" + item.page}*/
                             href={{
                                 pathname: pathname,
                                 query: {
-                                    slug: slug,
+                                    ...query,
                                     page: item.page
                                 }
                             }}
+                            
                             shallow={true}
-                            scroll={true}
+                            scroll={false}
                         >
-                            <a className="pagination__link">{item.page}</a>
+                            <a onClick={(e) => onClick(item.page)} className="pagination__link">{item.page}</a>
                         </Link>
                         
                     </li>

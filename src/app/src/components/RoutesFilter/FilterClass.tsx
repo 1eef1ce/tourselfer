@@ -35,6 +35,15 @@ const params = {
         { label: 'filter.price_less_30', valueMin: 1, valueMax: 30, getValue: 'less-30' },
         { label: 'filter.price_30-50', valueMin: 30, valueMax: 50, getValue: '30-50' },
         { label: 'filter.price_50_more', valueMin: 50, valueMax: 999, getValue: 'more-50' },
+    ],
+    conveniences: [
+        { label: 'filter.conveniences_wifi', value: 'wifi', getValue: 'wifi' },
+        { label: 'filter.conveniences_restroom', value: 'restroom', getValue: 'restroom' },
+        { label: 'filter.conveniences_cafe', value: 'cafe', getValue: 'cafe' },
+    ],
+    language: [
+        { label: 'filter.route_language_en', value: 'en', getValue: 'en' },
+        { label: 'filter.route_language_ru', value: 'ru', getValue: 'ru' },
     ]
 };
 
