@@ -13,7 +13,7 @@ export default function Pagination({data, pathname, basepath}) {
     const router = useRouter();
     const { slug } = router.query;
 
-    if (typeof data === 'object' && Array.isArray(data.links)) {
+    if (typeof data === 'object' && !!data?.links && Array.isArray(data.links)) {
 
         let pageCounter = 1;
 

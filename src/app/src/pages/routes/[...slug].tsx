@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import {Breadcrumbs, Layout, Pagination, SeeMore} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
@@ -16,14 +16,14 @@ const getQueryParams = (router) => {
     const {locale, query} = router;
     const queryParams = {
         cityCode: query.slug[0],
-        filter: {},
+        filter: FilterApi.getFromURL(),
         pagination: {
             limit: 12,
             page: query?.page ?? 1
         }
     };
 
-    console.log(FilterApi.getFromURL());
+    //console.log(FilterApi.getFromURL());
 
     return queryParams;
 };
@@ -86,16 +86,18 @@ export async function getServerSideProps ({locale, params, query}) {
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
-};
+}
 
 export default function RoutesListPage(props) {
 
+    const firstRender = useRef(true);
     const router = useRouter();
     const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
 
     const FilterApi = new FilterClass({router});
 
+    const [needUpdate, setNeedUpdate] = useState(false);
     const [items, setItems] = useState(props.list.data);
     const [pagination, setPagination] = useState(props.list.meta);
     const [filter, setFilter] = useState(FilterApi.getFromURL());
@@ -103,6 +105,19 @@ export default function RoutesListPage(props) {
     //const list = props.list.data;
 
     let currentPage = props?.list?.meta?.current_page ?? 1;
+
+    //setFilter(FilterApi.getFromURL());
+
+    
+
+    useEffect(() => {
+        console.log("needUpdate", needUpdate);
+        if (needUpdate == true) {
+            getItems();
+            setNeedUpdate(false);
+        }
+
+    }, [needUpdate]);
 
     const getItems = async (lazyLoad = false) => {
 
@@ -120,8 +135,9 @@ export default function RoutesListPage(props) {
             });
     };
 
-    useEffect(() => {
-        console.log(filter);
+    
+    /*useEffect(() => {
+        
         const urlParams = FilterApi.getURLFromData(filter);
 
         router.push({
@@ -130,16 +146,10 @@ export default function RoutesListPage(props) {
                 slug: [slug[0].toString(), urlParams.query.toString()]
             }, urlParams.params),
         }, undefined, { shallow: true });
-        //getItems();
-    }, [filter]);
+        
+    }, [filter]);*/
 
-    useEffect(() => {
-        setItems(props.list.data);
-    }, [props.list.data]);
-
-    useEffect(() => {
-        setPagination(props.list.meta);
-    }, [props.list.meta]);
+    /*
 
     useEffect(() => {
         
@@ -148,6 +158,17 @@ export default function RoutesListPage(props) {
         }
     }, [router.query?.page]);
 
+    useEffect(() => {
+        if (!firstRender.current) {
+            console.log('has changed router');
+        }
+        
+    }, [router.query]);
+*/
+    
+    
+
+    
 
     return (
         <Layout>
@@ -159,7 +180,21 @@ export default function RoutesListPage(props) {
                 <div className="container">
                     <Breadcrumbs/>
                     <h1 className="title-1">Routes</h1>
-                    <Filter data={filter} updateData={setFilter} locale={locale}/>
+                    <Filter
+                        data={filter}
+                        updateData={setFilter}
+                        locale={locale}
+                        onChanged={() => {
+                            const urlParams = FilterApi.getURLFromData(filter);
+console.log(urlParams);
+                            /*router.push({
+                                pathname: router.pathname,
+                                query: Object.assign({
+                                    slug: [slug[0].toString(), urlParams.query.toString()]
+                                }, urlParams.params),
+                            }, undefined, { shallow: true });*/
+                        }}
+                    />
                     <RoutesContainer items={items} classMod="afterSort"/>
                     <SeeMore
                         data={pagination}
@@ -173,6 +208,10 @@ export default function RoutesListPage(props) {
                                     lazy: true
                                 }
                             }, undefined, { shallow: true })
+                            .then(() => {
+                                setNeedUpdate(true);
+                            });
+                            
                         }} />
                     <Pagination
                         data={pagination}

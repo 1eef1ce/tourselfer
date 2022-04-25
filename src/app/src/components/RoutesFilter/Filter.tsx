@@ -20,7 +20,15 @@ const Filter = props => {
             ...prevState,
             [key]: value
         }));
+        
+        /*if (!!props.onChanged && typeof props.onChanged === 'function') {
+            props.onChanged();
+        }*/
     };
+
+    useEffect(() => {
+        console.log('updateData from comp Filter');
+    }, [props.data]);
 
     const setMultipleOption = (key, value) => {
         let valueArray = props.data[key] ?? [],
