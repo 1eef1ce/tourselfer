@@ -101,5 +101,7 @@
     "filter.route_language_ru": "Русский",
 
     "filter.button_more_filters": "Другие фильтры",
-    "filter.button_less_filters": "Скрыть фильтры"
+    "filter.button_less_filters": "Скрыть фильтры",
+
+    "pagination.show_more": "Показать еще"
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@components/ui';
-import { link } from 'fs';
+import { useTranslation } from 'next-i18next';
 
 export default function SeeMore({ data, onClick, pathname }) {
 
@@ -9,6 +9,7 @@ export default function SeeMore({ data, onClick, pathname }) {
         pages: [],
         currentPage: 1
     };
+    const { t } = useTranslation("components");
 
     if (typeof data === 'object' && !!data?.links && Array.isArray(data?.links)) {
 
@@ -43,7 +44,7 @@ export default function SeeMore({ data, onClick, pathname }) {
                         size='medium'
                         onClick={(e) => {onClick(links.currentPage + 1)}}
                     >
-                        See more
+                        {t('pagination.show_more')}
                     </Button>
                 </div>
             </>
