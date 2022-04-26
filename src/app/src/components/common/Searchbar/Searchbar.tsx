@@ -36,13 +36,13 @@ class SearchbarClass extends React.Component<any, any, any> {
         this.fetchData(event.target.value);
     }
 
-    onClick() {
+    /*onClick() {
         if (this.state.items && this.state.items.length > 0 && !this.state.visibleItems) {
             this.setState({
                 visibleItems: true
             });
         }
-    }
+    }*/
 
     clearValue(e) {
         e.preventDefault();
@@ -85,9 +85,7 @@ class SearchbarClass extends React.Component<any, any, any> {
                     />
                     {((this.state.inputValue !== '') && (this.state.focus === true)) &&
                     (
-                        <span className="form__icon" onMouseDown={this.clearValue}>
-                            <Close/>
-                        </span>
+                        <span className="close-btn" onMouseDown={this.clearValue}></span>
                     )}
                     <Button
                         className="search__btn"

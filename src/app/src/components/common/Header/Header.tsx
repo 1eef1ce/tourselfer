@@ -15,7 +15,14 @@ import BottomMenu from '@components/common/Menu/BottomMenu';
 import {FavoritesWidget} from '@components/common/FavoritesWidget';
 import { useTranslation } from 'next-i18next';
 
-const Header = () => {
+interface HeaderProps {
+    mainPage: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ((props) => {
+    const {
+        mainPage = false
+    } = props;
     const [hasScrolled, setHasScrolled] = useState(false);
     const windowSize = useWindowSize();
     const { t } = useTranslation("components");
@@ -42,10 +49,9 @@ const Header = () => {
 
     return (
         <>
-            <header className={cn("header", {'header--transparent': !hasScrolled})}>
+            <header className={cn("header", {'header--static': !hasScrolled}, {'mainpage': mainPage})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
-                    {isMobile && <MobileMenuContainer/>}
                     <Link href="/">
                         <a className="logo header__logo icon">
                             <Logo/>
@@ -69,6 +75,6 @@ const Header = () => {
             {isMobile && <BottomMenu/>}
         </>
     );
-};
+});
 
 export default Header;

@@ -113,5 +113,11 @@
     "sorts.route_cost": "Затраты на маршруте",
     "sorts.route_duration": "Продолжительность маршрута",
 
-    "pagination.show_more": "Показать еще"
+    "pagination.show_more": "Показать еще",
+    
+    "alert.title": "Заголовок всплывашки",
+    "alert.message_error": "Сообщение об ошибке",
+    "alert.message_info": "Информационное сообщение",
+    "alert.message_success": "Отправлено успешно"
+    
 }
