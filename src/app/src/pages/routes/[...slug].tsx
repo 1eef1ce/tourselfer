@@ -3,6 +3,7 @@ import {Breadcrumbs, Layout, Pagination, SeeMore} from '@components/common';
 import Head from 'next/head';
 import {Button} from '@components/ui';
 import {Filter, FilterClass} from '@components/RoutesFilter';
+import {RoutesSort} from '@components/RoutesSort';
 import {RoutesContainer} from '@components/Routes';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -21,6 +22,10 @@ const getQueryParams = (router) => {
         pagination: {
             limit: pageLimit,
             page: query?.page ?? 1
+        },
+        sort: {
+            by: query?.sort_by ?? undefined,
+            order: query?.sort_order ?? undefined,
         }
     };
 
@@ -39,16 +44,23 @@ export async function getServerSideProps ({locale, params, query}) {
 
     return {
       props: {
+        page: await BaseApi.getPageData('routes-list', {
+            cityCode: query.slug[0],
+        }),
         list: await BaseApi.getRoutesList(queryParams),
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
 }
 
+interface ListSorts {
+    by: string,
+    order: string,
+    label?: any
+}
 
 export default function RoutesListPage(props) {
 
-    const firstRender = useRef(true);
     const router = useRouter();
     const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
@@ -59,20 +71,24 @@ export default function RoutesListPage(props) {
     const [items, setItems] = useState(props.list.data);
     const [pagination, setPagination] = useState(props.list.meta);
 
-    //const list = props.list.data;
 
-    let currentPage = props?.list?.meta?.current_page ?? 1;
+    const updateList = async (filter: object, page: any, lazyload?: boolean, sort?: any) => {
 
-    const updateList = async (filter: object, page: any, lazyload?: boolean) => {
-
-        const queryParams = {
+        let queryParams = {
             cityCode: query.slug[0],
             filter: filter,
             pagination: {
                 limit: pageLimit,
                 page: page ?? 1
-            }
+            },
         };
+
+        if (typeof sort !== 'undefined') {
+            queryParams['sort'] = {
+                by: sort.by,
+                order: sort.order
+            };
+        }
 
         BaseApi.getRoutesList(queryParams)
             .then(response => {
@@ -89,13 +105,16 @@ export default function RoutesListPage(props) {
     return (
         <Layout>
             <Head>
-                <title>Routes</title>
+                <title>{props.page.meta.title}</title>
+                <meta content={props.page.meta.description} name="description"/>
             </Head>
 
             <div className="routes">
                 <div className="container">
-                    <Breadcrumbs/>
-                    <h1 className="title-1">Routes</h1>
+                    <Breadcrumbs
+                        items={props.page.breadcrumbs}
+                    />
+                    <h1 className="title-1">{props.page.title_h1}</h1>
                     <Filter
                         locale={locale}
                         onChanged={(data) => {
@@ -111,6 +130,29 @@ export default function RoutesListPage(props) {
                                 const page = query?.page ?? 1;
                                 updateList(data, page);
                             });
+                        }}
+                    />
+                    <RoutesSort
+                        onChange={(sort) => {
+
+                            if (!!sort.by && !!sort.order) {
+                                const urlParams = FilterApi.getURLFromData(FilterApi.getFromURL());
+
+                                router.push({
+                                    pathname: router.pathname,
+                                    query: {
+                                        ...query,
+                                        sort_by: sort.by,
+                                        sort_order: sort.order
+                                    }
+                                }, undefined, { shallow: true })
+                                .then(() => {
+                                    const page = query?.page ?? 1;
+                                    updateList(FilterApi.getFromURL(), page, false, sort);
+                                });
+
+
+                            }
                         }}
                     />
                     <RoutesContainer items={items} classMod="afterSort"/>

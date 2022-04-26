@@ -1,6 +1,9 @@
 
 export class Api {
 
+    locale: any;
+    baseURL: string;
+
     constructor(props) {
         this.locale = props.locale ?? 'en';
         this.baseURL = process.env.API_HOST ?? 'http://localhost'
@@ -16,7 +19,6 @@ export class Api {
 
                     if (typeof value !== 'undefined') {
                         if (Array.isArray(value) && value.length > 0) {
-                            console.log(value);
                             params.append(key + '[' + index + ']', value.join(';'));
                         } else {
                             params.append(key + '[' + index + ']', value.toString());
@@ -42,10 +44,10 @@ export class Api {
 
         if (!!params.pagination) {
             if (!!params.pagination.limit && params.pagination.limit > 0)
-                pagination.limit = parseInt(params.pagination.limit);
+                pagination['limit'] = parseInt(params.pagination.limit);
 
             if (!!params.pagination.page && params.pagination.page > 0)
-                pagination.page = parseInt(params.pagination.page);
+                pagination['page'] = parseInt(params.pagination.page);
         }
 
         return pagination;
@@ -69,6 +71,30 @@ export class Api {
             });
     }
 
+    async getPageData(pageType, props?: any) {
+        let params = {
+            language: this.locale
+        };
+        let methodURL = '/api/v1/pageData/' + encodeURI(pageType);
+
+        Object.assign(params, props);
+
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    meta: null,
+                    title_h1: "",
+                    breadcrumbs: []
+                };
+            });
+    }
+
     async getRoutesList(props) {
 
         let params = {
@@ -82,7 +108,10 @@ export class Api {
             methodURL = '/api/v1/route/findByCityCode/' + encodeURI(props.cityCode);
 
         if (!!props.filter)
-            params.filter = props.filter;
+            params['filter'] = props.filter;
+
+        if (!!props.sort)
+            params['sort'] = props.sort;
 
         Object.assign(params, this.setPagination(props));
 

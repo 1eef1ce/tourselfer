@@ -1,4 +1,6 @@
 {
+    "breadcrumbs.main_page": "Главная",
+
     "header.link.lang": "Язык",
     "header.link.favorites": "Избранное",
     "header.link.signIn": "Войти",
@@ -58,6 +60,7 @@
     "yes": "Да",
     "no": "Нет",
 
+    "filter.mobile_title": "Фильтр",
     "filter.cost": "Расходы на маршруте",
     "filter.cost_all": "Все",
     "filter.cost_free": "Бесплатно",
@@ -95,6 +98,8 @@
     "filter.conveniences_wifi": "Wi-fi",
     "filter.conveniences_restroom": "Туалет",
     "filter.conveniences_cafe": "Кафе",
+    "filter.conveniences_free_parking": "Бесплатная парковка",
+    "filter.conveniences_parking": "Парковка",
 
     "filter.route_language": "Язык маршрута",
     "filter.route_language_en": "Английский",
@@ -102,6 +107,11 @@
 
     "filter.button_more_filters": "Другие фильтры",
     "filter.button_less_filters": "Скрыть фильтры",
+
+    "sorts.route_rating": "Рейтинг маршрута",
+    "sorts.author_rating": "Рейтинг автора",
+    "sorts.route_cost": "Затраты на маршруте",
+    "sorts.route_duration": "Продолжительность маршрута",
 
     "pagination.show_more": "Показать еще"
 }

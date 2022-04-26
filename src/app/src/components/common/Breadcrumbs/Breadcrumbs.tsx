@@ -2,6 +2,7 @@ import {ChevronRight} from '@components/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 const getPathFromUrl = (url: string): string => {
     return url.split(/[?#]/)[0];
@@ -22,24 +23,28 @@ export interface Breadcrumb {
 export interface BreadcrumbsProps {
     rootLabel?: string | null;
     rootClass?: string;
+    items?: any;
 }
 
 const defaultProps: BreadcrumbsProps = {
     rootLabel: 'Main',
-    rootClass: 'breadcrumbs'
+    rootClass: 'breadcrumbs',
 };
 
 const Breadcrumbs = ({
      rootLabel,
      rootClass,
+     items,
  }: BreadcrumbsProps) => {
     const router = useRouter();
+    const { t } = useTranslation("components");
     const [breadcrumbs, setBreadcrumbs] = useState<Array<Breadcrumb> | null>(
         null
     );
 
+
     useEffect(() => {
-        if (router) {
+        /*if (router) {
             const linkPath = router.asPath.split('/');
             linkPath.shift();
 
@@ -51,8 +56,18 @@ const Breadcrumbs = ({
             });
 
             setBreadcrumbs(pathArray);
-        }
-    }, [router]);
+        }*/
+        const newItems = [];
+        items.map((item) => {
+            newItems.push({
+                breadcrumb: item.label.toString(),
+                href:  item.url,
+            });
+        });
+
+        setBreadcrumbs(newItems);
+
+    }, [items]);
 
     if (!breadcrumbs) {
         return null;
@@ -67,9 +82,7 @@ const Breadcrumbs = ({
                             <ChevronRight />
                         </span>
                         <span>
-                            {convertBreadcrumb(
-                                rootLabel || 'Main',
-                            )}
+                            {t('breadcrumbs.main_page')}
                         </span>
                     </a>
                 </Link>

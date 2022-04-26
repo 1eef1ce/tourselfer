@@ -38,8 +38,9 @@ const params = {
     ],
     conveniences: [
         { label: 'filter.conveniences_wifi', value: 'wifi', getValue: 'wifi' },
-        { label: 'filter.conveniences_restroom', value: 'restroom', getValue: 'restroom' },
+        { label: 'filter.conveniences_restroom', value: 'wc', getValue: 'wc' },
         { label: 'filter.conveniences_cafe', value: 'cafe', getValue: 'cafe' },
+        { label: 'filter.conveniences_free_parking', value: 'freeparking', getValue: 'freeparking' },
     ],
     language: [
         { label: 'filter.route_language_en', value: 'en', getValue: 'en' },

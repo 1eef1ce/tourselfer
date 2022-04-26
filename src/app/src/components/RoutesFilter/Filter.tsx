@@ -84,7 +84,7 @@ const Filter = props => {
     }, [data]);
 
     useEffect(() => {
-        const moreFilters = [data?.price].filter(item => {
+        const moreFilters = [data?.price, data?.conveniences, data?.language].filter(item => {
             if (Array.isArray(item) && item.length > 0) {
                 return true;
             } else if (typeof item !== 'undefined') {
@@ -230,36 +230,6 @@ const Filter = props => {
                         {!showMoreFilters ? <>{t("filter.button_more_filters")}</> : <>{t('filter.button_less_filters')}</>}
                     </Button>
                 </div>
-
-
-            <div className="filter__actions">
-                <div className="filter__select filter__select--simple">
-                    <SelectField
-                        classPrefix="select-filter"
-                        id="filter"
-                        name="filter"
-                        options={
-                            [
-                                { value: 'Route rating', label: 'Route rating' },
-                                { value: 'Author rating', label: 'Author rating' },
-                                { value: 'Cost', label: 'Cost' },
-                                { value: 'Duration', label: 'Duration' }
-                            ]
-                        }
-                        defaultOption={
-                            [
-                                { value: 'Route rating', label: 'Route rating' }
-                            ]
-                        }
-                    />
-                </div>
-                <a className="filter-btn" href="javascript:void(0)">
-                    <span className="icon filter-btn__icon">
-                        <FilterIcon />
-                    </span>
-                    <span>Filter</span>
-                </a>
-            </div>
         </div>
     );
 
