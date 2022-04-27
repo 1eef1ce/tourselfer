@@ -153,4 +153,30 @@ export class Api {
             });
         
     }
+
+    async getRouteItem(props) {
+        let params = {
+            language: this.locale
+        };
+
+        if (!props.code)
+            return null;
+
+        let methodURL = '/api/v1/route/getByCode/' + props.code;
+console.log(this.getURL(methodURL, params));
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
+    }
 }

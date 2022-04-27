@@ -1,0 +1,29 @@
+{
+    "tags.super_place": "Суперместо",
+    "tags.route_verified": "Проверенный маршрут",
+
+    "route.props.duration": "Время прохождения",
+    "route.props.duration_value_range": "{{start}}ч.-{{end}}ч.",
+    "route.props.duration_value": "{{value}} час",
+    "route.props.locations_count": "Локаций",
+
+    "route.props.costs": "Затраты на маршруте",
+    "route.props.costs_0": "Бесплатно",
+    "route.props.costs_1": "до 500₽",
+    "route.props.costs_2": "500₽-1000₽",
+    "route.props.costs_3": "1000₽-3000₽",
+    "route.props.costs_4": "более 3000₽",
+    "route.props.type": "Способ прохождения",
+
+    "route.buy_button": "Купить маршрут",
+    "route.get_button": "Пройти маршрут",
+    "route.price_free": "Бесплатно",
+    "route.walk_with_guide": "Пройти маршрут вместе с автором",
+
+    "route.locations.unlock_more": "Откройте еще {{value}} локаций",
+
+    "author.type_simple": "Автор маршрутов",
+    "author.type_prof": "Профессиональный автор",
+
+    "route.main_comment.title": "Что говорят путешественники?"
+}

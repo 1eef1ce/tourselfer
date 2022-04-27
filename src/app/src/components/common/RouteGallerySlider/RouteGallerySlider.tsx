@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import {PlayIcon} from '@components/icons';
 
-const RouteGallerySlider = () => {
+const RouteGallerySlider = (props) => {
+    
     return (
         <Swiper
             modules={[Navigation, Pagination]}
@@ -21,6 +22,7 @@ const RouteGallerySlider = () => {
                 }
             }}
         >
+            {props?.data?.video != "" &&
             <SwiperSlide>
                 <div className="route-gallery__item video">
                     <div className="video__placeholder">
@@ -33,16 +35,16 @@ const RouteGallerySlider = () => {
                     </div>
                 </div>
             </SwiperSlide>
-            <SwiperSlide>
-                <div className="route-gallery__item">
-                    <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className="route-gallery__item">
-                    <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
-                </div>
-            </SwiperSlide>
+            }
+
+            {props?.data?.pictures && props?.data?.pictures.map(pic => (
+                <SwiperSlide>
+                    <div className="route-gallery__item">
+                        <Image src={pic} alt="" title="" layout="fill"/>
+                    </div>
+                </SwiperSlide>
+            ))}
+            
         </Swiper>
     );
 };
