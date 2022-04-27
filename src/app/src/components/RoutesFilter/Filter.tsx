@@ -6,6 +6,8 @@ import { Button, SelectField } from '@components/ui';
 import FilterClass from './FilterClass';
 import Link from 'next/link';
 import {Api} from "@lib/api"
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface FilterData {
     cost?: any
@@ -141,14 +143,23 @@ const Filter = props => {
                 <div className="filter-tags__row">
                     <div className="filter-tags__title">{t('filter.tags')}</div>
                     <div className="filter-tags__items">
-                        {tags.map(tag => (
+                        
+                        {tags && tags.length > 0 && tags.map(tag => (
                             <a key={tag.code} className={"tag" + (Array.isArray(data?.tag) && data?.tag.indexOf(tag.code) !== -1 ? ' active' : '')} onClick={(e) => setMultipleOption('tag', tag.code)} href="javascript:void(0)">
                                 <span>{tag.title}</span>
                                 {(Array.isArray(data?.tag) && data?.tag.indexOf(tag.code) !== -1) &&
                                     <span className="tag__icon icon"><Close /></span>
                                 }
                             </a>
-                        ))}
+                        ))
+
+                        ||
+
+                        <Skeleton 
+                            containerClassName="skeleton-text"
+                        />
+
+                        }
                         
                     </div>
                 </div>

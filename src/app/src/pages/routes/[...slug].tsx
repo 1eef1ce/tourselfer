@@ -10,6 +10,8 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const pageLimit = 12;
 const getQueryParams = (router) => {
@@ -105,16 +107,20 @@ export default function RoutesListPage(props) {
     return (
         <Layout>
             <Head>
-                <title>{props.page.meta.title}</title>
-                <meta content={props.page.meta.description} name="description"/>
+                <title>{props?.page?.meta?.title}</title>
+                <meta content={props?.page?.meta?.description} name="description"/>
             </Head>
 
             <div className="routes">
                 <div className="container">
+                    {props?.page?.breadcrumbs && props?.page?.breadcrumbs.length > 0 && 
                     <Breadcrumbs
-                        items={props.page.breadcrumbs}
+                        items={props?.page?.breadcrumbs}
                     />
-                    <h1 className="title-1">{props.page.title_h1}</h1>
+                    ||
+                    <Skeleton containerClassName="skeleton-text"/>
+                    }
+                    <h1 className="title-1">{props?.page?.title_h1 || <Skeleton containerClassName="skeleton-text"/>}</h1>
                     <Filter
                         locale={locale}
                         onChanged={(data) => {
