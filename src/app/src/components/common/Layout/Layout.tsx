@@ -2,7 +2,12 @@ import React from 'react';
 import {TopBanner, Header, Footer, Notifications} from '@components/common';
 import { useAuth } from '../../../hooks/auth';
 
-const Layout =({children}) => {
+interface LayoutProps {
+    transparentHeader?: boolean;
+    children?: any;
+}
+
+const Layout =({transparentHeader = false, children}: LayoutProps) => {
     const showBanner = false;
     const { user } = useAuth();
 
@@ -11,7 +16,7 @@ const Layout =({children}) => {
             <Notifications/>
             <div className="wrapper">
                 {showBanner && <TopBanner/>}
-                <Header/>
+                <Header transparent={transparentHeader}/>
                 <main>{children}</main>
                 <Footer/>
             </div>

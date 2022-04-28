@@ -14,7 +14,11 @@ import BottomMenu from '@components/common/Menu/BottomMenu';
 import {FavoritesWidget} from '@components/common/FavoritesWidget';
 import { useTranslation } from 'next-i18next';
 
-const Header = () => {
+interface HeaderProps {
+    transparent?: boolean;
+}
+
+const Header = ({transparent = false}: HeaderProps) => {
     const [hasScrolled, setHasScrolled] = useState(false);
     const windowSize = useWindowSize();
     const { t } = useTranslation("components");
@@ -41,7 +45,7 @@ const Header = () => {
 
     return (
         <>
-            <header className={cn("header", {'header--transparent': !hasScrolled})}>
+            <header className={cn("header", {'header--transparent': transparent && !hasScrolled})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
                     {isMobile && <MobileMenuContainer/>}

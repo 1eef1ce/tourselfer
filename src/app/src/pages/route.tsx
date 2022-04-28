@@ -26,7 +26,7 @@ const User = ({userType}) => {
 
 export default function RouteDetailPage() {
     return (
-        <Layout>
+        <Layout transparentHeader={true}>
             <Head>
                 <title>Route</title>
             </Head>
