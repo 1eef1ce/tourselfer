@@ -97,11 +97,14 @@
 
     &:not(.error) {
 
-      &:focus {
+      &:not(.withFile) {
 
-        & + .file__label {
-          border-color: $color-green;
-          background: #fff;
+        &:focus {
+
+          & + .file__label {
+            border-color: $color-green;
+            background: #fff;
+          }
         }
       }
     }
@@ -111,6 +114,8 @@
       & + .file__label {
         padding: 16px 52px 16px 16px;
         justify-content: flex-start;
+        background: $color-gray-7;
+        border-color: transparent;
       }
     }
 

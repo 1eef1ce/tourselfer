@@ -4,7 +4,6 @@
 .checkbox {
   position: relative;
   display: flex;
-  margin-top: 16px;
 
   &__input {
     position: absolute;
@@ -186,5 +185,9 @@
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
+  }
+
+  & + & {
+    margin-top: 16px;
   }
 }
