@@ -7,15 +7,15 @@
     max-width: 936px;
   }
 
+  &__more {
+    margin-top: 32px;
+  }
+
   .section {
 
     &:first-of-type {
       margin-top: 40px;
     }
-  }
-
-  &__more {
-    margin-top: 32px;
   }
 
   .title-3 {
@@ -25,6 +25,14 @@
       line-height: 1.2;
       letter-spacing: normal;
     }
+  }
+
+  .file__container--img {
+    height: 216px;
+  }
+
+  .form__textarea {
+    min-height: 224px;
   }
 }
 
@@ -55,7 +63,7 @@
   margin: 52px 0;
 
   @include max-767 {
-    margin: 32px 0 52px;
+    margin: 32px 0 48px;
   }
 
   &__step {
@@ -89,7 +97,7 @@
           opacity: 1;
 
           @include max-767 {
-            bottom: -20px;
+            bottom: -15px;
           }
         }
       }
@@ -109,6 +117,14 @@
           line-height: 1.41;
           letter-spacing: -0.01em;
           color: $color-primary;
+
+          @include max-1200 {
+            font-size: 26px;
+          }
+
+          @include max-1023 {
+            font-size: 24px;
+          }
 
           @include max-767 {
             font-size: 24px;

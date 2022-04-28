@@ -15,12 +15,140 @@
     display: flex;
     margin: 24px -8px -8px;
 
-    &--end {
-      align-items: flex-end;
+    @include max-767 {
+      margin: 24px -4px -8px;
     }
 
     .form__group {
       margin: 8px;
+
+      @include max-767 {
+        margin: 8px 4px;
+      }
+    }
+
+    &--end {
+      align-items: flex-end;
+    }
+
+    &--withLang {
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 132px;
+
+          @include max-767 {
+            max-width: 96px;
+          }
+        }
+      }
+    }
+
+    &--withCity {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 240px;
+
+          @include max-767 {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+
+    &--images {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+    }
+
+    &--addImages {
+      flex-wrap: wrap;
+
+      .form__group {
+        max-width: calc(50% - 16px);
+
+        @include max-767 {
+          max-width: calc(100% - 8px);
+        }
+      }
+    }
+
+    &--withTime {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+
+        @include max-767 {
+          width: calc(50% - 8px);
+        }
+      }
+
+      .form__label {
+        width: calc(200% + 16px);
+
+        @include max-767 {
+          width: calc(200% + 8px);
+        }
+      }
+    }
+
+    &--wideMargin {
+      margin: 16px -16px -16px;
+
+      @include max-767 {
+        margin: 16px 0 -16px;
+      }
+
+      .form__group {
+        margin: 16px;
+
+        @include max-767 {
+          margin: 16px 0;
+        }
+      }
+    }
+
+    &--withCheck {
+
+      @include max-767 {
+        flex-direction: column;
+      }
+    }
+
+    &--withArea {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 132px;
+
+          @include max-767 {
+            max-width: 100%;
+          }
+        }
+      }
     }
   }
 
@@ -50,6 +178,10 @@
     &--radio {
       margin: 32px 0;
     }
+
+    &--w456 {
+      max-width: 456px;
+    }
   }
 
   &__actions {
@@ -68,6 +200,10 @@
     font-size: 14px;
     line-height: 1.14;
     color: $color-semi;
+
+    &--forGroup {
+      margin-bottom: 16px;
+    }
   }
 
   &__field {
@@ -179,6 +315,7 @@
   }
 
   &__textarea {
+    min-height: 104px;
     padding: 16px;
     resize: none;
   }
@@ -217,10 +354,15 @@
   &__divider {
     display: flex;
     align-items: center;
+    width: 16px;
     height: 56px;
-    margin: 8px;
+    margin: 8px 0;
     font-size: 16px;
     line-height: 1.5;
     color: $color-secondary;
+
+    @include max-767 {
+      display: none;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import {useCallback, useRef, useState} from 'react';
 import {Layout} from '@components/common';
 import {Button, Checkbox, ImageUpload, Input, Radio, SelectField, Textarea} from '@components/ui';
-import {ChevronRight, Plus, Trashcan} from '@components/icons';
+import {ChevronRight, MapPinBlack, Plus, Trashcan} from '@components/icons';
 import Head from 'next/head';
 import {useWindowSize} from '@lib/hooks/useWindowSize';
 import ReactTags from 'react-tag-autocomplete';
@@ -212,7 +212,7 @@ export default function CreateRoutePage() {
                                     {inputList.map((x, i) => {
                                         return (
                                             <>
-                                                <div className="form__row">
+                                                <div className="form__row form__row--withLang">
                                                     <div className="form__group">
                                                         <Input
                                                             id="routeTitle"
@@ -223,7 +223,7 @@ export default function CreateRoutePage() {
                                                             onChange={e => handleInputChange(e, i)}
                                                         />
                                                     </div>
-                                                    <div className="form__group">
+                                                    <div className="form__group form__group--select">
                                                         <SelectField
                                                             name="routeLang"
                                                             classNamePrefix="select"
@@ -260,8 +260,8 @@ export default function CreateRoutePage() {
                                 </div>
                                 <div className="section">
                                     <div className="title-3">Местоположение</div>
-                                    <div className="form__row">
-                                        <div className="form__group">
+                                    <div className="form__row form__row--withCity">
+                                        <div className="form__group form__group--select">
                                             <SelectField
                                                 name="routeCountry"
                                                 classNamePrefix="select"
@@ -281,7 +281,7 @@ export default function CreateRoutePage() {
                                 </div>
                                 <div className="section">
                                     <div className="title-3">Изображения</div>
-                                    <div className="form__row">
+                                    <div className="form__row form__row--images">
                                         <div className="form__group">
                                             <div className="form__label">Картинка анонса *</div>
                                             <ImageUpload
@@ -303,7 +303,7 @@ export default function CreateRoutePage() {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form__row form__row--end">
+                                    <div className="form__row form__row--end form__row--addImages">
                                         {imageList.map((x, i) => {
                                             return (
                                                 <>
@@ -350,7 +350,7 @@ export default function CreateRoutePage() {
                                 </div>
                                 <div className="section">
                                     <div className="title-3">Продолжительность маршрута</div>
-                                    <div className="form__row form__row--end">
+                                    <div className="form__row form__row--end form__row--withTime">
                                         <div className="form__group">
                                             <SelectField
                                                 name="routeMinMeasure"
@@ -384,9 +384,9 @@ export default function CreateRoutePage() {
                                 </div>
                                 <div className="section">
                                     <div className="title-3">Детали маршрута</div>
-                                    <div className="form__row">
+                                    <div className="form__row form__row--wideMargin form__row--withCheck">
                                         <div className="form__group">
-                                            <div className="form__label">Затраты на маршруте *</div>
+                                            <div className="form__label form__label--forGroup">Затраты на маршруте *</div>
                                             <Radio
                                                 id="routeCost0"
                                                 name="routeCost"
@@ -419,7 +419,7 @@ export default function CreateRoutePage() {
                                             />
                                         </div>
                                         <div className="form__group">
-                                            <div className="form__label">Тип маршрута *</div>
+                                            <div className="form__label form__label--forGroup">Тип маршрута *</div>
                                             <Radio
                                                 id="routeType1"
                                                 name="routeType"
@@ -440,7 +440,7 @@ export default function CreateRoutePage() {
                                             />
                                         </div>
                                         <div className="form__group">
-                                            <div className="form__label">Сезонность маршрута *</div>
+                                            <div className="form__label form__label--forGroup">Сезонность маршрута *</div>
                                             <Checkbox
                                                 id="routeSeason1"
                                                 name="routeSeason1"
@@ -490,7 +490,7 @@ export default function CreateRoutePage() {
                                     {shortFieldList.map((x, i) => {
                                         return (
                                             <>
-                                                <div className="form__row">
+                                                <div className="form__row form__row--withArea">
                                                     <div className="form__group">
                                                         <Textarea
                                                             id="shortDesc"
@@ -502,7 +502,7 @@ export default function CreateRoutePage() {
                                                             onChange={e => handleShortFieldChange(e, i)}
                                                         />
                                                     </div>
-                                                    <div className="form__group">
+                                                    <div className="form__group form__group--select">
                                                         <SelectField
                                                             name="shortDescLang"
                                                             classNamePrefix="select"
@@ -539,7 +539,7 @@ export default function CreateRoutePage() {
                                     {fullFieldList.map((x, i) => {
                                         return (
                                             <>
-                                                <div className="form__row">
+                                                <div className="form__row form__row--withArea">
                                                     <div className="form__group">
                                                         <Textarea
                                                             id="fullDesc"
@@ -550,7 +550,7 @@ export default function CreateRoutePage() {
                                                             onChange={e => handleFullFieldChange(e, i)}
                                                         />
                                                     </div>
-                                                    <div className="form__group">
+                                                    <div className="form__group form__group--select">
                                                         <SelectField
                                                             name="fullDescLang"
                                                             classNamePrefix="select"
@@ -729,7 +729,228 @@ export default function CreateRoutePage() {
                                 </div>
                             </div>
                             <div className="create-location">
+                                <div className="create-location__container">
+                                    <form className="form">
+                                        <div className="section">
+                                            <div className="title-3">Локация</div>
+                                            {inputList.map((x, i) => {
+                                                return (
+                                                    <>
+                                                        <div className="form__row form__row--withLang">
+                                                            <div className="form__group">
+                                                                <Input
+                                                                    id="routeTitle"
+                                                                    name="routeTitle"
+                                                                    label="Заголовок локации"
+                                                                    required
+                                                                    value={x.routeTitle}
+                                                                    onChange={e => handleInputChange(e, i)}
+                                                                />
+                                                            </div>
+                                                            <div className="form__group form__group--select">
+                                                                <SelectField
+                                                                    name="routeLang"
+                                                                    classNamePrefix="select"
+                                                                    label="Язык"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="form__actions">
+                                                            {inputList.length - 1 === i && (
+                                                                <Button
+                                                                    squared
+                                                                    isStartIcon
+                                                                    startIcon={<Plus/>}
+                                                                    onClick={handleAddClick}
+                                                                >
+                                                                    Add field
+                                                                </Button>
+                                                            )}
+                                                            {inputList.length !== 1 && (
+                                                                <Button
+                                                                    squared
+                                                                    danger
+                                                                    isStartIcon
+                                                                    startIcon={<Trashcan/>}
+                                                                    onClick={() => handleRemoveClick(i)}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                            )}
+                                                        </div>
+                                                    </>
+                                                );
+                                            })}
+                                            <div className="form__row form__row--end">
+                                                <div className="form__group">
+                                                    <Input
+                                                        id="routeAddress"
+                                                        name="routeAddress"
+                                                        label="Адрес на языке страны"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form__group">
+                                                    <Button
+                                                        size="medium"
+                                                        variant="filled"
+                                                        colored
+                                                        isEndIcon
+                                                        endIcon={<MapPinBlack/>}
+                                                    >
+                                                        Указать на карте
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                            <div className="form__row">
+                                                <div className="form__group">
+                                                    <div className="form__label">Удобства на локации *</div>
+                                                    <ReactTags
+                                                        ref={reactTags}
+                                                        tags={tags}
+                                                        suggestions={suggestions}
+                                                        onDelete={onDelete}
+                                                        onAddition={onAddition}
+                                                        classNames={{
+                                                            selectedTag: 'tag'
+                                                        }}
+                                                        noSuggestionsText="No such tags"
+                                                        autoresize={false}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form__row form__row--withLang">
+                                                <div className="form__group">
+                                                    <Input
+                                                        id="routeTitle"
+                                                        name="routeTitle"
+                                                        label="Стоимость билетов или сопуствующих затрат на прохождение локации"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form__group form__group--select">
+                                                    <SelectField
+                                                        name="routeLang"
+                                                        classNamePrefix="select"
+                                                        label="Язык"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="title-3">Изображения</div>
+                                            <div className="form__row form__row--images">
+                                                <div className="form__group">
+                                                    <div className="form__label">Главное изображение *</div>
+                                                    <ImageUpload
+                                                        setImage={setImage}
+                                                        image={file}
+                                                        type=".jpg, .png"
+                                                        imageWidth={600}
+                                                        imageHeight={600}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form__row form__row--end form__row--addImages">
+                                                {imageList.map((x, i) => {
+                                                    return (
+                                                        <>
+                                                            <div className="form__group">
+                                                                {i === 0 &&
+                                                                <div className="form__label">Дополнительные изображения</div>
+                                                                }
+                                                                <ImageUpload
+                                                                    setImage={setImage}
+                                                                    image={file}
+                                                                    inputName="imageName"
+                                                                    type=".jpg, .png"
+                                                                    imageWidth={1200}
+                                                                    imageHeight={800}
+                                                                />
+                                                                <div className="form__actions">
+                                                                    {imageList.length - 1 === i && (
+                                                                        <Button
+                                                                            squared
+                                                                            isStartIcon
+                                                                            startIcon={<Plus/>}
+                                                                            onClick={handleImageAddClick}
+                                                                        >
+                                                                            Add field
+                                                                        </Button>
+                                                                    )}
+                                                                    {imageList.length !== 1 && (
+                                                                        <Button
+                                                                            squared
+                                                                            danger
+                                                                            isStartIcon
+                                                                            startIcon={<Trashcan/>}
+                                                                            onClick={() => handleImageRemoveClick(i)}
+                                                                        >
+                                                                            Delete
+                                                                        </Button>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="title-3">Время и режим работы</div>
+                                            <div className="form__row form__row--end form__row--withTime">
+                                                <div className="form__group">
+                                                    <SelectField
+                                                        name="routeMinMeasure"
+                                                        classNamePrefix="select"
+                                                        label="Минимальная продолжительность"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form__group">
+                                                    <Input
+                                                        id="routeMinValue"
+                                                        name="routeMinValue"
+                                                    />
+                                                </div>
+                                                <div className="form__divider">&#8212;</div>
+                                                <div className="form__group">
+                                                    <SelectField
+                                                        name="routeMaxMeasure"
+                                                        classNamePrefix="select"
+                                                        label="Максимальная продолжительность"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="form__group">
+                                                    <Input
+                                                        id="routeMaxValue"
+                                                        name="routeMaxValue"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div className="section">
+                                            <div className="title-3">Аудиогид</div>
+                                            <div className="form__row">
+                                                <div className="form__group">
+                                                    <Input
+                                                        id="routeVideo"
+                                                        name="routeVideo"
+                                                        label="Ссылка на видеопрезентацию маршрута"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className="create-location__progress progressbar">
+                                    <div className="progressbar__line">
+                                        <div className="progressbar__thumb"/>
+                                        <div className="progressbar__value">Progress 25%</div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="more creation__more">
                                 <Button
@@ -748,7 +969,7 @@ export default function CreateRoutePage() {
                         <div className="creation__container">
                             <div className="section">
                                 <div className="form__row">
-                                    <div className="form__group">
+                                    <div className="form__group form__group--w456">
                                         <Input
                                             id="routePrice"
                                             name="routePrice"
@@ -763,7 +984,7 @@ export default function CreateRoutePage() {
                                             id="routeOption1"
                                             name="routeOption1"
                                             value="option1"
-                                            label="Этот маршрут может быть пройден вместе с экскурсоводом, котором, как правило, буду являться Я"
+                                            label="Этот маршрут может быть пройден вместе с экскурсоводом, которым, как правило, буду являться Я"
                                         />
                                         <Checkbox
                                             id="routeOption2"
@@ -780,7 +1001,7 @@ export default function CreateRoutePage() {
                                     </div>
                                 </div>
                                 <div className="form__row">
-                                    <div className="form__group">
+                                    <div className="form__group form__group--w456">
                                         <Input
                                             id="routeMentorPrice"
                                             name="routeMentorPrice"

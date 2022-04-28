@@ -135,7 +135,7 @@
   &__label {
     position: relative;
     display: inline-flex;
-    align-items: center;
+    padding-top: 4px;
     font-size: 16px;
     line-height: 1.25;
     color: $color-primary;
@@ -146,7 +146,7 @@
       display: inline-block;
       width: 28px;
       height: 28px;
-      margin-right: 8px;
+      margin: -4px 8px 0 0;
       border: 1px solid $color-gray-15;
       border-radius: 100%;
       background: $color-gray-7;

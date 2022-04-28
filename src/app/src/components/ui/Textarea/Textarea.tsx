@@ -77,7 +77,7 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
                 <div className={cn("form__field", inputClass())}>
                     <textarea
                         className="form__input form__textarea"
-                        style={{height: this.state.currentHeight}}
+                        //style={{height: this.state.currentHeight}}
                         id={id}
                         name={name}
                         value={this.state.inputValue}

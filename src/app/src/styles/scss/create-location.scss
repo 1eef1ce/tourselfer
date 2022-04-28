@@ -2,6 +2,7 @@
 @import "media.scss";
 
 .create-location {
+  display: flex;
   padding: 48px;
   margin-top: 48px;
   border: 1px solid $color-gray-10;
@@ -12,5 +13,36 @@
     margin: 32px -16px 0;
     border-width: 1px 0 1px 0;
     border-radius: 0;
+  }
+
+  &__container {
+    max-width: 888px;
+    margin-right: auto;
+  }
+
+  &__progress {
+    width: 288px;
+  }
+
+  .section {
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  .form__row {
+
+    &--images {
+      flex-wrap: wrap;
+
+      .form__group {
+        max-width: calc(50% - 16px);
+
+        @include max-767 {
+          max-width: calc(100% - 8px);
+        }
+      }
+    }
   }
 }
