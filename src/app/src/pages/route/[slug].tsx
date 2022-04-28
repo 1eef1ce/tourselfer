@@ -16,7 +16,7 @@ import {Api} from "@lib/api"
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export async function getServerSideProps ({locale, params, query}) {
+export async function getServerSideProps ({locale, params, query, res}) {
 
     const BaseApi = new Api({locale});
     
@@ -25,22 +25,30 @@ export async function getServerSideProps ({locale, params, query}) {
         await i18n?.reloadResources();
     }
 
+    const route = await BaseApi.getRouteItem({
+        code: query?.slug,
+        withReviews: true
+    });
+
+    if (typeof route !== 'object' || (typeof route === 'object' && !!route.errorCode))
+        return {
+            notFound: true
+        };
+        
     return {
       props: {
         page: await BaseApi.getPageData('routes-item', {
             routeCode: query?.slug,
         }),
-        ...await BaseApi.getRouteItem({
-            code: query?.slug,
-            withReviews: true
-        }),
+        ...route,
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__route"])),
       },
+      
     };
 }
 
 const UserComponent = ({userType, user}) => {
-    const { t } = useTranslation("pages__route");
+    const { t } = useTranslation(["pages__route"]);
 
     return (
         <div className={`user user--${userType}`}>
@@ -71,10 +79,17 @@ export default function RoutePage(props) {
     const router = useRouter();
     const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
+    const BaseApi = new Api({locale});
 
     const { t } = useTranslation("pages__route");
 
     const mainProps = [];
+
+    const needUpdateReviews = useRef(false);
+    const [reviews, setReviews] = useState(null);
+    const [reviewsFilter, setReviewsFilter] = useState({});
+
+
 
     if (props?.data?.duration?.start)
     {
@@ -146,7 +161,65 @@ export default function RoutePage(props) {
             });
         }
     }
-console.log(props?.data);
+
+    useEffect(() => {
+        if (props?.data?.reviews && props?.data?.reviews.length > 0) {
+            setReviews({});
+            BaseApi.getRouteReviews({
+                routeId: props?.data?.id,
+                pagination: {
+                    limit: 3,
+                    page: 1
+                }
+            })
+            .then((response) => {
+                setReviews(response);
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (needUpdateReviews.current == true) {
+            console.log("useEffect", reviewsFilter);
+
+            BaseApi.getRouteReviews({
+                routeId: props?.data?.id,
+                filter: reviewsFilter,
+                pagination: {
+                    limit: 3,
+                    page: 1
+                }
+            })
+            .then((response) => {
+                setReviews(response);
+            });
+
+            needUpdateReviews.current = false;
+        }
+    }, [reviewsFilter]);
+
+    const setReviewsFilterValue = (key, value) => {
+        let valueArray = [];
+
+        if (typeof reviewsFilter == 'object' && typeof reviewsFilter[key] !== undefined)
+            valueArray = reviewsFilter[key] ?? [];
+
+        let index = valueArray.indexOf(value);
+
+        if (index !== -1) {
+            valueArray.splice(index, 1);
+        } else {
+            valueArray.push(value);
+        }
+
+        needUpdateReviews.current = true;
+        setReviewsFilter(prevState => ({
+            ...prevState,
+            [key]: valueArray
+        }));
+    }
+
+
     return (
         <Layout>
             <Head>
@@ -244,7 +317,7 @@ console.log(props?.data);
                                 }
                             </div>
                             
-                            <Link href={''}>
+                            <Link href={'#'}>
                                 <a className="link link--color route-buy__link">{t('route.walk_with_guide')}</a>
                             </Link>
                         </div>
@@ -331,7 +404,7 @@ console.log(props?.data);
                                         <div className="route-review__block">
                                             <div className="rating rating--small"><Rating value={props?.data?.reviews[0].rating}/></div>
                                             <div className="route-review__date">
-                                                <Moment local locale="fr">{props?.data?.reviews[0].created_at}</Moment>
+                                                <Moment format="YYYY/MM/DD">{props?.data?.reviews[0].created_at}</Moment>
                                             </div>
                                         </div>
                                     </div>
@@ -477,129 +550,96 @@ console.log(props?.data);
                             </div>
                         </div>
                     </div>{/*route-content*/}
+                    
+                    {props?.data?.reviews && props?.data?.reviews.length > 0 &&
                     <div className="route-section route-reviews">
                         <div className="route-reviews__head">
-                            <div className="rating-number">4.5</div>
-                            <h2 className="title-2">Reviews <span>(5)</span></h2>
+                            <div className="rating-number">{props?.data?.rating}</div>
+                            <h2 className="title-2">{t('route.reviews.title')} <span>({reviews?.meta?.total})</span></h2>
                         </div>
                         <div className="route-reviews__container">
                             <div className="route-reviews__content">
                                 <div className="route-reviews__items">
-                                    <div className="route-reviews__item">
-                                        <div className="route-review">
-                                            <div className="route-review__head">
-                                                <UserComponent userType='review' user={{}}/>
-                                                <div className="route-review__block">
-                                                    <div className="rating rating--small"><Rating value={5}/></div>
-                                                    <div className="route-review__date">Jun 2021</div>
+                                    {reviews?.data && reviews?.data.length > 0 && reviews?.data.map(item => {
+
+                                        return (
+                                            <div className="route-reviews__item">
+                                                <div className="route-review">
+                                                    <div className="route-review__head">
+                                                        <UserComponent userType='review' user={item.author}/>
+                                                        <div className="route-review__block">
+                                                            <div className="rating rating--small"><Rating value={item.rating}/></div>
+                                                            <div className="route-review__date"><Moment format="YYYY/MM/DD">{item.created_at}</Moment></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div className="route-review__text">
+                                                        {t('route.reviews.recommended', {
+                                                            result: !!item?.recommends ? t('route.reviews.recommended_yes') : t('route.reviews.recommended_no')
+                                                        })}
+                                                    </div>
+
+                                                    {!!item?.positive &&
+                                                    <div className="route-review__text">
+                                                        <span>{t('route.reviews.positive')}</span>
+                                                        {item?.positive}
+                                                    </div>
+                                                    }
+
+                                                    {!!item?.negative &&
+                                                    <div className="route-review__text">
+                                                        <span>{t('route.reviews.negative')}</span>
+                                                        {item?.negative}
+                                                    </div>
+                                                    }
                                                 </div>
                                             </div>
-                                            <div className="route-review__text">
-                                                Sights. Food. The nearest stops and transport. Free Wi-Fi. Restrooms.
-                                                Opening hours of museums, exhibitions, shopping centers... Rely on the
-                                                navigator - it is up to date with the latest information.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="route-reviews__item">
-                                        <div className="route-review">
-                                            <div className="route-review__head">
-                                                <UserComponent userType='review' user={{}}/>
-                                                <div className="route-review__block">
-                                                    <div className="rating rating--small"><Rating value={5}/></div>
-                                                    <div className="route-review__date">Jun 2021</div>
-                                                </div>
-                                            </div>
-                                            <div className="route-review__text">
-                                                <p>
-                                                    It&apos;s great that we managed to see the places and pray in the temple
-                                                    and try different tasty treats and shop. There is no such gallop, as
-                                                    is usual in travel agencies.
-                                                </p>
-                                                <p>
-                                                    Special thanks for the history of Shintoism.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        );
+                                    })}
+                                    
                                 </div>
-                                <div className="route-reviews__more">
+
+                                {/*<div className="route-reviews__more">
                                     <Button
                                         variant="outlined"
                                         size="medium"
                                     >
                                         Show more
                                     </Button>
-                                </div>
+                                </div>*/}
                             </div>
                             <div className="route-reviews__sort">
-                                <label className="checkbox" htmlFor="s5">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        id="s5"
-                                        name="s5"
-                                    />
-                                    <span className="checkbox__label">
-                                        <Rating value={5}/>
-                                        <span className="route-reviews__number">2</span>
-                                    </span>
-                                </label>
-                                <label className="checkbox" htmlFor="s4">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        id="s4"
-                                        name="s4"
-                                    />
-                                    <span className="checkbox__label">
-                                        <Rating value={4}/>
-                                        <span className="route-reviews__number">1</span>
-                                    </span>
-                                </label>
-                                <label className="checkbox" htmlFor="s3">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        id="s3"
-                                        name="s3"
-                                    />
-                                    <span className="checkbox__label">
-                                        <Rating value={3}/>
-                                        <span className="route-reviews__number">1</span>
-                                    </span>
-                                </label>
-                                <label className="checkbox" htmlFor="s2">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        id="s2"
-                                        name="s2"
-                                    />
-                                    <span className="checkbox__label">
-                                        <Rating value={2}/>
-                                        <span className="route-reviews__number">1</span>
-                                    </span>
-                                </label>
-                                <label className="checkbox" htmlFor="s1">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        id="s1"
-                                        name="s1"
-                                        disabled
-                                    />
-                                    <span className="checkbox__label">
-                                        <Rating value={1}/>
-                                        <span className="route-reviews__number">0</span>
-                                    </span>
-                                </label>
+                                {Array.apply(null, Array (5)).map((item, index) => {
+                                    
+                                    let rating = 5 - index,
+                                        inputId = "route-reviews-rating-" + rating;
+
+                                    return (
+                                        <label className="checkbox" htmlFor={inputId}>
+                                            <input
+                                                className="checkbox__input"
+                                                type="checkbox"
+                                                id={inputId}
+                                                name={inputId}
+                                                onChange={e => {setReviewsFilterValue('rating', rating)}}
+                                            />
+                                            <span className="checkbox__label">
+                                                <Rating value={rating}/>
+                                                <span className="route-reviews__number"></span>
+                                            </span>
+                                        </label>
+                                    );
+                                })}
+
+                                
                             </div>
                         </div>
-                    </div>{/*route-reviews*/}
+                    </div>
+                    }
                 </div>
             </div>
 
         </Layout>
-    )
+    );
+
 }

@@ -44,12 +44,19 @@ export async function getServerSideProps ({locale, params, query}) {
         await i18n?.reloadResources();
     }
 
+    const list = await BaseApi.getRoutesList(queryParams);
+console.log(list);
+    if (typeof list !== 'object' || (typeof list === 'object' && !!list.errorCode))
+        return {
+            notFound: true
+        };
+
     return {
       props: {
         page: await BaseApi.getPageData('routes-list', {
             cityCode: query.slug[0],
         }),
-        list: await BaseApi.getRoutesList(queryParams),
+        list: list,
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };

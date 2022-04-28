@@ -23,7 +23,7 @@ export default function AuthorDetailPage() {
                 />
                 <div className="section routes">
                     <h2 className="title-2">My routes</h2>
-                    <RoutesContainer/>
+                    {/*<RoutesContainer/>*/}
                     <div className="more">
                         <Button
                             variant='outlined'

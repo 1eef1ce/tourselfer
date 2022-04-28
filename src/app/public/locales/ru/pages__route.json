@@ -25,5 +25,12 @@
     "author.type_simple": "Автор маршрутов",
     "author.type_prof": "Профессиональный автор",
 
-    "route.main_comment.title": "Что говорят путешественники?"
+    "route.main_comment.title": "Что говорят путешественники?",
+
+    "route.reviews.title": "Отзывы",
+    "route.reviews.recommended": "Рекомендую маршрут: {{result}}",
+    "route.reviews.recommended_yes": "Да",
+    "route.reviews.recommended_no": "Нет",
+    "route.reviews.positive": "Что понравилось:",
+    "route.reviews.negative": "Что можно улучшить:"
 }

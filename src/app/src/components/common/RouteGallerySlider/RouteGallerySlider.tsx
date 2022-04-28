@@ -5,7 +5,21 @@ import Image from 'next/image';
 import {PlayIcon} from '@components/icons';
 
 const RouteGallerySlider = (props) => {
-    
+    let video = null;
+    if (props?.data?.video.toString() != "") {
+
+        if (props?.data?.video.indexOf('youtube.com') != -1) {
+            let codeMatch = props.data.video.match(/v=([0-9A-Za-z]+)/i);
+            if (Array.isArray(codeMatch) && codeMatch.length >= 2 && codeMatch[1].toString() != "") {
+                video = {
+                    url: props?.data?.video,
+                    preview: 'https://img.youtube.com/vi/'+codeMatch[1].toString()+'/maxresdefault.jpg'
+                };
+            }
+        }
+
+    }
+
     return (
         <Swiper
             modules={[Navigation, Pagination]}
@@ -22,11 +36,11 @@ const RouteGallerySlider = (props) => {
                 }
             }}
         >
-            {props?.data?.video != "" &&
+            {video &&
             <SwiperSlide>
                 <div className="route-gallery__item video">
                     <div className="video__placeholder">
-                        <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
+                        <Image src={video.preview} alt={props?.data?.title} title={props?.data?.title} layout="fill"/>
                     </div>
                     <div className="video__button">
                         <div className="icon video__icon">
@@ -40,7 +54,7 @@ const RouteGallerySlider = (props) => {
             {props?.data?.pictures && props?.data?.pictures.map(pic => (
                 <SwiperSlide>
                     <div className="route-gallery__item">
-                        <Image src={pic} alt="" title="" layout="fill"/>
+                        <Image src={pic} alt={props?.data?.title} title={props?.data?.title} layout="fill"/>
                     </div>
                 </SwiperSlide>
             ))}
