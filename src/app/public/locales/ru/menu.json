@@ -8,5 +8,14 @@
     "footer.faq": "FAQ",
     "footer.become_an_author": "Стать автором",
     "footer.support": "Поддержка",
-    "footer.blog": "Блог"
+    "footer.blog": "Блог",
+
+    "personal.index": "Мои маршруты",
+    "personal.index_description": "Купленные и полученные маршруты",
+    "personal.profile": "Профиль",
+    "personal.profile_description": "Ваши персональные данные",
+    "personal.security": "Безопасность",
+    "personal.security_description": "Настройте безопасность вашего аккаунта",
+    "personal.payment": "Платежи и выплаты",
+    "personal.payment_description": "Добавьте кредитную карту для легкой оплаты. Настройки выплат для авторов"
 }

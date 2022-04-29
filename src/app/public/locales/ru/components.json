@@ -118,6 +118,52 @@
     "alert.title": "Заголовок всплывашки",
     "alert.message_error": "Сообщение об ошибке",
     "alert.message_info": "Информационное сообщение",
-    "alert.message_success": "Отправлено успешно"
-    
+    "alert.message_success": "Отправлено успешно",
+
+    "auth.errors.base_title": "Ошибка",
+    "auth.errors.passwords_dont_match": "Введенные пароли не совпадают",
+    "auth.errors.min_password_length_wrong": "Минимальная длина пароля {{value}} символов.",
+    "auth.errors.empty_email": "Введите ваш email-адрес",
+    "auth.errors.empty_password": "Введите пароль от учетной записи",
+    "auth.errors.empty_name": "Введите ваше имя",
+    "auth.errors.set_password_new_account": "Укажите пароль для новой учетной записи",
+
+    "auth.authorized.title": "Вы уже авторизованы",
+    "auth.authorized.description_p1": "Если желаете выйти из аккаунта, нажмите",
+    "auth.authorized.description_p2": "здесь",
+
+    "auth.signin.title": "Войдите или создайте аккаунт",
+    "auth.signin.next_with_email": "Продолжить через электронную почту",
+    "auth.signin.forgot_password": "Забыли пароль?",
+    "auth.signin.button": "Войти",
+
+    "auth.signup.title": "Создание аккаунта",
+    "auth.signup.description": "Пароль должен состоять из заглавных и строчных букв и цифр. Длина — не менее {{minPasswordLength}} символов.",
+    "auth.signup.button": "Создать аккаунт",
+
+    "auth.confirm_signup.title": "Проверьте папку «Входящие»",
+    "auth.confirm_signup.description": "Мы отправили на {{email}} ссылку для подтверждения email адреса. Письмо должно прийти через несколько минут.",
+    "auth.confirm_signup.button": "Хорошо",
+
+    "auth.success_auth.title": "Вы успешно выполнили вход",
+    "auth.success_auth.description": "Сейчас вы будете перенаправлены на предыдущую страницу.",
+    "auth.success_auth.button": "Хорошо",
+
+    "auth.policy.description": "Входя в аккаунт или создавая новый, вы соглашаетесь с нашими",
+    "auth.policy.title1": "Правилами и условиями",
+    "auth.policy.title2": "Положением о конфиденциальности",
+
+    "auth.field.email": "Email",
+    "auth.field.password": "Пароль",
+    "auth.field.repeat_password": "Повторите пароль",
+    "auth.field.name": "Ваше имя",
+
+    "auth.forgot_password.title": "Забыли пароль?",
+    "auth.forgot_password.description": "Ничего страшного! Мы отправим вам ссылку для смены пароля. Введите адрес электронной почты, с которой вы заходите на Tourselfer.com.",
+    "auth.forgot_password.button_send": "Отправить ссылку на смену пароля",
+    "auth.forgot_password.button_rembered": "Я вспомнил пароль",
+
+    "auth.confirm_forgot.title": "Проверьте папку «Входящие»",
+    "auth.confirm_forgot.description": "Мы отправили на {{email}} ссылку для восстановления пароля. Письмо должно прийти через несколько минут.",
+    "auth.confirm_forgot.button": "Хорошо"
 }
