@@ -15,7 +15,7 @@
   &__top {
     display: flex;
 
-    @include max-767 {
+    @include max-1023 {
       flex-direction: column-reverse;
     }
   }
@@ -24,7 +24,7 @@
     max-width: 888px;
     margin-right: auto;
 
-    @include max-767 {
+    @include max-1023 {
       margin-top: 24px;
     }
   }
@@ -50,7 +50,7 @@
     width: 288px;
     margin-top: 14px;
 
-    @include max-767 {
+    @include max-1023 {
       width: 100%;
       margin-top: 0;
     }
@@ -63,7 +63,7 @@
     overflow: hidden;
     transition: 0.2s;
 
-    @include max-767 {
+    @include max-1023 {
       margin: 16px 0 -16px;
     }
 
@@ -80,7 +80,7 @@
     width: calc(50% - 24px);
     margin: 0 12px;
 
-    @include max-767 {
+    @include max-1023 {
       width: 100%;
       margin: 16px 0;
     }
@@ -144,7 +144,7 @@
     align-items: center;
     margin: -4px;
 
-    @include max-767 {
+    @include max-1023 {
       position: static;
       margin-top: 28px;
     }

@@ -8,6 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string
     required?: boolean
     type?: 'text' | 'email' | 'password'
+    noClear?: boolean
 }
 
 interface InputState {
@@ -52,12 +53,22 @@ class Input extends React.Component<InputProps, InputState> {
             label,
             required,
             type = 'text',
+            noClear = false,
             ...props
         } = this.props;
 
         const inputClass = () => {
             if (this.state.focus === true) {
                 return "focus";
+            }
+            else {
+                return "";
+            }
+        };
+
+        const noClearClass = () => {
+            if (noClear) {
+                return "form__input--noClear"
             }
             else {
                 return "";
@@ -74,7 +85,7 @@ class Input extends React.Component<InputProps, InputState> {
                 )}
                 <div className={cn("form__field", inputClass())}>
                     <input
-                        className="form__input"
+                        className={cn("form__input", noClearClass())}
                         id={id}
                         name={name}
                         type={type}
@@ -85,7 +96,7 @@ class Input extends React.Component<InputProps, InputState> {
                         onChange={this.onChange}
                         {...props}
                     />
-                    {(((this.state.inputValue !== '') || (this.props.value !== '')) && (this.state.focus === true)) &&
+                    {(!noClear && ((this.state.inputValue !== '') || (this.props.value !== '')) && (this.state.focus === true)) &&
                     (
                     <span className="form__icon" onMouseDown={this.clearValue}>
                         <Close/>

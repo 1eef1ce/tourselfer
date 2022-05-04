@@ -1,7 +1,7 @@
 import {useCallback, useRef, useState} from 'react';
 import {Layout} from '@components/common';
-import {Button, Checkbox, ImageUpload, Input, Radio, SelectField, Textarea} from '@components/ui';
-import {ChevronRight, MapPinBlack, Plus, Trashcan} from '@components/icons';
+import {Button, Checkbox, FileUpload, ImageUpload, Input, Progressbar, Radio, SelectField, Textarea, Timeline} from '@components/ui';
+import {ChevronRight, MapPin, Plus, Trashcan} from '@components/icons';
 import Head from 'next/head';
 import {useWindowSize} from '@lib/hooks/useWindowSize';
 import ReactTags from 'react-tag-autocomplete';
@@ -175,31 +175,22 @@ export default function CreateRoutePage() {
             <div className="container">
                 <div className="creation-progress">
                     <div className={"creation-progress__step" + (step1 ? ' active' : '')}>
-                        <div className="timeline">
-                            <div className="timeline__dash"/>
-                            <div className="timeline__placeholder">
-                                <div className="timeline__time">1 step</div>
-                            </div>
-                        </div>
+                        <Timeline
+                            label="1 step"
+                        />
                         <div className="creation-progress__title">About the route</div>
                     </div>
                     <div className={"creation-progress__step" + (step2 ? ' active' : '')}>
-                        <div className="timeline">
-                            <div className="timeline__dash"/>
-                            <div className="timeline__placeholder">
-                                <div className="timeline__time">2 step</div>
-                            </div>
-                        </div>
+                        <Timeline
+                            label="2 step"
+                        />
                         <div className="creation-progress__title">Route locations</div>
                     </div>
                     <div className={"creation-progress__step" + (step3 ? ' active' : '')}>
-                        <div className="timeline">
-                            <div className="timeline__dash"/>
-                            <div className="timeline__placeholder">
-                                <div className="timeline__time">3 step</div>
-                            </div>
-                            <div className="timeline__time timeline__time--last"/>
-                        </div>
+                        <Timeline
+                            label="3 step"
+                            withIcon
+                        />
                         <div className="creation-progress__title">Cost and Marketing</div>
                     </div>
                 </div>
@@ -611,15 +602,11 @@ export default function CreateRoutePage() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="create-route__progress progressbar">
-                                        <div className="progressbar__line">
-                                            <div className="progressbar__thumb"/>
-                                            <div className="progressbar__value">Progress 25%</div>
-                                        </div>
+                                    <div className="create-route__progress">
+                                        <Progressbar/>
                                     </div>
                                 </div>
-                                <div
-                                    className={"create-route__row" + (isMobile ? ' hidden' : '') + (isShow ? ' show' : '')}>
+                                <div className={"create-route__row" + (isMobile ? ' hidden' : '') + (isShow ? ' show' : '')}>
                                     <div className="create-route__col">
                                         <div className="create-route__block">
                                             <div className="create-route__option">
@@ -790,16 +777,27 @@ export default function CreateRoutePage() {
                                                         required
                                                     />
                                                 </div>
-                                                <div className="form__group">
-                                                    <Button
-                                                        size="medium"
-                                                        variant="filled"
-                                                        colored
-                                                        isEndIcon
-                                                        endIcon={<MapPinBlack/>}
-                                                    >
-                                                        Указать на карте
-                                                    </Button>
+                                                <div className="form__group form__group--auto">
+                                                    {!isMobile && (
+                                                        <Button
+                                                            size="medium"
+                                                            variant="filled"
+                                                            colored
+                                                            isEndIcon
+                                                            endIcon={<MapPin/>}
+                                                        >
+                                                            Указать на карте
+                                                        </Button>
+                                                    )}
+                                                    {isMobile && (
+                                                        <Button
+                                                            size="medium"
+                                                            variant="filled"
+                                                            colored
+                                                            isIcon
+                                                            icon={<MapPin/>}
+                                                        />
+                                                    )}
                                                 </div>
                                             </div>
                                             <div className="form__row">
@@ -819,7 +817,7 @@ export default function CreateRoutePage() {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="form__row form__row--withLang">
+                                            <div className="form__row form__row--withLang form__row--end">
                                                 <div className="form__group">
                                                     <Input
                                                         id="routeTitle"
@@ -898,58 +896,86 @@ export default function CreateRoutePage() {
                                         </div>
                                         <div className="section">
                                             <div className="title-3">Время и режим работы</div>
-                                            <div className="form__row form__row--end form__row--withTime">
-                                                <div className="form__group">
+                                            <div className="form__row form__row--withTimetable form__row--end">
+                                                <div className="form__group form__group--select">
                                                     <SelectField
-                                                        name="routeMinMeasure"
+                                                        name="routeTimetable"
                                                         classNamePrefix="select"
-                                                        label="Минимальная продолжительность"
+                                                        label="Режим работы"
                                                         required
                                                     />
                                                 </div>
-                                                <div className="form__group">
-                                                    <Input
-                                                        id="routeMinValue"
-                                                        name="routeMinValue"
+                                                <div className="form__group form__group--select">
+                                                    <SelectField
+                                                        name="routeTimetableStart"
+                                                        classNamePrefix="select"
+                                                        required
                                                     />
                                                 </div>
                                                 <div className="form__divider">&#8212;</div>
-                                                <div className="form__group">
+                                                <div className="form__group form__group--select">
                                                     <SelectField
-                                                        name="routeMaxMeasure"
+                                                        name="routeTimetableEnd"
                                                         classNamePrefix="select"
-                                                        label="Максимальная продолжительность"
                                                         required
                                                     />
                                                 </div>
-                                                <div className="form__group">
+                                                <div className="form__group form__group--timeRange">
                                                     <Input
-                                                        id="routeMaxValue"
-                                                        name="routeMaxValue"
+                                                        id="routeTimetableTime"
+                                                        name="routeTimetableTime"
+                                                        placeholder="__:__-__:__"
+                                                        noClear
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="form__row">
+                                                <div className="form__group">
+                                                    <div className="form__label">Праздничные и выходные дни *</div>
+                                                </div>
+                                            </div>
+                                            <div className="form__row">
+                                                <div className="form__group form__group--w80">
+                                                    <Input
+                                                        id="routeBestTime"
+                                                        name="routeBestTime"
+                                                        label="Лучшее время для начала прохождения"
+                                                        placeholder="__:__"
+                                                        noClear
                                                     />
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="section">
                                             <div className="title-3">Аудиогид</div>
-                                            <div className="form__row">
+                                            <div className="form__row form__row--withLang">
                                                 <div className="form__group">
-                                                    <Input
-                                                        id="routeVideo"
-                                                        name="routeVideo"
-                                                        label="Ссылка на видеопрезентацию маршрута"
+                                                    <div className="form__label">Аудиогиды по локации</div>
+                                                    <FileUpload/>
+                                                </div>
+                                                <div className="form__group form__group--select">
+                                                    <SelectField
+                                                        name="routeLang"
+                                                        classNamePrefix="select"
+                                                        label="Язык"
                                                     />
                                                 </div>
+                                            </div>
+                                            <div className="form__group form__group--singleBtn">
+                                                <Button
+                                                    type="submit"
+                                                    size="large"
+                                                    variant="filled"
+                                                    colored
+                                                >
+                                                    Сохранить локацию
+                                                </Button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div className="create-location__progress progressbar">
-                                    <div className="progressbar__line">
-                                        <div className="progressbar__thumb"/>
-                                        <div className="progressbar__value">Progress 25%</div>
-                                    </div>
+                                <div className="create-location__progress">
+                                    <Progressbar/>
                                 </div>
                             </div>
                             <div className="more creation__more">

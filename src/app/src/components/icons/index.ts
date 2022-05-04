@@ -25,7 +25,6 @@ export { default as Instagram } from './Instagram';
 export { default as Lock } from './Lock';
 export { default as Man } from './Man';
 export { default as MapPin} from './MapPin';
-export { default as MapPinBlack } from './MapPinBlack';
 export { default as Minus } from './Minus';
 export { default as PlayIcon } from './PlayIcon';
 export { default as Plus } from './Plus';

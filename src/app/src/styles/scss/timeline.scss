@@ -4,6 +4,11 @@
 .timeline {
   position: relative;
   display: flex;
+  width: 100%;
+
+  @include max-767 {
+    width: auto;
+  }
 
   &__dash {
     position: absolute;

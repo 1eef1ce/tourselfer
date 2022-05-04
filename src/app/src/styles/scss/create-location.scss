@@ -17,11 +17,16 @@
 
   &__container {
     max-width: 888px;
+    width: 100%;
     margin-right: auto;
   }
 
   &__progress {
     width: 288px;
+
+    @include max-1200 {
+      display: none;
+    }
   }
 
   .section {

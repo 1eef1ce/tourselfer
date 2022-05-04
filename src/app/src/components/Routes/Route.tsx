@@ -41,7 +41,7 @@ const Route = () => {
                 </div>
                 <div className="route-mark">
                     <div className="icon route-mark__icon">
-                        <MapPin />
+                        <MapPin gradient/>
                     </div>
                     <div className="route-mark__text">super place</div>
                 </div>

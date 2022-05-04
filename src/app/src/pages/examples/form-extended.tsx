@@ -1,9 +1,8 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import {Layout} from '@components/common';
-import {FileUpload, ImageUpload, Input} from '@components/ui';
+import {FileUpload, ImageUpload} from '@components/ui';
 import NumberFormat from 'react-number-format';
-import { IMaskInput, useIMask } from 'react-imask';
 
 const FormExtendedExample = () => {
     const [file, setFile] = useState('');
@@ -21,7 +20,6 @@ const FormExtendedExample = () => {
             if (Number(val) === 0) {
                 val = "01";
 
-                //this can happen when user paste number
             } else if (val > max) {
                 val = max;
             }
@@ -72,17 +70,6 @@ const FormExtendedExample = () => {
                             mask="_"
                             allowEmptyFormatting={true}
                             placeholder="__:__"
-                        />
-                    </div>
-
-                    <div style={{marginTop: "1em"}}>
-                        <IMaskInput
-                            mask={Number}
-                            //inputRef={el => this.input = el}
-                            onAccept={
-                                (value, mask) => console.log(value)
-                            }
-                            placeholder='__:__'
                         />
                     </div>
                 </div>

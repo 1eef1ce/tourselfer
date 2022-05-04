@@ -108,6 +108,48 @@
       }
     }
 
+    &--withTimetable {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+
+        &--select {
+          width: 92px;
+
+          @include max-767 {
+            width: calc(50% - 20px);
+          }
+
+          &:first-of-type {
+            width: 240px;
+
+            @include max-767 {
+              width: 100%;
+            }
+          }
+        }
+
+        &--timeRange {
+          width: 144px;
+
+          @include max-767 {
+            width: 100%;
+          }
+        }
+      }
+
+      .form__divider {
+
+        @include max-767 {
+          display: flex;
+          margin: 8px 4px;
+        }
+      }
+    }
+
     &--wideMargin {
       margin: 16px -16px -16px;
 
@@ -159,8 +201,13 @@
     width: 100%;
     margin-bottom: 24px;
 
+    &--auto {
+      width: auto;
+      flex-shrink: 0;
+    }
+
     &--btn {
-      margin: 32px 0;
+      margin: 32px 0 0;
       align-items: normal;
 
       .btn {
@@ -168,6 +215,14 @@
         & + .btn {
           margin-top: 16px;
         }
+      }
+    }
+
+    &--singleBtn {
+      margin: 32px 0 0;
+
+      @include max-767 {
+        align-items: normal;
       }
     }
 
@@ -181,6 +236,17 @@
 
     &--w456 {
       max-width: 456px;
+    }
+
+    &--w80 {
+
+      .form__field {
+        max-width: 80px;
+
+        @include max-767 {
+          max-width: 100%;
+        }
+      }
     }
   }
 
@@ -312,6 +378,10 @@
         }
       }
     }
+
+    &--noClear {
+      padding: 16px;
+    }
   }
 
   &__textarea {
@@ -354,6 +424,7 @@
   &__divider {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 16px;
     height: 56px;
     margin: 8px 0;
