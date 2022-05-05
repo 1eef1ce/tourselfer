@@ -1,0 +1,40 @@
+@import "variables.scss";
+@import "media.scss";
+
+.faq {
+
+  &__block {
+    padding: 48px 40px 40px;
+    border: 2px solid $color-gray-15;
+    border-radius: 16px;
+
+    @include max-767 {
+      padding: 24px 16px 28px;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 32px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.29;
+
+    @include max-767 {
+      margin-bottom: 21px;
+      font-size: 20px;
+      line-height: 1.4;
+    }
+  }
+}
+
+.faq-section {
+  margin-top: 76px;
+
+  @include max-767 {
+    margin-top: 32px;
+  }
+
+  &:first-of-type {
+    margin-top: 32px;
+  }
+}

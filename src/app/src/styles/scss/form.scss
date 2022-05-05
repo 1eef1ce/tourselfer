@@ -25,6 +25,14 @@
       @include max-767 {
         margin: 8px 4px;
       }
+
+      &--btnRight {
+        margin-left: auto;
+
+        @include max-767 {
+          margin-top: 24px;
+        }
+      }
     }
 
     &--end {
@@ -192,6 +200,13 @@
         }
       }
     }
+
+    &--withText {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+    }
   }
 
   &__group {
@@ -226,12 +241,37 @@
       }
     }
 
+    &--btnRight {
+      max-width: 205px;
+      width: 100%;
+
+      @include max-767 {
+        max-width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
     &--select {
       width: 240px;
     }
 
     &--radio {
       margin: 32px 0;
+    }
+
+    &--text {
+      max-width: 343px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: $color-semi;
+
+      @include max-767 {
+        max-width: 100%;
+        font-weight: 500;
+      }
     }
 
     &--w456 {
