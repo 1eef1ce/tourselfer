@@ -42,7 +42,7 @@ export class Api {
     setPagination(params) {
         let pagination = {};
 
-        if (!!params.pagination) {
+        if (params.pagination) {
             if (!!params.pagination.limit && params.pagination.limit > 0)
                 pagination['limit'] = parseInt(params.pagination.limit);
 
@@ -107,10 +107,10 @@ export class Api {
         if (!!props.cityCode && props.cityCode.length)
             methodURL = '/api/v1/route/findByCityCode/' + encodeURI(props.cityCode);
 
-        if (!!props.filter)
+        if (props.filter)
             params['filter'] = props.filter;
 
-        if (!!props.sort)
+        if (props.sort)
             params['sort'] = props.sort;
 
         Object.assign(params, this.setPagination(props));

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
 import { Button, SelectField } from '@components/ui';
-import Link from 'next/link';
 import {Api} from "@lib/api"
 
 const Filter = props => {

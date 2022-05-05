@@ -75,7 +75,7 @@ export default function ExampleForm() {
                           }) => (
                             <Form className="form examples__form" noValidate>
                                 <div className="form__title">Text</div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <Input
                                         className={"form__input" + (touched.exampleText && errors.exampleText ? ' error' : '')}
                                         id="exampleText"
@@ -83,6 +83,7 @@ export default function ExampleForm() {
                                         type="text"
                                         label="Text"
                                         required
+                                        placeholder="placeholder"
                                         {...getFieldProps('exampleText')}
                                     />
                                     {touched.exampleText && errors.exampleText ? (
@@ -91,7 +92,7 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Email</div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <Input
                                         className={"form__input" + (touched.exampleEmail && errors.exampleEmail ? ' error' : '')}
                                         id="exampleEmail"
@@ -107,7 +108,7 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Password</div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <InputPassword
                                         className={"form__input" + (touched.password && errors.password ? ' error' : '')}
                                         id="password"
@@ -120,7 +121,7 @@ export default function ExampleForm() {
                                         <div className="form__error">{errors.password}</div>
                                     ) : null}
                                 </div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <InputPassword
                                         className={"form__input" + (touched.confirmPassword && errors.confirmPassword ? ' error' : '')}
                                         id="confirmPassword"
@@ -135,13 +136,15 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Textarea</div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <Textarea
                                         className={"form__input form__textarea" + (touched.exampleTextarea && errors.exampleTextarea ? ' error' : '')}
                                         id="exampleTextarea"
                                         name="exampleTextarea"
                                         label="Comment"
                                         {...getFieldProps('exampleTextarea')}
+                                        placeholder="placeholder"
+                                        maxLength={100}
                                     />
                                     {touched.exampleTextarea && errors.exampleTextarea ? (
                                         <div className="form__error">{errors.exampleTextarea}</div>
@@ -149,7 +152,7 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Select</div>
-                                <div className="form__row form__row--select">
+                                <div className="form__group form__group--select">
                                     <SelectField
                                         className={"select" + (touched.exampleDate && errors.exampleDate ? ' error' : '')}
                                         classPrefix="select"
@@ -182,7 +185,7 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Radio</div>
-                                <div className="form__row form__row--radio">
+                                <div className="form__group form__group--radio">
                                     <Radio
                                         className={"radio__input" + (touched.exampleRadio && errors.exampleRadio ? ' error' : '')}
                                         id="exampleRadio1"
@@ -218,7 +221,7 @@ export default function ExampleForm() {
                                 </div>
 
                                 <div className="form__title">Checkbox</div>
-                                <div className="form__row">
+                                <div className="form__group">
                                     <Checkbox
                                         className={"checkbox__input" + (touched.exampleCheckbox1 && errors.exampleCheckbox1 ? ' error' : '')}
                                         id="exampleCheckbox1"
@@ -247,7 +250,7 @@ export default function ExampleForm() {
                                     ) : null}
                                 </div>
 
-                                <div className="form__row form__row--btn">
+                                <div className="form__group form__group--btn">
                                     <Button
                                         variant="filled"
                                         size="medium"

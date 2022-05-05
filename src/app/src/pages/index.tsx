@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import {Button} from '@components/ui';
 import {AdvantageSlider, AppSlider, Layout, Searchbar} from '@components/common';
 import {HeroPopularCities} from '@components/common/HeroPopularCities';
 import {Review, ReviewSlider} from '@components/Reviews';
@@ -11,7 +10,6 @@ import { i18n } from "next-i18next";
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import {Api} from '@lib/api';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export const getServerSideProps = async ({locale}) => {
@@ -37,7 +35,7 @@ export default function Homepage (props) {
     const { t } = useTranslation("pages__homepage");
 
     return (
-        <Layout mainPage={true}>
+        <Layout transparentHeader={true}>
             <Head>
                 <title>Tourselfer</title>
                 <meta name="description" content="Ready routes for your phone"/>

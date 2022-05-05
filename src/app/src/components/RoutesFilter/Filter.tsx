@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
-import { Button, SelectField } from '@components/ui';
+import { Close } from '@components/icons';
+import { Button } from '@components/ui';
 import FilterClass from './FilterClass';
-import Link from 'next/link';
 import {Api} from "@lib/api"
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';

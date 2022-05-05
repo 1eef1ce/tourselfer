@@ -7,15 +7,14 @@
   top: 0;
   z-index: 100;
   background: #fff;
+  border-bottom: 1px solid $color-gray;
   color: $color-primary;
   transition: 0.2s;
 
-  &--static {
+  &--transparent {
     border-bottom: 0;
-    background: #fff;
-    &.mainpage {
-        color: #fff;
-        background: transparent;
+    background: transparent;
+    color: #fff;
 
     .header {
 
@@ -59,7 +58,6 @@
       }
     }
   }
-  }
 
   &__container {
     display: flex;
@@ -72,9 +70,6 @@
 
     @include max-767 {
       padding: 16px;
-    }
-    @include max-767 {
-      padding: 16px 16px 8px;
     }
   }
 

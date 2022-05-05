@@ -234,7 +234,7 @@ const Auth = (props) => {
                     <div className="auth__title">Войдите или создайте аккаунт</div>
                 </div>
                 <div className="form">
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
                             onChange={event => setEmail(event.target.value)}
@@ -250,11 +250,12 @@ const Auth = (props) => {
                             <div className="form__error">{errors['email']}</div>
                         ) : null}
                     </div>
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={checkAvaliableEmail}
                         >
@@ -264,6 +265,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             Забыли пароль?
@@ -289,7 +291,7 @@ const Auth = (props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
@@ -305,11 +307,12 @@ const Auth = (props) => {
                             <div className="form__error">{errors['password']}</div>
                         ) : null}
                     </div>
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={submitLoginForm}
                         >
@@ -319,6 +322,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             Забыли пароль?
@@ -336,7 +340,7 @@ const Auth = (props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['name'] ? ' error' : '')}
                             onChange={event => setName(event.target.value)}
@@ -352,7 +356,7 @@ const Auth = (props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
@@ -368,7 +372,7 @@ const Auth = (props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['repeatPassword'] ? ' error' : '')}
                             onChange={event => setRepeatPassword(event.target.value)}
@@ -384,11 +388,12 @@ const Auth = (props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitRegForm}
                             loading={showLoader}
                         >
@@ -419,11 +424,12 @@ const Auth = (props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             Хорошо
@@ -451,11 +457,12 @@ const Auth = (props) => {
                     <div className="auth__subtitle">Сейчас вы будете перенаправлены на предыдущую страницу.</div>
                 </div>
                 <div className="form">
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             Хорошо
@@ -475,7 +482,7 @@ const Auth = (props) => {
                     </div>
                 </div>
                 <div className="form">
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
                             onChange={event => setEmail(event.target.value)}
@@ -492,11 +499,12 @@ const Auth = (props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitForgotPasswordForm}
                             loading={showLoader}
                         >
@@ -507,6 +515,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('')}
                         >
                             Я вспомнил пароль
@@ -525,11 +534,12 @@ const Auth = (props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                         >
                             Хорошо
                         </Button>

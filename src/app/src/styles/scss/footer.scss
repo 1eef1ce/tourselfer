@@ -8,7 +8,7 @@
   color: $color-white-80;
 
   @include max-767 {
-    padding-top: 24px;
+    padding: 24px 0 56px;
     margin-top: 64px;
   }
 

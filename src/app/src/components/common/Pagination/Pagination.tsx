@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React from 'react';
 import {ChevronRight} from '@components/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link'

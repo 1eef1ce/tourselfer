@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
-import { Button, SelectField } from '@components/ui';
-import Link from 'next/link';
-import {Api} from "@lib/api"
+import { FilterIcon } from '@components/icons';
+import { SelectField } from '@components/ui';
 
 const RoutesSort = props => {
 

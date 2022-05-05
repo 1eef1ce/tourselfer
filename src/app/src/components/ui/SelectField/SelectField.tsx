@@ -46,7 +46,8 @@ class SelectField extends React.Component<any, any> {
             required,
             classPrefix,
             options,
-            defaultOption
+            defaultOption,
+            ...props
         } = this.props;
 
         const inputClass = () => {
@@ -80,6 +81,7 @@ class SelectField extends React.Component<any, any> {
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         onChange={this.props?.onChange}
+                        {...props}
                     />
                 </div>
             </>

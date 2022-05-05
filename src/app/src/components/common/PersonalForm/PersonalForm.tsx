@@ -1,9 +1,6 @@
 import React from 'react';
-import Head from 'next/head';
-import {Breadcrumbs, Layout} from '@components/common';
-import {Button, Input, InputPassword, SelectField, Number} from '@components/ui';
+import {Button, Input, SelectField, Number} from '@components/ui';
 import {Formik, Form} from 'formik';
-import * as Yup from "yup";
 
 export default function PersonalForm() {
 

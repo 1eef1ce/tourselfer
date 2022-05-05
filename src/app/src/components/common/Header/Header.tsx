@@ -1,28 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
 import {Logo} from '@components/ui';
-import {ChevronDown} from '@components/icons';
 import {I18nWidget} from '@components/common';
 import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';
 import throttle from 'lodash.throttle';
 import cn from 'classnames';
-import MobileMenuContainer from '@components/common/Menu/MobileMenu';
 import HeaderMenu from '@components/common/Menu/HeaderMenu';
-import MobileSearchContainer from '@components/common/Search/MobileSearch';
+import MobileSearch from '@components/common/Search/MobileSearch';
 import {SignIn} from '@components/common/UserNav';
 import BottomMenu from '@components/common/Menu/BottomMenu';
 import {FavoritesWidget} from '@components/common/FavoritesWidget';
 import { useTranslation } from 'next-i18next';
 
 interface HeaderProps {
-    mainPage: boolean;
+    transparent?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ((props) => {
-    const {
-        mainPage = false
-    } = props;
+const Header = ({transparent = false}: HeaderProps) => {
     const [hasScrolled, setHasScrolled] = useState(false);
     const windowSize = useWindowSize();
     const { t } = useTranslation("components");
@@ -49,7 +44,7 @@ const Header: React.FC<HeaderProps> = ((props) => {
 
     return (
         <>
-            <header className={cn("header", {'header--static': !hasScrolled}, {'mainpage': mainPage})}>
+            <header className={cn("header", {'header--transparent': transparent && !hasScrolled})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
                     <Link href="/">
@@ -57,7 +52,7 @@ const Header: React.FC<HeaderProps> = ((props) => {
                             <Logo/>
                         </a>
                     </Link>
-                    {isMobile && <MobileSearchContainer/>}
+                    {isMobile && <MobileSearch/>}
                     <div className="dropdown header__lang">
                             <I18nWidget/>
                     </div>
@@ -75,6 +70,6 @@ const Header: React.FC<HeaderProps> = ((props) => {
             {isMobile && <BottomMenu/>}
         </>
     );
-});
+};
 
 export default Header;
