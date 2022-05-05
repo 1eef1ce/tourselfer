@@ -18,7 +18,7 @@ const ShowcaseItems = ({items}) => {
             || 
                 
             <div className="skeleton-items">
-                {Array.apply(null, Array(4)).map((i)=>
+                {Array(...Array(4)).map((i)=>
                     <Skeleton 
                         containerClassName="item"
                         className="item-title"

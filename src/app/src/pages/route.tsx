@@ -2,7 +2,7 @@ import {Breadcrumbs, Layout, RouteGallerySlider} from '@components/common';
 import Head from 'next/head';
 import Image from 'next/image';
 import {CheckRounded, Lock, Man, MapPin} from '@components/icons';
-import {Button, Rating} from '@components/ui';
+import {Button, Rating, Timeline} from '@components/ui';
 
 const User = ({userType}) => {
     return (
@@ -26,7 +26,7 @@ const User = ({userType}) => {
 
 export default function RouteDetailPage() {
     return (
-        <Layout>
+        <Layout transparentHeader={true}>
             <Head>
                 <title>Route</title>
             </Head>
@@ -60,7 +60,7 @@ export default function RouteDetailPage() {
                                 <div className="route-labels__items">
                                     <div className="route-labels__item">
                                         <div className="icon route-labels__icon">
-                                            <MapPin/>
+                                            <MapPin gradient/>
                                         </div>
                                         <div>SUPER PLACE</div>
                                     </div>
@@ -116,10 +116,9 @@ export default function RouteDetailPage() {
                                     <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">1 hour</div>
-                                    </div>
+                                    <Timeline
+                                        label="1 hour"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Imperial Palace in Tokyo</div>
                                 <div className="route-locations__type">Architecture, Park</div>
@@ -129,10 +128,9 @@ export default function RouteDetailPage() {
                                     <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">2–3 hours</div>
-                                    </div>
+                                    <Timeline
+                                        label="2–3 hours"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Ginza area in Tokyo</div>
                                 <div className="route-locations__type">Architecture</div>
@@ -148,10 +146,9 @@ export default function RouteDetailPage() {
                                     </div>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">1 hour</div>
-                                    </div>
+                                    <Timeline
+                                        label="1 hour"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Ginza area in Tokyo</div>
                                 <div className="route-locations__type">Entertainment</div>
@@ -165,10 +162,9 @@ export default function RouteDetailPage() {
                                     <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">1 hour</div>
-                                    </div>
+                                    <Timeline
+                                        label="1 hour"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Imperial Palace in Tokyo</div>
                                 <div className="route-locations__type">Architecture, Park</div>
@@ -178,10 +174,9 @@ export default function RouteDetailPage() {
                                     <Image src="/images/route-pic.jpg" alt="" title="" layout="fill"/>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">2–3 hours</div>
-                                    </div>
+                                    <Timeline
+                                        label="2–3 hours"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Ginza area in Tokyo</div>
                                 <div className="route-locations__type">Architecture</div>
@@ -197,10 +192,9 @@ export default function RouteDetailPage() {
                                     </div>
                                 </div>
                                 <div className="route-locations__duration">
-                                    <div className="route-locations__dash"/>
-                                    <div className="route-locations__placeholder">
-                                        <div className="route-locations__time">1 hour</div>
-                                    </div>
+                                    <Timeline
+                                        label="1 hour"
+                                    />
                                 </div>
                                 <div className="route-locations__title">Ginza area in Tokyo</div>
                                 <div className="route-locations__type">Entertainment</div>

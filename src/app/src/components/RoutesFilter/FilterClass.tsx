@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import { Bus, Car, Close, FilterIcon, Man } from '@components/icons';
+import { Bus, Car, Man } from '@components/icons';
 
 const params = {
     cost: [

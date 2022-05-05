@@ -3,15 +3,11 @@ import {TopBanner, Header, Footer, Notifications} from '@components/common';
 import { useAuth } from '../../../hooks/auth';
 
 interface LayoutProps {
-    mainPage?: boolean;
+    transparentHeader?: boolean;
+    children?: any;
 }
 
-const Layout: React.FC<LayoutProps> = ((props) => {
-    const {
-        mainPage = false,
-        children
-    } = props;
-
+const Layout =({transparentHeader = false, children}: LayoutProps) => {
     const showBanner = false;
     const { user } = useAuth();
 
@@ -20,13 +16,13 @@ const Layout: React.FC<LayoutProps> = ((props) => {
             <Notifications/>
             <div className="wrapper">
                 {showBanner && <TopBanner/>}
-                <Header mainPage={mainPage}/>
+                <Header transparent={transparentHeader}/>
                 <main>{children}</main>
                 <Footer/>
             </div>
             
         </>
     );
-});
+};
 
 export default Layout;

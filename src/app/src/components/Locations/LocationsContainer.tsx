@@ -32,7 +32,7 @@ const LocationsContainer = ({items}) => {
                     />                  
                 </div>
                 <div className="skeleton-row">
-                    {Array.apply(null, Array(3)).map((i)=>
+                    {Array(...Array(3)).map((i)=>
                         <Skeleton 
                             containerClassName="item"
                             className="item-title"

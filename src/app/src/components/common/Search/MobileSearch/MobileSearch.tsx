@@ -1,10 +1,9 @@
-import cn from 'classnames';
 import {Searchbar} from '@components/common';
 
-const MobileSearch = (props) =>  {
+const MobileSearch = () =>  {
 
     return (
-        <div className={"mobile-search"}>
+        <div className="search search--mobile">
             <Searchbar/>
         </div>
     );

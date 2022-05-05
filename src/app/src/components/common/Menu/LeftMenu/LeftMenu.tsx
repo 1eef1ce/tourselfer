@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import {Heart, Impression, RoutesIcon, SearchIcon, User} from '@components/icons';
 
 const LeftMenu = () => {
     return (

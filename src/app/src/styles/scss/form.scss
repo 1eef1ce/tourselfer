@@ -13,13 +13,217 @@
 
   &__row {
     display: flex;
+    margin: 24px -8px -8px;
+
+    @include max-767 {
+      margin: 24px -4px -8px;
+    }
+
+    .form__group {
+      margin: 8px;
+
+      @include max-767 {
+        margin: 8px 4px;
+      }
+    }
+
+    &--end {
+      align-items: flex-end;
+    }
+
+    &--withLang {
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 132px;
+
+          @include max-767 {
+            max-width: 96px;
+          }
+        }
+      }
+    }
+
+    &--withCity {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 240px;
+
+          @include max-767 {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+
+    &--images {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+    }
+
+    &--addImages {
+      flex-wrap: wrap;
+
+      .form__group {
+        max-width: calc(50% - 16px);
+
+        @include max-767 {
+          max-width: calc(100% - 8px);
+        }
+      }
+    }
+
+    &--withTime {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+
+        @include max-767 {
+          width: calc(50% - 8px);
+        }
+      }
+
+      .form__label {
+        width: calc(200% + 16px);
+
+        @include max-767 {
+          width: calc(200% + 8px);
+        }
+      }
+    }
+
+    &--withTimetable {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+
+        &--select {
+          width: 92px;
+
+          @include max-767 {
+            width: calc(50% - 20px);
+          }
+
+          &:first-of-type {
+            width: 240px;
+
+            @include max-767 {
+              width: 100%;
+            }
+          }
+        }
+
+        &--timeRange {
+          width: 144px;
+
+          @include max-767 {
+            width: 100%;
+          }
+        }
+      }
+
+      .form__divider {
+
+        @include max-767 {
+          display: flex;
+          margin: 8px 4px;
+        }
+      }
+    }
+
+    &--wideMargin {
+      margin: 16px -16px -16px;
+
+      @include max-767 {
+        margin: 16px 0 -16px;
+      }
+
+      .form__group {
+        margin: 16px;
+
+        @include max-767 {
+          margin: 16px 0;
+        }
+      }
+    }
+
+    &--withCheck {
+
+      @include max-767 {
+        flex-direction: column;
+      }
+    }
+
+    &--withArea {
+
+      @include max-767 {
+        flex-wrap: wrap;
+      }
+
+      .form__group {
+        width: auto;
+        flex-grow: 1;
+
+        &--select {
+          max-width: 132px;
+
+          @include max-767 {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &__group {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
     margin-bottom: 24px;
 
+    &--auto {
+      width: auto;
+      flex-shrink: 0;
+    }
+
     &--btn {
-      margin: 32px 0;
+      margin: 32px 0 0;
       align-items: normal;
+
+      .btn {
+
+        & + .btn {
+          margin-top: 16px;
+        }
+      }
+    }
+
+    &--singleBtn {
+      margin: 32px 0 0;
+
+      @include max-767 {
+        align-items: normal;
+      }
     }
 
     &--select {
@@ -29,6 +233,31 @@
     &--radio {
       margin: 32px 0;
     }
+
+    &--w456 {
+      max-width: 456px;
+    }
+
+    &--w80 {
+
+      .form__field {
+        max-width: 80px;
+
+        @include max-767 {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4px -4px -4px;
+
+    .btn {
+      margin: 4px;
+    }
   }
 
   &__label {
@@ -37,6 +266,10 @@
     font-size: 14px;
     line-height: 1.14;
     color: $color-semi;
+
+    &--forGroup {
+      margin-bottom: 16px;
+    }
   }
 
   &__field {
@@ -88,9 +321,11 @@
     box-shadow: inset 0 0 0 1px $color-gray-15;
     outline: none;
     transition: 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &::placeholder {
-      color: $color-semi;
+      color: $color-secondary;
     }
 
     &:not(:disabled) {
@@ -145,11 +380,25 @@
         }
       }
     }
+
+    &--noClear {
+      padding: 16px;
+    }
   }
 
   &__textarea {
+    min-height: 104px;
     padding: 16px;
     resize: none;
+  }
+
+  &__length {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 14px;
+    line-height: 1.14;
+    color: $color-secondary;
   }
 
   &__error {
@@ -174,10 +423,19 @@
     }
   }
 
-  .btn {
+  &__divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 56px;
+    margin: 8px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-secondary;
 
-    & + .btn {
-      margin-top: 16px;
+    @include max-767 {
+      display: none;
     }
   }
 }
