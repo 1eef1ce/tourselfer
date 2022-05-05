@@ -32,10 +32,15 @@ export async function getServerSideProps ({locale, params, query}) {
 
 export default function PersonalIndexPage(props) {
     const { t } = useTranslation("pages__personal");
+    const {locale, pathname, query, push} = useRouter();
+    const BaseApi = new Api({locale});
     const { user, isLoadingUserData, isAuthorize } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/personal',
     });
+
+    const [personalRoutes, setPersonalRoutes] = useState([]);
+   
     const breadcrumbs = [
         {
             label: t('index.breadcrumb_1'),
@@ -46,6 +51,15 @@ export default function PersonalIndexPage(props) {
             url: "/personal/"
         }
     ];
+
+    useEffect(() => {
+        BaseApi.getPersonalRoutesList()
+            .then(response => {
+                setPersonalRoutes(response?.data ?? []);
+            });
+
+    }, []);
+
     
     if (!isAuthorize)
         return (<InlineAuth hasContainer={true} breadcrumbs={breadcrumbs} reloadAfterSignin={true} redirectAfterSignin={'/personal/'} />);
@@ -70,16 +84,12 @@ export default function PersonalIndexPage(props) {
                     
                         <div className="tab-content active">
                             <h2>{t('index.title_h1')}</h2>
-
-                            <RouteCard params={false} title={'Tokyo kaleidoscope'} label={true}>
-                                <Image src="/images/route-personal1.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
-                            <RouteCard params={false} title={'Route Name'} label={true}>
-                                <Image src="/images/route-personal2.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
-                            <RouteCard params={false} title={'Route Name'} label={true}>
-                                <Image src="/images/route-personal3.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
+                            {Array.isArray(personalRoutes) && personalRoutes.map( (item) => {
+                                return (
+                                    <RouteCard route={item} link={'/go/' + item.id}></RouteCard>
+                                );
+                            })}
+                            
                         </div>
                         
                         

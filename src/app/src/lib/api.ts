@@ -1,3 +1,4 @@
+import axios from '@lib/axios'
 
 export class Api {
 
@@ -150,6 +151,21 @@ export class Api {
                     links: null,
                     meta: null
                 };
+            });
+        
+    }
+
+    async getPersonalRoutesList() {
+        let params = {
+            language: this.locale
+        };
+        let methodURL = '/api/v1/user/getRoutes';
+
+        return await axios
+            .get(this.getURL(methodURL, params))
+            .then(response => response.data)
+            .catch(error => {
+
             });
         
     }

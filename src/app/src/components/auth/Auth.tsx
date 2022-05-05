@@ -125,7 +125,7 @@ const Auth = (props: Props) => {
                     refresh();
 
                     if (response === true && props?.reloadAfterSignin) {
-                        router.reload(window.location.pathname)
+                        router.reload();
                     }
                 });
         }
