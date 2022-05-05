@@ -23,7 +23,9 @@ module.exports = {
     images: {
         domains: [
             'api.stage1.test.tourselfer.tech',
-            'localhost'
+            'localhost',
+            'youtube.com',
+            'img.youtube.com'
         ]
     }
 };

@@ -114,7 +114,7 @@ export class Api {
             params['sort'] = props.sort;
 
         Object.assign(params, this.setPagination(props));
-
+console.log(this.getURL(methodURL, params));
         return await fetch(this.getURL(methodURL, params))
             .then(resource => resource.json())
             .then((response) => {
@@ -152,5 +152,70 @@ export class Api {
                 };
             });
         
+    }
+
+    async getRouteItem(props) {
+        let params = {
+            language: this.locale
+        };
+
+        if (!props.code)
+            return null;
+
+        let methodURL = '/api/v1/route/getByCode/' + props.code;
+
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
+    }
+
+    async getRouteReviews(props) {
+
+        let params = {
+            language: this.locale
+        };
+
+        let methodURL = null;
+        
+        if (props?.routeId && props?.routeId.length)
+            methodURL = '/api/v1/route/reviews/' + encodeURI(props.routeId);
+        
+        if (!methodURL)
+            return null;
+        
+        if (!!props.filter)
+            params['filter'] = props.filter;
+
+        if (!!props.sort)
+            params['sort'] = props.sort;
+
+        
+        Object.assign(params, this.setPagination(props));
+
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
     }
 }
