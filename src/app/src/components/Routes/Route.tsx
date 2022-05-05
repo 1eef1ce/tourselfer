@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {Crown, Man, MapPin} from '@components/icons';
+import {Man, MapPin} from '@components/icons';
 import {Avatar, UserName} from '@components/common';
 import { useTranslation } from 'next-i18next';
 
@@ -113,7 +113,7 @@ const Route = ({item}) => {
                 {!!item.super_place && item.super_place === true &&
                 <div className="route-mark">
                     <div className="icon route-mark__icon">
-                        <MapPin />
+                        <MapPin gradient/>
                     </div>
                     <div className="route-mark__text">super place</div>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import {RatingNumber} from '@components/ui';
 import {Avatar, UserName} from '@components/common';
 import {Crown, Man, MapPin} from '@components/icons';

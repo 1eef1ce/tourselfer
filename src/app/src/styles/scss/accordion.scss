@@ -1,0 +1,166 @@
+@import "variables.scss";
+@import "media.scss";
+
+.accordion {
+  border: 2px solid $color-gray-15;
+  border-radius: 16px;
+  overflow: hidden;
+
+  &__item {
+    background: #fff;
+    transition: 0.2s;
+
+    &:not(:last-of-type) {
+      border-bottom: 2px solid $color-gray-15;
+    }
+
+    &:not(.active) {
+
+      .accordion {
+
+        &__head {
+
+          &:hover {
+
+            .accordion {
+
+              &__title {
+                color: $color-semi;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.active {
+      background: $gradient-green;
+
+      .accordion {
+
+        &__head {
+          align-items: flex-start;
+          padding-top: 48px;
+
+          @include max-1023 {
+            padding-top: 24px;
+          }
+
+          @include max-767 {
+            padding-top: 16px;
+          }
+        }
+
+        &__title {
+          color: #fff;
+
+          @include max-767 {
+            font-size: 24px;
+            line-height: 1.33;
+          }
+        }
+
+        &__icon {
+          transform: scale(1, -1);
+
+          svg * {
+            fill: #fff;
+          }
+        }
+
+        &__body {
+          height: auto;
+          margin-top: -10px;
+          padding-bottom: 48px;
+
+          @include max-1023 {
+            margin-top: 0;
+            padding-bottom: 24px;
+          }
+
+          @include max-767 {
+            margin-top: 10px;
+            padding-bottom: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    padding: 32px 64px;
+    cursor: pointer;
+
+    @include max-1023 {
+      padding: 24px;
+    }
+
+    @include max-767 {
+      padding: 11px 16px;
+    }
+  }
+
+  &__title {
+    width: 100%;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.41;
+    letter-spacing: -0.01em;
+    transition: 0.2s;
+
+    @include max-1023 {
+      font-size: 24px;
+    }
+
+    @include max-767 {
+      font-size: 18px;
+      line-height: 1.33;
+    }
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    margin-left: 16px;
+    transition: 0.2s;
+
+    @include max-1023 {
+      width: 24px;
+      height: 24px;
+    }
+
+    @include max-767 {
+      width: 20px;
+      height: 20px;
+    }
+
+    svg * {
+      fill: $color-green;
+    }
+  }
+
+  &__body {
+    height: 0;
+    padding: 0 64px;
+    font-size: 20px;
+    line-height: 1.8;
+    color: #fff;
+    overflow: hidden;
+    transition: 0.2s;
+
+    @include max-1023 {
+      padding: 0 24px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    @include max-767 {
+      padding: 0 16px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}

@@ -72,7 +72,7 @@ export default function AuthorsPage() {
                         Show more
                     </Button>
                 </div>
-                <Pagination/>
+                {/*<Pagination/>*/}
             </div>
         </Layout>
     );

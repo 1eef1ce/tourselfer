@@ -1,7 +1,7 @@
 import {User} from '@components/icons';
 import {Modal} from '@components/ui';
 import {useModal} from '@lib/hooks/useModal';
-import {Auth} from '@components/auth';
+import {Auth} from '@components/Auth';
 import { useTranslation } from 'next-i18next';
 import { useAuth } from '@hooks/auth';
 import Link from 'next/link';

@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { MapPinBlack } from '@components/icons';
+import { MapPin } from '@components/icons';
 
 
 class SearchbarItems extends React.Component<any, any, any> {
@@ -85,10 +85,10 @@ class SearchbarItems extends React.Component<any, any, any> {
 
         if (this.props.visibleItems && this.props.items && this.props.items.length > 0) {
             return (
-                <div className="search__suggestions__wrapper" /*ref={this.wrapperRef}*/>
+                <div className="search-suggestions" /*ref={this.wrapperRef}*/>
                     {this.props.items.map((item, key) => (
                         <div className={"search-suggestions__item" + (this.state.currentIndex == key ? ' active' : '')} key={item.label.general}>
-                            <div className="icon search-suggestions__icon"><MapPinBlack /></div>
+                            <div className="icon search-suggestions__icon"><MapPin/></div>
                             <div className="search-suggestions__title">
                                 <div className="search-suggestions__label">{item.label.general}</div>
                                 {Array.isArray(item.label.subs) && item.label.subs.length > 0 &&

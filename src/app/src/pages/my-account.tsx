@@ -1,11 +1,9 @@
 import {Breadcrumbs, Layout, RouteCard, PersonalForm} from '@components/common';
 import Head from 'next/head';
 import Image from 'next/image';
-import {Trash} from '@components/icons';
-import {Button, Rating, Input, Number, SelectField} from '@components/ui';
+import {Trashcan} from '@components/icons';
+import {Button} from '@components/ui';
 import LeftMenu from '@components/common/Menu/LeftMenu';
-
-import {Formik, Form} from 'formik';
 
 export default function MyAccount() {
     return (
@@ -49,7 +47,7 @@ export default function MyAccount() {
                                 </Button>
                                 <Button
                                     isStartIcon={true}
-                                    startIcon={<Trash/>}
+                                    startIcon={<Trashcan/>}
                                 >
                                     Delete
                                 </Button>

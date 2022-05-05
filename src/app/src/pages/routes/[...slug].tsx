@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import {Breadcrumbs, Layout, Pagination, SeeMore} from '@components/common';
 import Head from 'next/head';
-import {Button} from '@components/ui';
 import {Filter, FilterClass} from '@components/RoutesFilter';
 import {RoutesSort} from '@components/RoutesSort';
 import {RoutesContainer} from '@components/Routes';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
@@ -44,12 +42,19 @@ export async function getServerSideProps ({locale, params, query}) {
         await i18n?.reloadResources();
     }
 
+    const list = await BaseApi.getRoutesList(queryParams);
+console.log(list);
+    if (typeof list !== 'object' || (typeof list === 'object' && !!list.errorCode))
+        return {
+            notFound: true
+        };
+
     return {
       props: {
         page: await BaseApi.getPageData('routes-list', {
             cityCode: query.slug[0],
         }),
-        list: await BaseApi.getRoutesList(queryParams),
+        list: list,
         ...(await serverSideTranslations(locale!, ["menu", "components", "pages__homepage"])),
       },
     };
@@ -101,7 +106,7 @@ export default function RoutesListPage(props) {
                 }
                 setPagination(response?.meta ?? {});
             });
-    }
+    };
 
 
     return (

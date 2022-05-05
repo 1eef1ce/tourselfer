@@ -44,28 +44,18 @@ const Breadcrumbs = ({
 
 
     useEffect(() => {
-        /*if (router) {
-            const linkPath = router.asPath.split('/');
-            linkPath.shift();
-
-            const pathArray = linkPath.map((path, i) => {
-                return {
-                    breadcrumb: path.replace(/-/g, ' '),
-                    href: '/' + linkPath.slice(0, i + 1).join('/'),
-                };
+        
+        if (items && items.length > 0) {
+            const newItems = [];
+            items.map((item) => {
+                newItems.push({
+                    breadcrumb: item.label.toString(),
+                    href:  item.url,
+                });
             });
 
-            setBreadcrumbs(pathArray);
-        }*/
-        const newItems = [];
-        items.map((item) => {
-            newItems.push({
-                breadcrumb: item.label.toString(),
-                href:  item.url,
-            });
-        });
-
-        setBreadcrumbs(newItems);
+            setBreadcrumbs(newItems);
+        }
 
     }, [items]);
 

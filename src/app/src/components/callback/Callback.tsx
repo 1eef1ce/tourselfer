@@ -5,7 +5,7 @@ const Callback = () => {
     return (
         <>
             <form className="form">
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="name"
                         name="name"
@@ -13,7 +13,7 @@ const Callback = () => {
                         required
                     />
                 </div>
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="phone"
                         name="phone"
@@ -21,7 +21,7 @@ const Callback = () => {
                         required
                     />
                 </div>
-                <div className="form__row form__row--btn">
+                <div className="form__group form__group--btn">
                     <Button
                         variant="filled"
                         size="medium"

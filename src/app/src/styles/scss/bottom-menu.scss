@@ -21,7 +21,8 @@
     min-width: calc(20% - 8px);
     margin: 0 4px;
 
-    &:hover {
+    &:hover,
+    &.active {
 
       .bottom-menu {
 

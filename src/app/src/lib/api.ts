@@ -43,7 +43,7 @@ export class Api {
     setPagination(params) {
         let pagination = {};
 
-        if (!!params.pagination) {
+        if (params.pagination) {
             if (!!params.pagination.limit && params.pagination.limit > 0)
                 pagination['limit'] = parseInt(params.pagination.limit);
 
@@ -108,10 +108,10 @@ export class Api {
         if (!!props.cityCode && props.cityCode.length)
             methodURL = '/api/v1/route/findByCityCode/' + encodeURI(props.cityCode);
 
-        if (!!props.filter)
+        if (props.filter)
             params['filter'] = props.filter;
 
-        if (!!props.sort)
+        if (props.sort)
             params['sort'] = props.sort;
 
         Object.assign(params, this.setPagination(props));
@@ -167,6 +167,70 @@ export class Api {
             .catch(error => {
 
             });
+    }
         
+    async getRouteItem(props) {
+        let params = {
+            language: this.locale
+        };
+
+        if (!props.code)
+            return null;
+
+        let methodURL = '/api/v1/route/getByCode/' + props.code;
+
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
+    }
+
+    async getRouteReviews(props) {
+
+        let params = {
+            language: this.locale
+        };
+
+        let methodURL = null;
+        
+        if (props?.routeId && props?.routeId.length)
+            methodURL = '/api/v1/route/reviews/' + encodeURI(props.routeId);
+        
+        if (!methodURL)
+            return null;
+        
+        if (!!props.filter)
+            params['filter'] = props.filter;
+
+        if (!!props.sort)
+            params['sort'] = props.sort;
+
+        
+        Object.assign(params, this.setPagination(props));
+
+        return await fetch(this.getURL(methodURL, params))
+            .then(resource => resource.json())
+            .then((response) => {
+                return response;
+            })
+            .catch(error => {
+                console.warn(error);
+
+                return {
+                    data: [],
+                    links: null,
+                    meta: null
+                };
+            });
     }
 }

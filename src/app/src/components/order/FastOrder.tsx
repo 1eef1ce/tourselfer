@@ -6,7 +6,7 @@ const FastOrder = () => {
         <>
             <form className="form">
                 <div className="form__title">Доставка</div>
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="address"
                         name="address"
@@ -14,7 +14,7 @@ const FastOrder = () => {
                         required
                     />
                 </div>
-                <div className="form__row form__row--select">
+                <div className="form__group form__group--select">
                     <SelectField
                         classPrefix="select"
                         id="s_date"
@@ -32,7 +32,7 @@ const FastOrder = () => {
                         }
                     />
                 </div>
-                <div className="form__row form__row--radio">
+                <div className="form__group form__group--radio">
                     <label className="radio">
                         <input className="radio__input" type="radio" name="r1"/>
                         <span className="radio__label">10:00 — 14:00</span>
@@ -46,14 +46,14 @@ const FastOrder = () => {
                         <span className="radio__label">10:00 — 22:00</span>
                     </label>
                 </div>
-                <div className="form__row">
+                <div className="form__group">
                     <label className="checkbox">
                         <input className="checkbox__input" type="checkbox"/>
                         <span className="checkbox__label">Перезвоните мне для подтверждения заказа</span>
                     </label>
                 </div>
                 <div className="form__title">Получатель заказа</div>
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="name"
                         name="name"
@@ -61,7 +61,7 @@ const FastOrder = () => {
                         required
                     />
                 </div>
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="phone"
                         name="phone"
@@ -69,7 +69,7 @@ const FastOrder = () => {
                         required
                     />
                 </div>
-                <div className="form__row">
+                <div className="form__group">
                     <Input
                         id="email"
                         name="email"
@@ -78,14 +78,14 @@ const FastOrder = () => {
                         required
                     />
                 </div>
-                <div className="form__row">
+                <div className="form__group">
                     <Textarea
                         id="comment"
                         name="comment"
                         label="Комментарий"
                     />
                 </div>
-                <div className="form__row form__row--btn">
+                <div className="form__group form__group--btn">
                     <Button
                         variant="filled"
                         size="medium"

@@ -4,6 +4,7 @@ import {Button} from '@components/ui';
 import {SearchbarItems} from '@components/common/SearchbarItems';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import cn from 'classnames';
 
 class SearchbarClass extends React.Component<any, any, any> {
     
@@ -68,9 +69,18 @@ class SearchbarClass extends React.Component<any, any, any> {
     render() {
         const { t } = this.props.t;
 
+        const inputClass = () => {
+            if (this.state.focus === true) {
+                return "focus";
+            }
+            else {
+                return "";
+            }
+        };
+
         return (
             <div className="form search__form">
-                <div className="search__wrapper">
+                <div className={cn("search__wrapper", inputClass())}>
                     <div className="icon search__icon">
                         <SearchIcon />
                     </div>
@@ -85,7 +95,9 @@ class SearchbarClass extends React.Component<any, any, any> {
                     />
                     {((this.state.inputValue !== '') && (this.state.focus === true)) &&
                     (
-                        <span className="close-btn" onMouseDown={this.clearValue}></span>
+                        <span className="form__icon" onMouseDown={this.clearValue}>
+                            <Close/>
+                        </span>
                     )}
                     <Button
                         className="search__btn"

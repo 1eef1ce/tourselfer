@@ -8,12 +8,14 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     name: string
     label?: string
     required?: boolean
+    maxLength?: number
 }
 
 interface TextareaState {
     currentHeight: number
     focus: boolean
     inputValue: string
+    length: number
 }
 
 class Textarea extends React.Component<TextareaProps, TextareaState> {
@@ -22,7 +24,8 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
         this.state = {
             currentHeight: 104,
             focus: false,
-            inputValue: ''
+            inputValue: '',
+            length: 0
         };
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -38,7 +41,10 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
     }
 
     onChange(e) {
-        this.setState({inputValue: (e.target as HTMLInputElement).value});
+        this.setState({
+            inputValue: (e.target as HTMLInputElement).value,
+            length: (e.target as HTMLInputElement).value.length
+        });
     }
 
     render() {
@@ -47,6 +53,7 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
             name,
             label,
             required,
+            maxLength,
             ...props
         } = this.props;
 
@@ -70,16 +77,20 @@ class Textarea extends React.Component<TextareaProps, TextareaState> {
                 <div className={cn("form__field", inputClass())}>
                     <textarea
                         className="form__input form__textarea"
-                        style={{height: this.state.currentHeight}}
+                        //style={{height: this.state.currentHeight}}
                         id={id}
                         name={name}
                         value={this.state.inputValue}
                         required={required}
+                        maxLength={maxLength}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         onChange={this.onChange}
                         {...props}
                     />
+                    {maxLength != null && (
+                        <span className="form__length">{this.state.length}/{maxLength}</span>
+                    )}
                 </div>
             </>
         );

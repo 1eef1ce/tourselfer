@@ -245,7 +245,7 @@ const Auth = (props: Props) => {
                     <div className="auth__title">{t('auth.signin.title')}</div>
                 </div>
                 <div className="form">
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
                             onChange={event => setEmail(event.target.value)}
@@ -261,11 +261,12 @@ const Auth = (props: Props) => {
                             <div className="form__error">{errors['email']}</div>
                         ) : null}
                     </div>
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={checkAvaliableEmail}
                         >
@@ -275,6 +276,7 @@ const Auth = (props: Props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             {t('auth.signin.forgot_password')}
@@ -300,7 +302,7 @@ const Auth = (props: Props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
@@ -316,11 +318,12 @@ const Auth = (props: Props) => {
                             <div className="form__error">{errors['password']}</div>
                         ) : null}
                     </div>
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={submitLoginForm}
                         >
@@ -330,6 +333,7 @@ const Auth = (props: Props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             {t('auth.signin.forgot_password')}
@@ -347,7 +351,7 @@ const Auth = (props: Props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['name'] ? ' error' : '')}
                             onChange={event => setName(event.target.value)}
@@ -363,7 +367,7 @@ const Auth = (props: Props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['password'] ? ' error' : '')}
                             onChange={event => setPassword(event.target.value)}
@@ -379,7 +383,7 @@ const Auth = (props: Props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['repeatPassword'] ? ' error' : '')}
                             onChange={event => setRepeatPassword(event.target.value)}
@@ -395,11 +399,12 @@ const Auth = (props: Props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitRegForm}
                             loading={showLoader}
                         >
@@ -430,11 +435,12 @@ const Auth = (props: Props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             {t('auth.confirm_signup.button')}
@@ -462,11 +468,12 @@ const Auth = (props: Props) => {
                     <div className="auth__subtitle">{t("auth.success_auth.description")}</div>
                 </div>
                 <div className="form">
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             {t("auth.success_auth.button")}
@@ -485,7 +492,7 @@ const Auth = (props: Props) => {
                     </div>
                 </div>
                 <div className="form">
-                    <div className="form__row">
+                    <div className="form__group">
                         <Input
                             className={"form__input" + (!!errors && errors['email'] ? ' error' : '')}
                             onChange={event => setEmail(event.target.value)}
@@ -502,11 +509,12 @@ const Auth = (props: Props) => {
                         ) : null}
                     </div>
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitForgotPasswordForm}
                             loading={showLoader}
                         >
@@ -517,6 +525,7 @@ const Auth = (props: Props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('')}
                         >
                             {t("auth.forgot_password.button_rembered")}
@@ -535,11 +544,12 @@ const Auth = (props: Props) => {
                 </div>
                 <div className="form">
 
-                    <div className="form__row form__row--btn">
+                    <div className="form__group form__group--btn">
                         <Button
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                         >
                             {t("auth.confirm_forgot.button")}
                         </Button>

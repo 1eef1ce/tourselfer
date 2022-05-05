@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Location = (props) => {
     return (
-        <Link href={"routes/" + props.code}>
+        <Link href={"/routes/" + props.code}>
             <a className="locations__item">
                 <picture className="locations__picture">
                     <source srcSet={props.img} media="(min-width: 500px)"/>

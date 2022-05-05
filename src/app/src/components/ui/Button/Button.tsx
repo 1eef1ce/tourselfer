@@ -9,6 +9,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'medium' | 'large'
     squared? : boolean
     colored?: boolean
+    danger?: boolean
     type?: 'submit' | 'reset' | 'button'
     Component?: string | JSXElementConstructor<any>
     loading?: boolean
@@ -27,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
     size,
     squared,
     colored,
+    danger,
     isIcon,
     icon,
     isStartIcon,
@@ -49,6 +51,7 @@ const Button: React.FC<ButtonProps> = ({
             ['btn--medium']: size === 'medium',
             ['btn--large']: size === 'large',
             ['btn--squared']: squared === true,
+            ['btn--danger']: danger === true,
             ['btn--icon']: isIcon === true,
             ['loading']: loading === true
         },
