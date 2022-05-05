@@ -32,5 +32,9 @@
     "route.reviews.recommended_yes": "Да",
     "route.reviews.recommended_no": "Нет",
     "route.reviews.positive": "Что понравилось:",
-    "route.reviews.negative": "Что можно улучшить:"
+    "route.reviews.negative": "Что можно улучшить:",
+
+    "route.madal.get_route.title": "Вы добавили маршрут!",
+    "route.madal.get_route.description": "Маршрут успешно добавлен в ваш аккаунт. Теперь вы можете его пройти используя свой смартфон.",
+    "route.madal.get_route.go_to_route": "Начать прохождение маршрута"
 }

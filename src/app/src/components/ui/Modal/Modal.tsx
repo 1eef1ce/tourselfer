@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useCallback} from 'react';
+import React, {FC, useEffect, useCallback, useState} from 'react';
 import ReactDOM from 'react-dom';
 import cn from 'classnames';
 import {Close} from '@components/icons';
@@ -26,7 +26,6 @@ const Modal: FC<ModalProps> = ({
 }) => {
 
     const modalClick = React.useRef();
-
     const handleKey = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -71,7 +70,7 @@ const Modal: FC<ModalProps> = ({
                             <Scrollbars
                                 hideTracksWhenNotNeeded={true}
                                 autoHeight
-                                autoHeightMin={440}
+                                autoHeightMin={240}
                                 autoHeightMax='80vh'
                                 universal={true}
                             >

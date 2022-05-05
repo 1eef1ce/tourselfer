@@ -15,6 +15,11 @@ import { i18n } from "next-i18next";
 import {Api} from "@lib/api"
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import {useModal} from '@lib/hooks/useModal';
+import {Modal} from '@components/ui';
+import { useAuth } from '@hooks/auth';
+import {Auth} from '@components/Auth';
+import { useNotify } from '@hooks/notify';
 
 export async function getServerSideProps ({locale, params, query, res}) {
 
@@ -80,15 +85,19 @@ export default function RoutePage(props) {
     const {locale, pathname, query, push} = useRouter();
     const { slug } = router.query;
     const BaseApi = new Api({locale});
+    const { user, isLoadingUserData, isAuthorize } = useAuth({
+        middleware: 'guest',
+        redirectIfAuthenticated: '/personal',
+    });
 
     const { t } = useTranslation("pages__route");
+    const {errorNotify} = useNotify();
 
     const mainProps = [];
 
     const needUpdateReviews = useRef(false);
     const [reviews, setReviews] = useState(null);
     const [reviewsFilter, setReviewsFilter] = useState({});
-
 
 
     if (props?.data?.duration?.start)
@@ -219,6 +228,54 @@ export default function RoutePage(props) {
         }));
     }
 
+    /**
+     * Get routes
+     */
+
+    const [loadingGetRoute, setLoadingGetRoute] = useState(false);
+
+    const [showSigninModal, setShowSigninModal] = useState(false);
+    const toggleShowSigninModal = () => setShowSigninModal(!showSigninModal);
+
+    const [showGetRouteModal, setShowGetRouteModal] = useState(false);
+    const toggleShowGetRouteModal = () => setShowGetRouteModal(!showGetRouteModal);
+
+    const getRoute = ({passSignIn}) => {
+        passSignIn = passSignIn ?? false;
+
+        if (passSignIn == false && !isAuthorize) {
+            setShowSigninModal(true);
+            return;
+        }
+
+        setLoadingGetRoute(true);
+        BaseApi.preCheckoutRoute({
+            id: props?.data?.id
+        })
+        .then(response => {
+        
+            if (response?.result === 'ok' && response?.checkout_id) {
+                if (response?.payed === true) {
+                    setShowGetRouteModal(true);
+                    return;
+                } else {
+                    router.push(`/checkout/${response?.checkout_id}`);
+                }
+            }
+
+            errorNotify({
+                title: "Unknown error",
+                message: "Try again later"
+            });
+
+            console.log(response);
+        })
+        .finally(() => {
+            setLoadingGetRoute(false);
+        });
+
+    }
+
 
     return (
         <Layout>
@@ -226,6 +283,41 @@ export default function RoutePage(props) {
                 <title>{props?.page?.meta?.title}</title>
                 <meta content={props?.page?.meta?.description} name="description"/>
             </Head>
+
+            {!isAuthorize && showSigninModal &&
+                <Modal
+                    isShown={true}
+                    hide={toggleShowSigninModal}
+                >
+                    <Auth
+                        onSuccessSignIn={() => {
+                            setShowSigninModal(false);
+                            getRoute({passSignIn: true});
+                        }}
+                    />
+                </Modal>
+            }
+
+            {showGetRouteModal &&
+                <Modal
+                    isShown={showGetRouteModal}
+                    hide={toggleShowGetRouteModal}
+                    modalTitle={t('route.madal.get_route.title')}
+                    modalSubtitle={t('route.madal.get_route.description')}
+                >
+                    <div>
+                        <Button
+                            variant="filled"
+                            size="medium"
+                            type="button"
+                            onClick={e => router.push(`/run/${props?.data?.id}`)}
+                            colored
+                        >
+                            {t('route.madal.get_route.go_to_route')}
+                        </Button>
+                    </div>
+            </Modal>
+            }
 
             <div className="route">
                 <div className="showcase showcase--route">
@@ -307,19 +399,15 @@ export default function RoutePage(props) {
                                 </div>
 
                                 {props?.data?.price?.current > 0 &&
-                                <Link href={`/buy/${props?.data?.code}`}>
-                                    <a className="btn btn--large btn--filled">{t('route.buy_button')}</a>
-                                </Link>
+                                <Button onClick={getRoute} loading={loadingGetRoute} className="btn btn--large btn--filled">{t('route.buy_button')}</Button>
                                 ||
-                                <Link href={`/personal/get-route?code=${props?.data?.code}`}>
-                                    <a className="btn btn--large btn--filled">{t('route.get_button')}</a>
-                                </Link>
+                                <Button onClick={getRoute} loading={loadingGetRoute} className="btn btn--large btn--filled">{t('route.get_button')}</Button>
                                 }
                             </div>
-                            
+                            {/*
                             <Link href={'#'}>
                                 <a className="link link--color route-buy__link">{t('route.walk_with_guide')}</a>
-                            </Link>
+                            </Link>*/}
                         </div>
                     </div>{/*route-about*/}
 

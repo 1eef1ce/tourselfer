@@ -44,7 +44,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const csrf = () => axios.get('/api/v1/csrf-cookie');
 
     const refresh = async () => {
-        mutate('/api/v1/user');
+        return mutate('/api/v1/user');
     };
     
     const login = async ({ setErrors, setStatus, ...props }) => {

@@ -11,6 +11,7 @@ import { i18n } from "next-i18next";
 interface Props {
     redirectAfterSignin?: string,
     reloadAfterSignin?: boolean
+    onSuccessSignIn?: any
 }
 
 const Auth = (props: Props) => {
@@ -124,6 +125,10 @@ const Auth = (props: Props) => {
                     setShowLoader(false);
                     refresh();
 
+                    if (response === true && typeof props?.onSuccessSignIn === 'function') {
+                        props?.onSuccessSignIn();
+                    }
+                        
                     if (response === true && props?.reloadAfterSignin) {
                         router.reload();
                     }

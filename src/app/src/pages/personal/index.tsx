@@ -86,7 +86,7 @@ export default function PersonalIndexPage(props) {
                             <h2>{t('index.title_h1')}</h2>
                             {Array.isArray(personalRoutes) && personalRoutes.map( (item) => {
                                 return (
-                                    <RouteCard route={item} link={'/go/' + item.id}></RouteCard>
+                                    <RouteCard route={item} link={'/run/' + item.id}></RouteCard>
                                 );
                             })}
                             

@@ -233,4 +233,18 @@ export class Api {
                 };
             });
     }
+
+    async preCheckoutRoute(props) {
+        let params = {
+            language: this.locale
+        };
+        let methodURL = '/api/v1/user/checkoutRoute/' + props.id;
+
+        return await axios
+            .get(this.getURL(methodURL, params))
+            .then(response => response.data)
+            .catch(error => {
+
+            });
+    }
 }

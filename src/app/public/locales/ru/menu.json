@@ -17,5 +17,7 @@
     "personal.security": "Безопасность",
     "personal.security_description": "Настройте безопасность вашего аккаунта",
     "personal.payment": "Платежи и выплаты",
-    "personal.payment_description": "Добавьте кредитную карту для легкой оплаты. Настройки выплат для авторов"
+    "personal.payment_description": "Добавьте кредитную карту для легкой оплаты. Настройки выплат для авторов",
+    "personal.logout": "Выйти",
+    "personal.logout_description": "Вы можете принудительно выйти из вашей учетной записи"
 }

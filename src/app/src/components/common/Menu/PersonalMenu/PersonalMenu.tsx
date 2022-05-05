@@ -2,11 +2,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {Heart, Impression, RoutesIcon, SearchIcon, User} from '@components/icons';
 import { useTranslation } from 'next-i18next';
+import { useAuth } from '@hooks/auth';
 
 const PersonalMenu = () => {
     const { t } = useTranslation("menu");
     const router = useRouter();
     const {locale, pathname, query, push} = useRouter();
+    
+    const {logout} = useAuth();
+
+    const logoutHandler = () => {
+        logout()
+            .then(() => {
+                router.reload();
+            });
+    }
 
     return (
         <div className="left-menu">
@@ -46,6 +56,12 @@ const PersonalMenu = () => {
                     </div>
                 </a>
             </Link>
+            <a href="javascript:void(0)" onClick={logoutHandler} className={"left-menu__item"}>
+                    <div className="left-menu__text">
+                        <span className="left-menu__title">{t('personal.logout')}</span>
+                        <span className="left-menu__desc">{t('personal.logout_description')}</span>
+                    </div>
+            </a>
         </div>
     );
 };
