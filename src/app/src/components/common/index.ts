@@ -1,3 +1,4 @@
+export { default as Accordion } from './Accordion';
 export { default as AppSlider } from './AppSlider';
 export { default as AdvantageSlider } from './AdvantageSlider';
 export { default as Avatar } from './Avatar';
