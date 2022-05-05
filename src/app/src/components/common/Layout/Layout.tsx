@@ -1,6 +1,6 @@
 import React from 'react';
 import {TopBanner, Header, Footer, Notifications} from '@components/common';
-import { useAuth } from '../../../hooks/auth';
+import { useAuth } from '@hooks/auth';
 
 interface LayoutProps {
     transparentHeader?: boolean;

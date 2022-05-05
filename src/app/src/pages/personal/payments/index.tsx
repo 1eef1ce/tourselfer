@@ -1,68 +1,76 @@
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import {InlineAuth} from '@components/InlineAuth';
 import {Breadcrumbs, Layout, RouteCard, PersonalForm} from '@components/common';
 import Head from 'next/head';
-import Image from 'next/image';
-import {Trashcan} from '@components/icons';
 import {Button} from '@components/ui';
-import LeftMenu from '@components/common/Menu/LeftMenu';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { i18n } from "next-i18next";
+import {Api} from "@lib/api"
+import Image from 'next/image';
+import {Trash} from '@components/icons';
+import PersonalMenu from '@components/common/Menu/PersonalMenu';
+import { useAuth } from '@hooks/auth';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-export default function MyAccount() {
+export async function getServerSideProps ({locale, params, query}) {
+
+    const BaseApi = new Api({locale});
+    
+    if (process.env.NODE_ENV === "development")
+    {
+        await i18n?.reloadResources();
+    }
+
+    return {
+      props: {
+        ...(await serverSideTranslations(locale!, ["menu", "components", "pages__personal"])),
+      },
+    };
+}
+
+export default function PersonalMyPage(props) {
+    const { t } = useTranslation("pages__personal");
+    const { user, isLoadingUserData, isAuthorize } = useAuth({
+        middleware: 'guest',
+        redirectIfAuthenticated: '/personal',
+    });
+    const breadcrumbs = [
+        {
+            label: t('payments.breadcrumb_1'),
+            url: "/personal/"
+        },
+        {
+            label: t('payments.breadcrumb_2'),
+            url: "/personal/my/"
+        }
+    ];
+    
+    if (!isAuthorize)
+        return (<InlineAuth hasContainer={true} breadcrumbs={breadcrumbs} reloadAfterSignin={true} redirectAfterSignin={'/personal/'} />);
+
     return (
         <Layout>
             <Head>
-                <title>My Account</title>
+                <title>{t('payments.title_h1')}</title>
+                <meta content={''} name="description"/>
             </Head>
+
             <div className="container">
-                {/*<Breadcrumbs/>*/}
+                <Breadcrumbs items={breadcrumbs}/>
                 <div className="personal">
                     <div className="column left">
-                        <h1 className="title-1">My Account</h1>
+                        <h1 className="title-1">{t('account.title')}</h1>
 
-                        <LeftMenu/>
+                        <PersonalMenu/>
                         
                     </div>
                     <div className="column right">
-                    
-                        <div className="tab-content active">
-                            <h2>My routes</h2>
-                            <RouteCard params={false} title={'Tokyo kaleidoscope'} label={true}>
-                                <Image src="/images/route-personal1.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
-                            <RouteCard params={false} title={'Route Name'} label={true}>
-                                <Image src="/images/route-personal2.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
-                            <RouteCard params={false} title={'Route Name'} label={true}>
-                                <Image src="/images/route-personal3.png" alt="" title="" layout="fill"/>
-                            </RouteCard>
-                        </div>
-                        
-                        <div className="tab-content">
-                            <h2>Personal</h2>
-                            <div className="change-avatar">
-                                <div className="avatar">
-                                    <Image src="/images/avatar.png" alt="" title="" layout="fill"/>
-                                </div>
-                                <Button
-                                >
-                                    Change avatar
-                                </Button>
-                                <Button
-                                    isStartIcon={true}
-                                    startIcon={<Trashcan/>}
-                                >
-                                    Delete
-                                </Button>
-                            </div>
-                            <PersonalForm/>                          
-                        </div>
 
-                        <div className="tab-content">
-                            <h2>Login and Security</h2>
-                            <PersonalForm/>                          
-                        </div>
-                        
-                        <div className="tab-content">
-                            <h2>Payments and payouts</h2>
-                            <div className="payment-group">
+                        <h2>{t('payments.title_h1')}</h2>
+
+                        <div className="payment-group">
                                 <span className="title">Selected payment methods</span>
                                 <span className="desc">Payment methods you have already set up</span>
                                 <div className="payment-items">
@@ -122,7 +130,6 @@ export default function MyAccount() {
                                     Go to the payment
                                 </Button>
                             </div>
-                        </div>
                         
                     </div>
                 </div>

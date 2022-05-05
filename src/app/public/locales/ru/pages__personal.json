@@ -1,0 +1,23 @@
+{
+    "account.title": "Мой аккаунт",
+
+    "index.title_h1": "Мои маршруты",
+    "index.meta_title": "Мои маршруты",
+    "index.breadcrumb_1": "Мой аккаунт",
+    "index.breadcrumb_2": "Мои маршруты",
+
+    "profile.title_h1": "Персональные данные",
+    "profile.meta_title": "Персональные данные",
+    "profile.breadcrumb_1": "Мой аккаунт",
+    "profile.breadcrumb_2": "Персональные данные",
+
+    "security.title_h1": "Авторизация и безопасность",
+    "security.meta_title": "Авторизация и безопасность",
+    "security.breadcrumb_1": "Мой аккаунт",
+    "security.breadcrumb_2": "Авторизация и безопасность",
+
+    "payments.title_h1": "Платежи и выплаты",
+    "payments.meta_title": "Платежи и выплаты",
+    "payments.breadcrumb_1": "Мой аккаунт",
+    "payments.breadcrumb_2": "Платежи и выплаты"
+}

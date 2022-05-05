@@ -1,3 +1,4 @@
+import axios from '@lib/axios'
 
 export class Api {
 
@@ -114,7 +115,7 @@ export class Api {
             params['sort'] = props.sort;
 
         Object.assign(params, this.setPagination(props));
-console.log(this.getURL(methodURL, params));
+
         return await fetch(this.getURL(methodURL, params))
             .then(resource => resource.json())
             .then((response) => {
@@ -154,6 +155,20 @@ console.log(this.getURL(methodURL, params));
         
     }
 
+    async getPersonalRoutesList() {
+        let params = {
+            language: this.locale
+        };
+        let methodURL = '/api/v1/user/getRoutes';
+
+        return await axios
+            .get(this.getURL(methodURL, params))
+            .then(response => response.data)
+            .catch(error => {
+
+            });
+    }
+        
     async getRouteItem(props) {
         let params = {
             language: this.locale

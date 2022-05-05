@@ -4,10 +4,17 @@ import { PolicyText } from '@components/common';
 import { useAuth } from '../../hooks/auth';
 import { useNotify } from '../../hooks/notify';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { i18n } from "next-i18next";
 
+interface Props {
+    redirectAfterSignin?: string,
+    reloadAfterSignin?: boolean
+}
 
-const Auth = (props) => {
-
+const Auth = (props: Props) => {
+    const { t } = useTranslation("components");
     const router = useRouter();
     const config = {
         minPasswordLength: 8
@@ -41,12 +48,12 @@ const Auth = (props) => {
 
                 if (password != repeatPassword) {
                     setErrors({
-                        password: 'Введенные пароли не совпадают',
-                        repeatPassword: 'Введенные пароли не совпадают'
+                        password: t('auth.errors.passwords_dont_match'),
+                        repeatPassword: t('')
                     });
                 } else if (password.length < config.minPasswordLength) {
                     setErrors({
-                        password: 'Минимальная длина пароля ' + config.minPasswordLength + ' символов.',
+                        password: t('auth.errors.min_password_length_wrong', {value: config.minPasswordLength}),
                     });
                 }
                 else {
@@ -64,7 +71,7 @@ const Auth = (props) => {
 
         if (email.length <= 5 || email.indexOf('@') == -1 || email.indexOf('.') == -1)
             oErrors = {
-                email: "Введите ваш email-адрес"
+                email: t('auth.errors.empty_email')
             };
 
 
@@ -88,7 +95,7 @@ const Auth = (props) => {
                 .catch(error => {
                     setShowLoader(false);
                     errorNotify({
-                        title: 'Ошибка',
+                        title: t('auth.errors.base_title'),
                         message: error.toString()
                     });
 
@@ -103,9 +110,9 @@ const Auth = (props) => {
 
         let oErrors = {};
 
-        if (password.length <= 4)
+        if (password.length <= 7)
             oErrors = {
-                email: "Введите пароль от учетной записи"
+                password: t('auth.errors.empty_password')
             };
 
         if (Object.entries(oErrors).length === 0) {
@@ -116,6 +123,10 @@ const Auth = (props) => {
                 .then((response) => {
                     setShowLoader(false);
                     refresh();
+
+                    if (response === true && props?.reloadAfterSignin) {
+                        router.reload();
+                    }
                 });
         }
 
@@ -128,10 +139,10 @@ const Auth = (props) => {
         const oErrors = {};
 
         if (name.length <= 2)
-            oErrors['name'] = "Введите ваше имя";
+            oErrors['name'] = t('auth.errors.empty_name');
 
         if (password.length <= 0 || repeatPassword.length <= 0)
-            oErrors['password'] = "Укажите пароль для новой учетной записи";
+            oErrors['password'] = t('auth.errors.set_password_new_account');
 
 
         if (Object.entries(oErrors).length === 0) {
@@ -165,7 +176,7 @@ const Auth = (props) => {
 
         if (email.length <= 5 || email.indexOf('@') == -1 || email.indexOf('.') == -1)
             oErrors = {
-                email: "Введите ваш email-адрес"
+                email: t('auth.errors.empty_email')
             };
 
 
@@ -198,7 +209,7 @@ const Auth = (props) => {
             .catch(error => {
                 setShowLoader(false);
                 errorNotify({
-                    title: 'Ошибка',
+                    title: t('auth.errors.base_title'),
                     message: error.toString()
                 });
             });
@@ -214,8 +225,8 @@ const Auth = (props) => {
         return (
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Вы уже авторизованы</div>
-                    <div className="auth__subtitle">Если желаете выйти из аккаунта, нажмите <a href="#" onClick={submitLogout}>здесь</a>.</div>
+                    <div className="auth__title">{t('auth.authorized.title')}</div>
+                    <div className="auth__subtitle">{t('auth.authorized.description_p1')} <a href="#" onClick={submitLogout}>{t('auth.authorized.description_p2')}</a>.</div>
                 </div>
 
             </div>
@@ -231,7 +242,7 @@ const Auth = (props) => {
             {action === '' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Войдите или создайте аккаунт</div>
+                    <div className="auth__title">{t('auth.signin.title')}</div>
                 </div>
                 <div className="form">
                     <div className="form__group">
@@ -259,7 +270,7 @@ const Auth = (props) => {
                             loading={showLoader}
                             onClick={checkAvaliableEmail}
                         >
-                            Продолжить через электронную почту
+                            {t('auth.signin.next_with_email')}
                         </Button>
                         <Button
                             variant="outlined"
@@ -268,17 +279,17 @@ const Auth = (props) => {
                             colored
                             onClick={() => setAction('forgotPassword')}
                         >
-                            Забыли пароль?
+                            {t('auth.signin.forgot_password')}
                         </Button>
                     </div>
                 </div>
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description={t('auth.policy.description')}
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1={t('auth.policy.title1')}
                         link2="/policy"
-                        title2="Положением о конфиденциальности"
+                        title2={t('auth.policy.title2')}
                     />
                 </div>
             </div>
@@ -287,7 +298,7 @@ const Auth = (props) => {
             {action === 'setPassword' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Войдите или создайте аккаунт</div>
+                    <div className="auth__title">{t('auth.signin.title')}</div>
                 </div>
                 <div className="form">
 
@@ -299,7 +310,7 @@ const Auth = (props) => {
                             id="password"
                             name="password"
                             type="password"
-                            label="Пароль"
+                            label={t("auth.field.password")}
                             required
                             autoComplete="current-password"
                         />
@@ -316,7 +327,7 @@ const Auth = (props) => {
                             loading={showLoader}
                             onClick={submitLoginForm}
                         >
-                            Войти
+                            {t('auth.signin.button')}
                         </Button>
                         <Button
                             variant="outlined"
@@ -325,7 +336,7 @@ const Auth = (props) => {
                             colored
                             onClick={() => setAction('forgotPassword')}
                         >
-                            Забыли пароль?
+                            {t('auth.signin.forgot_password')}
                         </Button>
                     </div>
                 </div>
@@ -335,8 +346,8 @@ const Auth = (props) => {
             {action === 'createNewAccount' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Создание аккаунта</div>
-                    <div className="auth__subtitle">Пароль должен состоять из заглавных и строчных букв и цифр. Длина — не менее {config.minPasswordLength} символов.</div>
+                    <div className="auth__title">{t("auth.signup.title")}</div>
+                    <div className="auth__subtitle">{t('auth.signup.description', {minPasswordLength: config.minPasswordLength})}</div>
                 </div>
                 <div className="form">
 
@@ -348,7 +359,7 @@ const Auth = (props) => {
                             id="form__reg__field-name"
                             name="name"
                             type="text"
-                            label="Ваше имя"
+                            label={t("auth.field.name")}
                             required
                         />
                         {!!errors && errors['name'] ? (
@@ -364,7 +375,7 @@ const Auth = (props) => {
                             id="form__reg__field-password"
                             name="password"
                             type="password"
-                            label="Пароль"
+                            label={t("auth.field.password")}
                             required
                         />
                         {!!errors && errors['password'] ? (
@@ -380,7 +391,7 @@ const Auth = (props) => {
                             id="form__reg__field-repeat-password"
                             name="repeat-password"
                             type="password"
-                            label="Повторите пароль"
+                            label={t("auth.field.repeat_password")}
                             required
                         />
                         {!!errors && errors['repeatPassword'] ? (
@@ -397,7 +408,7 @@ const Auth = (props) => {
                             onClick={submitRegForm}
                             loading={showLoader}
                         >
-                            Создать аккаунт
+                            {t('auth.signup.button')}
                         </Button>
 
                     </div>
@@ -405,11 +416,11 @@ const Auth = (props) => {
 
                 <div className="text-note">
                     <PolicyText
-                        description="Создавая новый аккаунт, вы соглашаетесь с нашими"
+                        description={t('auth.policy.description')}
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1={t('auth.policy.title1')}
                         link2="/policy"
-                        title2="Положением о конфиденциальности"
+                        title2={t('auth.policy.title2')}
                     />
                 </div>
 
@@ -419,8 +430,8 @@ const Auth = (props) => {
             {action === 'needEmailConfirm' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Проверьте папку «Входящие»</div>
-                    <div className="auth__subtitle">Мы отправили на {email} ссылку для подтверждения email адреса. Письмо должно прийти через несколько минут.</div>
+                    <div className="auth__title">{t('auth.confirm_signup.title')}</div>
+                    <div className="auth__subtitle">{t('auth.confirm_signup.description', {email: email})}</div>
                 </div>
                 <div className="form">
 
@@ -432,7 +443,7 @@ const Auth = (props) => {
                             colored
                             onClick={refresh}
                         >
-                            Хорошо
+                            {t('auth.confirm_signup.button')}
                         </Button>
 
                     </div>
@@ -440,11 +451,11 @@ const Auth = (props) => {
 
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description={t('auth.policy.description')}
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1={t('auth.policy.title1')}
                         link2="/policy"
-                        title2="Положением о конфиденциальности"
+                        title2={t('auth.policy.title2')}
                     />
                 </div>
             </div>
@@ -453,8 +464,8 @@ const Auth = (props) => {
             {action === 'successAuth' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Вы успешно выполнили вход</div>
-                    <div className="auth__subtitle">Сейчас вы будете перенаправлены на предыдущую страницу.</div>
+                    <div className="auth__title">{t("auth.success_auth.title")}</div>
+                    <div className="auth__subtitle">{t("auth.success_auth.description")}</div>
                 </div>
                 <div className="form">
                     <div className="form__group form__group--btn">
@@ -465,7 +476,7 @@ const Auth = (props) => {
                             colored
                             onClick={refresh}
                         >
-                            Хорошо
+                            {t("auth.success_auth.button")}
                         </Button>
                     </div>
                 </div>
@@ -475,10 +486,9 @@ const Auth = (props) => {
             {action === 'forgotPassword' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Забыли пароль?</div>
+                    <div className="auth__title">{t('auth.forgot_password.title')}</div>
                     <div className="auth__subtitle">
-                        Ничего страшного! Мы отправим вам ссылку для смены пароля. Введите адрес электронной
-                        почты, с которой вы заходите на <span>Tourselfer.com</span>.
+                        {t('auth.forgot_password.description')}
                     </div>
                 </div>
                 <div className="form">
@@ -490,7 +500,7 @@ const Auth = (props) => {
                             id="email"
                             name="email"
                             type="email"
-                            label="Email"
+                            label={t('auth.field.email')}
                             required
                             autoFocus
                         />
@@ -508,7 +518,7 @@ const Auth = (props) => {
                             onClick={submitForgotPasswordForm}
                             loading={showLoader}
                         >
-                            Отправить ссылку на смену пароля
+                            {t("auth.forgot_password.button_send")}
                         </Button>
 
                         <Button
@@ -518,7 +528,7 @@ const Auth = (props) => {
                             colored
                             onClick={() => setAction('')}
                         >
-                            Я вспомнил пароль
+                            {t("auth.forgot_password.button_rembered")}
                         </Button>
 
                     </div>
@@ -529,8 +539,8 @@ const Auth = (props) => {
             {action === 'forgotPasswordConfirm' &&
             <div className="auth">
                 <div className="auth__head">
-                    <div className="auth__title">Проверьте папку «Входящие»</div>
-                    <div className="auth__subtitle">Мы отправили на {email} ссылку для восстановления пароля. Письмо должно прийти через несколько минут.</div>
+                    <div className="auth__title">{t("auth.confirm_forgot.title")}</div>
+                    <div className="auth__subtitle">{t("auth.confirm_forgot.description", {email: email})}</div>
                 </div>
                 <div className="form">
 
@@ -541,7 +551,7 @@ const Auth = (props) => {
                             type="button"
                             colored
                         >
-                            Хорошо
+                            {t("auth.confirm_forgot.button")}
                         </Button>
 
                     </div>
@@ -549,11 +559,11 @@ const Auth = (props) => {
 
                 <div className="text-note">
                     <PolicyText
-                        description="Входя в аккаунт или создавая новый, вы соглашаетесь с нашими"
+                        description={t('auth.policy.description')}
                         link1="/policy"
-                        title1="Правилами и условиями"
+                        title1={t('auth.policy.title1')}
                         link2="/policy"
-                        title2="Положением о конфиденциальности"
+                        title2={t('auth.policy.title2')}
                     />
                 </div>
             </div>

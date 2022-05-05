@@ -554,7 +554,9 @@ export default function RoutePage(props) {
                     {props?.data?.reviews && props?.data?.reviews.length > 0 &&
                     <div className="route-section route-reviews">
                         <div className="route-reviews__head">
+                            {props?.data?.rating > 0 &&
                             <div className="rating-number">{props?.data?.rating}</div>
+                            }
                             <h2 className="title-2">{t('route.reviews.title')} <span>({reviews?.meta?.total})</span></h2>
                         </div>
                         <div className="route-reviews__container">

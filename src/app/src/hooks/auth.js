@@ -29,7 +29,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .then(response => response.data)
             .catch(error => {
                 throw error;
-                console.log(error);
                 //if (error.response.status !== 409)
                 //    throw error;
 
