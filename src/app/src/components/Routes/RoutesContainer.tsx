@@ -1,7 +1,8 @@
 import Route from './Route';
 
 type RouteTypes = {
-    classMod?: string
+    classMod?: string,
+    items: Array<object>
 };
 
 const RoutesContainer = (props:RouteTypes) => {
@@ -9,8 +10,9 @@ const RoutesContainer = (props:RouteTypes) => {
     return (
         <div className={rootClass + ((typeof props.classMod === "string") ? (' ' + rootClass + '--' + props.classMod) : '')}>
             <div className="routes__items">
-                <Route/>
-                <Route/>
+                {props.items.length > 0 && props.items.map(item => (
+                    <Route item={item} />
+                ))}
             </div>
         </div>
     );

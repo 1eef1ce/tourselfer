@@ -1,4 +1,6 @@
 import ShowcaseItem from './ShowcaseItem';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const ShowcaseItems = ({items}) => {
     return (
@@ -11,7 +13,19 @@ const ShowcaseItems = ({items}) => {
                     city={item.name}
                     img={item.picture}
                 />
-            ))}
+            )) 
+            
+            || 
+                
+            <div className="skeleton-items">
+                {Array(...Array(4)).map((i)=>
+                    <Skeleton 
+                        containerClassName="item"
+                        className="item-title"
+                    />
+                )}                   
+            </div>
+            }
         </div>
     );
 };

@@ -6,9 +6,8 @@ import { useWindowSize } from '@lib/hooks/useWindowSize';
 import {useEffect, useState} from 'react';
 import throttle from 'lodash.throttle';
 import cn from 'classnames';
-import MobileMenuContainer from '@components/common/Menu/MobileMenu';
 import HeaderMenu from '@components/common/Menu/HeaderMenu';
-import MobileSearchContainer from '@components/common/Search/MobileSearch';
+import MobileSearch from '@components/common/Search/MobileSearch';
 import {SignIn} from '@components/common/UserNav';
 import BottomMenu from '@components/common/Menu/BottomMenu';
 import {FavoritesWidget} from '@components/common/FavoritesWidget';
@@ -48,13 +47,12 @@ const Header = ({transparent = false}: HeaderProps) => {
             <header className={cn("header", {'header--transparent': transparent && !hasScrolled})}>
                 {/*<IPAddress/>*/}
                 <div className="container header__container">
-                    {isMobile && <MobileMenuContainer/>}
                     <Link href="/">
                         <a className="logo header__logo icon">
                             <Logo/>
                         </a>
                     </Link>
-                    {isMobile && <MobileSearchContainer/>}
+                    {isMobile && <MobileSearch/>}
                     <div className="dropdown header__lang">
                             <I18nWidget/>
                     </div>

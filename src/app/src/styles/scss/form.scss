@@ -321,6 +321,8 @@
     box-shadow: inset 0 0 0 1px $color-gray-15;
     outline: none;
     transition: 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &::placeholder {
       color: $color-secondary;
@@ -360,10 +362,10 @@
 
     &.error {
       box-shadow: inset 0 0 0 2px $color-red;
-      background: $color-red-7;
+      background: $color-red-7-hex;
 
       &:hover {
-        background: $color-red-7;
+        background: $color-red-7-hex;
       }
 
       &:focus {

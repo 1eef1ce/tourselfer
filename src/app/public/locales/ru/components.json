@@ -1,4 +1,6 @@
 {
+    "breadcrumbs.main_page": "Главная",
+
     "header.link.lang": "Язык",
     "header.link.favorites": "Избранное",
     "header.link.signIn": "Войти",
@@ -25,15 +27,15 @@
     "advantages.slide6.title": "Интернет не нужен!",
     "advantages.slide6.description": "Если ты за границей, навигатор проведет тебя по выбранному маршруту без подключения к мобильному интернету.",
 
-    "route.props.locations_count": "Количество локаций",
-    "route.props.duration": "Продолжительность маршрута",
+    "route.props.locations_count": "Локации",
+    "route.props.duration": "Длительность",
     "route.props.duration_value_range": "{{start}}-{{end}} ч.",
     "route.props.duration_value": "{{start}} ч.",
 
     "route.props.type": "Вариант прохождения маршрута",
-    "route.props.type_foot": "пеший",
-    "route.props.type_car": "авто",
-    "route.props.type_bus": "общественный транспорт",
+    "route.props.type_foot": "Пеший",
+    "route.props.type_car": "Авто",
+    "route.props.type_bus": "Городской транспорт",
 
     "review.recommended": "Рекомендует маршрут: ",
     "review.liked": "Что понравилось: ",
@@ -56,5 +58,66 @@
     "searchbar.placeholder": "например: Санкт-Петербург",
 
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+
+    "filter.mobile_title": "Фильтр",
+    "filter.cost": "Расходы на маршруте",
+    "filter.cost_all": "Все",
+    "filter.cost_free": "Бесплатно",
+    "filter.cost_1": "$",
+    "filter.cost_2": "$$",
+    "filter.cost_3": "$$$",
+    "filter.cost_4": "$$$$",
+
+    "filter.type": "Способ прохождения",
+    "filter.type_all": "Все",
+
+    "filter.superPlace": "Суперместо на маршруте",
+    "filter.superPlace_all": "Все",
+    "filter.type_all_has": "Суперместо",
+
+    "filter.author": "Автор",
+    "filter.profAuthor_all": "Все",
+    "filter.profAuthor_has": "Профессиональный автор",
+
+    "filter.tags": "Метки маршрута",
+
+    "filter.duration": "Продолжительность",
+    "filter.duration_less_3_hour": "Менее 3х часов",
+    "filter.duration_all_day": "Весь день",
+    "filter.duration_1-2_days": "1-2 дня",
+    "filter.duration_2_days_more": "2 дня и более",
+
+    "filter.price": "Стоимость маршрута",
+    "filter.price_free": "Бесплатно",
+    "filter.price_less_30": "Менее $30",
+    "filter.price_30-50": "$30-$50",
+    "filter.price_50_more": "$50+",
+
+    "filter.conveniences": "Удобства на маршруте",
+    "filter.conveniences_wifi": "Wi-fi",
+    "filter.conveniences_restroom": "Туалет",
+    "filter.conveniences_cafe": "Кафе",
+    "filter.conveniences_free_parking": "Бесплатная парковка",
+    "filter.conveniences_parking": "Парковка",
+
+    "filter.route_language": "Язык маршрута",
+    "filter.route_language_en": "Английский",
+    "filter.route_language_ru": "Русский",
+
+    "filter.button_more_filters": "Другие фильтры",
+    "filter.button_less_filters": "Скрыть фильтры",
+
+    "sorts.route_rating": "Рейтинг маршрута",
+    "sorts.author_rating": "Рейтинг автора",
+    "sorts.route_cost": "Затраты на маршруте",
+    "sorts.route_duration": "Продолжительность маршрута",
+
+    "pagination.show_more": "Показать еще",
+    
+    "alert.title": "Заголовок всплывашки",
+    "alert.message_error": "Сообщение об ошибке",
+    "alert.message_info": "Информационное сообщение",
+    "alert.message_success": "Отправлено успешно"
+    
 }

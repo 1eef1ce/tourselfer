@@ -80,6 +80,7 @@ class SelectField extends React.Component<any, any> {
                         defaultValue={defaultOption}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
+                        onChange={this.props?.onChange}
                         {...props}
                     />
                 </div>

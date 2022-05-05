@@ -255,6 +255,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={checkAvaliableEmail}
                         >
@@ -264,6 +265,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             Забыли пароль?
@@ -310,6 +312,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             loading={showLoader}
                             onClick={submitLoginForm}
                         >
@@ -319,6 +322,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('forgotPassword')}
                         >
                             Забыли пароль?
@@ -389,6 +393,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitRegForm}
                             loading={showLoader}
                         >
@@ -424,6 +429,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             Хорошо
@@ -456,6 +462,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={refresh}
                         >
                             Хорошо
@@ -497,6 +504,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                             onClick={submitForgotPasswordForm}
                             loading={showLoader}
                         >
@@ -507,6 +515,7 @@ const Auth = (props) => {
                             variant="outlined"
                             size="medium"
                             type="button"
+                            colored
                             onClick={() => setAction('')}
                         >
                             Я вспомнил пароль
@@ -530,6 +539,7 @@ const Auth = (props) => {
                             variant="filled"
                             size="medium"
                             type="button"
+                            colored
                         >
                             Хорошо
                         </Button>
