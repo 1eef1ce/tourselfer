@@ -19,7 +19,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     isStartIcon?: boolean
     startIcon?: JSX.Element
     isEndIcon?: boolean
-    endIcon?: JSX.Element
+    endIcon?: JSX.Element,
+    onClick?: any
 }
 
 const Button: React.FC<ButtonProps> = ({

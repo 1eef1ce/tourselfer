@@ -253,13 +253,13 @@ export default function RoutePage(props) {
             id: props?.data?.id
         })
         .then(response => {
-        
-            if (response?.result === 'ok' && response?.checkout_id) {
-                if (response?.payed === true) {
+            if (response?.result == 'ok' && response?.checkout_id) {
+                if (response?.payed == true) {
                     setShowGetRouteModal(true);
                     return;
                 } else {
                     router.push(`/checkout/${response?.checkout_id}`);
+                    return;
                 }
             }
 
@@ -267,8 +267,6 @@ export default function RoutePage(props) {
                 title: "Unknown error",
                 message: "Try again later"
             });
-
-            console.log(response);
         })
         .finally(() => {
             setLoadingGetRoute(false);
